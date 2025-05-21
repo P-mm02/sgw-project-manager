@@ -1,0 +1,134 @@
+/* Footer Styles for SG-WORKING */
+.sgw-footer {
+  background-color: #1a365d; /* Deep blue */
+  color: #ffffff;
+  padding: 3rem 0;
+  font-family: 'Inter', sans-serif;
+  border-top: 3px solid #2c5282; /* Accent border */
+}
+
+.sgw-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem;
+}
+
+.sgw-footer-about {
+  max-width: 300px;
+}
+
+.sgw-footer-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sgw-footer-logo:hover {
+  color: #90cdf4; /* Light blue hover */
+}
+
+.sgw-footer-about p {
+  color: #cbd5e0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.sgw-footer-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.sgw-footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #4299e1; /* Water blue accent */
+}
+
+.sgw-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sgw-footer-link {
+  color: #cbd5e0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.sgw-footer-link::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #4299e1;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.sgw-footer-link:hover {
+  color: #ffffff;
+  padding-left: 1.5rem;
+}
+
+.sgw-footer-link:hover::before {
+  opacity: 1;
+  left: 0.2rem;
+}
+
+.sgw-footer-bottom {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid #2d3748;
+  color: #a0aec0;
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sgw-footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .sgw-footer-about {
+    margin: 0 auto;
+  }
+
+  .sgw-footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sgw-footer-links {
+    align-items: center;
+  }
+
+  .sgw-footer-link {
+    padding-left: 0;
+  }
+
+  .sgw-footer-link:hover {
+    padding-left: 1rem;
+  }
+}
