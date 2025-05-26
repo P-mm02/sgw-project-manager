@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "./page.css";
+import "@/styles/page.css";
 
 export const metadata = {
   title: 'หน้าแรก | SG-WORKING',

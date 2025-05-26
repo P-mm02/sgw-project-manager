@@ -1,0 +1,13 @@
+.project-action-plan,
+.project-actual-work {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.bar-scale {
+  flex: 1;
+  height: 12px;
+  border-radius: 2px;
+  background-color: #e0e0e0; /* light gray */
+}

@@ -1,4 +1,4 @@
-import DPprojects from "../components/DPprojects/DPprojects"
+import ProjectCon from '../components/ProjectCon/ProjectCon'
 
 export const metadata = {
   title: 'งานเจาะน้ำบาดาล | SG-WORKING',
@@ -7,7 +7,7 @@ export const metadata = {
 export default function DrillingPage() {
   return (
     <main>
-      <DPprojects/>
+      <ProjectCon />
       <h1>งานเจาะน้ำบาดาล</h1>
       <p>บริการงานเจาะน้ำบาดาลทั่วประเทศไทย</p>
       {/* Add your drilling content here */}
