@@ -1,24 +1,20 @@
-import React from 'react'
+'use client'
+import React, { useMemo } from 'react'
 import projectData from '@/data/projectData.json'
 import './ProjectDP.css'
 import DateCtrl from '../DateCtrl/DateCtrl'
+import { generateMonths, Month } from './generateMonths/generateMonths'
 
 type MonthDPProps = {
   monthCount: number
   monthSelect: number
 }
 
-function getDaysInFebruary(year: number): number {
-  return new Date(year, 2, 0).getDate()
-}
-
-// Get current year
-const currentYear = new Date().getFullYear();
-const daysInFeb = getDaysInFebruary(currentYear);
-
-console.log(`February ${currentYear} has ${daysInFeb} days.`);
-
 export default function ProjectDP({ monthCount, monthSelect }: MonthDPProps) {
+  const selectYear = new Date().getFullYear()
+  const months: Month[] = useMemo(() => {
+    return generateMonths(monthCount, monthSelect, selectYear)
+  }, [monthCount, monthSelect, selectYear])
   return (
     <>
       {projectData.map((project, index) => (
@@ -26,7 +22,7 @@ export default function ProjectDP({ monthCount, monthSelect }: MonthDPProps) {
           <div className="project-name">{project.name}</div>
           <div className="project-location">{project.location}</div>
           <div className="project-plan col">
-            <DateCtrl monthCount={monthCount} monthSelect={monthSelect} />
+            <DateCtrl months={months} monthCount={monthCount} />
           </div>
         </div>
       ))}

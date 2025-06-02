@@ -1,4 +1,3 @@
-import Image from "next/image";
 import "@/styles/page.css";
 
 export const metadata = {

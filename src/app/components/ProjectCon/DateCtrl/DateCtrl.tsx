@@ -1,45 +1,14 @@
 'use client'
-import React, { useMemo, useEffect } from 'react'
+import React from 'react'
 import './DateCtrl.css'
-import { startOfMonth, endOfMonth, eachDayOfInterval, format } from 'date-fns'
+import { Month } from '../ProjectDP/generateMonths/generateMonths'
 
 type DateCtrlProps = {
   monthCount: number
-  monthSelect: number
+  months: Month[]
 }
 
-export default function DateCtrl({ monthCount, monthSelect }: DateCtrlProps) {
-  const selectYear = new Date().getFullYear()
-
-  const months = useMemo(() => {
-    return Array.from({ length: monthCount }, (_, i) => {
-      const targetMonth = monthSelect + i
-      const firstDay = startOfMonth(new Date(selectYear, targetMonth, 1))
-      const lastDay = endOfMonth(firstDay)
-      const days = eachDayOfInterval({ start: firstDay, end: lastDay })
-      console.log('monthSelect:', monthSelect)
-      console.log('monthCount:', monthCount)
-      console.log('selectYear:', selectYear)
-      console.log('***************************************************')
-      return {
-        name: format(firstDay, 'MMMM'),
-        days: days.map((day) => ({
-          label: format(day, 'd'),
-          id: format(day, 'yyyyMMdd'),
-        })),
-      }
-    })
-  }, [monthCount, monthSelect, selectYear])
-
-  /* useEffect(() => {
-    console.log('monthSelect:', monthSelect)
-    console.log('monthCount:', monthCount)
-    console.log('selectYear:', selectYear)
-    console.log('First day:', months[0]?.days[0]?.label)
-    console.log('Last day:', months[0]?.days.at(-1)?.label)
-    console.log('***************************************************')
-  }, [monthCount, monthSelect, months, selectYear]) */
-
+export default function DateCtrl({ monthCount, months }: DateCtrlProps) {
   return (
     <>
       <div
