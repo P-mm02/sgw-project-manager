@@ -1,8 +1,9 @@
 import { thaiMonths } from '@/constants/thaiMonths'
 import './monthDP.css'
 type MonthDPProps = {
-  monthCount: number,
+  monthCount: number
 }
+
 
 export default function MonthDP({ monthCount }: MonthDPProps) {
   return (

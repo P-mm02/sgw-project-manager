@@ -5,6 +5,7 @@ import DateCtrl from '../DateCtrl/DateCtrl'
 
 type MonthDPProps = {
   monthCount: number
+  monthSelect: number
 }
 
 function getDaysInFebruary(year: number): number {
@@ -17,7 +18,7 @@ const daysInFeb = getDaysInFebruary(currentYear);
 
 console.log(`February ${currentYear} has ${daysInFeb} days.`);
 
-export default function ProjectDP({ monthCount }: MonthDPProps) {
+export default function ProjectDP({ monthCount, monthSelect }: MonthDPProps) {
   return (
     <>
       {projectData.map((project, index) => (
@@ -25,7 +26,7 @@ export default function ProjectDP({ monthCount }: MonthDPProps) {
           <div className="project-name">{project.name}</div>
           <div className="project-location">{project.location}</div>
           <div className="project-plan col">
-            <DateCtrl monthCount={monthCount} />
+            <DateCtrl monthCount={monthCount} monthSelect={monthSelect} />
           </div>
         </div>
       ))}
