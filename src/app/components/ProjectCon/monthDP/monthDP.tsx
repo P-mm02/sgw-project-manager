@@ -2,13 +2,14 @@ import { thaiMonths } from '@/constants/thaiMonths'
 import './monthDP.css'
 type MonthDPProps = {
   monthCount: number
+  monthSelect: number
 }
 
 
-export default function MonthDP({ monthCount }: MonthDPProps) {
+export default function MonthDP({ monthCount, monthSelect}: MonthDPProps) {
   return (
     <>
-      {thaiMonths.slice(0, monthCount).map((month, index) => (
+      {thaiMonths.slice(monthSelect, monthSelect+monthCount).map((month, index) => (
         <div key={index} className="project-plan-month">
           <h3 className="month-header">{month}</h3>
         </div>

@@ -10,14 +10,17 @@ import MonthSelectBtn from './MonthSelectBtn/MonthSelectBtn'
 export default function DPprojects() {
   const [monthCount, setMonthCount] = useState(1)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0);
-  
+  const [yearSelect, setYearSelect] = useState<number>(() => 2025)
 
   return (
     <div className="projects-container">
-      <MonthBtnCtrl monthCount={monthCount} setMonthCount={setMonthCount} />
+      <MonthBtnCtrl monthCount={monthCount} setMonthCount={setMonthCount} setMonthSelect={setMonthSelect}/>
       <MonthSelectBtn
         monthSelect={monthSelect}
         setMonthSelect={setMonthSelect}
+        yearSelect={yearSelect}
+        setYearSelect={setYearSelect}
+        monthCount={monthCount}
       />
 
       <div className="row-head">
@@ -31,11 +34,15 @@ export default function DPprojects() {
           <h2>จำนวนวัน</h2>
         </div>
         <div className="row-month">
-          <MonthDP monthCount={monthCount} />
+          <MonthDP monthCount={monthCount} monthSelect={monthSelect} />
         </div>
       </div>
 
-      <ProjectDP monthCount={monthCount} monthSelect={monthSelect} />
+      <ProjectDP
+        monthCount={monthCount}
+        monthSelect={monthSelect}
+        yearSelect={yearSelect}
+      />
     </div>
   )
 }
