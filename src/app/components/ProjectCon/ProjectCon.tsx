@@ -21,11 +21,14 @@ export default function DPprojects() {
       />
 
       <div className="row-head">
-        <div className="project-name">
+        <div className="project-names">
           <h2>รายการ</h2>
         </div>
-        <div className="project-location">
+        <div className="project-locations">
           <h2>สถานที่ตั้ง</h2>
+        </div>
+        <div className="project-working-days">
+          <h2>จำนวนวัน</h2>
         </div>
         <div className="row-month">
           <MonthDP monthCount={monthCount} />

@@ -18,6 +18,9 @@ export default function Nav() {
           <Link href="/dewatering" className="nav-link">
             งานสูบลดระดับน้ำ
           </Link>
+          <Link href="/maintenance" className="nav-link">
+            งานซ่อมบำรุง
+          </Link>
           <Link href="/other" className="nav-link">
             งานอื่นๆ
           </Link>

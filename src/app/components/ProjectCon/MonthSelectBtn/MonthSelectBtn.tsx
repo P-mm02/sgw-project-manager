@@ -18,6 +18,7 @@ export default function MonthSelectBtn({monthSelect, setMonthSelect,}: MonthSele
   )
 
   return (
+    <>
     <div className="month-select-btn">
         <button
             onClick={() => setMonthSelect(Math.max(0, monthSelect - 1))}
@@ -36,7 +37,25 @@ export default function MonthSelectBtn({monthSelect, setMonthSelect,}: MonthSele
             >
             ▶
         </button>
-
     </div>
+    <div className="month-select-btn">
+        <button
+            onClick={() => setMonthSelect(Math.max(0, monthSelect - 1))}
+            disabled={monthSelect === 0}
+            >
+            ◀
+        </button>
+
+            <strong style={{ margin: '0 1rem' }}>
+            {monthName} {year}
+            </strong>
+            <button
+            onClick={() => setMonthSelect(Math.min(11, monthSelect + 1))}
+            disabled={monthSelect === 11}
+            >
+            ▶
+        </button>
+    </div>
+    </>    
   )
 }

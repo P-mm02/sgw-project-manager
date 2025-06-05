@@ -21,6 +21,10 @@ export default function ProjectDP({ monthCount, monthSelect }: MonthDPProps) {
         <div className="row-project" key={index}>
           <div className="project-name">{project.name}</div>
           <div className="project-location">{project.location}</div>
+          <div className="project-working-day">
+            <span>แผนปฎิบัติงาน {Number(project.planWorkDayEnd) - Number(project.planWorkDayStart)} วัน</span>
+            <span>ปฎิบัติงานจริง {Number(project.actualWorkDayEnd) - Number(project.actualWorkDayStart)} วัน</span>
+          </div>
           <div className="project-plan col">
             <DateCtrl months={months} monthCount={monthCount} />
           </div>
