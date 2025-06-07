@@ -1,0 +1,92 @@
+.add-project-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .add-project-form:hover {
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.15);
+  }
+  
+  .add-project-form label {
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.4rem;
+    display: inline-block;
+  }
+  
+  .add-project-form input,
+  .add-project-form select {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f5f7fa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  
+  .add-project-form input:focus,
+  .add-project-form select:focus {
+    border-color: #0070f3;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.2);
+  }
+  
+  .add-project-form button {
+    padding: 0.9rem 1.4rem;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+  
+  .add-project-form button:hover {
+    background-color: #005bb5;
+  }
+  
+  .add-project-form button:active {
+    transform: scale(0.97);
+  }
+  
+  .add-project-head {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #0052a0, #00c6ff);
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.25);
+  }
+  
+  .preview-box {
+    background-color: #f9fafc;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  
+  .input-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+  }

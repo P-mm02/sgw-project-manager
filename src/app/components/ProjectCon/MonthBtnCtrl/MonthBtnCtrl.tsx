@@ -19,7 +19,7 @@ export default function BtnCtrl({ monthCount, setMonthCount, setMonthSelect }: B
     }
   }
   return (
-    <div className="row-btn">
+    <div className="month-count-btn">
       {options.map((count) => (
         <button
           key={count}

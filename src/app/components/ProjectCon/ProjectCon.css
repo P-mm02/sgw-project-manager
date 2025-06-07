@@ -6,7 +6,6 @@
 }
 
 
-
 /* Responsive stacking for mobile */
 @media (max-width: 768px) {
   .row-project {
@@ -36,24 +35,6 @@
 }
 
 
-.project-plan.col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-/* Optional: If project-plan is used outside of .col too */
-.project-plan {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-}
-
 .row-head {
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 9fr;
@@ -77,4 +58,26 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.add-project-btn {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background-color: #007acc;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.add-project-btn:hover {
+  background-color: #005fa3;
+  transform: translateY(-1px);
+}
+
+.top-row-btn-con{
+  display: flex;
+  justify-content: space-between;
 }

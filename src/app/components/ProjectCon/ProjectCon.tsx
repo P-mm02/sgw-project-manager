@@ -1,6 +1,7 @@
 'use client'
 import './ProjectCon.css'
 import { useState } from 'react'
+import Link from 'next/link'
 import MonthBtnCtrl from './MonthBtnCtrl/MonthBtnCtrl'
 import MonthDP from './monthDP/monthDP'
 import ProjectDP from './ProjectDP/ProjectDP'
@@ -14,7 +15,16 @@ export default function DPprojects() {
 
   return (
     <div className="projects-container">
-      <MonthBtnCtrl monthCount={monthCount} setMonthCount={setMonthCount} setMonthSelect={setMonthSelect}/>
+      <div className="top-row-btn-con">
+        <MonthBtnCtrl
+          monthCount={monthCount}
+          setMonthCount={setMonthCount}
+          setMonthSelect={setMonthSelect}
+        />
+        <Link href="/addProject" className="add-project-btn">
+          เพิ่มโปรเจค
+        </Link>
+      </div>
       <MonthSelectBtn
         monthSelect={monthSelect}
         setMonthSelect={setMonthSelect}

@@ -2,7 +2,7 @@ export const metadata = {
   title: 'งานซ่อมบำรุง | SG-WORKING',
 }
 
-export default function DewateringPage() {
+export default function MaintenancePage() {
   return (
     <main>
       <h1>งานซ่อมบำรุง</h1>

@@ -39,4 +39,15 @@
 .show-day-number .bar-scale-day .day-number {
     display: block;
   }
+
+.plan-highlight {
+  background-color: #2196f3; /* blue */
+  color: white;
+}
+
+.actual-highlight {
+  background-color: #ff9800; /* orange */
+  color: white;
+}
+
   

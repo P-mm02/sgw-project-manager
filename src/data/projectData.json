@@ -1,362 +1,842 @@
 [
   {
-    "name": "บิ๊กฟาร์มหมู พัทลุง",
-    "location": "อ.เมือง จ.เชียงใหม่",
-    "workType": "drilling",
-    "planWorkDayStart": "20250604",
-    "planWorkDayEnd": "20250629",
-    "actualWorkDayStart": "20250602",
-    "actualWorkDayEnd": "20250627"
-  },
-  {
-    "name": "บิ๊กฟาร์มไก่บางบาล",
-    "location": "อ.เมือง จ.นครราชสีมา",
-    "workType": "survey",
-    "planWorkDayStart": "20250125",
-    "planWorkDayEnd": "20250205",
-    "actualWorkDayStart": "20250126",
-    "actualWorkDayEnd": "20250206"
-  },
-  {
-    "name": "ฟาร์มโคนมดารา ฟาร์ม",
-    "location": "อ.บ้านโป่ง จ.ราชบุรี",
-    "workType": "drilling",
-    "planWorkDayStart": "20250324",
-    "planWorkDayEnd": "20250408",
-    "actualWorkDayStart": "20250322",
-    "actualWorkDayEnd": "20250405"
-  },
-  {
-    "name": "โครงการบ้านจัดสรร นนทบุรี",
-    "location": "อ.เมือง จ.เชียงราย",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250221",
-    "planWorkDayEnd": "20250311",
-    "actualWorkDayStart": "20250224",
-    "actualWorkDayEnd": "20250311"
-  },
-  {
-    "name": "รีสอร์ตบ้านภูเขา เขาค้อ",
+    "id": 16,
+    "projectName": "โรงงานน้ำตาลมิตรผล",
     "location": "อ.หาดใหญ่ จ.สงขลา",
-    "workType": "survey",
-    "planWorkDayStart": "20251010",
-    "planWorkDayEnd": "20251020",
-    "actualWorkDayStart": "20251009",
-    "actualWorkDayEnd": "20251018"
-  },
-  {
-    "name": "ฟาร์มโคนมดารา ฟาร์ม",
-    "location": "อ.เมือง จ.ตรัง",
-    "workType": "survey",
-    "planWorkDayStart": "20250924",
-    "planWorkDayEnd": "20251014",
-    "actualWorkDayStart": "20250924",
-    "actualWorkDayEnd": "20251011"
-  },
-  {
-    "name": "ฟาร์มโคนมดารา ฟาร์ม",
-    "location": "อ.เมือง จ.สุราษฎร์ธานี",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250406",
-    "planWorkDayEnd": "20250430",
-    "actualWorkDayStart": "20250404",
-    "actualWorkDayEnd": "20250502"
-  },
-  {
-    "name": "สถานีขนส่งใหม่ ขอนแก่น",
-    "location": "อ.บ้านโป่ง จ.ราชบุรี",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250408",
-    "planWorkDayEnd": "20250505",
-    "actualWorkDayStart": "20250409",
-    "actualWorkDayEnd": "20250504"
-  },
-  {
-    "name": "สถานีขนส่งใหม่ ขอนแก่น",
-    "location": "อ.สัตหีบ จ.ชลบุรี",
-    "workType": "drilling",
-    "planWorkDayStart": "20250711",
-    "planWorkDayEnd": "20250721",
-    "actualWorkDayStart": "20250712",
-    "actualWorkDayEnd": "20250721"
-  },
-  {
-    "name": "สนามบินเบตง",
-    "location": "อ.หัวหิน จ.ประจวบคีรีขันธ์",
-    "workType": "survey",
-    "planWorkDayStart": "20250407",
-    "planWorkDayEnd": "20250427",
-    "actualWorkDayStart": "20250406",
-    "actualWorkDayEnd": "20250429"
-  },
-  {
-    "name": "บิ๊กฟาร์มหมู พัทลุง",
-    "location": "อ.ลาดกระบัง จ.กรุงเทพฯ",
-    "workType": "others",
-    "planWorkDayStart": "20250630",
-    "planWorkDayEnd": "20250718",
-    "actualWorkDayStart": "20250703",
-    "actualWorkDayEnd": "20250716"
-  },
-  {
-    "name": "รีสอร์ตบ้านภูเขา เขาค้อ",
-    "location": "อ.เมือง จ.เชียงราย",
-    "workType": "dewatering",
-    "planWorkDayStart": "20250910",
-    "planWorkDayEnd": "20251005",
-    "actualWorkDayStart": "20250910",
-    "actualWorkDayEnd": "20251003"
-  },
-  {
-    "name": "โครงการบ้านจัดสรร นนทบุรี",
-    "location": "อ.เมือง จ.ลำปาง",
-    "workType": "dewatering",
-    "planWorkDayStart": "20250613",
-    "planWorkDayEnd": "20250626",
-    "actualWorkDayStart": "20250612",
-    "actualWorkDayEnd": "20250628"
-  },
-  {
-    "name": "สนามบินเบตง",
-    "location": "อ.หาดใหญ่ จ.สงขลา",
-    "workType": "survey",
-    "planWorkDayStart": "20251007",
-    "planWorkDayEnd": "20251103",
-    "actualWorkDayStart": "20251010",
-    "actualWorkDayEnd": "20251101"
-  },
-  {
-    "name": "โรงงานแปรรูปยางพารา ไทย-มาเลย์",
-    "location": "อ.เมือง จ.เชียงใหม่",
-    "workType": "drilling",
-    "planWorkDayStart": "20250902",
-    "planWorkDayEnd": "20250925",
-    "actualWorkDayStart": "20250905",
-    "actualWorkDayEnd": "20250926"
-  },
-  {
-    "name": "โรงเรียนบ้านบางเสร่",
-    "location": "อ.เมือง จ.เชียงราย",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250108",
-    "planWorkDayEnd": "20250127",
-    "actualWorkDayStart": "20250106",
-    "actualWorkDayEnd": "20250129"
-  },
-  {
-    "name": "โรงงานแปรรูปยางพารา ไทย-มาเลย์",
-    "location": "อ.เมือง จ.เพชรบุรี",
-    "workType": "drilling",
-    "planWorkDayStart": "20250702",
-    "planWorkDayEnd": "20250721",
-    "actualWorkDayStart": "20250703",
-    "actualWorkDayEnd": "20250718"
-  },
-  {
-    "name": "MRT สถานีจตุจักร",
-    "location": "อ.เมือง จ.เชียงราย",
-    "workType": "survey",
-    "planWorkDayStart": "20250226",
-    "planWorkDayEnd": "20250319",
-    "actualWorkDayStart": "20250301",
-    "actualWorkDayEnd": "20250316"
-  },
-  {
-    "name": "The Mall โคราช",
-    "location": "อ.เมือง จ.ตรัง",
-    "workType": "drilling",
-    "planWorkDayStart": "20250505",
-    "planWorkDayEnd": "20250529",
-    "actualWorkDayStart": "20250505",
-    "actualWorkDayEnd": "20250528"
-  },
-  {
-    "name": "บิ๊กฟาร์มไก่บางบาล",
-    "location": "อ.เมือง จ.เชียงใหม่",
-    "workType": "maintenance",
-    "planWorkDayStart": "20251023",
-    "planWorkDayEnd": "20251118",
-    "actualWorkDayStart": "20251023",
-    "actualWorkDayEnd": "20251119"
-  },
-  {
-    "name": "InterContinental หัวหิน",
-    "location": "อ.ปากเกร็ด จ.นนทบุรี",
-    "workType": "others",
-    "planWorkDayStart": "20250524",
-    "planWorkDayEnd": "20250611",
-    "actualWorkDayStart": "20250523",
-    "actualWorkDayEnd": "20250608"
-  },
-  {
-    "name": "ฟาร์มโคนมดารา ฟาร์ม",
-    "location": "อ.เมือง จ.ลำปาง",
-    "workType": "survey",
-    "planWorkDayStart": "20250628",
-    "planWorkDayEnd": "20250725",
-    "actualWorkDayStart": "20250628",
-    "actualWorkDayEnd": "20250727"
-  },
-  {
-    "name": "InterContinental หัวหิน",
-    "location": "อ.ลาดกระบัง จ.กรุงเทพฯ",
-    "workType": "drilling",
-    "planWorkDayStart": "20250606",
-    "planWorkDayEnd": "20250617",
-    "actualWorkDayStart": "20250607",
-    "actualWorkDayEnd": "20250617"
-  },
-  {
-    "name": "The Mall โคราช",
-    "location": "อ.ปากเกร็ด จ.นนทบุรี",
-    "workType": "others",
-    "planWorkDayStart": "20250430",
-    "planWorkDayEnd": "20250510",
-    "actualWorkDayStart": "20250428",
-    "actualWorkDayEnd": "20250511"
-  },
-  {
-    "name": "InterContinental หัวหิน",
-    "location": "อ.เมือง จ.เชียงใหม่",
-    "workType": "survey",
-    "planWorkDayStart": "20250826",
-    "planWorkDayEnd": "20250920",
-    "actualWorkDayStart": "20250828",
-    "actualWorkDayEnd": "20250920"
-  },
-  {
-    "name": "The Mall โคราช",
-    "location": "อ.เมือง จ.ภูเก็ต",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250928",
-    "planWorkDayEnd": "20251017",
-    "actualWorkDayStart": "20250930",
-    "actualWorkDayEnd": "20251015"
-  },
-  {
-    "name": "The Mall โคราช",
-    "location": "อ.เมือง จ.เชียงราย",
-    "workType": "drilling",
-    "planWorkDayStart": "20250912",
-    "planWorkDayEnd": "20250924",
-    "actualWorkDayStart": "20250915",
-    "actualWorkDayEnd": "20250926"
-  },
-  {
-    "name": "สนามบินเบตง",
-    "location": "อ.เมือง จ.เชียงใหม่",
-    "workType": "survey",
-    "planWorkDayStart": "20250116",
-    "planWorkDayEnd": "20250128",
-    "actualWorkDayStart": "20250118",
-    "actualWorkDayEnd": "20250127"
-  },
-  {
-    "name": "BTS สถานีสำโรง",
-    "location": "อ.ปากเกร็ด จ.นนทบุรี",
-    "workType": "others",
-    "planWorkDayStart": "20250321",
-    "planWorkDayEnd": "20250420",
-    "actualWorkDayStart": "20250322",
-    "actualWorkDayEnd": "20250422"
-  },
-  {
-    "name": "โรงงานแปรรูปยางพารา ไทย-มาเลย์",
-    "location": "อ.เมือง จ.อุดรธานี",
-    "workType": "dewatering",
-    "planWorkDayStart": "20250513",
-    "planWorkDayEnd": "20250606",
-    "actualWorkDayStart": "20250516",
-    "actualWorkDayEnd": "20250605"
-  },
-  {
-    "name": "โรงงานผลิตอาหารสัตว์ ซีพี",
-    "location": "อ.เมือง จ.เพชรบุรี",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250218",
-    "planWorkDayEnd": "20250320",
-    "actualWorkDayStart": "20250220",
-    "actualWorkDayEnd": "20250320"
-  },
-  {
-    "name": "บิ๊กฟาร์มไก่บางบาล",
-    "location": "อ.เมือง จ.ลำปาง",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250203",
-    "planWorkDayEnd": "20250222",
-    "actualWorkDayStart": "20250202",
-    "actualWorkDayEnd": "20250220"
-  },
-  {
-    "name": "ศูนย์ราชการ แจ้งวัฒนะ",
-    "location": "อ.เมือง จ.เชียงราย",
-    "workType": "survey",
-    "planWorkDayStart": "20250413",
-    "planWorkDayEnd": "20250423",
-    "actualWorkDayStart": "20250411",
-    "actualWorkDayEnd": "20250422"
-  },
-  {
-    "name": "บ่อน้ำบาดาล ราชบุรี",
-    "location": "อ.เมือง จ.เชียงใหม่",
-    "workType": "dewatering",
-    "planWorkDayStart": "20250520",
-    "planWorkDayEnd": "20250611",
-    "actualWorkDayStart": "20250520",
-    "actualWorkDayEnd": "20250610"
-  },
-  {
-    "name": "ศูนย์ราชการ แจ้งวัฒนะ",
-    "location": "อ.เมือง จ.นครราชสีมา",
-    "workType": "maintenance",
-    "planWorkDayStart": "20250702",
-    "planWorkDayEnd": "20250721",
-    "actualWorkDayStart": "20250705",
-    "actualWorkDayEnd": "20250723"
-  },
-  {
-    "name": "ศูนย์ราชการ แจ้งวัฒนะ",
-    "location": "อ.เมือง จ.เชียงใหม่",
-    "workType": "dewatering",
-    "planWorkDayStart": "20250506",
-    "planWorkDayEnd": "20250520",
-    "actualWorkDayStart": "20250505",
-    "actualWorkDayEnd": "20250520"
-  },
-  {
-    "name": "โรงงานผลิตอาหารสัตว์ ซีพี",
-    "location": "อ.เมือง จ.นครศรีธรรมราช",
-    "workType": "drilling",
-    "planWorkDayStart": "20250318",
-    "planWorkDayEnd": "20250406",
-    "actualWorkDayStart": "20250316",
-    "actualWorkDayEnd": "20250408"
-  },
-  {
-    "name": "บิ๊กฟาร์มหมู พัทลุง",
-    "location": "อ.ลาดกระบัง จ.กรุงเทพฯ",
-    "workType": "survey",
-    "planWorkDayStart": "20250829",
-    "planWorkDayEnd": "20250921",
-    "actualWorkDayStart": "20250827",
-    "actualWorkDayEnd": "20250918"
-  },
-  {
-    "name": "โรงงานน้ำตาลมิตรผล",
-    "location": "อ.หาดใหญ่ จ.สงขลา",
+    "latlng": {
+      "lat": 17.026963,
+      "lng": 101.244624
+    },
+    "client": "SCG",
+    "supervisor": "Team B",
+    "projectWorth": 2570638,
+    "status": "in_progress",
     "workType": "maintenance",
     "planWorkDayStart": "20250102",
     "planWorkDayEnd": "20250131",
     "actualWorkDayStart": "20250105",
-    "actualWorkDayEnd": "20250131"
+    "actualWorkDayEnd": "20250131",
+    "tags": ["mountain", "remote"],
+    "report": "report_39.pdf",
+    "documents": ["report_q1.pdf"]
   },
   {
-    "name": "ศูนย์ราชการ แจ้งวัฒนะ",
+    "id": 34,
+    "projectName": "โรงเรียนบ้านบางเสร่",
+    "location": "อ.เมือง จ.เชียงราย",
+    "latlng": {
+      "lat": 5.652757,
+      "lng": 103.492718
+    },
+    "client": "Private Client",
+    "supervisor": "Chiang Mai Unit",
+    "projectWorth": 4647569,
+    "status": "in_progress",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250108",
+    "planWorkDayEnd": "20250127",
+    "actualWorkDayStart": "20250106",
+    "actualWorkDayEnd": "20250129",
+    "tags": ["urgent"],
+    "report": "report_16.pdf",
+    "documents": ["summary.docx", "photos.zip"]
+  },
+  {
+    "id": 12,
+    "projectName": "สนามบินเบตง",
+    "location": "อ.เมือง จ.เชียงใหม่",
+    "latlng": {
+      "lat": 15.194496,
+      "lng": 104.245138
+    },
+    "client": "CP Group",
+    "supervisor": "Team A",
+    "projectWorth": 3197935,
+    "status": "in_progress",
+    "workType": "survey",
+    "planWorkDayStart": "20250116",
+    "planWorkDayEnd": "20250128",
+    "actualWorkDayStart": "20250118",
+    "actualWorkDayEnd": "20250127",
+    "tags": ["government"],
+    "report": "report_28.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 18,
+    "projectName": "บิ๊กฟาร์มไก่บางบาล",
+    "location": "อ.เมือง จ.นครราชสีมา",
+    "latlng": {
+      "lat": 9.245545,
+      "lng": 104.707744
+    },
+    "client": "InterContinental",
+    "supervisor": "Team B",
+    "projectWorth": 2161679,
+    "status": "in_progress",
+    "workType": "survey",
+    "planWorkDayStart": "20250125",
+    "planWorkDayEnd": "20250205",
+    "actualWorkDayStart": "20250126",
+    "actualWorkDayEnd": "20250206",
+    "tags": ["farm", "organic"],
+    "report": "report_2.pdf",
+    "documents": ["contract.pdf", "inspection.jpg"]
+  },
+  {
+    "id": 17,
+    "projectName": "บิ๊กฟาร์มไก่บางบาล",
+    "location": "อ.เมือง จ.ลำปาง",
+    "latlng": {
+      "lat": 19.506905,
+      "lng": 102.812146
+    },
+    "client": "InterContinental",
+    "supervisor": "Team B",
+    "projectWorth": 3601297,
+    "status": "in_progress",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250203",
+    "planWorkDayEnd": "20250222",
+    "actualWorkDayStart": "20250202",
+    "actualWorkDayEnd": "20250220",
+    "tags": ["urban"],
+    "report": "report_32.pdf",
+    "documents": []
+  },
+  {
+    "id": 4,
+    "projectName": "โรงงานผลิตอาหารสัตว์ ซีพี",
+    "location": "อ.เมือง จ.เพชรบุรี",
+    "latlng": {
+      "lat": 12.467815,
+      "lng": 104.215959
+    },
+    "client": "SCG",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 409366,
+    "status": "in_progress",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250218",
+    "planWorkDayEnd": "20250320",
+    "actualWorkDayStart": "20250220",
+    "actualWorkDayEnd": "20250320",
+    "tags": ["government"],
+    "report": "report_31.pdf",
+    "documents": []
+  },
+  {
+    "id": 36,
+    "projectName": "โครงการบ้านจัดสรร นนทบุรี",
+    "location": "อ.เมือง จ.เชียงราย",
+    "latlng": {
+      "lat": 7.431347,
+      "lng": 105.013231
+    },
+    "client": "Private Client",
+    "supervisor": "Team A",
+    "projectWorth": 1378790,
+    "status": "in_progress",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250221",
+    "planWorkDayEnd": "20250311",
+    "actualWorkDayStart": "20250224",
+    "actualWorkDayEnd": "20250311",
+    "tags": ["transport", "metro"],
+    "report": "report_4.pdf",
+    "documents": ["contract.pdf", "inspection.jpg"]
+  },
+  {
+    "id": 37,
+    "projectName": "MRT สถานีจตุจักร",
+    "location": "อ.เมือง จ.เชียงราย",
+    "latlng": {
+      "lat": 14.713544,
+      "lng": 103.386547
+    },
+    "client": "ThaiBev",
+    "supervisor": "Drill Team Bravo",
+    "projectWorth": 2422087,
+    "status": "planned",
+    "workType": "survey",
+    "planWorkDayStart": "20250226",
+    "planWorkDayEnd": "20250319",
+    "actualWorkDayStart": "20250301",
+    "actualWorkDayEnd": "20250316",
+    "tags": ["government"],
+    "report": "report_18.pdf",
+    "documents": ["permit_form.png"]
+  },
+  {
+    "id": 14,
+    "projectName": "โรงงานผลิตอาหารสัตว์ ซีพี",
+    "location": "อ.เมือง จ.นครศรีธรรมราช",
+    "latlng": {
+      "lat": 10.591889,
+      "lng": 102.16319
+    },
+    "client": "PTT Exploration",
+    "supervisor": "Bangkok Ops",
+    "projectWorth": 468899,
+    "status": "completed",
+    "workType": "drilling",
+    "planWorkDayStart": "20250318",
+    "planWorkDayEnd": "20250406",
+    "actualWorkDayStart": "20250316",
+    "actualWorkDayEnd": "20250408",
+    "tags": ["hospital"],
+    "report": "report_37.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 10,
+    "projectName": "BTS สถานีสำโรง",
+    "location": "อ.ปากเกร็ด จ.นนทบุรี",
+    "latlng": {
+      "lat": 13.68132,
+      "lng": 99.082481
+    },
+    "client": "Bangkok Hospital",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 3132376,
+    "status": "in_progress",
+    "workType": "others",
+    "planWorkDayStart": "20250321",
+    "planWorkDayEnd": "20250420",
+    "actualWorkDayStart": "20250322",
+    "actualWorkDayEnd": "20250422",
+    "tags": ["farm", "organic"],
+    "report": "report_29.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 23,
+    "projectName": "ฟาร์มโคนมดารา ฟาร์ม",
+    "location": "อ.บ้านโป่ง จ.ราชบุรี",
+    "latlng": {
+      "lat": 15.190258,
+      "lng": 100.285495
+    },
+    "client": "InterContinental",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 1045915,
+    "status": "completed",
+    "workType": "drilling",
+    "planWorkDayStart": "20250324",
+    "planWorkDayEnd": "20250408",
+    "actualWorkDayStart": "20250322",
+    "actualWorkDayEnd": "20250405",
+    "tags": ["farm", "organic"],
+    "report": "report_3.pdf",
+    "documents": ["summary.docx", "photos.zip"]
+  },
+  {
+    "id": 21,
+    "projectName": "ฟาร์มโคนมดารา ฟาร์ม",
     "location": "อ.เมือง จ.สุราษฎร์ธานี",
+    "latlng": {
+      "lat": 16.654349,
+      "lng": 102.535916
+    },
+    "client": "Government Project",
+    "supervisor": "Drill Team Bravo",
+    "projectWorth": 667622,
+    "status": "in_progress",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250406",
+    "planWorkDayEnd": "20250430",
+    "actualWorkDayStart": "20250404",
+    "actualWorkDayEnd": "20250502",
+    "tags": ["mountain", "remote"],
+    "report": "report_7.pdf",
+    "documents": ["permit_form.png"]
+  },
+  {
+    "id": 3,
+    "projectName": "สนามบินเบตง",
+    "location": "อ.หัวหิน จ.ประจวบคีรีขันธ์",
+    "latlng": {
+      "lat": 14.018546,
+      "lng": 101.34077
+    },
+    "client": "CP Group",
+    "supervisor": "Chiang Mai Unit",
+    "projectWorth": 2837875,
+    "status": "in_progress",
+    "workType": "survey",
+    "planWorkDayStart": "20250407",
+    "planWorkDayEnd": "20250427",
+    "actualWorkDayStart": "20250406",
+    "actualWorkDayEnd": "20250429",
+    "tags": ["urban"],
+    "report": "report_10.pdf",
+    "documents": []
+  },
+  {
+    "id": 26,
+    "projectName": "สถานีขนส่งใหม่ ขอนแก่น",
+    "location": "อ.บ้านโป่ง จ.ราชบุรี",
+    "latlng": {
+      "lat": 13.838855,
+      "lng": 102.053168
+    },
+    "client": "Bangkok Hospital",
+    "supervisor": "East Zone Crew",
+    "projectWorth": 3601547,
+    "status": "completed",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250408",
+    "planWorkDayEnd": "20250505",
+    "actualWorkDayStart": "20250409",
+    "actualWorkDayEnd": "20250504",
+    "tags": ["transport", "metro"],
+    "report": "report_8.pdf",
+    "documents": ["permit_form.png"]
+  },
+  {
+    "id": 19,
+    "projectName": "ศูนย์ราชการ แจ้งวัฒนะ",
+    "location": "อ.เมือง จ.เชียงราย",
+    "latlng": {
+      "lat": 19.136119,
+      "lng": 101.472024
+    },
+    "client": "BTS Co. Ltd.",
+    "supervisor": "Drill Team Bravo",
+    "projectWorth": 1309692,
+    "status": "planned",
+    "workType": "survey",
+    "planWorkDayStart": "20250413",
+    "planWorkDayEnd": "20250423",
+    "actualWorkDayStart": "20250411",
+    "actualWorkDayEnd": "20250422",
+    "tags": ["farm", "organic"],
+    "report": "report_33.pdf",
+    "documents": ["contract.pdf", "inspection.jpg"]
+  },
+  {
+    "id": 2,
+    "projectName": "The Mall โคราช",
+    "location": "อ.ปากเกร็ด จ.นนทบุรี",
+    "latlng": {
+      "lat": 19.23737,
+      "lng": 100.76555
+    },
+    "client": "InterContinental",
+    "supervisor": "Bangkok Ops",
+    "projectWorth": 4211957,
+    "status": "completed",
+    "workType": "others",
+    "planWorkDayStart": "20250430",
+    "planWorkDayEnd": "20250510",
+    "actualWorkDayStart": "20250428",
+    "actualWorkDayEnd": "20250511",
+    "tags": ["urban"],
+    "report": "report_24.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 38,
+    "projectName": "The Mall โคราช",
+    "location": "อ.เมือง จ.ตรัง",
+    "latlng": {
+      "lat": 14.706585,
+      "lng": 104.709661
+    },
+    "client": "Government Project",
+    "supervisor": "Bangkok Ops",
+    "projectWorth": 3662172,
+    "status": "completed",
+    "workType": "drilling",
+    "planWorkDayStart": "20250505",
+    "planWorkDayEnd": "20250529",
+    "actualWorkDayStart": "20250505",
+    "actualWorkDayEnd": "20250528",
+    "tags": ["urban"],
+    "report": "report_19.pdf",
+    "documents": ["contract.pdf", "inspection.jpg"]
+  },
+  {
+    "id": 32,
+    "projectName": "ศูนย์ราชการ แจ้งวัฒนะ",
+    "location": "อ.เมือง จ.เชียงใหม่",
+    "latlng": {
+      "lat": 17.067846,
+      "lng": 102.392182
+    },
+    "client": "BTS Co. Ltd.",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 3764968,
+    "status": "planned",
+    "workType": "dewatering",
+    "planWorkDayStart": "20250506",
+    "planWorkDayEnd": "20250520",
+    "actualWorkDayStart": "20250505",
+    "actualWorkDayEnd": "20250520",
+    "tags": ["farm", "organic"],
+    "report": "report_36.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 7,
+    "projectName": "โรงงานแปรรูปยางพารา ไทย-มาเลย์",
+    "location": "อ.เมือง จ.อุดรธานี",
+    "latlng": {
+      "lat": 19.745062,
+      "lng": 97.93621
+    },
+    "client": "BTS Co. Ltd.",
+    "supervisor": "East Zone Crew",
+    "projectWorth": 3926358,
+    "status": "completed",
+    "workType": "dewatering",
+    "planWorkDayStart": "20250513",
+    "planWorkDayEnd": "20250606",
+    "actualWorkDayStart": "20250516",
+    "actualWorkDayEnd": "20250605",
+    "tags": ["resort"],
+    "report": "report_30.pdf",
+    "documents": ["contract.pdf", "inspection.jpg"]
+  },
+  {
+    "id": 6,
+    "projectName": "บ่อน้ำบาดาล ราชบุรี",
+    "location": "อ.เมือง จ.เชียงใหม่",
+    "latlng": {
+      "lat": 8.492562,
+      "lng": 98.836562
+    },
+    "client": "PTT Exploration",
+    "supervisor": "Team B",
+    "projectWorth": 2612660,
+    "status": "in_progress",
+    "workType": "dewatering",
+    "planWorkDayStart": "20250520",
+    "planWorkDayEnd": "20250611",
+    "actualWorkDayStart": "20250520",
+    "actualWorkDayEnd": "20250610",
+    "tags": ["urban"],
+    "report": "report_34.pdf",
+    "documents": ["contract.pdf", "inspection.jpg"]
+  },
+  {
+    "id": 22,
+    "projectName": "InterContinental หัวหิน",
+    "location": "อ.ปากเกร็ด จ.นนทบุรี",
+    "latlng": {
+      "lat": 7.114739,
+      "lng": 105.211282
+    },
+    "client": "Private Client",
+    "supervisor": "Team B",
+    "projectWorth": 3276394,
+    "status": "in_progress",
+    "workType": "others",
+    "planWorkDayStart": "20250524",
+    "planWorkDayEnd": "20250611",
+    "actualWorkDayStart": "20250523",
+    "actualWorkDayEnd": "20250608",
+    "tags": ["resort"],
+    "report": "report_21.pdf",
+    "documents": []
+  },
+  {
+    "id": 33,
+    "projectName": "บิ๊กฟาร์มหมู พัทลุง",
+    "location": "อ.เมือง จ.เชียงใหม่",
+    "latlng": {
+      "lat": 16.406085,
+      "lng": 99.506324
+    },
+    "client": "CP Group",
+    "supervisor": "Chiang Mai Unit",
+    "projectWorth": 2560358,
+    "status": "completed",
+    "workType": "drilling",
+    "planWorkDayStart": "20250604",
+    "planWorkDayEnd": "20250629",
+    "actualWorkDayStart": "20250602",
+    "actualWorkDayEnd": "20250627",
+    "tags": ["coastal"],
+    "report": "report_1.pdf",
+    "documents": []
+  },
+  {
+    "id": 5,
+    "projectName": "InterContinental หัวหิน",
+    "location": "อ.ลาดกระบัง จ.กรุงเทพฯ",
+    "latlng": {
+      "lat": 7.806472,
+      "lng": 104.775983
+    },
+    "client": "Bangkok Hospital",
+    "supervisor": "Maintenance Team 2",
+    "projectWorth": 1602630,
+    "status": "in_progress",
+    "workType": "drilling",
+    "planWorkDayStart": "20250606",
+    "planWorkDayEnd": "20250617",
+    "actualWorkDayStart": "20250607",
+    "actualWorkDayEnd": "20250617",
+    "tags": ["coastal"],
+    "report": "report_23.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 29,
+    "projectName": "โครงการบ้านจัดสรร นนทบุรี",
+    "location": "อ.เมือง จ.ลำปาง",
+    "latlng": {
+      "lat": 19.747177,
+      "lng": 103.63664
+    },
+    "client": "BTS Co. Ltd.",
+    "supervisor": "Maintenance Team 2",
+    "projectWorth": 2991270,
+    "status": "completed",
+    "workType": "dewatering",
+    "planWorkDayStart": "20250613",
+    "planWorkDayEnd": "20250626",
+    "actualWorkDayStart": "20250612",
+    "actualWorkDayEnd": "20250628",
+    "tags": ["mountain", "remote"],
+    "report": "report_13.pdf",
+    "documents": []
+  },
+  {
+    "id": 8,
+    "projectName": "ฟาร์มโคนมดารา ฟาร์ม",
+    "location": "อ.เมือง จ.ลำปาง",
+    "latlng": {
+      "lat": 7.704694,
+      "lng": 102.212681
+    },
+    "client": "Private Client",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 3161596,
+    "status": "in_progress",
+    "workType": "survey",
+    "planWorkDayStart": "20250628",
+    "planWorkDayEnd": "20250725",
+    "actualWorkDayStart": "20250628",
+    "actualWorkDayEnd": "20250727",
+    "tags": ["mountain", "remote"],
+    "report": "report_22.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 20,
+    "projectName": "บิ๊กฟาร์มหมู พัทลุง",
+    "location": "อ.ลาดกระบัง จ.กรุงเทพฯ",
+    "latlng": {
+      "lat": 7.018263,
+      "lng": 100.07352
+    },
+    "client": "ThaiBev",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 4036728,
+    "status": "completed",
+    "workType": "others",
+    "planWorkDayStart": "20250630",
+    "planWorkDayEnd": "20250718",
+    "actualWorkDayStart": "20250703",
+    "actualWorkDayEnd": "20250716",
+    "tags": ["coastal"],
+    "report": "report_11.pdf",
+    "documents": ["summary.docx", "photos.zip"]
+  },
+  {
+    "id": 28,
+    "projectName": "โรงงานแปรรูปยางพารา ไทย-มาเลย์",
+    "location": "อ.เมือง จ.เพชรบุรี",
+    "latlng": {
+      "lat": 14.069849,
+      "lng": 102.700801
+    },
+    "client": "InterContinental",
+    "supervisor": "Drill Team Bravo",
+    "projectWorth": 1561324,
+    "status": "in_progress",
+    "workType": "drilling",
+    "planWorkDayStart": "20250702",
+    "planWorkDayEnd": "20250721",
+    "actualWorkDayStart": "20250703",
+    "actualWorkDayEnd": "20250718",
+    "tags": ["coastal"],
+    "report": "report_17.pdf",
+    "documents": ["permit_form.png"]
+  },
+  {
+    "id": 30,
+    "projectName": "ศูนย์ราชการ แจ้งวัฒนะ",
+    "location": "อ.เมือง จ.นครราชสีมา",
+    "latlng": {
+      "lat": 7.858106,
+      "lng": 103.440659
+    },
+    "client": "Bangkok Hospital",
+    "supervisor": "Chiang Mai Unit",
+    "projectWorth": 1981377,
+    "status": "completed",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250702",
+    "planWorkDayEnd": "20250721",
+    "actualWorkDayStart": "20250705",
+    "actualWorkDayEnd": "20250723",
+    "tags": ["farm", "organic"],
+    "report": "report_35.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 40,
+    "projectName": "สถานีขนส่งใหม่ ขอนแก่น",
+    "location": "อ.สัตหีบ จ.ชลบุรี",
+    "latlng": {
+      "lat": 20.430322,
+      "lng": 101.448723
+    },
+    "client": "Bangkok Hospital",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 4935438,
+    "status": "planned",
+    "workType": "drilling",
+    "planWorkDayStart": "20250711",
+    "planWorkDayEnd": "20250721",
+    "actualWorkDayStart": "20250712",
+    "actualWorkDayEnd": "20250721",
+    "tags": ["hospital"],
+    "report": "report_9.pdf",
+    "documents": []
+  },
+  {
+    "id": 11,
+    "projectName": "ศูนย์ราชการ แจ้งวัฒนะ",
+    "location": "อ.เมือง จ.สุราษฎร์ธานี",
+    "latlng": {
+      "lat": 7.932065,
+      "lng": 102.210387
+    },
+    "client": "BTS Co. Ltd.",
+    "supervisor": "Chiang Mai Unit",
+    "projectWorth": 2416186,
+    "status": "in_progress",
     "workType": "maintenance",
     "planWorkDayStart": "20250722",
     "planWorkDayEnd": "20250809",
     "actualWorkDayStart": "20250723",
-    "actualWorkDayEnd": "20250806"
+    "actualWorkDayEnd": "20250806",
+    "tags": ["urban"],
+    "report": "report_40.pdf",
+    "documents": []
+  },
+  {
+    "id": 25,
+    "projectName": "InterContinental หัวหิน",
+    "location": "อ.เมือง จ.เชียงใหม่",
+    "latlng": {
+      "lat": 10.714605,
+      "lng": 104.622039
+    },
+    "client": "CP Group",
+    "supervisor": "Drill Team Bravo",
+    "projectWorth": 4957134,
+    "status": "planned",
+    "workType": "survey",
+    "planWorkDayStart": "20250826",
+    "planWorkDayEnd": "20250920",
+    "actualWorkDayStart": "20250828",
+    "actualWorkDayEnd": "20250920",
+    "tags": ["mountain", "remote"],
+    "report": "report_25.pdf",
+    "documents": []
+  },
+  {
+    "id": 31,
+    "projectName": "บิ๊กฟาร์มหมู พัทลุง",
+    "location": "อ.ลาดกระบัง จ.กรุงเทพฯ",
+    "latlng": {
+      "lat": 12.586436,
+      "lng": 102.772904
+    },
+    "client": "CP Group",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 2463500,
+    "status": "completed",
+    "workType": "survey",
+    "planWorkDayStart": "20250829",
+    "planWorkDayEnd": "20250921",
+    "actualWorkDayStart": "20250827",
+    "actualWorkDayEnd": "20250918",
+    "tags": ["resort"],
+    "report": "report_38.pdf",
+    "documents": ["permit_form.png"]
+  },
+  {
+    "id": 27,
+    "projectName": "โรงงานแปรรูปยางพารา ไทย-มาเลย์",
+    "location": "อ.เมือง จ.เชียงใหม่",
+    "latlng": {
+      "lat": 12.190658,
+      "lng": 102.055933
+    },
+    "client": "Bangkok Hospital",
+    "supervisor": "Bangkok Ops",
+    "projectWorth": 4284733,
+    "status": "planned",
+    "workType": "drilling",
+    "planWorkDayStart": "20250902",
+    "planWorkDayEnd": "20250925",
+    "actualWorkDayStart": "20250905",
+    "actualWorkDayEnd": "20250926",
+    "tags": ["government"],
+    "report": "report_15.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 24,
+    "projectName": "รีสอร์ตบ้านภูเขา เขาค้อ",
+    "location": "อ.เมือง จ.เชียงราย",
+    "latlng": {
+      "lat": 19.020795,
+      "lng": 103.350362
+    },
+    "client": "Government Project",
+    "supervisor": "Maintenance Team 2",
+    "projectWorth": 1705566,
+    "status": "completed",
+    "workType": "dewatering",
+    "planWorkDayStart": "20250910",
+    "planWorkDayEnd": "20251005",
+    "actualWorkDayStart": "20250910",
+    "actualWorkDayEnd": "20251003",
+    "tags": ["resort"],
+    "report": "report_12.pdf",
+    "documents": ["contract.pdf", "inspection.jpg"]
+  },
+  {
+    "id": 9,
+    "projectName": "The Mall โคราช",
+    "location": "อ.เมือง จ.เชียงราย",
+    "latlng": {
+      "lat": 14.037226,
+      "lng": 104.901795
+    },
+    "client": "CP Group",
+    "supervisor": "Southern Survey Team",
+    "projectWorth": 4873280,
+    "status": "completed",
+    "workType": "drilling",
+    "planWorkDayStart": "20250912",
+    "planWorkDayEnd": "20250924",
+    "actualWorkDayStart": "20250915",
+    "actualWorkDayEnd": "20250926",
+    "tags": ["transport", "metro"],
+    "report": "report_27.pdf",
+    "documents": ["report_q1.pdf"]
+  },
+  {
+    "id": 15,
+    "projectName": "ฟาร์มโคนมดารา ฟาร์ม",
+    "location": "อ.เมือง จ.ตรัง",
+    "latlng": {
+      "lat": 8.547582,
+      "lng": 101.221705
+    },
+    "client": "EGAT",
+    "supervisor": "Bangkok Ops",
+    "projectWorth": 849364,
+    "status": "completed",
+    "workType": "survey",
+    "planWorkDayStart": "20250924",
+    "planWorkDayEnd": "20251014",
+    "actualWorkDayStart": "20250924",
+    "actualWorkDayEnd": "20251011",
+    "tags": ["coastal"],
+    "report": "report_6.pdf",
+    "documents": ["permit_form.png"]
+  },
+  {
+    "id": 1,
+    "projectName": "The Mall โคราช",
+    "location": "อ.เมือง จ.ภูเก็ต",
+    "latlng": {
+      "lat": 16.722154,
+      "lng": 105.236386
+    },
+    "client": "SCG",
+    "supervisor": "Bangkok Ops",
+    "projectWorth": 3112193,
+    "status": "planned",
+    "workType": "maintenance",
+    "planWorkDayStart": "20250928",
+    "planWorkDayEnd": "20251017",
+    "actualWorkDayStart": "20250930",
+    "actualWorkDayEnd": "20251015",
+    "tags": ["urban"],
+    "report": "report_26.pdf",
+    "documents": []
+  },
+  {
+    "id": 35,
+    "projectName": "สนามบินเบตง",
+    "location": "อ.หาดใหญ่ จ.สงขลา",
+    "latlng": {
+      "lat": 5.685833,
+      "lng": 98.626983
+    },
+    "client": "BTS Co. Ltd.",
+    "supervisor": "Team B",
+    "projectWorth": 3558724,
+    "status": "completed",
+    "workType": "survey",
+    "planWorkDayStart": "20251007",
+    "planWorkDayEnd": "20251103",
+    "actualWorkDayStart": "20251010",
+    "actualWorkDayEnd": "20251101",
+    "tags": ["coastal"],
+    "report": "report_14.pdf",
+    "documents": []
+  },
+  {
+    "id": 13,
+    "projectName": "รีสอร์ตบ้านภูเขา เขาค้อ",
+    "location": "อ.หาดใหญ่ จ.สงขลา",
+    "latlng": {
+      "lat": 17.415138,
+      "lng": 98.266204
+    },
+    "client": "Bangkok Hospital",
+    "supervisor": "Maintenance Team 2",
+    "projectWorth": 3917953,
+    "status": "completed",
+    "workType": "survey",
+    "planWorkDayStart": "20251010",
+    "planWorkDayEnd": "20251020",
+    "actualWorkDayStart": "20251009",
+    "actualWorkDayEnd": "20251018",
+    "tags": ["resort"],
+    "report": "report_5.pdf",
+    "documents": []
+  },
+  {
+    "id": 39,
+    "projectName": "บิ๊กฟาร์มไก่บางบาล",
+    "location": "อ.เมือง จ.เชียงใหม่",
+    "latlng": {
+      "lat": 12.196229,
+      "lng": 98.910209
+    },
+    "client": "BTS Co. Ltd.",
+    "supervisor": "Drill Team Bravo",
+    "projectWorth": 2962460,
+    "status": "planned",
+    "workType": "maintenance",
+    "planWorkDayStart": "20251023",
+    "planWorkDayEnd": "20251118",
+    "actualWorkDayStart": "20251023",
+    "actualWorkDayEnd": "20251119",
+    "tags": ["urban"],
+    "report": "report_20.pdf",
+    "documents": ["report_q1.pdf"]
   }
 ]
