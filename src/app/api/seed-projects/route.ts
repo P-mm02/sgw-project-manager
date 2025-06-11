@@ -1,23 +1,23 @@
-// src/app/api/seed-projects/route.ts
 import { NextResponse } from 'next/server'
-import clientPromise from '@/lib/mongodb'
+import { connectToDB } from '@/lib/mongoose'
+import Project from '@/models/Project'
 import projectData from '@/data/projectData.json'
 
 export async function GET() {
   try {
-    const client = await clientPromise
-    const db = client.db('sgw') // replace with your DB name
-    const collection = db.collection('projects')
+    await connectToDB()
 
-    // Optional: Clear old data
-    await collection.deleteMany({})
+    // Optional: Clear existing projects
+    await Project.deleteMany({})
+    console.log('✅ Cleared existing projects')
 
-    // Insert new data
-    await collection.insertMany(projectData)
+    // Insert new seed data
+    await Project.insertMany(projectData)
+    console.log('✅ Inserted new seed data')
 
     return NextResponse.json({ message: 'Projects seeded successfully' })
   } catch (error) {
-    console.error(error)
+    console.error('❌ Failed to seed projects:', error)
     return NextResponse.json(
       { error: 'Failed to seed projects' },
       { status: 500 }

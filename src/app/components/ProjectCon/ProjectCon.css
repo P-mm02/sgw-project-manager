@@ -35,24 +35,6 @@
 }
 
 
-.row-head {
-  display: grid;
-  grid-template-columns: 2fr 2fr 2fr 9fr;
-  gap: 1rem;
-  align-items: start;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 1rem;
-}
-
-/* Grid-based project layout */
-.row-project {
-  display: grid;
-  grid-template-columns: 2fr 2fr 2fr 9fr;
-  gap: 1rem;
-  align-items: start;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 1rem;
-}
 
 .row-month {
   display: flex;

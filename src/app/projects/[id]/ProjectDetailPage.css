@@ -1,0 +1,34 @@
+.project-detail-container {
+    max-width: 768px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+  
+  .project-detail-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .detail-row {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: #1e293b;
+    margin-right: 0.5rem;
+  }
+  
+  .detail-value {
+    color: #475569;
+  }
+  

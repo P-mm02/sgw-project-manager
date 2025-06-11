@@ -1,9 +1,53 @@
+/* Grid-based project layout */
+.row-head {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 9fr;
+  gap: 1rem;
+  align-items: start;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+}
+.row-project {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 9fr;
+  gap: 1rem;
+  align-items: start;
+  justify-content: center;
+  border-bottom: 1px solid #ccc;
+  padding: 0rem 0rem 2rem 0rem;
+  position: relative
+}
 
 .project-working-day{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: end;
-    font-size: 1rem;
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: end;
+  font-size: 1rem;
+}
+
+.project-plan{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.project-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  padding-bottom: 0.25rem;
+}
+
+.project-location {
+  font-size: 1.25rem;
+  font-weight: 400;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  padding-bottom: 0.25rem;
+}

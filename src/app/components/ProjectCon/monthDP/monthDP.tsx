@@ -1,4 +1,4 @@
-import { thaiMonths } from '@/constants/thaiMonths'
+import { thaiMonths } from '@/constants/thaiMonthShort'
 import './monthDP.css'
 type MonthDPProps = {
   monthCount: number

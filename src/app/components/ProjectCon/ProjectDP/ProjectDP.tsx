@@ -1,21 +1,54 @@
 'use client'
-import React, { useMemo } from 'react'
-import projectData from '@/data/projectData.json'
+import React, { useEffect, useMemo, useState } from 'react'
 import './ProjectDP.css'
-import DateCtrl from '../DateCtrl/DateCtrl'
+import DateCtrl from './DateCtrl/DateCtrl'
 import { generateMonths, Month } from './generateMonths/generateMonths'
 import { parse, differenceInCalendarDays } from 'date-fns'
+import ProjectActionButtons from './ProjectActionButtons/ProjectActionButtons'
+import { deleteProject } from '@/lib/deleteProject'
+import MonthDP from '../monthDP/monthDP'
+
+
 
 type MonthDPProps = {
   monthCount: number
   monthSelect: number
   yearSelect: number
+  workType: string
 }
 
-export default function ProjectDP({ monthCount, monthSelect, yearSelect }: MonthDPProps) {  
+export default function ProjectDP({
+  monthCount,
+  monthSelect,
+  yearSelect,
+  workType,
+}: MonthDPProps) {
+  const [projectData, setProjectData] = useState<any[]>([])
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch('/api/projects')
+        const { data } = await res.json()
+
+        // 🔍 Filter only drilling projects
+        const drillingProjects = data.filter(
+          (project: any) => project.workType === workType
+        )
+
+        setProjectData(drillingProjects)
+      } catch (error) {
+        console.error('Failed to fetch projects:', error)
+      }
+    }
+
+    fetchProjects()
+  }, [])
+
   const months: Month[] = useMemo(() => {
     return generateMonths(monthCount, monthSelect, yearSelect)
   }, [monthCount, monthSelect, yearSelect])
+
   const getDayDiff = (start: string, end: string) => {
     return (
       differenceInCalendarDays(
@@ -24,10 +57,35 @@ export default function ProjectDP({ monthCount, monthSelect, yearSelect }: Month
       ) + 1
     )
   }
+  
   return (
     <>
+      <div className="row-head">
+        <div className="project-names">
+          <h2>รายการ</h2>
+        </div>
+        <div className="project-locations">
+          <h2>สถานที่ตั้ง</h2>
+        </div>
+        <div className="project-working-days">
+          <h2>จำนวนวัน</h2>
+        </div>
+        <div className="row-month">
+          <MonthDP monthCount={monthCount} monthSelect={monthSelect} />
+        </div>
+      </div>
       {projectData.map((project, index) => (
         <div className="row-project" key={index}>
+          <ProjectActionButtons
+            projectId={project._id}
+            onDelete={async (id) => {
+              const success = await deleteProject(id)
+              if (success) {
+                setProjectData((prev) => prev.filter((p) => p._id !== id))
+              }
+            }}
+          />
+
           <div className="project-name">{project.projectName}</div>
           <div className="project-location">{project.location}</div>
           <div className="project-working-day">

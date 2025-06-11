@@ -2,10 +2,9 @@
 .month-select-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;  
+  justify-content: space-between;
   font-size: 2rem;
-
+  width: 300px;
 }
 
 .year-select-btn {
@@ -21,4 +20,18 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+
+.month-select-btn button, .year-select-btn button{
+  padding: 1rem 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+.month-select-btn button:hover, .year-select-btn button:hover{  
+  border-radius: 0.25rem;
+  cursor: pointer;
+  background-color: cadetblue;
 }

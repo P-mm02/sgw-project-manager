@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import './DateCtrl.css'
-import { Month } from '../ProjectDP/generateMonths/generateMonths'
+import { Month } from '../generateMonths/generateMonths'
 
 type DateCtrlProps = {
   monthCount: number
@@ -20,22 +20,22 @@ export default function DateCtrl({ monthCount, months, planRange, actualRange }:
       >
         {months.map((month, i) => (
           <div
-            className="bar-scale-month plan"
-            key={`plan-${i}`}
+          className={`bar-scale-month plan ${monthCount === 12 ? 'bar-scale-month-12month' : ''}`}
+          key={`plan-${i}`}
             style={{ gridTemplateColumns: `repeat(${month.days.length}, 1fr)` }}
           >
             {month.days.map((day) => {
               const isInPlan =
                 day.id >= planRange.start && day.id <= planRange.end
               return (
-                <div
-                  className={`bar-scale-day plan ${
-                    isInPlan ? 'plan-highlight' : ''
-                  }`}
-                  key={day.id}
-                  id={day.id}
-                >
-                  <span className="day-number">{day.label}</span>
+                <div className="bar-scale-day-wrapper">
+                  <div
+                    className={`bar-scale-day plan`}
+                    key={day.id}
+                    id={day.id}
+                  >
+                    <span className="day-number">{day.label}</span>
+                  </div>
                 </div>
               )
             })}
@@ -50,7 +50,7 @@ export default function DateCtrl({ monthCount, months, planRange, actualRange }:
       >
         {months.map((month, i) => (
           <div
-            className="bar-scale-month actual"
+            className={`bar-scale-month actual ${monthCount === 12 ? 'bar-scale-month-12month' : ''}`}
             key={`actual-${i}`}
             style={{ gridTemplateColumns: `repeat(${month.days.length}, 1fr)` }}
           >
@@ -58,13 +58,16 @@ export default function DateCtrl({ monthCount, months, planRange, actualRange }:
               const isInActual =
                 day.id >= actualRange.start && day.id <= actualRange.end
               return (
-                <div
-                  className={`bar-scale-day actual ${
-                    isInActual ? 'actual-highlight' : ''
-                  }`}
-                  key={day.id}
-                >
-                  <span className="day-number">{day.label}</span>
+                <div className="bar-scale-day-wrapper">
+                  <div
+                    className={`bar-scale-day actual ${
+                      isInActual ? 'actual-highlight' : ''
+                    }
+                    `}
+                    key={day.id}
+                  >
+                    <span className="day-number">{day.label}</span>
+                  </div>
                 </div>
               )
             })}
