@@ -14,9 +14,20 @@
   align-items: start;
   justify-content: center;
   border-bottom: 1px solid #ccc;
-  padding: 0rem 0rem 2rem 0rem;
-  position: relative
+  padding: 1rem 0.25rem 2rem 0.25rem;
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
+
+.row-project:hover {
+  background-color: #b2f5ea; /* brighter aquamarine-like color */
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
 
 .project-working-day{
   height: 100%;

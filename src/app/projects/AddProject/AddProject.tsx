@@ -2,19 +2,18 @@
 import { useState } from 'react'
 import './AddProject.css'
 import { handleSubmit } from './handleSubmit'
-
+import { formatDateInput } from '@/lib/formatDateInput'
 
 export default function AddProject() {
   const initialFormState = {
     projectName: '',
     location: '',
-    lat: '',
-    lng: '',
+    mapLink:'',
     client: '',
     supervisor: '',
     projectWorth: '',
     status: '',
-    workType: '',
+    workType: 'others',
     planWorkDayStart: '',
     planWorkDayEnd: '',
     actualWorkDayStart: '',
@@ -31,11 +30,12 @@ export default function AddProject() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value, type } = e.target
 
-  
+    const formattedValue = type === 'date' ? value.replaceAll('-', '') : value
+
+    setFormData((prev) => ({ ...prev, [name]: formattedValue }))
+  } 
 
   return (
     <div className="add-project-form">
@@ -55,11 +55,8 @@ export default function AddProject() {
         onChange={handleChange}
       />
 
-      <label>ละติจูด</label>
-      <input name="lat" value={formData.lat} onChange={handleChange} />
-
-      <label>ลองติจูด</label>
-      <input name="lng" value={formData.lng} onChange={handleChange} />
+      <label>ลิงค์แผนที่</label>
+      <input name="mapLink" value={formData.mapLink} onChange={handleChange} />
 
       <label>ชื่อลูกค้า/บริษัทลูกค้า</label>
       <input name="client" value={formData.client} onChange={handleChange} />
@@ -100,7 +97,7 @@ export default function AddProject() {
       <input
         type="date"
         name="planWorkDayStart"
-        value={formData.planWorkDayStart}
+        value={formatDateInput(formData.planWorkDayStart)}
         onChange={handleChange}
       />
 
@@ -108,7 +105,7 @@ export default function AddProject() {
       <input
         type="date"
         name="planWorkDayEnd"
-        value={formData.planWorkDayEnd}
+        value={formatDateInput(formData.planWorkDayEnd)}
         onChange={handleChange}
       />
 
@@ -116,7 +113,7 @@ export default function AddProject() {
       <input
         type="date"
         name="actualWorkDayStart"
-        value={formData.actualWorkDayStart}
+        value={formatDateInput(formData.actualWorkDayStart)}
         onChange={handleChange}
       />
 
@@ -124,7 +121,7 @@ export default function AddProject() {
       <input
         type="date"
         name="actualWorkDayEnd"
-        value={formData.actualWorkDayEnd}
+        value={formatDateInput(formData.actualWorkDayEnd)}
         onChange={handleChange}
       />
 

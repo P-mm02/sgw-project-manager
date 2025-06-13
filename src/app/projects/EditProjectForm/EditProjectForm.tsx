@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react'
 import './EditProjectForm.css'
+import { formatDateInput } from '@/lib/formatDateInput'
+
 
 type Props = {
   initialData: any
@@ -9,8 +11,6 @@ type Props = {
 export default function EditProjectForm({ initialData }: Props) {
   const [formData, setFormData] = useState({
     ...initialData,
-    lat: initialData.latlng?.lat || '',
-    lng: initialData.latlng?.lng || '',
     tags: initialData.tags?.join(', ') || '',
     documents: initialData.documents?.join(', ') || '',
   })
@@ -18,8 +18,11 @@ export default function EditProjectForm({ initialData }: Props) {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target
-    setFormData((prev: typeof formData) => ({ ...prev, [name]: value }))
+    const { name, value, type } = e.target
+
+    const formattedValue = type === 'date' ? value.replaceAll('-', '') : value
+
+    setFormData((prev: typeof formData) => ({ ...prev, [name]: formattedValue }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,11 +73,8 @@ export default function EditProjectForm({ initialData }: Props) {
         onChange={handleChange}
       />
 
-      <label>ละติจูด</label>
-      <input name="lat" value={formData.lat} onChange={handleChange} />
-
-      <label>ลองจิจูด</label>
-      <input name="lng" value={formData.lng} onChange={handleChange} />
+      <label>ลิงค์แผนที่</label>
+      <input name="mapLink" value={formData.mapLink} onChange={handleChange} />
 
       <label>ลูกค้า</label>
       <input name="client" value={formData.client} onChange={handleChange} />
@@ -113,7 +113,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="planWorkDayStart"
-        value={formData.planWorkDayStart}
+        value={formatDateInput(formData.planWorkDayStart)}
         onChange={handleChange}
       />
 
@@ -121,7 +121,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="planWorkDayEnd"
-        value={formData.planWorkDayEnd}
+        value={formatDateInput(formData.planWorkDayEnd)}
         onChange={handleChange}
       />
 
@@ -129,7 +129,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="actualWorkDayStart"
-        value={formData.actualWorkDayStart}
+        value={formatDateInput(formData.actualWorkDayStart)}
         onChange={handleChange}
       />
 
@@ -137,7 +137,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="actualWorkDayEnd"
-        value={formData.actualWorkDayEnd}
+        value={formatDateInput(formData.actualWorkDayEnd)}
         onChange={handleChange}
       />
 

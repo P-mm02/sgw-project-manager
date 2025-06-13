@@ -30,7 +30,10 @@ export default function DateCtrl({ monthCount, months, planRange, actualRange }:
               return (
                 <div className="bar-scale-day-wrapper">
                   <div
-                    className={`bar-scale-day plan`}
+                    className={`bar-scale-day plan ${
+                      isInPlan ? 'plan-highlight' : ''
+                    }
+                    `}
                     key={day.id}
                     id={day.id}
                   >

@@ -7,6 +7,7 @@ import { parse, differenceInCalendarDays } from 'date-fns'
 import ProjectActionButtons from './ProjectActionButtons/ProjectActionButtons'
 import { deleteProject } from '@/lib/deleteProject'
 import MonthDP from '../monthDP/monthDP'
+import { useRouter } from 'next/navigation'
 
 
 
@@ -58,6 +59,8 @@ export default function ProjectDP({
     )
   }
   
+  const router = useRouter()
+
   return (
     <>
       <div className="row-head">
@@ -75,9 +78,14 @@ export default function ProjectDP({
         </div>
       </div>
       {projectData.map((project, index) => (
-        <div className="row-project" key={index}>
+        <div
+          className="row-project"
+          key={index}
+          onClick={() => router.push(`/projects/${project._id}`)}
+        >
           <ProjectActionButtons
             projectId={project._id}
+            mapLink={project.mapLink}
             onDelete={async (id) => {
               const success = await deleteProject(id)
               if (success) {

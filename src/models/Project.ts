@@ -1,13 +1,10 @@
-import mongoose, { Schema, models, model } from 'mongoose'
+import { Schema, models, model, InferSchemaType } from 'mongoose'
 
 const ProjectSchema = new Schema(
   {
     projectName: String,
     location: String,
-    latlng: {
-      lat: Number,
-      lng: Number,
-    },
+    mapLink: String,
     client: String,
     supervisor: String,
     projectWorth: Number,
@@ -23,6 +20,8 @@ const ProjectSchema = new Schema(
   },
   { timestamps: true }
 )
+
+export type ProjectType = InferSchemaType<typeof ProjectSchema>
 
 const Project = models.Project || model('Project', ProjectSchema)
 export default Project
