@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getProjectById } from '@/lib/project-utils'
 import ProjectDetail from './projectDetail/projectDetail'
+import ProjectReport from './ProjectReport/ProjectReport'
 import "./page.css";
 
 type ProjectDetailPageProps = {
@@ -14,5 +15,10 @@ export default async function ProjectDetailPage({
   const project = await getProjectById(projectID.id)
   if (!project) notFound()
 
-  return <ProjectDetail project={project} />
+  return (
+    <div className="project-details-con">
+      <ProjectDetail project={project} />
+      <ProjectReport project={project} />
+    </div>
+  )
 }

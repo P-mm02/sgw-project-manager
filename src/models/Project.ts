@@ -17,6 +17,13 @@ const ProjectSchema = new Schema(
     tags: [String],
     report: String,
     documents: [String],
+    workLog: [
+      {
+        recorder: String,
+        recordTime: Date,
+        recordText: String,
+      },
+    ],
   },
   { timestamps: true }
 )

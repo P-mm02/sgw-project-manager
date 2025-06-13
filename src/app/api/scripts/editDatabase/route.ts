@@ -18,9 +18,29 @@ export async function GET() {
         },
       }
     ) */
+
+    // Add empty workLog array if it doesn't exist
+    const currentTime = new Date()
+    await Project.updateMany(
+      { workLog: { $exists: false } },
+      {
+        $set: {
+          workLog: [
+            {
+              recorder: 'recorder',
+              recordTime: currentTime,
+              recordText: 'recordText',
+            },
+          ],
+        },
+      },
+      { strict: false } // correct place for options
+    )
     
 
-    return NextResponse.json({ message: '✅✅✅✅✅✅✅✅successfully✅✅✅✅✅✅✅✅' })
+    return NextResponse.json({
+      message: '✅✅✅✅✅✅✅✅successfully✅✅✅✅✅✅✅✅',
+    })
   } catch (error) {
     console.error('❌ Failed :', error)
     return NextResponse.json(
