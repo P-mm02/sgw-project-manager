@@ -1,17 +1,15 @@
+import type { ProjectFormType } from '@/types/ProjectFormType'
+
 export async function handleSubmit(
-  formData: any,
+  formData: ProjectFormType,
   setSubmitted: (val: boolean) => void,
   setPreview: (val: boolean) => void
 ) {
   const payload = {
     ...formData,
     projectWorth: Number(formData.projectWorth),
-    latlng: {
-      lat: parseFloat(formData.lat),
-      lng: parseFloat(formData.lng),
-    },
-    tags: formData.tags.split(',').map((t: string) => t.trim()),
-    documents: formData.documents.split(',').map((d: string) => d.trim()),
+    tags: formData.tags.split(',').map((t) => t.trim()),
+    documents: formData.documents.split(',').map((d) => d.trim()),
   }
 
   const res = await fetch('/api/add-project', {

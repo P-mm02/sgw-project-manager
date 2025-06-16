@@ -3,12 +3,16 @@ import { useState } from 'react'
 import './AddProject.css'
 import { handleSubmit } from './handleSubmit'
 import { formatDateInput } from '@/lib/formatDateInput'
+import type { ProjectFormType } from '@/types/ProjectFormType'
+
+const safe = (val: string | undefined | null) => val ?? ''
+
 
 export default function AddProject() {
-  const initialFormState = {
+  const initialFormState: ProjectFormType = {
     projectName: '',
     location: '',
-    mapLink:'',
+    mapLink: '',
     client: '',
     supervisor: '',
     projectWorth: '',
@@ -21,8 +25,9 @@ export default function AddProject() {
     tags: '',
     report: '',
     documents: '',
-  } // same fields
-  const [formData, setFormData] = useState(initialFormState)
+  }
+  
+  const [formData, setFormData] = useState<ProjectFormType>(initialFormState)
 
   const [preview, setPreview] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -44,27 +49,27 @@ export default function AddProject() {
       <label>ชื่อโครงการ</label>
       <input
         name="projectName"
-        value={formData.projectName}
+        value={safe(formData.projectName)}
         onChange={handleChange}
       />
 
       <label>สถานที่ตั้ง</label>
       <input
         name="location"
-        value={formData.location}
+        value={safe(formData.location)}
         onChange={handleChange}
       />
 
       <label>ลิงค์แผนที่</label>
-      <input name="mapLink" value={formData.mapLink} onChange={handleChange} />
+      <input name="mapLink" value={safe(formData.mapLink)} onChange={handleChange} />
 
       <label>ชื่อลูกค้า/บริษัทลูกค้า</label>
-      <input name="client" value={formData.client} onChange={handleChange} />
+      <input name="client" value={safe(formData.client)} onChange={handleChange} />
 
       <label>ผู้รับผิดชอบ</label>
       <input
         name="supervisor"
-        value={formData.supervisor}
+        value={safe(formData.supervisor)}
         onChange={handleChange}
       />
 
@@ -76,7 +81,7 @@ export default function AddProject() {
       />
 
       <label>สถานะ</label>
-      <select name="status" value={formData.status} onChange={handleChange}>
+      <select name="status" value={safe(formData.status)} onChange={handleChange}>
         <option value="">Select Status</option>
         <option value="planned">Planned</option>
         <option value="in_progress">In Progress</option>
@@ -84,7 +89,7 @@ export default function AddProject() {
       </select>
 
       <label>ประเภทงาน</label>
-      <select name="workType" value={formData.workType} onChange={handleChange}>
+      <select name="workType" value={safe(formData.workType)} onChange={handleChange}>
         <option value="">Select Type</option>
         <option value="drilling">Drilling</option>
         <option value="survey">Survey</option>
@@ -97,7 +102,7 @@ export default function AddProject() {
       <input
         type="date"
         name="planWorkDayStart"
-        value={formatDateInput(formData.planWorkDayStart)}
+        value={formatDateInput(safe(formData.planWorkDayStart))}
         onChange={handleChange}
       />
 
@@ -105,7 +110,7 @@ export default function AddProject() {
       <input
         type="date"
         name="planWorkDayEnd"
-        value={formatDateInput(formData.planWorkDayEnd)}
+        value={formatDateInput(safe(formData.planWorkDayEnd))}
         onChange={handleChange}
       />
 
@@ -113,7 +118,7 @@ export default function AddProject() {
       <input
         type="date"
         name="actualWorkDayStart"
-        value={formatDateInput(formData.actualWorkDayStart)}
+        value={formatDateInput(safe(formData.actualWorkDayStart))}
         onChange={handleChange}
       />
 
@@ -121,7 +126,7 @@ export default function AddProject() {
       <input
         type="date"
         name="actualWorkDayEnd"
-        value={formatDateInput(formData.actualWorkDayEnd)}
+        value={formatDateInput(safe(formData.actualWorkDayEnd))}
         onChange={handleChange}
       />
 
@@ -129,7 +134,7 @@ export default function AddProject() {
       <input name="tags" value={formData.tags} onChange={handleChange} />
 
       <label>รายงาน</label>
-      <input name="report" value={formData.report} onChange={handleChange} />
+      <input name="report" value={safe(formData.report)} onChange={handleChange} />
 
       <label>เอกสาร (comma-separated)</label>
       <input

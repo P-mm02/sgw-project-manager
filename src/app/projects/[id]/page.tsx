@@ -17,8 +17,12 @@ export default async function ProjectDetailPage({
 
   return (
     <div className="project-details-con">
+      <div className="project-col-1">
       <ProjectDetail project={project} />
+      </div>
+      <div className="project-col-2">
       <ProjectReport project={project} />
-    </div>
+      </div>
+    </div>    
   )
 }

@@ -28,7 +28,7 @@ export default function DateCtrl({ monthCount, months, planRange, actualRange }:
               const isInPlan =
                 day.id >= planRange.start && day.id <= planRange.end
               return (
-                <div className="bar-scale-day-wrapper">
+                <div className="bar-scale-day-wrapper" key={day.id}>
                   <div
                     className={`bar-scale-day plan ${
                       isInPlan ? 'plan-highlight' : ''
@@ -61,7 +61,7 @@ export default function DateCtrl({ monthCount, months, planRange, actualRange }:
               const isInActual =
                 day.id >= actualRange.start && day.id <= actualRange.end
               return (
-                <div className="bar-scale-day-wrapper">
+                <div className="bar-scale-day-wrapper" key={day.id}>
                   <div
                     className={`bar-scale-day actual ${
                       isInActual ? 'actual-highlight' : ''

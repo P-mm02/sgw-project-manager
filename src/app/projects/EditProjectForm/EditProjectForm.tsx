@@ -2,10 +2,13 @@
 import { useState } from 'react'
 import './EditProjectForm.css'
 import { formatDateInput } from '@/lib/formatDateInput'
+import type { ProjectType } from '@/models/Project'
+
+const safe = (val: string | undefined | null) => val ?? ''
 
 
 type Props = {
-  initialData: any
+  initialData: ProjectType
 }
 
 export default function EditProjectForm({ initialData }: Props) {
@@ -30,11 +33,7 @@ export default function EditProjectForm({ initialData }: Props) {
 
     const updatedData = {
       ...formData,
-      latlng: {
-        lat: parseFloat(formData.lat),
-        lng: parseFloat(formData.lng),
-      },
-      projectWorth: parseFloat(formData.projectWorth),
+      projectWorth: parseFloat(safe(formData.projectWorth)),
       tags: formData.tags.split(',').map((tag: string) => tag.trim()),
       documents: formData.documents.split(',').map((doc: string) => doc.trim()),
     }
@@ -62,46 +61,46 @@ export default function EditProjectForm({ initialData }: Props) {
       <label>ชื่อโครงการ</label>
       <input
         name="projectName"
-        value={formData.projectName}
+        value={safe(formData.projectName)}
         onChange={handleChange}
       />
 
       <label>สถานที่ตั้ง</label>
       <input
         name="location"
-        value={formData.location}
+        value={safe(formData.location)}
         onChange={handleChange}
       />
 
       <label>ลิงค์แผนที่</label>
-      <input name="mapLink" value={formData.mapLink} onChange={handleChange} />
+      <input name="mapLink" value={safe(formData.mapLink)} onChange={handleChange} />
 
       <label>ลูกค้า</label>
-      <input name="client" value={formData.client} onChange={handleChange} />
+      <input name="client" value={safe(formData.client)} onChange={handleChange} />
 
       <label>ผู้ควบคุมงาน</label>
       <input
         name="supervisor"
-        value={formData.supervisor}
+        value={safe(formData.supervisor)}
         onChange={handleChange}
       />
 
       <label>มูลค่างาน</label>
       <input
         name="projectWorth"
-        value={formData.projectWorth}
+        value={safe(formData.projectWorth)}
         onChange={handleChange}
       />
 
       <label>สถานะ</label>
-      <select name="status" value={formData.status} onChange={handleChange}>
+      <select name="status" value={safe(formData.status)} onChange={handleChange}>
         <option value="planned">วางแผน</option>
         <option value="in_progress">กำลังดำเนินการ</option>
         <option value="done">เสร็จสิ้น</option>
       </select>
 
       <label>ประเภทงาน</label>
-      <select name="workType" value={formData.workType} onChange={handleChange}>
+      <select name="workType" value={safe(formData.workType)} onChange={handleChange}>
         <option value="drilling">เจาะบ่อ</option>
         <option value="survey">สำรวจ</option>
         <option value="dewatering">ดูดน้ำ</option>
@@ -113,7 +112,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="planWorkDayStart"
-        value={formatDateInput(formData.planWorkDayStart)}
+        value={formatDateInput(safe(formData.planWorkDayStart))}
         onChange={handleChange}
       />
 
@@ -121,7 +120,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="planWorkDayEnd"
-        value={formatDateInput(formData.planWorkDayEnd)}
+        value={formatDateInput(safe(formData.planWorkDayEnd))}
         onChange={handleChange}
       />
 
@@ -129,7 +128,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="actualWorkDayStart"
-        value={formatDateInput(formData.actualWorkDayStart)}
+        value={formatDateInput(safe(formData.actualWorkDayStart))}
         onChange={handleChange}
       />
 
@@ -137,7 +136,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input
         type="date"
         name="actualWorkDayEnd"
-        value={formatDateInput(formData.actualWorkDayEnd)}
+        value={formatDateInput(safe(formData.actualWorkDayEnd))}
         onChange={handleChange}
       />
 
@@ -145,7 +144,7 @@ export default function EditProjectForm({ initialData }: Props) {
       <input name="tags" value={formData.tags} onChange={handleChange} />
 
       <label>รายงาน</label>
-      <input name="report" value={formData.report} onChange={handleChange} />
+      <input name="report" value={safe(formData.report)} onChange={handleChange} />
 
       <label>เอกสาร (comma-separated)</label>
       <input

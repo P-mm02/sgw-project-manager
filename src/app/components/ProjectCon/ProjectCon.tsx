@@ -23,9 +23,11 @@ export default function DPprojects({workType}:ProjectConProps) {
           setMonthCount={setMonthCount}
           setMonthSelect={setMonthSelect}
         />
-        <Link href="/projects/AddProject" className="add-project-btn">
-          เพิ่มโปรเจค
-        </Link>
+        <div className="add-project-btn-wrapper">
+          <Link href="/projects/AddProject" className="add-project-btn">
+            เพิ่มโปรเจค
+          </Link>
+        </div>
       </div>
       <MonthSelectBtn
         monthSelect={monthSelect}

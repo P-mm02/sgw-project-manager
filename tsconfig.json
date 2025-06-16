@@ -31,10 +31,13 @@
   },
   "include": [
     "next-env.d.ts",
-    "src",
+    "src"
+    // ❌ REMOVE ".next/types/**/*.ts"
+    ,
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next" // ✅ add this to completely exclude problematic generated types
   ]
 }

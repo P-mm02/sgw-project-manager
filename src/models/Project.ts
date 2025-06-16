@@ -1,4 +1,4 @@
-import { Schema, models, model, InferSchemaType } from 'mongoose'
+import { InferSchemaType, Schema, model, models, Types } from 'mongoose'
 
 const ProjectSchema = new Schema(
   {
@@ -7,7 +7,7 @@ const ProjectSchema = new Schema(
     mapLink: String,
     client: String,
     supervisor: String,
-    projectWorth: Number,
+    projectWorth: String,
     status: String,
     workType: String,
     planWorkDayStart: String,
@@ -28,7 +28,10 @@ const ProjectSchema = new Schema(
   { timestamps: true }
 )
 
-export type ProjectType = InferSchemaType<typeof ProjectSchema>
+type BaseProject = InferSchemaType<typeof ProjectSchema>
+
+// 👇 Add _id manually
+export type ProjectType = BaseProject & { _id: Types.ObjectId;}
 
 const Project = models.Project || model('Project', ProjectSchema)
 export default Project

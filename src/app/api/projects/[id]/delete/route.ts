@@ -4,12 +4,13 @@ import Project from '@/models/Project'
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } } // Direct destructuring
+  { params }: { params: { id: string } }
 ) {
-  const { id } = await params
+  const { id } = params
 
   await connectToDB()
   await Project.findByIdAndDelete(id)
 
   return NextResponse.json({ success: true })
 }
+

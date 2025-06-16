@@ -7,7 +7,7 @@ export async function GET() {
     await connectToDB()
 
     const projects = await Project.find().sort({ createdAt: -1 }) // latest first
-
+    
     return NextResponse.json({ success: true, data: projects })
   } catch (error) {
     console.error('❌ Failed to fetch projects:', error)

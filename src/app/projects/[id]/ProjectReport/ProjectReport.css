@@ -17,8 +17,16 @@
 }
 
 .report-section {
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9fafb; /* light gray background */
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+.report-section:hover {
+  background-color: #f1f5f9;
+  transition: background-color 0.2s ease;
 }
 
 .report-label {
@@ -38,6 +46,34 @@
   color: #475569;
 }
 
-.document-item {
-  margin-bottom: 0.4rem;
+
+.report-recorder,
+.report-recordTime,
+.report-recordText {
+  display: flex;
+  flex-direction: column; /* <--- Allow vertical stacking */
+  align-items: start;      /* <--- Left-align items */
+}
+
+.input-field {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  padding: 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.add-log-btn {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.add-log-btn:hover {
+  background-color: #2563eb;
 }

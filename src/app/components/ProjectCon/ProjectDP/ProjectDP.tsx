@@ -8,6 +8,7 @@ import ProjectActionButtons from './ProjectActionButtons/ProjectActionButtons'
 import { deleteProject } from '@/lib/deleteProject'
 import MonthDP from '../monthDP/monthDP'
 import { useRouter } from 'next/navigation'
+import type { ProjectType } from '@/models/Project'
 
 
 
@@ -24,7 +25,7 @@ export default function ProjectDP({
   yearSelect,
   workType,
 }: MonthDPProps) {
-  const [projectData, setProjectData] = useState<any[]>([])
+  const [projectData, setProjectData] = useState<ProjectType[]>([])
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -34,7 +35,7 @@ export default function ProjectDP({
 
         // 🔍 Filter only drilling projects
         const drillingProjects = data.filter(
-          (project: any) => project.workType === workType
+          (project: ProjectType) => project.workType === workType
         )
 
         setProjectData(drillingProjects)
@@ -44,7 +45,7 @@ export default function ProjectDP({
     }
 
     fetchProjects()
-  }, [])
+  }, [workType])
 
   const months: Month[] = useMemo(() => {
     return generateMonths(monthCount, monthSelect, yearSelect)
@@ -84,12 +85,14 @@ export default function ProjectDP({
           onClick={() => router.push(`/projects/${project._id}`)}
         >
           <ProjectActionButtons
-            projectId={project._id}
-            mapLink={project.mapLink}
+            projectId={project._id.toString()}
+            mapLink={project.mapLink ?? ''}
             onDelete={async (id) => {
               const success = await deleteProject(id)
               if (success) {
-                setProjectData((prev) => prev.filter((p) => p._id !== id))
+                setProjectData((prev) =>
+                  prev.filter((p) => p._id.toString() !== id)
+                )
               }
             }}
           />
@@ -99,11 +102,11 @@ export default function ProjectDP({
           <div className="project-working-day">
             <span>
               แผนปฎิบัติงาน{' '}
-              {getDayDiff(project.planWorkDayStart, project.planWorkDayEnd)} วัน
+              {getDayDiff(project.planWorkDayStart ?? '', project.planWorkDayEnd ?? '')} วัน
             </span>
             <span>
               ปฎิบัติงานจริง{' '}
-              {getDayDiff(project.actualWorkDayStart, project.actualWorkDayEnd)}{' '}
+              {getDayDiff(project.actualWorkDayStart ?? '', project.actualWorkDayEnd ?? '')}{' '}
               วัน
             </span>
           </div>
@@ -112,12 +115,12 @@ export default function ProjectDP({
               months={months}
               monthCount={monthCount}
               planRange={{
-                start: project.planWorkDayStart,
-                end: project.planWorkDayEnd,
+                start: project.planWorkDayStart ?? '',
+                end: project.planWorkDayEnd ?? '',
               }}
               actualRange={{
-                start: project.actualWorkDayStart,
-                end: project.actualWorkDayEnd,
+                start: project.actualWorkDayStart ?? '',
+                end: project.actualWorkDayEnd ?? '',
               }}
             />
           </div>
