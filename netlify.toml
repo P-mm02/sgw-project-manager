@@ -4,3 +4,7 @@
 
 [functions]
   directory = ".netlify/functions-internal"
+
+[[functions]]
+  name = "keep-warm"
+  schedule = "*/5 * * * *"  # every 5 minutes
