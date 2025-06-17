@@ -19,27 +19,39 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
       recordTime: log.recordTime ? new Date(log.recordTime) : new Date(),
     }))
   )
-  
-  
 
-  const handleAddLog = () => {
+  const handleAddLog = async () => {
     if (!recorder || !recordText) return
-
     const newLog: WorkLogEntry = {
       recorder,
       recordText,
       recordTime: new Date(),
     }
-
-    setLogs((prevLogs) => [newLog, ...prevLogs])
-    setRecorder('')
-    setRecordText('')
+    try {
+      const res = await fetch(`/api/projects/${project._id}/add-log`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newLog),
+      })
+      setLogs((prevLogs) => [newLog, ...prevLogs])
+      setRecorder('')
+      setRecordText('')
+      const result = await res.json()
+      if (result.success) {
+        console.log('Add Log successfully');        
+      } else {
+        console.error('API failed:', result.error)
+      }
+    } catch (err) {
+      console.error('Failed to send log:', err)
+    }
   }
-  
 
   return (
     <div className="project-report-container">
-      <h2 className="project-report-title">บันทึกการทํางาน และคำสั่ง</h2>
+      <h1 className="project-report-title">บันทึกการทํางาน และคำสั่ง</h1>
 
       {/* ✅ Input Section */}
       <div className="report-section-input">
