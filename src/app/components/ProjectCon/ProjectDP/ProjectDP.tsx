@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 import type { ProjectType } from '@/models/Project'
 import dynamic from 'next/dynamic'
 import Skeleton from '@/loading/Skeleton/Skeleton'
-import type { ComponentType } from 'react'
+//import type { ComponentType } from 'react'
 
 type MonthDPProps = {
   monthCount: number
