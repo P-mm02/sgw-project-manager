@@ -1,0 +1,86 @@
+📄 .env.local
+📄 .gitignore
+📁 .netlify
+  📁 blobs-serve
+  📁 functions-internal
+  📁 functions-serve
+    📁 keep-warm
+      📄 keep-warm.js
+      📁 src
+      📄 ___netlify-telemetry.mjs
+  📁 plugins
+    📄 package-lock.json
+    📄 package.json
+  📄 state.json
+  📁 v1
+    📁 functions
+📄 eslint.config.mjs
+📄 file-structure.txt
+📄 netlify.toml
+📄 next-env.d.ts
+📄 next.config.ts
+📄 package-lock.json
+📄 package.json
+📁 public
+  📄 file.svg
+  📄 globe.svg
+  📄 next.svg
+  📄 vercel.svg
+  📄 window.svg
+📄 README.md
+📁 scripts
+  📄 generate-tree.js
+📁 src
+  📁 app
+    📁 api
+      📁 add-project
+      📁 projects
+      📁 scripts
+      📁 test-db
+    📁 components
+      📁 Footer
+      📁 Nav
+      📁 ProjectCon
+    📁 dewatering
+      📄 page.tsx
+    📁 drilling
+      📄 page.tsx
+    📄 favicon.ico
+    📄 layout.tsx
+    📁 maintenance
+      📄 page.tsx
+    📁 other
+      📄 page.tsx
+    📄 page.tsx
+    📁 projects
+      📁 AddProject
+      📁 EditProjectForm
+      📁 [id]
+    📁 survey
+      📄 page.tsx
+  📁 constants
+    📄 thaiMonths.ts
+    📄 thaiMonthShort.ts
+  📁 data
+    📄 projectData.json
+  📁 functions
+    📄 keep-warm.ts
+  📁 lib
+    📄 deleteProject.ts
+    📄 formatDateInput.ts
+    📄 mongoose.ts
+    📄 project-utils.ts
+  📁 loading
+    📁 Skeleton
+      📄 Skeleton.css
+      📄 Skeleton.tsx
+  📁 models
+    📄 Project.ts
+  📁 styles
+    📄 globals.css
+    📄 page.css
+  📁 types
+    📄 ProjectFormType.ts
+📄 tsconfig.build.json
+📄 tsconfig.build.tsbuildinfo
+📄 tsconfig.json

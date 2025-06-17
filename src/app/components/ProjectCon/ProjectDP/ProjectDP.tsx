@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import './ProjectDP.css'
 import { generateMonths, Month } from './generateMonths/generateMonths'
 import { parse, differenceInCalendarDays } from 'date-fns'
@@ -10,43 +10,23 @@ import { useRouter } from 'next/navigation'
 import type { ProjectType } from '@/models/Project'
 import dynamic from 'next/dynamic'
 import Skeleton from '@/loading/Skeleton/Skeleton'
-//import type { ComponentType } from 'react'
 
 type MonthDPProps = {
   monthCount: number
   monthSelect: number
   yearSelect: number
-  workType: string
+  projectData: ProjectType[]
+  setProjectData: React.Dispatch<React.SetStateAction<ProjectType[]>>
 }
+
 
 export default function ProjectDP({
   monthCount,
   monthSelect,
   yearSelect,
-  workType,
+  projectData,
+  setProjectData,
 }: MonthDPProps) {
-  const [projectData, setProjectData] = useState<ProjectType[]>([])
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch('/api/projects')
-        const { data } = await res.json()
-
-        // 🔍 Filter only drilling projects
-        const drillingProjects = data.filter(
-          (project: ProjectType) => project.workType === workType
-        )
-
-        setProjectData(drillingProjects)
-      } catch (error) {
-        console.error('Failed to fetch projects:', error)
-      }
-    }
-
-    fetchProjects()
-  }, [workType])
-
   const months: Month[] = useMemo(() => {
     return generateMonths(monthCount, monthSelect, yearSelect)
   }, [monthCount, monthSelect, yearSelect])
@@ -59,16 +39,23 @@ export default function ProjectDP({
       ) + 1
     )
   }
-  
+
   const router = useRouter()
 
-  const DateCtrl = dynamic(() => import('./DateCtrl/DateCtrl'), {
-    ssr: false, // optional: skip server-side rendering
-    loading: () => <Skeleton/>, // optional loading UI
-  })
+  const DateCtrl =
+    monthCount < 12
+      ? dynamic(() => import('./DateCtrl/DateCtrl'), {
+          ssr: false,
+          loading: () => <Skeleton />,
+        })
+      : dynamic(() => import('./DateCtrl/DateCtrlYear'), {
+          ssr: false,
+          loading: () => <Skeleton />,
+        })
 
-  
-/*   const DateCtrl = dynamic(
+
+  console.log(projectData)
+  /*   const DateCtrl = dynamic(
     () =>
       new Promise<{ default: ComponentType<any> }>((resolve) => {
         setTimeout(() => resolve(import('./DateCtrl/DateCtrl')), 2000)
@@ -78,9 +65,8 @@ export default function ProjectDP({
       loading: () => <Skeleton />,
     }
   ) */
-  
 
-/*   console.time('ProjectDP')
+  /*   console.time('ProjectDP')
   // render or fetch
   console.timeEnd('ProjectDP') */
   return (
@@ -123,11 +109,18 @@ export default function ProjectDP({
           <div className="project-working-day">
             <span>
               แผนปฎิบัติงาน{' '}
-              {getDayDiff(project.planWorkDayStart ?? '', project.planWorkDayEnd ?? '')} วัน
+              {getDayDiff(
+                project.planWorkDayStart ?? '',
+                project.planWorkDayEnd ?? ''
+              )}{' '}
+              วัน
             </span>
             <span>
               ปฎิบัติงานจริง{' '}
-              {getDayDiff(project.actualWorkDayStart ?? '', project.actualWorkDayEnd ?? '')}{' '}
+              {getDayDiff(
+                project.actualWorkDayStart ?? '',
+                project.actualWorkDayEnd ?? ''
+              )}{' '}
               วัน
             </span>
           </div>
@@ -146,7 +139,6 @@ export default function ProjectDP({
             />
           </div>
         </div>
-        
       ))}
     </>
   )
