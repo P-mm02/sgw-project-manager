@@ -9,8 +9,8 @@ import MonthDP from '../monthDP/monthDP'
 import { useRouter } from 'next/navigation'
 import type { ProjectType } from '@/models/Project'
 import dynamic from 'next/dynamic'
-
-
+import Skeleton from '@/loading/Skeleton/Skeleton'
+import type { ComponentType } from 'react'
 
 type MonthDPProps = {
   monthCount: number
@@ -62,10 +62,23 @@ export default function ProjectDP({
   
   const router = useRouter()
 
-  const DateCtrl = dynamic(() => import('./DateCtrl/DateCtrl'), {
+  /* const DateCtrl = dynamic(() => import('./DateCtrl/DateCtrl'), {
     ssr: false, // optional: skip server-side rendering
-    loading: () => <div>Loading chart......</div>, // optional loading UI
+    loading: () => <Skeleton/>, // optional loading UI
   })
+ */
+  
+  const DateCtrl = dynamic(
+    () =>
+      new Promise<{ default: ComponentType<any> }>((resolve) => {
+        setTimeout(() => resolve(import('./DateCtrl/DateCtrl')), 2000)
+      }),
+    {
+      ssr: false,
+      loading: () => <Skeleton />,
+    }
+  )
+  
 
 /*   console.time('ProjectDP')
   // render or fetch

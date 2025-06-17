@@ -6,13 +6,6 @@
 }
 
 
-/* Responsive stacking for mobile */
-@media (max-width: 768px) {
-  .row-project {
-    grid-template-columns: 1fr;
-  }
-}
-
 .project-names {
   display: flex;
   justify-content: center;
