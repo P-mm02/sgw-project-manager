@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useMemo, useState } from 'react'
 import './ProjectDP.css'
-import DateCtrl from './DateCtrl/DateCtrl'
 import { generateMonths, Month } from './generateMonths/generateMonths'
 import { parse, differenceInCalendarDays } from 'date-fns'
 import ProjectActionButtons from './ProjectActionButtons/ProjectActionButtons'
@@ -9,6 +8,7 @@ import { deleteProject } from '@/lib/deleteProject'
 import MonthDP from '../monthDP/monthDP'
 import { useRouter } from 'next/navigation'
 import type { ProjectType } from '@/models/Project'
+import dynamic from 'next/dynamic'
 
 
 
@@ -62,6 +62,14 @@ export default function ProjectDP({
   
   const router = useRouter()
 
+  const DateCtrl = dynamic(() => import('./DateCtrl/DateCtrl'), {
+    ssr: false, // optional: skip server-side rendering
+    loading: () => <div>Loading chart......</div>, // optional loading UI
+  })
+
+/*   console.time('ProjectDP')
+  // render or fetch
+  console.timeEnd('ProjectDP') */
   return (
     <>
       <div className="row-head">
@@ -125,6 +133,7 @@ export default function ProjectDP({
             />
           </div>
         </div>
+        
       ))}
     </>
   )
