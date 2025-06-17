@@ -6,7 +6,7 @@ export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  const { id } = params
+  const { id } = await params
 
   await connectToDB()
   await Project.findByIdAndDelete(id)
