@@ -3,8 +3,8 @@
   publish = ".next"
 
 [functions]
-  directory = ".netlify/functions-internal"
+  directory = "src/functions"
 
-[[functions]]
-  name = "keep-warm"
-  schedule = "*/5 * * * *"  # every 5 minutes
+[[scheduled]]
+  function = "keep-warm"
+  schedule = "*/5 * * * *" # every 5 minutes
