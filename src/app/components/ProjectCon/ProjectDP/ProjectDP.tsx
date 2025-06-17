@@ -62,13 +62,13 @@ export default function ProjectDP({
   
   const router = useRouter()
 
-  /* const DateCtrl = dynamic(() => import('./DateCtrl/DateCtrl'), {
+  const DateCtrl = dynamic(() => import('./DateCtrl/DateCtrl'), {
     ssr: false, // optional: skip server-side rendering
     loading: () => <Skeleton/>, // optional loading UI
   })
- */
+
   
-  const DateCtrl = dynamic(
+/*   const DateCtrl = dynamic(
     () =>
       new Promise<{ default: ComponentType<any> }>((resolve) => {
         setTimeout(() => resolve(import('./DateCtrl/DateCtrl')), 2000)
@@ -77,7 +77,7 @@ export default function ProjectDP({
       ssr: false,
       loading: () => <Skeleton />,
     }
-  )
+  ) */
   
 
 /*   console.time('ProjectDP')
