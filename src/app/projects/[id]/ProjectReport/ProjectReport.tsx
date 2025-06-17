@@ -55,7 +55,7 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
 
       {/* ✅ Input Section */}
       <div className="report-section-input">
-        <label className="report-label">ผู้บันทึก หรือผู้สั่งการ:</label>
+        <label className="report-label">ผู้บันทึก / ผู้สั่งการ:</label>
         <input
           type="text"
           className="input-field"
@@ -77,6 +77,11 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
       {logs.map((log, index) => (
         <div className="report-section" key={`new-${index}`}>
           <div className="report-recordTime">
+            <div className="report-recorder">
+              <p className="report-label text-wrap">
+                ผู้บันทึก / ผู้สั่งการ: {log.recorder}
+              </p>
+            </div>
             <p className="report-label text-wrap">
               เวลาที่บันทึก:&nbsp;
               {new Date(log.recordTime).toLocaleString('th-TH', {
@@ -84,9 +89,6 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
                 timeStyle: 'medium',
               })}
             </p>
-          </div>
-          <div className="report-recorder">
-            <p className="report-label text-wrap">ผู้บันทึก: {log.recorder}</p>
           </div>
           <div className="report-con">
             <div className="report-recordText">

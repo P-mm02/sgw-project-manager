@@ -3,8 +3,9 @@ import './ProjectCon.css'
 import { useState } from 'react'
 import Link from 'next/link'
 import MonthBtnCtrl from './MonthBtnCtrl/MonthBtnCtrl'
-import ProjectDP from './ProjectDP/ProjectDP'
+//import ProjectDP from './ProjectDP/ProjectDP'
 import MonthSelectBtn from './MonthSelectBtn/MonthSelectBtn'
+import dynamic from 'next/dynamic'
 
 type ProjectConProps = {  
   workType: string
@@ -14,7 +15,11 @@ export default function DPprojects({workType}:ProjectConProps) {
   const [monthCount, setMonthCount] = useState(1)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0)
   const [yearSelect, setYearSelect] = useState<number>(() => 2025)
-
+  
+  const ProjectDP = dynamic(() => import('./ProjectDP/ProjectDP'), {
+    ssr: false, // optional: skip server-side rendering
+    loading: () => <div>Loading chart......</div>, // optional loading UI
+  })
   return (
     <div className="projects-container">
       <div className="top-row-btn-con">
