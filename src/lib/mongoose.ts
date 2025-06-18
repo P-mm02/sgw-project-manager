@@ -1,6 +1,21 @@
-import mongoose from 'mongoose'
+import mongoose, { Mongoose } from 'mongoose'
 
-let cached = (global as any).mongoose || { conn: null, promise: null }
+interface MongooseGlobal {
+  mongoose: {
+    conn: Mongoose | null
+    promise: Promise<Mongoose> | null
+  }
+}
+
+// Extend globalThis safely
+const globalWithMongoose = globalThis as typeof globalThis & MongooseGlobal
+
+const cached = globalWithMongoose.mongoose || {
+  conn: null,
+  promise: null,
+}
+
+globalWithMongoose.mongoose = cached
 
 export async function connectToDB() {
   if (cached.conn) return cached.conn
@@ -15,11 +30,9 @@ export async function connectToDB() {
 
   try {
     cached.conn = await cached.promise
-    ;(global as any).mongoose = cached
-    console.log('✅ Mongoose connected (cached)')
     return cached.conn
-  } catch (e) {
-    console.error('❌ Mongoose connection error:', e)
-    throw e
+  } catch (error) {
+    console.error('❌ Mongoose connection error:', error)
+    throw error
   }
 }
