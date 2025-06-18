@@ -1,25 +1,25 @@
 import mongoose from 'mongoose'
 
-declare global {
-  var mongooseConnection: boolean
-}
-
-global.mongooseConnection = global.mongooseConnection || false
+let cached = (global as any).mongoose || { conn: null, promise: null }
 
 export async function connectToDB() {
-  if (global.mongooseConnection) return
+  if (cached.conn) return cached.conn
 
-  try {
-    await mongoose.connect(process.env.MONGODB_URI!, {
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(process.env.MONGODB_URI!, {
       dbName: 'sgw',
       bufferCommands: false,
       maxPoolSize: 10,
     })
+  }
 
-    global.mongooseConnection = true
-    console.log('✅ Mongoose connected')
-  } catch (error) {
-    console.error('❌ Mongoose connection error:', error)
-    throw error
+  try {
+    cached.conn = await cached.promise
+    ;(global as any).mongoose = cached
+    console.log('✅ Mongoose connected (cached)')
+    return cached.conn
+  } catch (e) {
+    console.error('❌ Mongoose connection error:', e)
+    throw e
   }
 }
