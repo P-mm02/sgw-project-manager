@@ -9,21 +9,9 @@ export default function Nav() {
           <Link href="/" className="nav-link">
             หน้าแรก
           </Link>
-          <Link href="/drilling" className="nav-link">
-            งานเจาะ
-          </Link>
-          <Link href="/survey" className="nav-link">
-            งานสำรวจ
-          </Link>
-          <Link href="/dewatering" className="nav-link">
-            งานสูบลดระดับน้ำ
-          </Link>
-          <Link href="/maintenance" className="nav-link">
-            งานซ่อมบำรุง
-          </Link>
-          <Link href="/other" className="nav-link">
-            งานอื่นๆ
-          </Link>
+          <Link href="/project-manage" className="nav-link">
+            โครงการ
+          </Link>          
         </div>
       </div>
     </nav>

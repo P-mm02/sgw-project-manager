@@ -8,36 +8,42 @@ import MonthSelectBtn from './MonthSelectBtn/MonthSelectBtn'
 import type { ProjectType } from '@/models/Project'
 //import dynamic from 'next/dynamic'
 //import Skeleton from '@/loading/Skeleton/Skeleton'
+import WorkTypeSelect from './WorkTypeSelect/WorkTypeSelect'
 
 
-type ProjectConProps = {  
-  workType: string
-}
 
-export default function DPprojects({workType}:ProjectConProps) {
+export default function DPprojects() {
+  const [workType, setWorkType] = useState('all')
+
   const [monthCount, setMonthCount] = useState(1)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0)
   const [yearSelect, setYearSelect] = useState<number>(() => 2025)
   
+  const [projectDataOri, setProjectOriData] = useState<ProjectType[]>([])
   const [projectData, setProjectData] = useState<ProjectType[]>([])
 
+  
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const res = await fetch('/api/projects')
         const { data } = await res.json()
-
-        const drillingProjects = data.filter(
-          (project: ProjectType) => project.workType === workType
-        )
-        setProjectData(drillingProjects)
+        setProjectOriData(data)
+        console.log('fetchfetchfetchfetchfetchfetchfetch')
       } catch (error) {
         console.error('Failed to fetch projects:', error)
       }
     }
-
     fetchProjects()
-  }, [workType])
+  }, [])
+  
+  useEffect(() => {
+    const filterProjects = projectDataOri.filter(
+      (project: ProjectType) =>
+        workType === 'all' || project.workType === workType
+    )
+    setProjectData(filterProjects)
+  }, [workType, projectDataOri])
 
   /* const ProjectDP = dynamic(() => import('./ProjectDP/ProjectDP'), {
     ssr: false, // optional: skip server-side rendering
@@ -52,6 +58,7 @@ export default function DPprojects({workType}:ProjectConProps) {
           setMonthCount={setMonthCount}
           setMonthSelect={setMonthSelect}
         />
+        <WorkTypeSelect setWorkType={setWorkType} />
         <div className="add-project-btn-wrapper">
           <Link href="/projects/AddProject" className="add-project-btn">
             เพิ่มโปรเจค

@@ -7,7 +7,7 @@ export const metadata = {
 export default function DrillingPage() {
   return (
     <main>
-      <ProjectCon workType="drilling" />
+      <ProjectCon/>
       <h1>งานเจาะน้ำบาดาล</h1>
       <p>บริการงานเจาะน้ำบาดาลทั่วประเทศไทย</p>
     </main>

@@ -54,7 +54,7 @@ export default function ProjectDP({
         })
 
 
-  console.log(projectData)
+  
   /*   const DateCtrl = dynamic(
     () =>
       new Promise<{ default: ComponentType<any> }>((resolve) => {
