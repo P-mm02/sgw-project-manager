@@ -10,46 +10,35 @@ import type { ProjectType } from '@/models/Project'
 //import Skeleton from '@/loading/Skeleton/Skeleton'
 import WorkTypeSelect from './WorkTypeSelect/WorkTypeSelect'
 
+type Props = {
+  serverProjects: ProjectType[]
+}
 
-
-export default function DPprojects() {
+export default function ProjectCon({ serverProjects }: Props) {
   const [workType, setWorkType] = useState('all')
 
   const [monthCount, setMonthCount] = useState(1)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0)
   const [yearSelect, setYearSelect] = useState<number>(() => 2025)
-  
-  const [projectDataOri, setProjectOriData] = useState<ProjectType[]>([])
-  const [projectData, setProjectData] = useState<ProjectType[]>([])
 
-  
+  const [projectData, setProjectData] = useState<ProjectType[]>(() => {
+    return serverProjects
+  })
+
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch('/api/projects')
-        const { data } = await res.json()
-        setProjectOriData(data)
-        console.log('fetchfetchfetchfetchfetchfetchfetch')
-      } catch (error) {
-        console.error('Failed to fetch projects:', error)
-      }
+    if (workType === 'all') {
+      setProjectData(serverProjects)
+    } else {
+      setProjectData(serverProjects.filter((p) => p.workType === workType))
     }
-    fetchProjects()
-  }, [])
+  }, [workType, serverProjects])
   
-  useEffect(() => {
-    const filterProjects = projectDataOri.filter(
-      (project: ProjectType) =>
-        workType === 'all' || project.workType === workType
-    )
-    setProjectData(filterProjects)
-  }, [workType, projectDataOri])
 
   /* const ProjectDP = dynamic(() => import('./ProjectDP/ProjectDP'), {
     ssr: false, // optional: skip server-side rendering
     loading: () => <Skeleton />, // optional loading UI
   }) */
-  
+
   return (
     <div className="projects-container">
       <div className="top-row-btn-con">
