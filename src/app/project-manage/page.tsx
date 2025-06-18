@@ -16,7 +16,7 @@ export default async function ProjectsPage() {
   if (!res.ok) {
     throw new Error('Failed to fetch projects')
   }
-  console.log('xxxxxxxxxxxxxxxxxxx : ' + baseUrl)
+  console.log('xxxxxxxxxxxxxxxxxxx : ' )
   const { data } = await res.json()
 
   return (

@@ -15,7 +15,6 @@
   📁 v1
     📁 functions
 📄 eslint.config.mjs
-📄 file-structure.txt
 📄 netlify.toml
 📄 next-env.d.ts
 📄 next.config.ts
@@ -29,9 +28,12 @@
   📄 window.svg
 📄 README.md
 📁 scripts
+  📄 file-structure.txt
   📄 generate-tree.js
 📁 src
   📁 app
+    📁 accounting
+      📄 page.tsx
     📁 api
       📁 add-project
       📁 projects
@@ -40,31 +42,23 @@
     📁 components
       📁 Footer
       📁 Nav
-      📁 ProjectCon
-    📁 dewatering
-      📄 page.tsx
-    📁 drilling
-      📄 page.tsx
     📄 favicon.ico
+    📁 HR
+      📄 page.tsx
     📄 layout.tsx
-    📁 maintenance
-      📄 page.tsx
-    📁 other
-      📄 page.tsx
     📄 page.tsx
+    📁 project-manage
+      📄 page.tsx
+      📁 ProjectCon
     📁 projects
       📁 AddProject
       📁 EditProjectForm
       📁 [id]
-    📁 survey
-      📄 page.tsx
   📁 constants
     📄 thaiMonths.ts
     📄 thaiMonthShort.ts
   📁 data
     📄 projectData.json
-  📁 functions
-    📄 keep-warm.ts
   📁 lib
     📄 deleteProject.ts
     📄 formatDateInput.ts
@@ -76,6 +70,11 @@
       📄 Skeleton.tsx
   📁 models
     📄 Project.ts
+  📁 netlify
+    📁 edge-functions
+      📄 hello.ts
+    📁 functions
+      📄 keep-warm.ts
   📁 styles
     📄 globals.css
     📄 page.css

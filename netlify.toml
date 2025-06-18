@@ -3,8 +3,12 @@
   publish = ".next"
 
 [functions]
-  directory = "src/functions"
+  directory = "netlify/functions"
 
 [[scheduled]]
   function = "keep-warm"
-  schedule = "*/5 * * * *" # every 5 minutes
+  schedule = "*/5 * * * *"
+
+[[edge_functions]]
+  function = "hello"
+  path = "/api/hello"
