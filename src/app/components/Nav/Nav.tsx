@@ -10,8 +10,14 @@ export default function Nav() {
             หน้าแรก
           </Link>
           <Link href="/project-manage" className="nav-link">
-            โครงการ
-          </Link>          
+            โปรเจค
+          </Link>
+          <Link href="/HR" className="nav-link">
+            ฝ่ายบุคคล
+          </Link>
+          <Link href="/accounting" className="nav-link">
+            ฝ่ายการเงิน
+          </Link>
         </div>
       </div>
     </nav>
