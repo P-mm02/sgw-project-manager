@@ -52,17 +52,22 @@
  
 
   
-  /* Mobile Responsiveness */
-  @media (max-width: 768px) {
-    .nav-content {
-      padding: 0 1rem;
-    }
-    
-    .nav-links {
-      display: none; /* Will be shown via mobile menu */
-    }
-    
-    .mobile-menu-button {
-      display: block;
-    }
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .nav-content {
+    padding: 0 1rem;
   }
+
+  .nav-links {
+    
+
+    display: block;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+  html {
+    font-size: 62.5%; /* 62.5% of 16px = 10px */
+  }
+}
