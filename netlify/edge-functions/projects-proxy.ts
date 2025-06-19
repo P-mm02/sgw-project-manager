@@ -1,13 +1,10 @@
 const handler = async (req: Request): Promise<Response> => {
-  console.log(
-    'projects-proxyprojects-proxyprojects-proxyprojects-proxyprojects-proxyprojects-proxy'
-  )
   
-  // Optional: geo check
-  const country = (req as any).geo?.country?.code
-  const isLocalhost = req.headers.get('host')?.includes('localhost')
+  const country = (req as any).geo?.country?.code ?? 'UNKNOWN'
+  const allowed = ['TH', 'UNKNOWN'] // allow TH and fallback case
 
-  if (!isLocalhost && country !== 'TH') {
+  if (!allowed.includes(country)) {
+    console.log('Blocked country:', country)
     return new Response(
       JSON.stringify({ message: 'Forbidden for this region' }),
       {
@@ -16,7 +13,6 @@ const handler = async (req: Request): Promise<Response> => {
       }
     )
   }
-
 
   // Forward to your existing API route
   const res = await fetch(
