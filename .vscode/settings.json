@@ -1,9 +1,8 @@
 {
   "deno.enable": true,
-  "deno.enablePaths": [
-    "netlify/edge-functions"
-  ],
+  "deno.enablePaths": ["netlify/edge-functions"],
   "deno.unstable": true,
   "deno.importMap": ".netlify/edge-functions-import-map.json",
-  "deno.path": "C:\\Users\\Wee\\AppData\\Roaming\\netlify\\Config\\deno-cli\\deno.exe"
+  "deno.path": "C:\\Users\\Wee\\AppData\\Roaming\\netlify\\Config\\deno-cli\\deno.exe",
+  "deno.lint": true
 }

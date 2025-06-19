@@ -12,3 +12,7 @@
 [[edge_functions]]
   function = "hello"
   path = "/api/hello"
+
+[[edge_functions]]
+  function = "projects-proxy"
+  path = "/api/edge-projects"

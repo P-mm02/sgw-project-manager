@@ -11,19 +11,35 @@ import type { ProjectType } from '@/models/Project'
 import WorkTypeSelect from './WorkTypeSelect/WorkTypeSelect'
 
 type Props = {
-  serverProjects: ProjectType[]
+  //serverProjects: ProjectType[]
 }
 
-export default function ProjectCon({ serverProjects }: Props) {
+export default function ProjectCon(/* { serverProjects }: Props */) {
   const [workType, setWorkType] = useState('all')
-
   const [monthCount, setMonthCount] = useState(1)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0)
   const [yearSelect, setYearSelect] = useState<number>(() => 2025)
-
-  const [projectData, setProjectData] = useState<ProjectType[]>(() => {
-    return serverProjects
-  })
+  const [serverProjects, setserverProjects] = useState<ProjectType[]>([])
+  const [projectData, setProjectData] = useState<ProjectType[]>([])
+  
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch('/api/edge-projects')
+        const { data } = await res.json()
+        if (!Array.isArray(data)) {
+          console.error('Invalid project data:', data)
+          return []
+        }
+        
+        setserverProjects(data)
+        console.log('fetchfetchfetchfetchfetchfetchfetch')
+      } catch (error) {
+        console.error('Failed to fetch projects:', error)
+      }
+    }
+    fetchProjects()
+  }, [])
 
   useEffect(() => {
     if (workType === 'all') {
