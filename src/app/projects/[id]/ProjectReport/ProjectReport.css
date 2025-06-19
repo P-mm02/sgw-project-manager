@@ -78,3 +78,66 @@
 .add-log-btn:hover {
   background-color: #2563eb;
 }
+
+.edit-workLog,
+.delete-workLog {
+  padding: 0.4rem 1rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-workLog {
+  background-color: #968c00;
+  color: white;
+}
+
+.edit-workLog:hover {
+  background-color: #746c00;
+}
+
+.delete-workLog {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-workLog:hover {
+  background-color: #c0392b;
+}
+
+.save-workLog,
+.cancel-workLog {
+  padding: 0.4rem 1rem;
+  margin: 0.5rem 0.25rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.save-workLog {
+  background-color: #015994;
+  color: white;
+}
+
+.save-workLog:hover {
+  background-color: #027bbd;
+  transform: scale(1.02);
+}
+
+.cancel-workLog {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-workLog:hover {
+  background-color: #d32f2f;
+  transform: scale(1.02);
+}
+

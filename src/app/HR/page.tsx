@@ -1,4 +1,3 @@
-import '@/styles/page.css'
 
 export const metadata = {
   title: 'หน้าแรก | SG-WORKING',

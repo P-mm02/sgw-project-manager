@@ -1,0 +1,33 @@
+.homepage-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .section h2 {
+    margin-bottom: 0.5rem;
+    color: #015994;
+  }
+  
+  .section ul {
+    list-style: inside;
+    padding-left: 0;
+  }
+  
+  .section a {
+    color: #007acc;
+    text-decoration: none;
+  }
+  
+  .section a:hover {
+    text-decoration: underline;
+  }
+  
