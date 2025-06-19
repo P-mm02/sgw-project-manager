@@ -2,18 +2,29 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import './Nav.css'
 
 export default function Nav() {
   const pathname = usePathname()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
 
   return (
     <nav className="nav-container">
       <div className="nav-content">
-        <div className="nav-links">
+        <button className="mobile-menu-button" onClick={toggleMobileMenu}>
+          ☰
+        </button>
+
+        <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
           <Link
             href="/"
             className={`nav-link ${pathname === '/' ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             หน้าแรก
           </Link>
@@ -22,18 +33,21 @@ export default function Nav() {
             className={`nav-link ${
               pathname === '/project-manage' ? 'active' : ''
             }`}
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             โปรเจค
           </Link>
           <Link
             href="/HR"
             className={`nav-link ${pathname === '/HR' ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             ฝ่ายบุคคล
           </Link>
           <Link
-            href="/accounting"
-            className={`nav-link ${pathname === '/accounting' ? 'active' : ''}`}
+            href="/accountant"
+            className={`nav-link ${pathname === '/accountant' ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             ฝ่ายการเงิน
           </Link>

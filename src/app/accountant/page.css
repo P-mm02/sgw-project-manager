@@ -1,0 +1,74 @@
+.account-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .account-title {
+    font-size: 2.75rem;
+    margin-bottom: 1rem;
+    color: #0c2a4e;
+  }
+  
+  .account-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #4b5563;
+  }
+  
+  .account-section {
+    margin-bottom: 3rem;
+  }
+  
+  .account-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+  
+  .account-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .account-table th,
+  .account-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .account-table th {
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+  
+  .account-table td {
+    color: #374151;
+  }
+  
+  .account-documents {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .account-documents li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .account-documents a {
+    text-decoration: none;
+    color: #1d4ed8;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .account-documents a:hover {
+    color: #0f172a;
+  }
+  

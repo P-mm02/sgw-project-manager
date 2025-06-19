@@ -1,0 +1,80 @@
+.hr-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .hr-title {
+    font-size: 2.75rem;
+    margin-bottom: 1rem;
+    color: #0c2a4e;
+  }
+  
+  .hr-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #4b5563;
+  }
+  
+  .hr-section {
+    margin-bottom: 3rem;
+  }
+  
+  .hr-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+  
+  .hr-card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .hr-card {
+    flex: 1 1 250px;
+    background-color: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  
+  .hr-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .hr-card strong {
+    font-size: 1.2rem;
+    color: #111827;
+  }
+  
+  .hr-card p {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+  }
+  
+  .hr-documents {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .hr-documents li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .hr-documents a {
+    text-decoration: none;
+    color: #1d4ed8;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .hr-documents a:hover {
+    color: #0f172a;
+  }
+  
