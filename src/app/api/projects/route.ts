@@ -7,12 +7,10 @@ export async function GET() {
     await connectToDB()
 
     const projects = await Project.find().sort({ createdAt: -1 }) // latest first
-    console.log('xxxxxxxxxxxxxxxxxx srcappapiprojects\route.ts')
     return NextResponse.json({ success: true, data: projects })
   } catch (error) {
     console.error('❌ Failed to fetch projects:', error)
-    
-    
+        
     return NextResponse.json(
       { success: false, message: 'Failed to fetch projects' },
       { status: 500 }

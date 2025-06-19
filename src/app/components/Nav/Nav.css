@@ -9,7 +9,8 @@
     font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
+    opacity: 0.95;
   }
   
   .nav-content {
@@ -39,11 +40,15 @@
     transition: all 0.3s ease;
     padding: 1rem 1rem;
   }
-  
   .nav-link:hover {
-    color: #096191;
-    background-color: aquamarine;    
+    color: black;
+    background-color: rgb(224, 224, 224) ;    
   }
+  .nav-link.active  {
+    color: white;
+    background-color: rgb(12, 42, 78) ;    
+  }  
+
  
 
   

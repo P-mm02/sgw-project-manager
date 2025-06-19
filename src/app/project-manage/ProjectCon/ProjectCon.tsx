@@ -9,8 +9,11 @@ import type { ProjectType } from '@/models/Project'
 //import dynamic from 'next/dynamic'
 //import Skeleton from '@/loading/Skeleton/Skeleton'
 import WorkTypeSelect from './WorkTypeSelect/WorkTypeSelect'
+import DotsLoader from '@/loading/DotsLoader/DotsLoader'
+
 
 export default function ProjectCon() {
+  const [loading, setLoading] = useState(true)
   const [workType, setWorkType] = useState('all')
   const [monthCount, setMonthCount] = useState(1)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0)
@@ -20,23 +23,25 @@ export default function ProjectCon() {
   
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true)
       try {
         const res = await fetch('/api/edge-projects')
         const { data } = await res.json()
         if (!Array.isArray(data)) {
           console.error('Invalid project data:', data)
-          return []
+          return
         }
-        
         setserverProjects(data)
-        console.log('fetchfetchfetchfetchfetchfetchfetch')
+        
       } catch (error) {
         console.error('Failed to fetch projects:', error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchProjects()
   }, [])
-
+  
   useEffect(() => {
     if (workType === 'all') {
       setProjectData(serverProjects)
@@ -74,13 +79,17 @@ export default function ProjectCon() {
         monthCount={monthCount}
       />
 
-      <ProjectDP
-        monthCount={monthCount}
-        monthSelect={monthSelect}
-        yearSelect={yearSelect}
-        projectData={projectData}
-        setProjectData={setProjectData}
-      />
+      {loading ? (
+        <DotsLoader/>
+      ) : (
+        <ProjectDP
+          monthCount={monthCount}
+          monthSelect={monthSelect}
+          yearSelect={yearSelect}
+          projectData={projectData}
+          setProjectData={setProjectData}
+        />
+      )}
     </div>
   )
 }
