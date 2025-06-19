@@ -10,11 +10,7 @@ import type { ProjectType } from '@/models/Project'
 //import Skeleton from '@/loading/Skeleton/Skeleton'
 import WorkTypeSelect from './WorkTypeSelect/WorkTypeSelect'
 
-type Props = {
-  //serverProjects: ProjectType[]
-}
-
-export default function ProjectCon(/* { serverProjects }: Props */) {
+export default function ProjectCon() {
   const [workType, setWorkType] = useState('all')
   const [monthCount, setMonthCount] = useState(1)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0)
