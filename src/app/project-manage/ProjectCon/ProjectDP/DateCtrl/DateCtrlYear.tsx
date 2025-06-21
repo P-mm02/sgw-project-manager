@@ -25,8 +25,10 @@ export default function DateCtrlYear({
       >
         {months.map((month, i) => (
           <div
-            className={`bar-scale-month plan ${
-              monthCount === 12 ? 'bar-scale-month-12month' : ''
+            className={` ${
+              monthCount === 12
+                ? 'bar-scale-month-12month'
+                : 'bar-scale-month plan'
             }`}
             key={`plan-${i}`}
             style={{ gridTemplateColumns: `repeat(${month.days.length}, 1fr)` }}
@@ -60,8 +62,10 @@ export default function DateCtrlYear({
       >
         {months.map((month, i) => (
           <div
-            className={`bar-scale-month actual ${
-              monthCount === 12 ? 'bar-scale-month-12month' : ''
+            className={` ${
+              monthCount === 12
+                ? 'bar-scale-month-12month'
+                : 'bar-scale-month actual'
             }`}
             key={`actual-${i}`}
             style={{ gridTemplateColumns: `repeat(${month.days.length}, 1fr)` }}

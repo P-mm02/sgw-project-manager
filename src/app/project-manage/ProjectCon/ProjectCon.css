@@ -21,7 +21,7 @@
 }
 
 .project-working-days{
-  display: flex;
+  display: flex;  
   justify-content: end;
   color: #555;
   font-size: 0.9rem;
@@ -59,8 +59,19 @@
 
 .top-row-btn-con{
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.date-ctrl-con{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
   margin: 1rem 0;

@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import type { ProjectType } from '@/models/Project'
 import dynamic from 'next/dynamic'
 import Skeleton from '@/loading/Skeleton/Skeleton'
+import { formatStartEndDate } from '@/lib/formatStartEndDate'
 
 type MonthDPProps = {
   monthCount: number
@@ -42,33 +43,10 @@ export default function ProjectDP({
 
   const router = useRouter()
 
-  const DateCtrl =
-    monthCount < 12
-      ? dynamic(() => import('./DateCtrl/DateCtrl'), {
+  const DateCtrl = dynamic(() => import('./DateCtrl/DateCtrl'), {
           ssr: false,
           loading: () => <Skeleton />,
         })
-      : dynamic(() => import('./DateCtrl/DateCtrlYear'), {
-          ssr: false,
-          loading: () => <Skeleton />,
-        })
-
-
-  
-  /*   const DateCtrl = dynamic(
-    () =>
-      new Promise<{ default: ComponentType<any> }>((resolve) => {
-        setTimeout(() => resolve(import('./DateCtrl/DateCtrl')), 2000)
-      }),
-    {
-      ssr: false,
-      loading: () => <Skeleton />,
-    }
-  ) */
-
-  /*   console.time('ProjectDP')
-  // render or fetch
-  console.timeEnd('ProjectDP') */
   return (
     <>
       <div className="row-head">
@@ -116,12 +94,20 @@ export default function ProjectDP({
               วัน
             </span>
             <span>
+              {formatStartEndDate(project.planWorkDayStart as string)} ถึง{' '}
+              {formatStartEndDate(project.planWorkDayEnd as string)}
+            </span>
+            <span>
               ปฎิบัติงานจริง{' '}
               {getDayDiff(
                 project.actualWorkDayStart ?? '',
                 project.actualWorkDayEnd ?? ''
               )}{' '}
               วัน
+            </span>
+            <span>
+              {formatStartEndDate(project.actualWorkDayStart as string)} ถึง{' '}
+              {formatStartEndDate(project.actualWorkDayStart as string)}
             </span>
           </div>
           <div className="project-plan col">

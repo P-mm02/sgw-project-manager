@@ -59,11 +59,6 @@ export default function ProjectCon() {
   return (
     <div className="projects-container">
       <div className="top-row-btn-con">
-        <MonthBtnCtrl
-          monthCount={monthCount}
-          setMonthCount={setMonthCount}
-          setMonthSelect={setMonthSelect}
-        />
         <WorkTypeSelect setWorkType={setWorkType} />
         <div className="add-project-btn-wrapper">
           <Link href="/projects/AddProject" className="add-project-btn">
@@ -71,16 +66,23 @@ export default function ProjectCon() {
           </Link>
         </div>
       </div>
-      <MonthSelectBtn
-        monthSelect={monthSelect}
-        setMonthSelect={setMonthSelect}
-        yearSelect={yearSelect}
-        setYearSelect={setYearSelect}
-        monthCount={monthCount}
-      />
+      <div className="date-ctrl-con">
+        <MonthSelectBtn
+          monthSelect={monthSelect}
+          setMonthSelect={setMonthSelect}
+          yearSelect={yearSelect}
+          setYearSelect={setYearSelect}
+          monthCount={monthCount}
+        />
+        <MonthBtnCtrl
+          monthCount={monthCount}
+          setMonthCount={setMonthCount}
+          setMonthSelect={setMonthSelect}
+        />
+      </div>
 
       {loading ? (
-        <DotsLoader/>
+        <DotsLoader />
       ) : (
         <ProjectDP
           monthCount={monthCount}
