@@ -1,0 +1,83 @@
+.license-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .license-header {
+    margin-bottom: 2rem;
+  }
+  
+  .license-header h1 {
+    font-size: 2.25rem;
+    color: #0c2a4e;
+  }
+  
+  .license-header p {
+    font-size: 1.1rem;
+    color: #4b5563;
+  }
+  
+  .license-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .license-card {
+    background: #ffffff;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  
+  .license-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .license-card h2 {
+    font-size: 1.25rem;
+    color: #1f2937;
+    margin-bottom: 1rem;
+  }
+  
+  .license-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .license-card li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    color: #374151;
+  }
+  
+  .license-card strong {
+    color: #111827;
+  }
+  
+  .license-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .license-actions a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .license-actions a:hover {
+    color: #1d4ed8;
+  }
+  
+  .license-card.expired {
+    border-color: #f87171;
+    background-color: #fef2f2;
+  }
+  

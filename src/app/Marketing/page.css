@@ -1,0 +1,71 @@
+.marketing-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .marketing-header {
+    margin-bottom: 2rem;
+  }
+  
+  .marketing-header h1 {
+    font-size: 2.5rem;
+    color: #0c2a4e;
+  }
+  
+  .marketing-header p {
+    color: #6b7280;
+    font-size: 1.1rem;
+  }
+  
+  .marketing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .marketing-card {
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease;
+  }
+  
+  .marketing-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .marketing-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+  
+  .marketing-card ul {
+    padding-left: 1.2rem;
+  }
+  
+  .marketing-card li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #374151;
+  }
+  
+  .marketing-card a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+  }
+  
+  .marketing-card a:hover {
+    color: #1d4ed8;
+  }
+  
+  .highlight {
+    background-color: #ecfdf5;
+    border-color: #34d399;
+  }
+  

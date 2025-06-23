@@ -38,6 +38,20 @@ export default function Nav() {
             โปรเจค
           </Link>
           <Link
+            href="/license"
+            className={`nav-link ${pathname === '/license' ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            ใบอนุญาต
+          </Link>
+          <Link
+            href="/Marketing"
+            className={`nav-link ${pathname === '/Marketing' ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            การตลาด
+          </Link>
+          <Link
             href="/HR"
             className={`nav-link ${pathname === '/HR' ? 'active' : ''}`}
             onClick={() => setIsMobileMenuOpen(false)}
