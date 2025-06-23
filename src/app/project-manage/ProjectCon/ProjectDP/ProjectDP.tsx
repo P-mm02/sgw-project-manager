@@ -107,7 +107,7 @@ export default function ProjectDP({
             </span>
             <span>
               {formatStartEndDate(project.actualWorkDayStart as string)} ถึง{' '}
-              {formatStartEndDate(project.actualWorkDayStart as string)}
+              {formatStartEndDate(project.actualWorkDayEnd as string)}
             </span>
           </div>
           <div className="project-plan col">
