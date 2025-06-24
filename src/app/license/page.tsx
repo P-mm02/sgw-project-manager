@@ -1,75 +1,87 @@
 import './page.css'
+import { connectToDB } from '@/lib/mongoose'
+import License from '@/models/License'
+import { formatDateToThai } from '@/lib/formatDateOutput'
+import Link from 'next/link'
+import { getDateDiff } from '@/lib/dateDiff'
+
 
 export const metadata = {
   title: 'ใบอนุญาต | SG-WORKING',
 }
 
-export default function LicensingWork() {
+export default async function LicensingWork() {
+  await connectToDB()
+  const licenses = await License.find().sort({ licenseExpireDate: -1 }).lean()
+
+  const today = new Date()
+
   return (
     <main className="license-container">
       <header className="license-header">
         <h1>📄 ข้อมูลใบอนุญาตเจาะน้ำบาดาล</h1>
-        <p>ตรวจสอบสถานะใบอนุญาต จุดเจาะ และวันหมดอายุของแต่ละโครงการ</p>
+        <Link href="/license/add" className="addLicense">
+          ➕ เพิ่มใบอนุญาต
+        </Link>
       </header>
 
       <div className="license-grid">
-        {/* Example License Card */}
-        <div className="license-card">
-          <h2>บ่อเลขที่ 001/2567</h2>
-          <ul>
-            <li>
-              <strong>โครงการ:</strong> ฟาร์มโคนม
-            </li>
-            <li>
-              <strong>ตำแหน่ง:</strong> 14.2342, 100.1122
-            </li>
-            <li>
-              <strong>ที่ตั้ง:</strong> ต.บางงา อ.ท่าวุ้ง จ.ลพบุรี
-            </li>
-            <li>
-              <strong>วันที่เริ่มใช้:</strong> 1 ม.ค. 2567
-            </li>
-            <li>
-              <strong>วันหมดอายุ:</strong> 31 ธ.ค. 2567
-            </li>
-            <li>
-              <strong>สถานะ:</strong> 🟢 ใช้งานอยู่
-            </li>
-          </ul>
-          <div className="license-actions">
-            <a href="#">📎 ดูเอกสารแนบ</a>
-            <a href="#">📍 เปิดในแผนที่</a>
-          </div>
-        </div>
+        {licenses.map((item: any) => {
+          const isExpired = new Date(item.licenseExpireDate) < today
 
-        {/* Another Example */}
-        <div className="license-card expired">
-          <h2>บ่อเลขที่ 045/2566</h2>
-          <ul>
-            <li>
-              <strong>โครงการ:</strong> โรงงาน A
-            </li>
-            <li>
-              <strong>ตำแหน่ง:</strong> 13.4567, 99.8890
-            </li>
-            <li>
-              <strong>ที่ตั้ง:</strong> ต.หนองปลาไหล อ.บ้านโป่ง จ.ราชบุรี
-            </li>
-            <li>
-              <strong>วันที่เริ่มใช้:</strong> 1 มิ.ย. 2566
-            </li>
-            <li>
-              <strong>วันหมดอายุ:</strong> 31 พ.ค. 2567
-            </li>
-            <li>
-              <strong>สถานะ:</strong> 🔴 หมดอายุแล้ว
-            </li>
-          </ul>
-          <div className="license-actions">
-            <a href="#">📎 ดูเอกสารแนบ</a>
-            <a href="#">📍 เปิดในแผนที่</a>
-          </div>
-        </div>
+          const diffInDays =
+            (new Date(item.licenseExpireDate).getTime() - today.getTime()) /
+            (1000 * 60 * 60 * 24)
+
+          const isNearExpired = diffInDays > 0 && diffInDays <= 30
+          
+
+          return (
+            <div
+              key={item._id}
+              className={`license-card ${
+                isExpired ? 'expired' : isNearExpired ? 'near-expired' : ''
+              }`}
+            >
+              <h2>บ่อเลขที่ {item.licenseNumber || item.wellNumber}</h2>
+              <ul>
+                <li>
+                  <strong>โครงการ:</strong> {item.clientName}
+                </li>
+                <li>
+                  <strong>ที่ตั้ง:</strong> {item.clientAddress}
+                </li>
+                <li>
+                  <strong>รายละเอียดบ่อ:</strong> {item.wellDescription}
+                </li>
+                <li>
+                  <strong>วันที่เริ่มใช้:</strong>{' '}
+                  {formatDateToThai(item.licenseIssuedDate)}
+                </li>
+                <li>
+                  <strong>วันหมดอายุ:</strong>{' '}
+                  {formatDateToThai(item.licenseExpireDate)}
+                </li>
+                <li>
+                  <strong>สถานะ:</strong>{' '}
+                  {isExpired
+                    ? '🔴 หมดอายุแล้ว'
+                    : isNearExpired
+                    ? '🟡 ใกล้หมดอายุ'
+                    : '🟢 ใช้งานอยู่'}
+                </li>
+                <li>
+                  <strong>เหลือเวลา:</strong>{' '}
+                  {getDateDiff(item.licenseExpireDate)} วัน
+                </li>
+              </ul>
+              <div className="license-actions">
+                <a href="#">📎 ดูเอกสารแนบ</a>
+                <a href="#">📍 เปิดในแผนที่</a>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </main>
   )

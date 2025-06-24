@@ -1,4 +1,7 @@
-export function formatDateOutput(formatted: string) {
-  if (!formatted || formatted.length !== 10) return ''
-  return formatted.replace(/-/g, '')
+export function formatDateToThai(input: string | Date): string {
+  const date = new Date(input)
+  const day = date.getDate()
+  const month = date.toLocaleString('th-TH', { month: 'long' })
+  const year = date.getFullYear() + 543
+  return `${day} ${month} ${year}`
 }

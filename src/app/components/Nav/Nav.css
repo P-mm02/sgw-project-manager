@@ -49,7 +49,7 @@
 }
 
 /* Responsive Mobile Nav */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .mobile-menu-button {
     display: block;
   }

@@ -2,11 +2,14 @@
 📄 .gitignore
 📁 .netlify
   📁 blobs-serve
+  📄 edge-functions-import-map.json
+  📁 edge-functions-serve
+    📄 dev.js
   📁 functions-internal
   📁 functions-serve
     📁 keep-warm
       📄 keep-warm.js
-      📁 src
+      📁 netlify
       📄 ___netlify-telemetry.mjs
   📁 plugins
     📄 package-lock.json
@@ -14,7 +17,15 @@
   📄 state.json
   📁 v1
     📁 functions
+📁 .vscode
+  📄 settings.json
 📄 eslint.config.mjs
+📁 netlify
+  📁 edge-functions
+    📄 hello.ts
+    📄 projects-proxy.ts
+  📁 functions
+    📄 keep-warm.ts
 📄 netlify.toml
 📄 next-env.d.ts
 📄 next.config.ts
@@ -32,7 +43,8 @@
   📄 generate-tree.js
 📁 src
   📁 app
-    📁 accounting
+    📁 accountant
+      📄 page.css
       📄 page.tsx
     📁 api
       📁 add-project
@@ -44,8 +56,16 @@
       📁 Nav
     📄 favicon.ico
     📁 HR
+      📄 page.css
       📄 page.tsx
     📄 layout.tsx
+    📁 license
+      📄 page.css
+      📄 page.tsx
+    📁 Marketing
+      📄 page.css
+      📄 page.tsx
+    📄 page.css
     📄 page.tsx
     📁 project-manage
       📄 page.tsx
@@ -60,24 +80,24 @@
   📁 data
     📄 projectData.json
   📁 lib
+    📄 convertNumberToMonth.ts
     📄 deleteProject.ts
     📄 formatDateInput.ts
+    📄 formatDateOutput.ts
+    📄 formatStartEndDate.ts
     📄 mongoose.ts
     📄 project-utils.ts
   📁 loading
+    📁 DotsLoader
+      📄 DotsLoader.css
+      📄 DotsLoader.tsx
     📁 Skeleton
       📄 Skeleton.css
       📄 Skeleton.tsx
   📁 models
     📄 Project.ts
-  📁 netlify
-    📁 edge-functions
-      📄 hello.ts
-    📁 functions
-      📄 keep-warm.ts
   📁 styles
     📄 globals.css
-    📄 page.css
   📁 types
     📄 ProjectFormType.ts
 📄 tsconfig.build.json

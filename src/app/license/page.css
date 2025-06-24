@@ -1,6 +1,5 @@
 .license-container {
-    max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 1rem;
     padding: 2rem;
     font-family: 'Inter', sans-serif;
   }
@@ -23,19 +22,34 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.5rem;
+    word-wrap: break-word;        /* Ensures long words break */
+    overflow-wrap: break-word;    /* Modern, better browser support */
   }
+  
   
   .license-card {
-    background: #ffffff;
+    background: #ffffff;    
     border: 2px solid #d1d5db;
+    border-left: 6px solid #22c55e;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
+    transition: all 0.2s ease;
+  }
+  .license-card.expired {
+    border-left: 6px solid #f87171;         /* Red border */
+    background-color: #fef2f2;             /* Light red background */
+    box-shadow: 0 0 10px rgba(248, 113, 113, 0.2); /* Soft red glow */
   }
   
+  .license-card.near-expired {
+    border-left: 6px solid #ffcc00;
+    background-color: #fff8e1;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+  } 
   .license-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
   }
   
   .license-card h2 {
@@ -76,8 +90,22 @@
     color: #1d4ed8;
   }
   
-  .license-card.expired {
-    border-color: #f87171;
-    background-color: #fef2f2;
+
+  
+
+  .addLicense {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #0077cc;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .addLicense:hover {
+    background-color: #005fa3;
   }
   
