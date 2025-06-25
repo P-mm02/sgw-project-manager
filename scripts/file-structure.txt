@@ -48,6 +48,7 @@
       📄 page.tsx
     📁 api
       📁 add-project
+      📁 license
       📁 projects
       📁 scripts
       📁 test-db
@@ -60,6 +61,7 @@
       📄 page.tsx
     📄 layout.tsx
     📁 license
+      📁 add
       📄 page.css
       📄 page.tsx
     📁 Marketing
@@ -81,6 +83,7 @@
     📄 projectData.json
   📁 lib
     📄 convertNumberToMonth.ts
+    📄 dateDiff.ts
     📄 deleteProject.ts
     📄 formatDateInput.ts
     📄 formatDateOutput.ts
@@ -95,6 +98,7 @@
       📄 Skeleton.css
       📄 Skeleton.tsx
   📁 models
+    📄 License.ts
     📄 Project.ts
   📁 styles
     📄 globals.css
