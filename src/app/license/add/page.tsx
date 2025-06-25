@@ -3,6 +3,8 @@
 import './page.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { formatDateToThai } from '@/lib/formatDateToThai'
+
 
 export default function AddLicensePage() {
   const router = useRouter()
@@ -12,6 +14,9 @@ export default function AddLicensePage() {
     licenseType: '',
     wellNumber: '',
     clientAddress: '',
+    depthStart: '',
+    depthEnd: '',
+    wellWidth: '',
     wellDescription: '',
     licenseIssuedDate: '',
     licenseExpireDate: '',
@@ -39,6 +44,57 @@ export default function AddLicensePage() {
       alert('❌ ไม่สามารถเพิ่มข้อมูลได้')
     }
   }
+
+  const handleLicenseNumberChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    let value = e.target.value.replace(/\D/g, '') // remove non-numeric
+    if (value.length > 11) value = value.slice(0, 11)
+
+    const formatted = value.replace(
+      /^(\d{2})(\d{0,5})(\d{0,4}).*/,
+      (_, p1, p2, p3) => [p1, p2, p3].filter(Boolean).join('-')
+    )
+
+    setFormData((prev) => ({
+      ...prev,
+      licenseNumber: formatted,
+    }))
+  }
+  const handlewellNumberChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    let value = e.target.value.replace(/\D/g, '') // remove non-numeric
+    if (value.length > 11) value = value.slice(0, 11)
+
+    const formatted = value.replace(
+      /^(\d{0,6})(\d{0,4}).*/,
+      (_, p1, p2, p3) => [p1, p2, p3].filter(Boolean).join('-')
+    )
+
+    setFormData((prev) => ({
+      ...prev,
+      wellNumber: formatted,
+    }))
+  }
+  
+  const handleWellDescriptionChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target
+
+    const updated = {
+      ...formData,
+      [name]: value,
+    }
+
+    updated.wellDescription = `ความลึก ${updated.depthStart || '_'}-${
+      updated.depthEnd || '_'
+    } เมตร | ความกว้างไม่เกิน ${updated.wellWidth || '_'} เมตร`
+
+    setFormData(updated)
+  }
+  
 
   return (
     <main className="license-form-container">
@@ -77,7 +133,9 @@ export default function AddLicensePage() {
             type="text"
             name="licenseNumber"
             value={formData.licenseNumber}
-            onChange={handleChange}
+            onChange={handleLicenseNumberChange}
+            pattern="\d{2}-\d{5}-\d{4}"
+            placeholder="ตัวอย่าง 12-34567-8910"
             required
           />
         </label>
@@ -88,7 +146,9 @@ export default function AddLicensePage() {
             type="text"
             name="wellNumber"
             value={formData.wellNumber}
-            onChange={handleChange}
+            onChange={handlewellNumberChange}
+            pattern="\d{6}-\d{4}"
+            placeholder="ตัวอย่าง 123456-7890"
           />
         </label>
 
@@ -102,13 +162,35 @@ export default function AddLicensePage() {
           />
         </label>
 
-        <label>
+        <label className="well-description-label">
           รายละเอียดบ่อ:
-          <textarea
-            name="wellDescription"
-            value={formData.wellDescription}
-            onChange={handleChange}
-          />
+          <div className="well-description-group">
+            <span>ความลึก</span>
+            <input
+              type="number"
+              name="depthStart"
+              value={formData.depthStart || ''}
+              onChange={handleWellDescriptionChange}
+              placeholder="ตื้นสุด"
+            />
+            <span>-</span>
+            <input
+              type="number"
+              name="depthEnd"
+              value={formData.depthEnd || ''}
+              onChange={handleWellDescriptionChange}
+              placeholder="ลึกสุด"
+            />
+            <span>เมตร | ความกว้างไม่เกิน</span>
+            <input
+              type="number"
+              name="wellWidth"
+              value={formData.wellWidth || ''}
+              onChange={handleWellDescriptionChange}
+              placeholder="กว้างสุด"
+            />
+            <span>เมตร</span>
+          </div>
         </label>
 
         <label>
@@ -120,6 +202,9 @@ export default function AddLicensePage() {
             onChange={handleChange}
             required
           />
+          <div className="thai-date-preview">
+            {formatDateToThai(formData.licenseIssuedDate)}
+          </div>
         </label>
 
         <label>
@@ -131,6 +216,9 @@ export default function AddLicensePage() {
             onChange={handleChange}
             required
           />
+          <div className="thai-date-preview">
+            {formatDateToThai(formData.licenseExpireDate)}
+          </div>
         </label>
 
         <button type="submit">💾 บันทึกใบอนุญาต</button>

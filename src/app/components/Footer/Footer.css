@@ -1,134 +1,119 @@
-/* Footer Styles for SG-WORKING */
+/* === Footer Wrapper === */
 .sgw-footer {
-  background-color: #1a365d; /* Deep blue */
-  color: #ffffff;
-  padding: 3rem 0;
-  font-family: 'Inter', sans-serif;
-  border-top: 3px solid #2c5282; /* Accent border */
+  background-color: #002b45;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  font-family: sans-serif;
 }
 
+/* === Container === */
 .sgw-footer-container {
-  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2.5rem;
 }
 
-.sgw-footer-about {
-  max-width: 300px;
+/* === Column === */
+.sgw-footer-col {
+  flex: 1 1 250px;
+  min-width: 250px;
 }
 
+/* === Logo === */
 .sgw-footer-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #00c1d4;
   text-decoration: none;
-  transition: color 0.3s ease;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
-.sgw-footer-logo:hover {
-  color: #90cdf4; /* Light blue hover */
-}
-
-.sgw-footer-about p {
-  color: #cbd5e0;
-  line-height: 1.6;
+/* === Description === */
+.sgw-footer-desc {
   font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ffffffcc;
+  margin-bottom: 1rem;
 }
 
+/* === Contact Details (Address/Phone) === */
+.sgw-footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #ffffffcc;
+  margin-top: 0.4rem;
+  line-height: 1.4;
+}
+
+/* === Headings === */
 .sgw-footer-heading {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   color: #ffffff;
-  position: relative;
-  padding-bottom: 0.5rem;
 }
 
-.sgw-footer-heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background-color: #4299e1; /* Water blue accent */
-}
-
+/* === Links === */
 .sgw-footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sgw-footer-link {
-  color: #cbd5e0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffffcc;
   text-decoration: none;
-  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
   font-size: 0.95rem;
-  position: relative;
-  padding-left: 1rem;
-}
-
-.sgw-footer-link::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: #4299e1;
-  opacity: 0;
-  transition: all 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .sgw-footer-link:hover {
-  color: #ffffff;
-  padding-left: 1.5rem;
+  color: #00c1d4;
 }
 
-.sgw-footer-link:hover::before {
-  opacity: 1;
-  left: 0.2rem;
+.sgw-footer-link svg {
+  min-width: 16px;
+  min-height: 16px;
 }
 
+/* === Bottom Footer === */
 .sgw-footer-bottom {
-  grid-column: 1 / -1;
   text-align: center;
-  padding-top: 2rem;
   margin-top: 2rem;
-  border-top: 1px solid #2d3748;
-  color: #a0aec0;
-  font-size: 0.875rem;
+  border-top: 1px solid #ffffff22;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  color: #ccc;
 }
 
-/* Responsive Design */
+/* === Responsive === */
 @media (max-width: 768px) {
   .sgw-footer-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 
-  .sgw-footer-about {
-    margin: 0 auto;
+  .sgw-footer-col {
+    flex: unset;
+    width: 100%;
   }
 
-  .sgw-footer-heading::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .sgw-footer-links {
-    align-items: center;
+  .sgw-footer-contact-item {
+    justify-content: center;
   }
 
   .sgw-footer-link {
-    padding-left: 0;
-  }
-
-  .sgw-footer-link:hover {
-    padding-left: 1rem;
+    justify-content: center;
   }
 }

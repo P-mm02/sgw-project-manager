@@ -20,7 +20,7 @@
   
   .license-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(434px, 1fr));
     gap: 1.5rem;
     word-wrap: break-word;        /* Ensures long words break */
     overflow-wrap: break-word;    /* Modern, better browser support */
@@ -107,5 +107,33 @@
   
   .addLicense:hover {
     background-color: #005fa3;
+  }
+  
+  .delete-btn {
+    margin-top: 1rem;
+    background-color: #ff4d4f;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.15s ease;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d9363e;
+    transform: translateY(-2px);
+  }
+  
+  .delete-btn:active {
+    transform: translateY(0);
+  }
+  
+  .delete-btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+    transform: none;
   }
   

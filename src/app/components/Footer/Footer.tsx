@@ -1,55 +1,77 @@
+'use client'
+
 import './Footer.css'
 import Link from 'next/link'
+import { Mail, Globe, Phone, Facebook, MessageSquare } from 'lucide-react'
 
 export default function Footer() {
   return (
     <footer className="sgw-footer">
       <div className="sgw-footer-container">
-        <div className="sgw-footer-about">
+        <div className="sgw-footer-col">
           <Link href="/" className="sgw-footer-logo">
             SG-WORKING
           </Link>
-          <p>
-            Specializing in groundwater solutions across Thailand since 2010.
+          <p className="sgw-footer-desc">
+            บริษัทก่อตั้งปี พ.ศ. 2536 ให้บริการน้ำบาดาลทั่วไทย
+          </p>
+          <p className="sgw-footer-contact-item">
+            <Phone size={16} /> 081-234-5678
+          </p>
+          <p className="sgw-footer-contact-item">
+            📍 99/9 หมู่ 5 ต.บางรัก อ.เมือง จ.กรุงเทพฯ 10200
           </p>
         </div>
 
-        <div>
-          <h3 className="sgw-footer-heading">Services</h3>
-          <div className="sgw-footer-links">
-            <Link href="#" className="sgw-footer-link">
-              Groundwater Survey
-            </Link>
-            <Link href="#" className="sgw-footer-link">
-              Drilling Services
-            </Link>
-            <Link href="#" className="sgw-footer-link">
-              Dewatering Systems
-            </Link>
-          </div>
+        <div className="sgw-footer-col">
+          <h3 className="sgw-footer-heading">ติดต่อเรา</h3>
+          <ul className="sgw-footer-links">
+            <li>
+              <a
+                href="https://line.me/ti/p/your-line-id"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sgw-footer-link"
+              >
+                <MessageSquare size={16} /> Line
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://facebook.com/your-page"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sgw-footer-link"
+              >
+                <Facebook size={16} /> Facebook
+              </a>
+            </li>
+            <li>
+              <a
+                href="mailto:contact@siamgroundwater.com"
+                className="sgw-footer-link"
+              >
+                <Mail size={16} /> Email
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://siamgroundwater.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sgw-footer-link"
+              >
+                <Globe size={16} /> Website
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <div>
-          <h3 className="sgw-footer-heading">Company</h3>
-          <div className="sgw-footer-links">
-            <Link  href="#" className="sgw-footer-link">
-              About Us
-            </Link>
-            <Link href="#" className="sgw-footer-link">
-              Projects
-            </Link>
-            <Link href="#" className="sgw-footer-link">
-              Contact
-            </Link>
-          </div>
-        </div>
-
-        <div className="sgw-footer-bottom">
-          <p>
-            © {new Date().getFullYear()} SiamGroundwater Co.,Ltd. All rights
-            reserved.
-          </p>
-        </div>
+      <div className="sgw-footer-bottom">
+        <p>
+          © {new Date().getFullYear()} SiamGroundwater Co.,Ltd. สงวนลิขสิทธิ์
+        </p>
       </div>
     </footer>
   )

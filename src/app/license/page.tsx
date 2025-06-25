@@ -4,6 +4,7 @@ import License, { LicenseType } from '@/models/License'
 import { formatDateToThai } from '@/lib/formatDateToThai'
 import Link from 'next/link'
 import { sendLineMessage } from '@/lib/sendLineMessage'
+import DeleteLicenseButton from './delete/DeleteLicenseButton'
 
 
 export const metadata = {
@@ -91,6 +92,9 @@ export default async function LicensingWork() {
               }`}
             >
               <h2>
+                <strong>โครงการ:</strong> {item.clientName || 'ไม่ระบุ'}
+              </h2>
+              <h2>
                 ใบอนุญาต
                 {{
                   drilling: 'เจาะบ่อ',
@@ -101,18 +105,6 @@ export default async function LicensingWork() {
               </h2>
               <h2>เลขที่: {item.licenseNumber || ''}</h2>
               <ul>
-                <li>
-                  <strong>ประเภท:</strong>{' '}
-                  {{
-                    drilling: 'เจาะบ่อ',
-                    waterUse: 'ใช้น้ำ',
-                    modify: 'แก้ไขบ่อ',
-                    cancel: 'อุดกลบบ่อ',
-                  }[item.licenseType ?? ''] || 'ไม่ระบุ'}
-                </li>
-                <li>
-                  <strong>โครงการ:</strong> {item.clientName || 'ไม่ระบุ'}
-                </li>
                 <li>
                   <strong>ที่ตั้ง:</strong> {item.clientAddress || 'ไม่ระบุ'}
                 </li>
@@ -151,6 +143,7 @@ export default async function LicensingWork() {
                 <a href="#">📎 ดูเอกสารแนบ</a>
                 <a href="#">📍 เปิดในแผนที่</a>
               </div>
+              {item._id && <DeleteLicenseButton id={item._id.toString()} />}
             </div>
           )
         })}
