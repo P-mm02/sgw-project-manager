@@ -17,15 +17,7 @@
     color: #333;
     position: relative;
   }
-  .license-form-container h1::after {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 3px;
-    background: #0066cc;
-    margin: 0.5rem auto 0;
-    border-radius: 10px;
-  }
+
   
   /* Form */
   .license-form {
@@ -112,5 +104,21 @@
     .license-form button {
       width: 100%;
     }
+  }
+  
+  .license-form select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.2s, box-shadow 0.2s;
+    background: #f9f9f9;
+  }
+  
+  .license-form select:focus {
+    border-color: #0077ff;
+    outline: none;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.15);
   }
   

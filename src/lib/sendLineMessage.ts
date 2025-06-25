@@ -6,7 +6,7 @@ export async function sendLineMessage(userId: string, message: string) {
   const url = 'https://api.line.me/v2/bot/message/push'
 
   const body = {
-    to: '1170600160847',
+    to: userId,
     messages: [
       {
         type: 'text',
@@ -21,8 +21,8 @@ export async function sendLineMessage(userId: string, message: string) {
   }
 
   try {
-    const res = await axios.post(url, body, { headers })
-    console.log('✅ Message sent', res.data)
+    await axios.post(url, body, { headers })
+    //console.log('✅ Message sent', res.data)
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       console.error(

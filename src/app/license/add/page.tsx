@@ -9,6 +9,7 @@ export default function AddLicensePage() {
   const [formData, setFormData] = useState({
     clientName: '',
     licenseNumber: '',
+    licenseType: '',
     wellNumber: '',
     clientAddress: '',
     wellDescription: '',
@@ -17,7 +18,7 @@ export default function AddLicensePage() {
   })
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -52,6 +53,22 @@ export default function AddLicensePage() {
             onChange={handleChange}
             required
           />
+        </label>
+
+        <label>
+          ประเภทใบอนุญาต
+          <select
+            name="licenseType"
+            value={formData.licenseType}
+            onChange={handleChange}
+            required
+          >
+            <option value="">-- เลือกประเภท --</option>
+            <option value="drilling">เจาะบ่อ</option>
+            <option value="waterUse">ใช้น้ำ</option>
+            <option value="modify">แก้ไขบ่อ</option>
+            <option value="cancel">ยกเลิกบ่อ</option>
+          </select>
         </label>
 
         <label>
