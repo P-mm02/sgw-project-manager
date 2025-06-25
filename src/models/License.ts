@@ -1,16 +1,29 @@
-import mongoose from 'mongoose'
+import mongoose, { InferSchemaType, Schema } from 'mongoose'
 
-const LicenseSchema = new mongoose.Schema({
+const LicenseSchema = new Schema(
+  {
     clientName: String,
-    licenseNumber:String,
+    licenseNumber: String,
     wellNumber: String,
-    clientAddress:String,
+    clientAddress: String,
     wellDescription: String,
     licenseIssuedDate: Date,
     licenseExpireDate: Date,
     notificationSent: { type: Boolean, default: false },
-    
-}, { timestamps: true })
+  },
+  {
+    timestamps: true,
+    collection: 'licenses',
+  }
+)
 
-export default mongoose.models.License ||
-  mongoose.model('License', LicenseSchema)
+export type LicenseType = InferSchemaType<typeof LicenseSchema> & {
+  _id?: string
+  createdAt?: Date
+  updatedAt?: Date
+  __v?: number
+}
+
+const License =
+  mongoose.models.License || mongoose.model('License', LicenseSchema)
+export default License

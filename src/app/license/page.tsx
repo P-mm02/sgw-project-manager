@@ -1,10 +1,8 @@
 import './page.css'
 import { connectToDB } from '@/lib/mongoose'
-import License from '@/models/License'
+import License, { LicenseType } from '@/models/License'
 import { formatDateToThai } from '@/lib/formatDateOutput'
 import Link from 'next/link'
-import { getDateDiff } from '@/lib/dateDiff'
-
 
 export const metadata = {
   title: 'ใบอนุญาต | SG-WORKING',
@@ -12,7 +10,9 @@ export const metadata = {
 
 export default async function LicensingWork() {
   await connectToDB()
-  const licenses = await License.find().sort({ licenseExpireDate: -1 }).lean()
+  const licenses = (await License.find()
+    .sort({ licenseExpireDate: -1 })
+    .lean()) as LicenseType[]
 
   const today = new Date()
 
@@ -26,41 +26,53 @@ export default async function LicensingWork() {
       </header>
 
       <div className="license-grid">
-        {licenses.map((item: any) => {
-          const isExpired = new Date(item.licenseExpireDate) < today
+        {licenses.map((item) => {
+          const expireDate = item.licenseExpireDate
+            ? new Date(item.licenseExpireDate)
+            : undefined
+          const issueDate = item.licenseIssuedDate
+            ? new Date(item.licenseIssuedDate)
+            : undefined
 
-          const diffInDays =
-            (new Date(item.licenseExpireDate).getTime() - today.getTime()) /
-            (1000 * 60 * 60 * 24)
-
+          const isExpired = expireDate ? expireDate < today : false
+          const diffInDays = expireDate
+            ? Math.ceil(
+                (expireDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+              )
+            : 0
           const isNearExpired = diffInDays > 0 && diffInDays <= 30
-          
 
           return (
             <div
               key={item._id}
               className={`license-card ${
-                isExpired ? 'expired' : isNearExpired ? 'near-expired' : ''
+                isExpired
+                  ? 'expired'
+                  : isNearExpired
+                  ? 'near-expired'
+                  : 'active'
               }`}
             >
-              <h2>บ่อเลขที่ {item.licenseNumber || item.wellNumber}</h2>
+              <h2>
+                บ่อเลขที่ {item.licenseNumber || item.wellNumber || 'ไม่ระบุ'}
+              </h2>
               <ul>
                 <li>
-                  <strong>โครงการ:</strong> {item.clientName}
+                  <strong>โครงการ:</strong> {item.clientName || 'ไม่ระบุ'}
                 </li>
                 <li>
-                  <strong>ที่ตั้ง:</strong> {item.clientAddress}
+                  <strong>ที่ตั้ง:</strong> {item.clientAddress || 'ไม่ระบุ'}
                 </li>
                 <li>
-                  <strong>รายละเอียดบ่อ:</strong> {item.wellDescription}
+                  <strong>รายละเอียดบ่อ:</strong> {item.wellDescription || '—'}
                 </li>
                 <li>
                   <strong>วันที่เริ่มใช้:</strong>{' '}
-                  {formatDateToThai(item.licenseIssuedDate)}
+                  {issueDate ? formatDateToThai(issueDate) : 'ไม่ระบุ'}
                 </li>
                 <li>
                   <strong>วันหมดอายุ:</strong>{' '}
-                  {formatDateToThai(item.licenseExpireDate)}
+                  {expireDate ? formatDateToThai(expireDate) : 'ไม่ระบุ'}
                 </li>
                 <li>
                   <strong>สถานะ:</strong>{' '}
@@ -72,7 +84,11 @@ export default async function LicensingWork() {
                 </li>
                 <li>
                   <strong>เหลือเวลา:</strong>{' '}
-                  {getDateDiff(item.licenseExpireDate)} วัน
+                  {expireDate
+                    ? isExpired
+                      ? 'หมดอายุแล้ว'
+                      : `${diffInDays} วัน`
+                    : 'ไม่ระบุ'}
                 </li>
               </ul>
               <div className="license-actions">
