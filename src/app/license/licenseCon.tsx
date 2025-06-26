@@ -1,25 +1,23 @@
-// src/app/license/licenseCon.tsx
-import { connectToDB } from '@/lib/mongoose'
-import License from '@/models/License'
-import { handleLicenseNotifications } from './handleLicenseNotifications'
-import LicenseClient from './LicenseClient'
+'use client'
+
+import { useEffect, useState } from 'react'
 import { LicenseType } from '@/models/License'
+import DotsLoader from '@/loading/DotsLoader/DotsLoader'
+import LicenseClient from './LicenseClient'
 
+export default function LicenseClientLoader() {
+  const [licenses, setLicenses] = useState<LicenseType[] | null>(null)
 
-export default async function LicenseCon() {
-  // 1. Connect to MongoDB
-  await connectToDB()
+  useEffect(() => {
+    const fetchLicenses = async () => {
+      const res = await fetch('/api/license/')
+      const data = await res.json()
+      setLicenses(data)
+    }
 
-  // 2. Fetch all licenses, sorted by expiration date (latest to oldest)
-  const licenses = (await License.find()
-    .sort({ licenseExpireDate: -1 })
-    .lean()) as LicenseType[]
+    fetchLicenses()
+  }, [])
 
-
-  // 3. Run notification logic if licenses are near expiration
-  await handleLicenseNotifications(licenses)
-
-  // 4. Pass licenses as JSON-safe props to the client component
+  if (!licenses) return <DotsLoader />
   return <LicenseClient licenses={licenses} />
-
 }

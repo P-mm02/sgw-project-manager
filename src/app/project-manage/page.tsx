@@ -1,16 +1,14 @@
-import ProjectCon from './ProjectCon/ProjectCon'
+// src/app/project-manage/page.tsx
+import ProjectClient from './ProjectClient'
 
 export const metadata = {
   title: 'จัดการโปรเจค | SG-WORKING',
 }
 
-//export const dynamic = 'force-dynamic' // optional: always fresh fetch
-
-export default async function ProjectsPage() {
+export default function ProjectsPage() {
   return (
     <main>
-      <ProjectCon />
-    </main>    
+      <ProjectClient />
+    </main>
   )
 }
-
