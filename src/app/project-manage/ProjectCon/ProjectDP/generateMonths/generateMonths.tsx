@@ -1,38 +1,47 @@
 'use client'
-import { startOfMonth, endOfMonth, eachDayOfInterval, format } from 'date-fns'
+import { startOfMonth, endOfMonth } from 'date-fns'
 
 export type Month = {
-  name: string
-  days: {
-    label: string
-    id: string
-  }[]
+  key: string // "202506"
+  label: string // "มิ.ย. 2568"
+  startDate: Date
+  endDate: Date
 }
 
+const thaiMonths = [
+  'ม.ค.',
+  'ก.พ.',
+  'มี.ค.',
+  'เม.ย.',
+  'พ.ค.',
+  'มิ.ย.',
+  'ก.ค.',
+  'ส.ค.',
+  'ก.ย.',
+  'ต.ค.',
+  'พ.ย.',
+  'ธ.ค.',
+]
+
 /**
- * Generate an array of months starting from `monthSelect`, spanning `monthCount` months
- *
- * @param monthCount number of months to generate
- * @param monthSelect starting month (0 = January)
- * @param year optional (default is current year)
- * @returns array of month data
+ * Generate an array of months starting from `monthSelect` (1-based), spanning `monthCount` months
  */
 export function generateMonths(
   monthCount: number,
-  monthSelect: number,
-  year: number = new Date().getFullYear()
+  monthSelect: number, // 1 = January
+  year: number
 ): Month[] {
   return Array.from({ length: monthCount }, (_, i) => {
-    const targetMonth = monthSelect + i
-    const firstDay = startOfMonth(new Date(year, targetMonth, 1))
-    const lastDay = endOfMonth(firstDay)
-    const days = eachDayOfInterval({ start: firstDay, end: lastDay })
+    const currentMonth = monthSelect  + i
+    const date = new Date(year, currentMonth, 1)
+    const y = date.getFullYear()
+    const m = date.getMonth()
+
     return {
-      name: format(firstDay, 'MMMM'),
-      days: days.map((day) => ({
-        label: format(day, 'd'),
-        id: format(day, 'yyyyMMdd'),
-      })),
+      key: `${y}${String(m + 1).padStart(2, '0')}`,
+      label: `${thaiMonths[m]} ${y + 543}`,
+      startDate: startOfMonth(date),
+      endDate: endOfMonth(date),
     }
   })
 }

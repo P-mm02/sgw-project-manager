@@ -15,9 +15,9 @@ import DotsLoader from '@/loading/DotsLoader/DotsLoader'
 export default function ProjectCon() {
   const [loading, setLoading] = useState(true)
   const [workType, setWorkType] = useState('all')
-  const [monthCount, setMonthCount] = useState(1)
+  const [monthCount, setMonthCount] = useState(12)
   const [monthSelect, setMonthSelect] = useState<number>(() => 0)
-  const [yearSelect, setYearSelect] = useState<number>(() => 2025)
+  const [yearSelect, setYearSelect] = useState<number>(() => new Date().getFullYear())
   const [serverProjects, setserverProjects] = useState<ProjectType[]>([])
   const [projectData, setProjectData] = useState<ProjectType[]>([])
   

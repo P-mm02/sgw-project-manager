@@ -1,37 +1,39 @@
 'use client'
+import { useState } from 'react'
 import './WorkTypeSelect.css'
 
 type WorkTypeSelectProps = {
   setWorkType: (value: string) => void
 }
 
+const workTypes = [
+  { label: 'ทั้งหมด', value: 'all' },
+  { label: 'งานเจาะ', value: 'drilling' },
+  { label: 'งานสำรวจ', value: 'survey' },
+  { label: 'งานสูบลดระดับน้ำ', value: 'dewatering' },
+  { label: 'งานซ่อมบำรุง', value: 'maintenance' },
+  { label: 'งานอื่นๆ', value: 'others' },
+]
+
 export default function WorkTypeSelect({ setWorkType }: WorkTypeSelectProps) {
+  const [active, setActive] = useState('all')
+
+  const handleClick = (value: string) => {
+    setActive(value)
+    setWorkType(value)
+  }
+
   return (
     <div className="workType-select-Con">
-      <button className="workType-btn" onClick={() => setWorkType('all')}>
-        ทั้งหมด
-      </button>
-      <button className="workType-btn" onClick={() => setWorkType('drilling')}>
-        งานเจาะ
-      </button>
-      <button className="workType-btn" onClick={() => setWorkType('survey')}>
-        งานสำรวจ
-      </button>
-      <button
-        className="workType-btn"
-        onClick={() => setWorkType('dewatering')}
-      >
-        งานสูบลดระดับน้ำ
-      </button>
-      <button
-        className="workType-btn"
-        onClick={() => setWorkType('maintenance')}
-      >
-        งานซ่อมบำรุง
-      </button>
-      <button className="workType-btn" onClick={() => setWorkType('others')}>
-        งานอื่นๆ
-      </button>
+      {workTypes.map(({ label, value }) => (
+        <button
+          key={value}
+          className={`workType-btn ${active === value ? 'active' : ''}`}
+          onClick={() => handleClick(value)}
+        >
+          {label}
+        </button>
+      ))}
     </div>
   )
 }

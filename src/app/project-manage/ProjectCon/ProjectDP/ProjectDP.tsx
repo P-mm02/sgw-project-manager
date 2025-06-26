@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation'
 import type { ProjectType } from '@/models/Project'
 import dynamic from 'next/dynamic'
 import Skeleton from '@/loading/Skeleton/Skeleton'
-import { formatStartEndDate } from '@/lib/formatStartEndDate'
 
 type MonthDPProps = {
   monthCount: number
@@ -69,21 +68,25 @@ export default function ProjectDP({
           key={index}
           onClick={() => router.push(`/projects/${project._id}`)}
         >
-          <ProjectActionButtons
-            projectId={project._id.toString()}
-            mapLink={project.mapLink ?? ''}
-            onDelete={async (id) => {
-              const success = await deleteProject(id)
-              if (success) {
-                setProjectData((prev) =>
-                  prev.filter((p) => p._id.toString() !== id)
-                )
-              }
-            }}
-          />
+          <div className="projectInfoAndBtnWraper">
+            <div className="projectInfoWraper">
+              <div className="project-name">{project.projectName}</div>
+              <div className="project-location">{project.location}</div>
+            </div>
+            <ProjectActionButtons
+              projectId={project._id.toString()}
+              mapLink={project.mapLink ?? ''}
+              onDelete={async (id) => {
+                const success = await deleteProject(id)
+                if (success) {
+                  setProjectData((prev) =>
+                    prev.filter((p) => p._id.toString() !== id)
+                  )
+                }
+              }}
+            />
+          </div>
 
-          <div className="project-name">{project.projectName}</div>
-          <div className="project-location">{project.location}</div>
           <div className="project-working-day">
             <span>
               แผนปฎิบัติงาน{' '}
@@ -94,10 +97,6 @@ export default function ProjectDP({
               วัน
             </span>
             <span>
-              {formatStartEndDate(project.planWorkDayStart as string)} ถึง{' '}
-              {formatStartEndDate(project.planWorkDayEnd as string)}
-            </span>
-            <span>
               ปฎิบัติงานจริง{' '}
               {getDayDiff(
                 project.actualWorkDayStart ?? '',
@@ -105,12 +104,8 @@ export default function ProjectDP({
               )}{' '}
               วัน
             </span>
-            <span>
-              {formatStartEndDate(project.actualWorkDayStart as string)} ถึง{' '}
-              {formatStartEndDate(project.actualWorkDayEnd as string)}
-            </span>
           </div>
-          <div className="project-plan col">
+          <div className="project-plan-con">
             <DateCtrl
               months={months}
               monthCount={monthCount}

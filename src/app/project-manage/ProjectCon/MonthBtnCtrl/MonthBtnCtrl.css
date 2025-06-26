@@ -12,7 +12,8 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: bold;
   transition: background-color 0.2s, color 0.2s, transform 0.1s;
 }
 
@@ -25,4 +26,12 @@
   background-color: #0070f3;
   border-color: #0070f3;
   color: white;
+}
+
+.month-select-btn button:disabled,
+.year-select-btn button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: not-allowed;
+  pointer-events: none; /* ✅ Prevents all interaction, including hover */
 }

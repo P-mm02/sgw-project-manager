@@ -22,7 +22,7 @@
 
 .project-working-days{
   display: flex;  
-  justify-content: end;
+  justify-content: center;
   color: #555;
   font-size: 0.9rem;
 }

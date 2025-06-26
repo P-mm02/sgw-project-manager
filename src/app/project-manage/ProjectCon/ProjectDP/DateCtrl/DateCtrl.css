@@ -1,110 +1,84 @@
-.project-action-plan,
-.project-actual-work {
+.date-timeline-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-
-.bar-scale-month {
-  display: grid;
-  width: 100%;
-  height: 2rem;
-  background-color: #e0e0e0;
-  position: relative;
-  border-radius: 2px;
-  overflow: visible;
-}
-
-.bar-scale-day-wrapper {
-  height: 2rem;
-  width: 100%;
-  z-index: 0;
-  position: relative;
-  overflow: visible;
-  cursor: default;
-}
-.bar-scale-day {
-  position: absolute;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
-  background-color: #e0e0e0;
+  
+}
+
+.timeline-months {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-size: 0.75rem;
+  color: #444;
+  
+}
+
+.timeline-month {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid #ccc;
+  transform: scaleY(1)
+
+}
+
+.timeline-bars {
+  position: relative;
+  height: 100%;
+}
+
+.timeline-bar {
+  position: absolute;
+  height: 35%;
+  border-radius: 4px;
+  color: black;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  transition: transform 0.15s ease-in-out, border 0.15s;
-  transform-origin: bottom center; /* ✅ This is important */
-  z-index: 1;
-  overflow: visible;
+  opacity: 0.9;
+  top: 15%;
 }
-.bar-scale-day .day-number {  
-  font-size: 1.5rem;
-  cursor: default;
-  display: none;
+
+.timeline-bar .timeRangeCon {
+  position: absolute;
   white-space: nowrap;
-
+  padding: 0.25rem 0.5rem;
+  background-color: #fffbe6;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
-.bar-scale-day-wrapper:hover .bar-scale-day, .bar-scale-day:hover .bar-scale-day{    
-  width: auto;
-  padding: 2px;
-  transform: scale(2) translateY(-50%); 
-  z-index: 20;
-
-}
-.bar-scale-day-wrapper:hover{
-  background-color: #340505;
-}
-.bar-scale-day-wrapper:hover .day-number{
-  display: block;
-}
-.bar-scale-day:hover .day-number{
+.timeline-bar.plan .timeRangeCon {
+  bottom: 100%;
+  margin-bottom: 0.1rem;
 }
 
-/* 12 month */
-.bar-scale-month-12month {
-  display: grid;
-  width: 100%;
-  height: 2rem;
-  background-color: #e0e0e0;
-  position: relative;
-  border-radius: 2px;
-
-}
-.bar-scale-month-12month .bar-scale-day-wrapper .bar-scale-day {
-  border: none;
-}
-.bar-scale-month-12month .day-number {
-  font-size: 1.5rem;
-  cursor: default;
-}
-.bar-scale-12month:hover{
-  width: 500%;
-} 
-.bar-scale-6month:hover{
-  width: 250%;
-} 
-.bar-scale-3month:hover{
-  width: 150%;
-} 
-
-/* show-day-number */
-.show-day-number .day-number {
-  display: block ;
+.timeline-bar.actual .timeRangeCon {
+  top: 100%;
+  margin-top: 0.1rem;
 }
 
-/* highlight */
-.plan-highlight {
-  background-color: #2196f3; /* blue */
-  color: white;
-  /* border: none; */
+
+
+.timeline-bar .timeRange{
+  text-wrap: nowrap;
+  font-size: 1rem;
 }
-.plan-highlight .day-number {  
-  z-index: 20;
+
+.timeline-bar.plan {
+  background-color: #2196f3;/* Blue */
+  z-index: 1;
 }
-.actual-highlight {
+
+.timeline-bar.actual {
   background-color: #ff9800; /* orange */
-  color: white;
+  z-index: 2;
+  top: 50%;
 }
