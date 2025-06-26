@@ -1,6 +1,7 @@
 // src/app/license/page.tsx
 import LicenseCon from './licenseCon'
 import Link from 'next/link'
+import './page.css'
 
 export const metadata = {
   title: 'ใบอนุญาต | SG-WORKING',
