@@ -3,7 +3,7 @@
 import React from 'react'
 import { differenceInCalendarDays, parse } from 'date-fns'
 import './DateCtrl.css'
-import { formatStartEndDate } from '@/lib/formatStartEndDate'
+import { formatStartEndDate } from '@/lib/date/formatStartEndDate'
 
 type DateRange = {
   start: string

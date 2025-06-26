@@ -1,7 +1,7 @@
-import { LicenseType } from '@/models/License' // 👈 make sure this type exists
+import { LicenseType } from '@/types/LicenseType' // 👈 make sure this type exists
 import License from '@/models/License'
-import { formatDateToThai } from '@/lib/formatDateToThai'
-import { sendLineMessage } from '@/lib/sendLineMessage'
+import { formatDateToThai } from '@/lib/date/formatDateToThai'
+import { sendLineMessage } from '@/lib/sendMessage/sendLineMessage'
 
 export async function handleLicenseNotifications(licenses: LicenseType[]) {
   const today = new Date()

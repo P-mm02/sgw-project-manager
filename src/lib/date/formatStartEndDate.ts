@@ -1,4 +1,4 @@
-import { convertNumberToMonth } from '@/lib/convertNumberToMonth'
+import { convertNumberToMonth } from '@/lib/date/convertNumberToMonth'
 
 export function formatStartEndDate(raw: string) {
   if (!raw || raw.length !== 8) return ''  

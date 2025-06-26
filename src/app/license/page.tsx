@@ -1,5 +1,5 @@
 // src/app/license/page.tsx
-import LicenseCon from './licenseCon'
+import LicenseClient from './LicenseClient/LicenseClient'
 import Link from 'next/link'
 import './page.css'
 
@@ -16,7 +16,7 @@ export default function LicensePage() {
           ➕ เพิ่มใบอนุญาต
         </Link>
       </header>
-      <LicenseCon />
+      <LicenseClient />
     </main>
   )
 }

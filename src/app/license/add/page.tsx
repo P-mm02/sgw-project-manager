@@ -3,7 +3,7 @@
 import './page.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { formatDateToThai } from '@/lib/formatDateToThai'
+import { formatDateToThai } from '@/lib/date/formatDateToThai'
 
 
 export default function AddLicensePage() {

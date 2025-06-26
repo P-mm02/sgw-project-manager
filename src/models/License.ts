@@ -1,4 +1,4 @@
-import mongoose, { InferSchemaType, Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const LicenseSchema = new Schema(
   {
@@ -18,13 +18,7 @@ const LicenseSchema = new Schema(
   }
 )
 
-export type LicenseType = InferSchemaType<typeof LicenseSchema> & {
-  _id?: string
-  createdAt?: Date
-  updatedAt?: Date
-  __v?: number
-}
-
 const License =
   mongoose.models.License || mongoose.model('License', LicenseSchema)
+
 export default License

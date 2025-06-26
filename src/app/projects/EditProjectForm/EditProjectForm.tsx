@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
 import './EditProjectForm.css'
-import { formatDateInput } from '@/lib/formatDateInput'
-import type { ProjectType } from '@/models/Project'
+import { formatDateInput } from '@/lib/date/formatDateInput'
+import type { ProjectType } from '@/types/ProjectType'
 
 const safe = (val: string | undefined | null) => val ?? ''
 

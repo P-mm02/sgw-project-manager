@@ -2,33 +2,16 @@
 import { useState } from 'react'
 import './AddProject.css'
 import { handleSubmit } from './handleSubmit'
-import { formatDateInput } from '@/lib/formatDateInput'
-import type { ProjectFormType } from '@/types/ProjectFormType'
+import { formatDateInput } from '@/lib/date/formatDateInput'
+import { ProjectFormState } from '@/types/ProjectFormState'
+import { initialProjectFormState } from '@/constants/project/initialProjectForm'
 
 const safe = (val: string | undefined | null) => val ?? ''
 
 
 export default function AddProject() {
-  const initialFormState: ProjectFormType = {
-    projectName: '',
-    location: '',
-    mapLink: '',
-    client: '',
-    supervisor: '',
-    projectWorth: '',
-    status: '',
-    workType: 'others',
-    planWorkDayStart: '',
-    planWorkDayEnd: '',
-    actualWorkDayStart: '',
-    actualWorkDayEnd: '',
-    tags: '',
-    report: '',
-    documents: '',
-  }
   
-  const [formData, setFormData] = useState<ProjectFormType>(initialFormState)
-
+  const [formData, setFormData] = useState<ProjectFormState>(initialProjectFormState)
   const [preview, setPreview] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 

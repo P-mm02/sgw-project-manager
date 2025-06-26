@@ -1,15 +1,30 @@
 // src/app/license/LicenseClient.tsx
 'use client'
-
-import './licenseCon.css'
-import { formatDateToThai } from '@/lib/formatDateToThai'
-import DeleteLicenseButton from './delete/DeleteLicenseButton'
-import { LicenseType } from '@/models/License'
+import { useEffect } from 'react'
+import '../LicenseClient.css'
+import { formatDateToThai } from '@/lib/date/formatDateToThai'
+import DeleteLicenseButton from '../../delete/DeleteLicenseButton'
+import { LicenseType } from '@/types/LicenseType' // ✅ now safe in client
 
 export default function LicenseClient({ licenses }: { licenses: LicenseType[] }) {
   const today = new Date()
+  useEffect(() => {
+    if (!licenses) return
 
-  return (
+    const notifyExpiringLicenses = async () => {
+      console.log(
+        'notifyExpiringLicensesnotifyExpiringLicensesnotifyExpiringLicenses'
+      )
+      
+      const { handleLicenseNotifications } = await import(
+        '@/lib/sendMessage/handleLicenseNotifications'
+      )
+      handleLicenseNotifications(licenses)
+    }
+
+    notifyExpiringLicenses()
+  }, [licenses])
+    return (
     <div className="license-grid">
       {licenses.map((item) => {
         const expireDate = item.licenseExpireDate

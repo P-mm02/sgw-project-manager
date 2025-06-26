@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import type { ProjectType } from '@/models/Project'
+import type { ProjectType } from '@/types/ProjectType'
 import './ProjectReport.css'
 
 type WorkLogEntry = {

@@ -1,5 +1,5 @@
 // src/app/api/test-line/route.ts
-import { sendLineMessage } from '@/lib/sendLineMessage'
+import { sendLineMessage } from '@/lib/sendMessage/sendLineMessage'
 import { NextResponse } from 'next/server'
 
 export async function GET() {

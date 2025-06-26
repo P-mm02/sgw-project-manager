@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { LicenseType } from '@/models/License'
 import DotsLoader from '@/loading/DotsLoader/DotsLoader'
-import LicenseClient from './LicenseClient'
+import LicenseClient from './licenseCon/LicenseClient'
 
 export default function LicenseClientLoader() {
   const [licenses, setLicenses] = useState<LicenseType[] | null>(null)

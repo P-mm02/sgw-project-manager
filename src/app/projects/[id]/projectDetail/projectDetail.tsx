@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { parse, differenceInCalendarDays } from 'date-fns'
-import { formatDateInput } from '@/lib/formatDateInput'
-import type { ProjectType } from '@/models/Project'
+import { formatDateInput } from '@/lib/date/formatDateInput'
+import type { ProjectType } from '@/types/ProjectType'
 import "./projectDetail.css";
 
 

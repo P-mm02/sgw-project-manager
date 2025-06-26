@@ -4,10 +4,10 @@ import './ProjectDP.css'
 import { generateMonths, Month } from './generateMonths/generateMonths'
 import { parse, differenceInCalendarDays } from 'date-fns'
 import ProjectActionButtons from './ProjectActionButtons/ProjectActionButtons'
-import { deleteProject } from '@/lib/deleteProject'
+import { deleteProject } from '@/lib/date/deleteProject'
 import MonthDP from '../monthDP/monthDP'
 import { useRouter } from 'next/navigation'
-import type { ProjectType } from '@/models/Project'
+import type { ProjectType } from '@/types/ProjectType'
 import dynamic from 'next/dynamic'
 import Skeleton from '@/loading/Skeleton/Skeleton'
 
@@ -63,6 +63,7 @@ export default function ProjectDP({
         </div>
       </div>
       {projectData.map((project, index) => (
+        
         <div
           className="row-project"
           key={index}
@@ -74,13 +75,13 @@ export default function ProjectDP({
               <div className="project-location">{project.location}</div>
             </div>
             <ProjectActionButtons
-              projectId={project._id.toString()}
+              projectId={project._id}
               mapLink={project.mapLink ?? ''}
               onDelete={async (id) => {
                 const success = await deleteProject(id)
                 if (success) {
                   setProjectData((prev) =>
-                    prev.filter((p) => p._id.toString() !== id)
+                    prev.filter((p) => p._id !== id)
                   )
                 }
               }}

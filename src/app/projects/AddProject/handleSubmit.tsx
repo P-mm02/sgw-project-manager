@@ -1,7 +1,7 @@
-import type { ProjectFormType } from '@/types/ProjectFormType'
+import type { ProjectFormState } from '@/types/ProjectFormState'
 
 export async function handleSubmit(
-  formData: ProjectFormType,
+  formData: ProjectFormState,
   setSubmitted: (val: boolean) => void,
   setPreview: (val: boolean) => void
 ) {
