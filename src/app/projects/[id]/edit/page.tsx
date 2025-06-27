@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getProjectById } from '@/lib/project-utils'
-import EditProjectForm from '@/app/projects/EditProjectForm/EditProjectForm' // You’ll build this next
+import EditProjectForm from '@/app/projects/[id]/edit/EditProjectForm/EditProjectForm' // You’ll build this next
 import { Suspense } from 'react'
 import './EditProjectPage.css'
 

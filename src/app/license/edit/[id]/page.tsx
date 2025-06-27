@@ -1,111 +1,105 @@
+// src/app/license/edit/[id]/page.tsx
 'use client'
 
-import './page.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { formatDateToThai } from '@/lib/date/formatDateToThai'
+import '@/app/license/add/page.css' // reuse same styles
+import type { LicenseType } from '@/types/LicenseType'
 
-
-export default function AddLicensePage() {
+export default function EditLicensePage() {
+  const { id } = useParams()
   const router = useRouter()
-  const [formData, setFormData] = useState({
-    clientName: '',
-    licenseNumber: '',
-    licenseType: '',
-    wellNumber: '',
-    clientAddress: '',
-    depthStart: '',
-    depthEnd: '',
-    wellWidth: '',
-    wellDescription: '',
-    licenseIssuedDate: '',
-    licenseExpireDate: '',
-  })
+
+  const [formData, setFormData] = useState<LicenseType | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchLicense = async () => {
+      const res = await fetch(`/api/license/${id}`)
+      if (!res.ok) {
+        alert('❌ Failed to fetch license data')
+        return
+      }
+      const data = await res.json()
+      setFormData(data)
+      setLoading(false)
+    }
+
+    if (id) fetchLicense()
+  }, [id])
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    const res = await fetch('/api/license/add', {
-      method: 'POST',
+    const res = await fetch(`/api/license/${id}/edit`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     })
 
     if (res.ok) {
-      alert('✅ เพิ่มข้อมูลใบอนุญาตสำเร็จ')
+      alert('✅ แก้ไขข้อมูลใบอนุญาตสำเร็จ')
       router.push('/license')
     } else {
-      alert('❌ ไม่สามารถเพิ่มข้อมูลได้')
+      alert('❌ ไม่สามารถแก้ไขข้อมูลได้')
     }
   }
 
   const handleLicenseNumberChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    let value = e.target.value.replace(/\D/g, '') // remove non-numeric
-    if (value.length > 11) value = value.slice(0, 11)
-
+    let value = e.target.value.replace(/\D/g, '').slice(0, 11)
     const formatted = value.replace(
       /^(\d{2})(\d{0,5})(\d{0,4}).*/,
       (_, p1, p2, p3) => [p1, p2, p3].filter(Boolean).join('-')
     )
-
-    setFormData((prev) => ({
-      ...prev,
-      licenseNumber: formatted,
-    }))
+    setFormData((prev: any) => ({ ...prev, licenseNumber: formatted }))
   }
-  const handlewellNumberChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    let value = e.target.value.replace(/\D/g, '') // remove non-numeric
-    if (value.length > 11) value = value.slice(0, 11)
 
-    const formatted = value.replace(
-      /^(\d{0,6})(\d{0,4}).*/,
-      (_, p1, p2, p3) => [p1, p2, p3].filter(Boolean).join('-')
+  const handleWellNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '').slice(0, 10)
+    const formatted = value.replace(/^(\d{0,6})(\d{0,4}).*/, (_, p1, p2) =>
+      [p1, p2].filter(Boolean).join('-')
     )
-
-    setFormData((prev) => ({
-      ...prev,
-      wellNumber: formatted,
-    }))
+    setFormData((prev: any) => ({ ...prev, wellNumber: formatted }))
   }
-  
+
   const handleWellDescriptionChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = e.target
-
     const updated = {
       ...formData,
       [name]: value,
     }
-
     updated.wellDescription = `ความลึก ${updated.depthStart || '_'}-${
       updated.depthEnd || '_'
     } เมตร | ความกว้างไม่เกิน ${updated.wellWidth || '_'} มิลลิเมตร`
-
     setFormData(updated)
   }
-  
+
+  if (loading || !formData)
+    return <p style={{ textAlign: 'center' }}>Loading...</p>
 
   return (
     <main className="license-form-container">
-      <h1>➕ เพิ่มข้อมูลใบอนุญาต</h1>
+      <h1>✏️ แก้ไขข้อมูลใบอนุญาต</h1>
       <form onSubmit={handleSubmit} className="license-form">
         <label>
           ชื่อลูกค้า / โครงการ:
           <input
             type="text"
             name="clientName"
-            value={formData.clientName}
+            value={formData.clientName || ''}
             onChange={handleChange}
             required
           />
@@ -132,10 +126,9 @@ export default function AddLicensePage() {
           <input
             type="text"
             name="licenseNumber"
-            value={formData.licenseNumber}
+            value={formData.licenseNumber || ''}
             onChange={handleLicenseNumberChange}
             pattern="\d{2}-\d{5}-\d{4}"
-            placeholder="ตัวอย่าง 12-34567-8910"
             required
           />
         </label>
@@ -145,10 +138,9 @@ export default function AddLicensePage() {
           <input
             type="text"
             name="wellNumber"
-            value={formData.wellNumber}
-            onChange={handlewellNumberChange}
+            value={formData.wellNumber || ''}
+            onChange={handleWellNumberChange}
             pattern="\d{6}-\d{4}"
-            placeholder="ตัวอย่าง 123456-7890"
           />
         </label>
 
@@ -156,7 +148,17 @@ export default function AddLicensePage() {
           ที่อยู่ลูกค้า:
           <textarea
             name="clientAddress"
-            value={formData.clientAddress}
+            value={formData.clientAddress || ''}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          รายละเอียดบ่อ:
+          <input
+            type="text"
+            name="wellDescription"
+            value={formData.wellDescription || ''}
             onChange={handleChange}
             required
           />
@@ -189,7 +191,7 @@ export default function AddLicensePage() {
               onChange={handleWellDescriptionChange}
               placeholder="กว้างสุด"
             />
-            <span>เมตร</span>
+            <span>มิลลิเมตร</span>
           </div>
         </label>
 
@@ -198,7 +200,7 @@ export default function AddLicensePage() {
           <input
             type="date"
             name="licenseIssuedDate"
-            value={formData.licenseIssuedDate}
+            value={formData.licenseIssuedDate?.slice(0, 10) || ''}
             onChange={handleChange}
             required
           />
@@ -212,7 +214,7 @@ export default function AddLicensePage() {
           <input
             type="date"
             name="licenseExpireDate"
-            value={formData.licenseExpireDate}
+            value={formData.licenseExpireDate?.slice(0, 10) || ''}
             onChange={handleChange}
             required
           />
@@ -221,7 +223,7 @@ export default function AddLicensePage() {
           </div>
         </label>
 
-        <button type="submit">💾 บันทึกใบอนุญาต</button>
+        <button type="submit">💾 บันทึกการแก้ไข</button>
       </form>
     </main>
   )

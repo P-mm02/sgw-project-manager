@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './EditProjectForm.css'
 import { formatDateInput } from '@/lib/date/formatDateInput'
 import type { ProjectType } from '@/types/ProjectType'
+import { useRouter } from 'next/navigation'
 
 const safe = (val: string | undefined | null) => val ?? ''
 
@@ -12,6 +13,7 @@ type Props = {
 }
 
 export default function EditProjectForm({ initialData }: Props) {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     ...initialData,
     tags: initialData.tags?.join(', ') || '',
@@ -31,13 +33,17 @@ export default function EditProjectForm({ initialData }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    const confirmEdit = window.confirm(
+      'คุณแน่ใจหรือไม่ว่าต้องการบันทึกการแก้ไขข้อมูลนี้?'
+    )
+    if (!confirmEdit) return
+
     const updatedData = {
       ...formData,
       projectWorth: parseFloat(safe(formData.projectWorth)),
       tags: formData.tags.split(',').map((tag: string) => tag.trim()),
       documents: formData.documents.split(',').map((doc: string) => doc.trim()),
     }
-      
 
     try {
       const res = await fetch(`/api/projects/${formData._id}/edit`, {
@@ -48,6 +54,7 @@ export default function EditProjectForm({ initialData }: Props) {
 
       if (res.ok) {
         alert('✅ แก้ไขสำเร็จ')
+        router.push(`/projects/${formData._id}`)
       } else {
         alert('❌ บันทึกล้มเหลว')
       }
@@ -55,7 +62,7 @@ export default function EditProjectForm({ initialData }: Props) {
       console.error('Error submitting form:', err)
     }
   }
-
+  
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <label>ชื่อโครงการ</label>

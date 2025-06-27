@@ -2,6 +2,7 @@ export type WorkLogEntry = {
   recorder?: string
   recordTime?: string
   recordText?: string
+  recordPriority?: string
 }
 
 export type ProjectType = {

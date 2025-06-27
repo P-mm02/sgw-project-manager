@@ -6,6 +6,9 @@ export type LicenseType = {
   wellNumber?: string
   clientAddress?: string
   wellDescription?: string
+  depthStart?: number // ✅ depth: shallow
+  depthEnd?: number // ✅ depth: deep
+  wellWidth?: number // ✅ width in millimeters
   licenseIssuedDate?: string
   licenseExpireDate?: string
   notificationSent?: number

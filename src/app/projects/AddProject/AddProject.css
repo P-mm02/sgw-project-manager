@@ -81,7 +81,10 @@
     white-space: pre-wrap;
     word-break: break-word;
   }
-  
+  .preview-box button{
+    margin-right: 1rem;
+  }
+
   .input-con{
     display: flex;
     flex-direction: column;

@@ -8,11 +8,12 @@ type WorkTypeSelectProps = {
 
 const workTypes = [
   { label: 'ทั้งหมด', value: 'all' },
-  { label: 'งานเจาะ', value: 'drilling' },
-  { label: 'งานสำรวจ', value: 'survey' },
-  { label: 'งานสูบลดระดับน้ำ', value: 'dewatering' },
-  { label: 'งานซ่อมบำรุง', value: 'maintenance' },
-  { label: 'งานอื่นๆ', value: 'others' },
+  { label: 'เจาะ', value: 'drilling' },
+  { label: 'สำรวจ', value: 'survey' },
+  { label: 'สูบลดระดับน้ำ', value: 'dewatering' },
+  { label: 'ซ่อมบำรุง', value: 'maintenance' },
+  { label: 'ซ่อมแก้ไข', value: 'fix' },
+  { label: 'อื่นๆ', value: 'others' },
 ]
 
 export default function WorkTypeSelect({ setWorkType }: WorkTypeSelectProps) {

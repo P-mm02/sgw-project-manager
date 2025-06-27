@@ -3,7 +3,8 @@ import type { ProjectFormState } from '@/types/ProjectFormState'
 export async function handleSubmit(
   formData: ProjectFormState,
   setSubmitted: (val: boolean) => void,
-  setPreview: (val: boolean) => void
+  setPreview: (val: boolean) => void,
+  push: (href: string) => void
 ) {
   const payload = {
     ...formData,
@@ -21,5 +22,6 @@ export async function handleSubmit(
   if (res.ok) {
     setSubmitted(true)
     setPreview(false)
+    push('/')
   }
 }

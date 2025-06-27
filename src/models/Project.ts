@@ -22,6 +22,7 @@ const ProjectSchema = new Schema(
         recorder: String,
         recordTime: Date,
         recordText: String,
+        recordPriority: String,
       },
     ],
   },

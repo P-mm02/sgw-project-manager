@@ -141,3 +141,27 @@
   transform: scale(1.02);
 }
 
+.priority-label {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+/* สีแยกตามระดับความสำคัญ */
+.priority-medium {
+  background-color: #d1fae5; /* ✅ เขียวอ่อน (tailwind: green-100) */
+  color: #065f46;            /* ✅ เขียวเข้ม (tailwind: green-700) */
+}
+
+.priority-high {
+  background-color: #fef3c7; /* เหลืองอ่อน */
+  color: #b45309;
+}
+
+.priority-critical {
+  background-color: #fee2e2; /* แดงอ่อน */
+  color: #b91c1c;
+}

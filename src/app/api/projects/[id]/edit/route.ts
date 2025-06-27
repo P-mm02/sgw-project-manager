@@ -7,7 +7,8 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { id } = await params
+  const getParams = await params
+  const { id } = getParams
 
   await connectToDB()
 

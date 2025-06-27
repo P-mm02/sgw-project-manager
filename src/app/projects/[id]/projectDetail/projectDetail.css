@@ -32,3 +32,23 @@
     color: #475569;
   }
   
+  .edit-button-wrap {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end; /* align to right */
+  }
+  .edit-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #86840a;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  
+  .edit-button:hover {
+    background-color: #686604;
+  }
+  

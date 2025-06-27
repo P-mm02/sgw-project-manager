@@ -8,6 +8,7 @@ type WorkLogEntry = {
   recorder: string
   recordText: string
   recordTime: Date
+  recordPriority: string
 }
 export default function ProjectReport({ project }: { project: ProjectType }) {
   const [recorder, setRecorder] = useState('')
@@ -17,8 +18,10 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
       recorder: log.recorder || '',
       recordText: log.recordText || '',
       recordTime: log.recordTime ? new Date(log.recordTime) : new Date(),
+      recordPriority: log.recordPriority || '',
     }))
   )
+  const [recordPriority, setRecordPriority] = useState('')
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editRecorder, setEditRecorder] = useState('')
   const [editRecordText, setEditRecordText] = useState('')
@@ -30,6 +33,7 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
       recorder,
       recordText,
       recordTime: new Date(),
+      recordPriority,
     }
     try {
       const res = await fetch(`/api/projects/${project._id}/add-log`, {
@@ -132,6 +136,17 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
           value={recordText}
           onChange={(e) => setRecordText(e.target.value)}
         />
+        <label className="report-label">ความสำคัญ:</label>
+        <select
+          className="input-field"
+          value={recordPriority}
+          onChange={(e) => setRecordPriority(e.target.value)}
+        >
+          <option value="">-- เลือกระดับ --</option>
+          <option value="medium">ปกติ</option>
+          <option value="high">สำคัญ</option>
+          <option value="critical">เร่งด่วน</option>
+        </select>
         <button onClick={handleAddLog} className="add-log-btn">
           ➕ เพิ่มบันทึก
         </button>
@@ -153,6 +168,20 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
                 timeStyle: 'medium',
               })}
             </p>
+            <span className={`priority-label priority-${log.recordPriority}`}>
+              {(() => {
+                switch (log.recordPriority) {
+                  case 'medium':
+                    return 'ปกติ'
+                  case 'high':
+                    return 'สำคัญ'
+                  case 'critical':
+                    return 'เร่งด่วน'
+                  default:
+                    return 'ไม่ระบุ'
+                }
+              })()}
+            </span>
           </div>
           <div className="report-con">
             <div className="report-recordText">

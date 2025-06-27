@@ -1,10 +1,11 @@
 // src/app/license/LicenseClient.tsx
 'use client'
 import { useEffect } from 'react'
-import '../LicenseClient.css'
+import './LicenseCon.css'
 import { formatDateToThai } from '@/lib/date/formatDateToThai'
 import DeleteLicenseButton from '../../delete/DeleteLicenseButton'
 import { LicenseType } from '@/types/LicenseType' // ✅ now safe in client
+import Link from 'next/link'
 
 export default function LicenseClient({ licenses }: { licenses: LicenseType[] }) {
   const today = new Date()
@@ -105,7 +106,10 @@ export default function LicenseClient({ licenses }: { licenses: LicenseType[] })
             <div className="license-actions">
               <a href="#">📎 ดูเอกสารแนบ</a>
               <a href="#">📍 เปิดในแผนที่</a>
-            </div>
+            </div> 
+            <Link href={`/license/edit/${item._id}`} className="edit-btn">
+              ✏️ แก้ไข
+            </Link>
             {item._id && <DeleteLicenseButton id={item._id.toString()} />}
           </div>
         )
