@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { parse, differenceInCalendarDays } from 'date-fns'
 import { formatDateInput } from '@/lib/date/formatDateInput'
 import type { ProjectType } from '@/types/ProjectType'
-import "./_ProjectDetail.css";
+import "./ProjectDetail.css";
 
 
 export default function ProjectDetail({ project }: { project: ProjectType }) {

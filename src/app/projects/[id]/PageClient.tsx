@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import ProjectDetail from './_ProjectDetail/_ProjectDetail'
+import ProjectDetail from './ProjectDetail/ProjectDetail'
 import ProjectReport from './ProjectReport/ProjectReport'
 import DotsLoader from '@/loading/DotsLoader/DotsLoader'
 import './page.css'
