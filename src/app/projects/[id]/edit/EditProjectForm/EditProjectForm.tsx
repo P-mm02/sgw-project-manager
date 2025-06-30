@@ -1,37 +1,66 @@
 'use client'
-import { useState } from 'react'
+
+import { useEffect, useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 import './EditProjectForm.css'
 import { formatDateInput } from '@/lib/date/formatDateInput'
-import type { ProjectType } from '@/types/ProjectType'
-import { useRouter } from 'next/navigation'
+import type { ProjectFormState } from '@/types/ProjectFormState'
 
 const safe = (val: string | undefined | null) => val ?? ''
 
-
-type Props = {
-  initialData: ProjectType
-}
-
-export default function EditProjectForm({ initialData }: Props) {
+export default function EditProjectForm() {
   const router = useRouter()
-  const [formData, setFormData] = useState({
-    ...initialData,
-    tags: initialData.tags?.join(', ') || '',
-    documents: initialData.documents?.join(', ') || '',
-  })
+  const { id } = useParams()
+  const [formData, setFormData] = useState<ProjectFormState | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      if (!id || typeof id !== 'string') return
+
+      try {
+        const res = await fetch(`/api/projects/${id}`)
+        if (!res.ok) throw new Error('ไม่พบโปรเจกต์')
+        const data = await res.json()
+
+        setFormData({
+          ...data,
+          tags: data.tags?.join(', ') || '',
+          documents: data.documents?.join(', ') || '',
+        })
+      } catch {
+        alert('❌ โหลดโปรเจกต์ล้มเหลว')
+        router.push('/projects')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProject()
+  }, [id, router])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target
-
     const formattedValue = type === 'date' ? value.replaceAll('-', '') : value
-
-    setFormData((prev: typeof formData) => ({ ...prev, [name]: formattedValue }))
+    setFormData((prev) => {
+      if (!prev) return prev
+      return {
+        ...prev,
+        [name]: formattedValue,
+      }
+    })
+    
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!formData) {
+      alert('❌ ไม่สามารถส่งข้อมูลที่ว่างเปล่าได้')
+      return
+    }
 
     const confirmEdit = window.confirm(
       'คุณแน่ใจหรือไม่ว่าต้องการบันทึกการแก้ไขข้อมูลนี้?'
@@ -46,7 +75,7 @@ export default function EditProjectForm({ initialData }: Props) {
     }
 
     try {
-      const res = await fetch(`/api/projects/${formData._id}/edit`, {
+      const res = await fetch(`/api/projects/${id}/edit`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData),
@@ -54,7 +83,7 @@ export default function EditProjectForm({ initialData }: Props) {
 
       if (res.ok) {
         alert('✅ แก้ไขสำเร็จ')
-        router.push(`/projects/${formData._id}`)
+        router.push(`/projects/${id}`)
       } else {
         alert('❌ บันทึกล้มเหลว')
       }
@@ -63,6 +92,9 @@ export default function EditProjectForm({ initialData }: Props) {
     }
   }
   
+
+  if (loading || !formData) return <p>⏳ กำลังโหลด...</p>
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <label>ชื่อโครงการ</label>
@@ -80,10 +112,18 @@ export default function EditProjectForm({ initialData }: Props) {
       />
 
       <label>ลิงค์แผนที่</label>
-      <input name="mapLink" value={safe(formData.mapLink)} onChange={handleChange} />
+      <input
+        name="mapLink"
+        value={safe(formData.mapLink)}
+        onChange={handleChange}
+      />
 
       <label>ลูกค้า</label>
-      <input name="client" value={safe(formData.client)} onChange={handleChange} />
+      <input
+        name="client"
+        value={safe(formData.client)}
+        onChange={handleChange}
+      />
 
       <label>ผู้ควบคุมงาน</label>
       <input
@@ -100,14 +140,22 @@ export default function EditProjectForm({ initialData }: Props) {
       />
 
       <label>สถานะ</label>
-      <select name="status" value={safe(formData.status)} onChange={handleChange}>
+      <select
+        name="status"
+        value={safe(formData.status)}
+        onChange={handleChange}
+      >
         <option value="planned">วางแผน</option>
         <option value="in_progress">กำลังดำเนินการ</option>
         <option value="done">เสร็จสิ้น</option>
       </select>
 
       <label>ประเภทงาน</label>
-      <select name="workType" value={safe(formData.workType)} onChange={handleChange}>
+      <select
+        name="workType"
+        value={safe(formData.workType)}
+        onChange={handleChange}
+      >
         <option value="drilling">เจาะบ่อ</option>
         <option value="survey">สำรวจ</option>
         <option value="dewatering">ดูดน้ำ</option>
@@ -151,7 +199,11 @@ export default function EditProjectForm({ initialData }: Props) {
       <input name="tags" value={formData.tags} onChange={handleChange} />
 
       <label>รายงาน</label>
-      <input name="report" value={safe(formData.report)} onChange={handleChange} />
+      <input
+        name="report"
+        value={safe(formData.report)}
+        onChange={handleChange}
+      />
 
       <label>เอกสาร (comma-separated)</label>
       <input
@@ -169,3 +221,4 @@ export default function EditProjectForm({ initialData }: Props) {
     </form>
   )
 }
+

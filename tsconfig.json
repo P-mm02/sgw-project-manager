@@ -17,27 +17,30 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
-    "baseUrl": "."
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
+    "netlify",
     "next-env.d.ts",
-    "src"
-    // ❌ REMOVE ".next/types/**/*.ts"
+    "src" // include serverless functions here
     ,
     ".next/types/**/*.ts"
-, "netlify"  ],
+  ],
   "exclude": [
     "node_modules",
-    ".next" // ✅ add this to completely exclude problematic generated types
+    ".next" // ⛔ explicitly ignore generated Next.js files
   ]
 }

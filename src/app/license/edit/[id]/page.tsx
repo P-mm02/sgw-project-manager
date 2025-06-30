@@ -57,20 +57,21 @@ export default function EditLicensePage() {
   const handleLicenseNumberChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    let value = e.target.value.replace(/\D/g, '').slice(0, 11)
+    const value = e.target.value.replace(/\D/g, '').slice(0, 11)
     const formatted = value.replace(
       /^(\d{2})(\d{0,5})(\d{0,4}).*/,
       (_, p1, p2, p3) => [p1, p2, p3].filter(Boolean).join('-')
     )
-    setFormData((prev: any) => ({ ...prev, licenseNumber: formatted }))
+    setFormData((prev) => ({ ...(prev as LicenseType), licenseNumber: formatted }))
+
   }
 
   const handleWellNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, '').slice(0, 10)
+    const value = e.target.value.replace(/\D/g, '').slice(0, 10)
     const formatted = value.replace(/^(\d{0,6})(\d{0,4}).*/, (_, p1, p2) =>
       [p1, p2].filter(Boolean).join('-')
     )
-    setFormData((prev: any) => ({ ...prev, wellNumber: formatted }))
+    setFormData((prev) => ({ ...prev as LicenseType, wellNumber: formatted }))
   }
 
   const handleWellDescriptionChange = (
