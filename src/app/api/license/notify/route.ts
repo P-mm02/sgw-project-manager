@@ -5,10 +5,16 @@ import { connectToDB } from '@/lib/mongoose'
 import License from '@/models/License'
 import { handleLicenseNotifications } from '@/lib/sendMessage/handleLicenseNotifications'
 
-export async function GET() {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url)
+  const secret = searchParams.get('secret')
+
+  if (secret !== process.env.CRON_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     await connectToDB()
-
     const licenses = await License.find({})
     await handleLicenseNotifications(licenses)
 
