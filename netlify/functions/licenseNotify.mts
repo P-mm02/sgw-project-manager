@@ -1,12 +1,10 @@
 /// <reference types="@netlify/functions" />
 import { Handler } from '@netlify/functions'
-//import { connectToDB } from '../../src/lib/mongoose'
-//import License from '../../src/models/License'
-//import { handleLicenseNotifications } from '../../src/lib/sendMessage/handleLicenseNotifications'
+import { connectToDB } from '@/lib/mongoose'
+import License from '@/models/License'
+import { handleLicenseNotifications } from '@/lib/sendMessage/handleLicenseNotifications'
 
-console.log('🔁 licenseNotify function loaded')
-
-const handler: Handler = async () => {
+/* const handler: Handler = async () => {
   console.log('🏁 handler triggered')
   return {
     statusCode: 200,
@@ -14,9 +12,9 @@ const handler: Handler = async () => {
     body: JSON.stringify({ message: 'Test OK' }),
   }
 }
+ */
 
-
-/* const handler: Handler = async () => {
+const handler: Handler = async () => {
   try {
     console.log('🔗 Connecting to database...')
     await connectToDB()
@@ -54,7 +52,8 @@ const handler: Handler = async () => {
     }
   }
 }
- */
+
+
 export const config = {
   schedule: '0 0,10 * * *', // Every day at 8:00 and 20:00 (UTC+7)
 }
