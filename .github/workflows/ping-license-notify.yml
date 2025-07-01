@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📡 Ping notify API
-        run: curl -s "https://sgw-project-manager.netlify.app/api/license/notify?secret=${{ secrets.LICENSE_CRON_SECRET }}"
+        run: curl -s "https://sgw-project-manager.netlify.app/api/license/notify?secret=${{ secrets.CRON_SECRET }}"
