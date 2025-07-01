@@ -25,7 +25,7 @@ export default function ProjectCon() {
     const fetchProjects = async () => {
       setLoading(true)
       try {
-        const res = await fetch('/api/edge-projects')
+        const res = await fetch('/api/projects')
         const { data } = await res.json()
         if (!Array.isArray(data)) {
           console.error('Invalid project data:', data)
