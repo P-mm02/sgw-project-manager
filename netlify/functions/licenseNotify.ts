@@ -1,8 +1,8 @@
 /// <reference types="@netlify/functions" />
 import { Handler } from '@netlify/functions'
-import { connectToDB } from '../../src/lib/mongoose'
-import License from '../../src/models/License'
-import { handleLicenseNotifications } from '../../src/lib/sendMessage/handleLicenseNotifications'
+//import { connectToDB } from '../../src/lib/mongoose'
+//import License from '../../src/models/License'
+//import { handleLicenseNotifications } from '../../src/lib/sendMessage/handleLicenseNotifications'
 
 console.log('🔁 licenseNotify function loaded')
 
@@ -56,7 +56,7 @@ const handler: Handler = async () => {
 }
  */
 export const config = {
-  schedule: '0 8,20 * * *', // Every day at 8:00 and 20:00 (UTC)
+  schedule: '0 0,10 * * *', // Every day at 8:00 and 20:00 (UTC+7)
 }
 
 export default handler
