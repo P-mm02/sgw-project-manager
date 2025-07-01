@@ -11,10 +11,6 @@
   function = "keep-warm"
   schedule = "*/5 * * * *"
 
-[[scheduled]]
-  function = "licenseNotify"
-  schedule = "0 0,10 * * *" # 8AM + 8PM Thailand time (UTC+7)
-
 [[edge_functions]]
   function = "hello"
   path = "/api/hello"
