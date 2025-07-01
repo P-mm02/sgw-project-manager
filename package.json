@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-  "node": ">=20.12.2"
+    "node": ">=20.12.2"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "tsc --project tsconfig.build.json && next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "build": "tsc && next build",
+    "start": "next start"
   },
   "dependencies": {
     "@netlify/functions": "^4.1.8",
@@ -23,13 +22,9 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@netlify/next": "^1.4.9",
     "@types/node": "^20.19.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.2",
     "typescript": "^5"
   }
 }

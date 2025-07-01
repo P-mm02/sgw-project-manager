@@ -22,12 +22,13 @@ export async function connectToDB() {
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(process.env.MONGODB_URI!, {
-      dbName: 'sgw',
+      dbName: 'SGW',
       bufferCommands: false,
       maxPoolSize: 10,
     })
+    console.log('successfully connect DB')
   }
-
+  
   try {
     cached.conn = await cached.promise
     return cached.conn

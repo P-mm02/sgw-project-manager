@@ -5,6 +5,7 @@ export const metadata = {
 }
 
 export default function HRPage() {
+
   return (
     <main className="hr-container">
       <h1 className="hr-title">👥 ฝ่ายบุคคล (HR)</h1>
