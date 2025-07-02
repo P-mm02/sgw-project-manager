@@ -2,7 +2,7 @@ name: 🔁 License Notification Cron
 
 on:
   schedule:
-    - cron: '0 1,10 * * *' #8AM & 5PM Thailand time
+    - cron: '0 0,9 * * *' #7AM & 4PM Thailand time
   workflow_dispatch:
     
 
