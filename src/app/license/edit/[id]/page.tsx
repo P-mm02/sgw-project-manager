@@ -1,7 +1,6 @@
 import PageClient from './pageClient'
 
-export default function Page() {
-  
+export default function Page() {  
 
   return (
   <main className="license-form-container">

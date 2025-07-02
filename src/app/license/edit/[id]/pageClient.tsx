@@ -88,6 +88,11 @@ export default function EditLicensePage() {
     } เมตร | ความกว้างไม่เกิน ${updated.wellWidth || '_'} มิลลิเมตร`
     setFormData(updated)
   }
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
 
   if (loading || !formData)
     return (
