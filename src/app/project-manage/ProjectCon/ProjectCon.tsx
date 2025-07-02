@@ -3,10 +3,11 @@ import './ProjectCon.css'
 import { useState, useEffect} from 'react'
 import Link from 'next/link'
 import MonthBtnCtrl from './MonthBtnCtrl/MonthBtnCtrl'
+import ProjectDP from './ProjectDP/ProjectDP'
 import MonthSelectBtn from './MonthSelectBtn/MonthSelectBtn'
 import type { ProjectType } from '@/types/ProjectType'
-import dynamic from 'next/dynamic'
-import Skeleton from '@/loading/Skeleton/Skeleton'
+//import dynamic from 'next/dynamic'
+//import Skeleton from '@/loading/Skeleton/Skeleton'
 import WorkTypeSelect from './WorkTypeSelect/WorkTypeSelect'
 import DotsLoader from '@/loading/DotsLoader/DotsLoader'
 
@@ -50,11 +51,11 @@ export default function ProjectCon() {
   }, [workType, serverProjects])
   
 
-  const ProjectDP = dynamic(() => import('./ProjectDP/ProjectDP'), {
+/*   const ProjectDP = dynamic(() => import('./ProjectDP/ProjectDP'), {
     ssr: false, // optional: skip server-side rendering
     loading: () => <Skeleton />, // optional loading UI
   })
-
+ */
   return (
     <div className="projects-container">
       <div className="top-row-btn-con">
