@@ -1,13 +1,78 @@
+/* 📦 Import font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
-body{
-    margin: 0;
+/* 📐 Root font-size for rem scaling */
+html {
+  font-size: 16px; /* Base = 16px on desktop */
 }
 
-html, body {
-  font-family: 'Noto Sans', sans-serif;
+@media (max-width: 768px) {
+  html {
+    font-size: 14px; /* Base = 14px on tablets */
+  }
 }
 
-* {
+@media (max-width: 480px) {
+  html {
+    font-size: 12px; /* Base = 12px on mobile phones */
+  }
+}
+
+/* 🧰 Reset box sizing and spacing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 🧾 Set font family globally */
+body {
   font-family: 'Noto Sans', sans-serif;
+  -webkit-font-smoothing: antialiased; /* Smooth fonts on Safari */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+  background-color: #fff;
+  color: #000;
+  line-height: 1.5;
+}
+
+/* ✋ Improve tap and touch interaction for mobile */
+a,
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 🧼 Reset button default styles */
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* 🖼️ Make all images responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 🧱 Optional container utility class for layout */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+/* 📱 Utility to hide things only on mobile */
+.hidden-mobile {
+  display: block;
+}
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
 }
