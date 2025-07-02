@@ -43,32 +43,7 @@
 .mobile-menu-button {
   display: none;
   font-size: 3rem;
-  background: none;
   border: none;
   cursor: pointer;
 }
 
-/* Responsive Mobile Nav */
-@media (max-width: 1024px) {
-  .mobile-menu-button {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: white;
-    border-top: 1px solid #ddd;
-  }
-
-  .nav-links.open {
-    display: flex;
-  }
-
-  .nav-link {
-    padding: 1rem 2rem;
-    border-bottom: 1px solid #eee;
-    font-size: 1.6rem;
-  }
-}

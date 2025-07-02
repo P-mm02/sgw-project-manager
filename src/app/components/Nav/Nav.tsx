@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import './Nav.css'
+import './Nav-mobile.css'
 
 export default function Nav() {
   const pathname = usePathname()
@@ -16,10 +17,11 @@ export default function Nav() {
   return (
     <nav className="nav-container">
       <div className="nav-content">
-        <button className="mobile-menu-button" onClick={toggleMobileMenu}>
-          ☰
-        </button>
-
+        <div className="mobile-menu-button-wrap">
+          <button className="mobile-menu-button" onClick={toggleMobileMenu}>
+            ☰
+          </button>
+        </div>
         <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
           <Link
             href="/"
