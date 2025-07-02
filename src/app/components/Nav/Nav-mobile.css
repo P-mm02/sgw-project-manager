@@ -1,74 +1,77 @@
 /* 🌐 Advanced Responsive Mobile Nav */
 @media (max-width: 1024px) {
-    .mobile-menu-button-wrap{
-        width: 100%;
-        height: 100%;
+  .mobile-menu-wrap {
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+  }
+
+  .mobile-menu-button {
+    display: block;
+    color: rgb(12, 42, 78);
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border: none;
+    font-size: 4rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .mobile-menu-button:hover {
+    background: #ffffff;
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    background-color: #ffffff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0.4rem 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  .nav-link {
+    padding: 1.2rem 2rem;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 1.6rem;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    background-color: rgb(12, 42, 78);
+    color: white;
+  }
+
+  .nav-link.active {
+    background-color: rgb(12, 42, 78);
+    color: white;
+    font-weight: bold;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-1rem);
     }
-    .mobile-menu-button {
-      display: block;
-      color: rgb(12, 42, 78);
-      width: 100%;
-      height: 100%;
-      background: #ffffff;
-      border: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-  
-    .mobile-menu-button:hover {
-      background: #ffffff;
-      transform: scale(1.05);
-      cursor: pointer;
-    }
-  
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      width: 100%;
-      background-color: #ffffff;
-      border-top: 1px solid #e5e7eb;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      padding: 1rem 0;
-      z-index: 40;
-    }
-  
-    .nav-links.open {
-      display: flex;
-      animation: slideDown 0.3s ease forwards;
-    }
-  
-    .nav-link {
-      padding: 1.2rem 2rem;
-      width: 100%;
-      text-align: center;
-      border-bottom: 1px solid #f3f4f6;
-      font-size: 1.6rem;
-      color: #333;
-      transition: background-color 0.3s ease;
-    }
-  
-    .nav-link:hover {
-      background-color: rgb(12, 42, 78);
-    }
-  
-    .nav-link.active {
-      background-color: rgb(12, 42, 78);
-      font-weight: bold;
-    }
-  
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-1rem);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
-  
+}
