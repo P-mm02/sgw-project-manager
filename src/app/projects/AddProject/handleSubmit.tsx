@@ -22,6 +22,6 @@ export async function handleSubmit(
   if (res.ok) {
     setSubmitted(true)
     setPreview(false)
-    push('/')
+    push('/project-manage')
   }
 }

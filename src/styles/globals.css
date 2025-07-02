@@ -46,12 +46,6 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 🧼 Reset button default styles */
-button {
-  border: none;
-  background: none;
-  font-family: inherit;
-}
 
 /* 🖼️ Make all images responsive by default */
 img {
