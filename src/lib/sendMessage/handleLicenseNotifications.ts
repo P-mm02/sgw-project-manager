@@ -5,7 +5,10 @@ import { sendLineMessage } from '@/lib/sendMessage/sendLineMessage'
 
 export async function handleLicenseNotifications(licenses: LicenseType[]) {
   const today = new Date()
-  const userId = 'Ua053de08814ccd75375a472e6a404f3e'
+  const userIds = [
+    'Ua053de08814ccd75375a472e6a404f3e',
+    'U4a74a0e50ecbc9807f53b020a56a7951',
+  ]
 
   const ninetyDaysFromNow = new Date(today.getTime() + 90 * 86400000)
   const sixtyDaysFromNow = new Date(today.getTime() + 60 * 86400000)
@@ -24,14 +27,22 @@ export async function handleLicenseNotifications(licenses: LicenseType[]) {
 
     if (!shouldNotify) continue
 
-    const message = `⚠️ ${license.clientName}\nใบอนุญาตเลขที่\n${
+    const message = `ทดสอบระบบข้อความอัตโนมัติ\n
+    ⚠️ ${license.clientName}\n
+    ใบอนุญาตเลขที่\n
+    ${
       license.licenseNumber
-    }\nจะหมดอายุ วันที่\n${formatDateToThai(
+    }\n
+    จะหมดอายุ วันที่\n
+    ${formatDateToThai(
       expireDate
-    )}\n📌 เตรียมดำเนินการต่ออายุใบอนุญาต`
+    )}\n
+    📌 เตรียมดำเนินการต่ออายุใบอนุญาต`
 
     try {
-      await sendLineMessage(userId, message)
+      for (const userId of userIds) {
+        await sendLineMessage(userId, message)
+      }
 
       if (license._id) {
         await License.findByIdAndUpdate(license._id, {

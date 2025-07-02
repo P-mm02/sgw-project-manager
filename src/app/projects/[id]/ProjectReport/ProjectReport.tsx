@@ -137,17 +137,33 @@ export default function ProjectReport({ project }: { project: ProjectType }) {
           onChange={(e) => setRecordText(e.target.value)}
         />
         <label className="report-label">ความสำคัญ:</label>
-        <select
-          className="input-field"
-          value={recordPriority}
-          onChange={(e) => setRecordPriority(e.target.value)}
+        <div className="priority-buttons">
+          {[
+            { value: 'medium', label: 'ปกติ' },
+            { value: 'high', label: 'สำคัญ' },
+            { value: 'critical', label: 'เร่งด่วน' },
+          ].map(({ value, label }) => (
+            <button
+              key={value}
+              type="button"
+              className={`priority-btn ${
+                recordPriority === value ? `active ${value}` : ''
+              }`}
+              onClick={() => setRecordPriority(value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={() => {
+            const confirmed = window.confirm(
+              'คุณแน่ใจหรือไม่ว่าต้องการเพิ่มบันทึก?'
+            )
+            if (confirmed) handleAddLog()
+          }}
+          className="add-log-btn"
         >
-          <option value="">-- เลือกระดับ --</option>
-          <option value="medium">ปกติ</option>
-          <option value="high">สำคัญ</option>
-          <option value="critical">เร่งด่วน</option>
-        </select>
-        <button onClick={handleAddLog} className="add-log-btn">
           ➕ เพิ่มบันทึก
         </button>
       </div>
