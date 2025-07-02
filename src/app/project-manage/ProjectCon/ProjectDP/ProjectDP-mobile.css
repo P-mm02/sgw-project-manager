@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+    .hidden-mobile {
+        display: none;
+    }
+    .row-head{
+        grid-template-columns: 2fr 2fr 2fr;
+    }
+    .row-project{
+        grid-template-columns: 4fr 2fr;
+    }
+}

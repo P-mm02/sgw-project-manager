@@ -3,20 +3,21 @@
 
 /* 📐 Root font-size for rem scaling */
 html {
-  font-size: 16px; /* Base = 16px on desktop */
+  font-size: 16px; /* 1rem = 16px on desktop */
 }
 
 @media (max-width: 768px) {
   html {
-    font-size: 14px; /* Base = 14px on tablets */
+    font-size: 14px; /* 1rem = 14px on tablets */
   }
 }
 
 @media (max-width: 480px) {
   html {
-    font-size: 12px; /* Base = 12px on mobile phones */
+    font-size: 12px; /* 1rem = 12px on mobile phones */
   }
 }
+
 
 /* 🧰 Reset box sizing and spacing */
 *,
@@ -67,12 +68,4 @@ img {
   margin: 0 auto;
 }
 
-/* 📱 Utility to hide things only on mobile */
-.hidden-mobile {
-  display: block;
-}
-@media (max-width: 768px) {
-  .hidden-mobile {
-    display: none;
-  }
-}
+

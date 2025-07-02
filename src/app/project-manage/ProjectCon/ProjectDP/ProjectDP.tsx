@@ -1,6 +1,7 @@
 'use client'
 import React, { useMemo } from 'react'
 import './ProjectDP.css'
+import './ProjectDP-mobile.css'
 import { generateMonths, Month } from './generateMonths/generateMonths'
 import { parse, differenceInCalendarDays } from 'date-fns'
 import ProjectActionButtons from './ProjectActionButtons/ProjectActionButtons'
@@ -58,12 +59,11 @@ export default function ProjectDP({
         <div className="project-working-days">
           <h2>จำนวนวัน</h2>
         </div>
-        <div className="row-month">
+        <div className="row-month hidden-mobile">
           <MonthDP monthCount={monthCount} monthSelect={monthSelect} />
         </div>
       </div>
       {projectData.map((project, index) => (
-        
         <div
           className="row-project"
           key={index}
@@ -80,9 +80,7 @@ export default function ProjectDP({
               onDelete={async (id) => {
                 const success = await deleteProject(id)
                 if (success) {
-                  setProjectData((prev) =>
-                    prev.filter((p) => p._id !== id)
-                  )
+                  setProjectData((prev) => prev.filter((p) => p._id !== id))
                 }
               }}
             />
@@ -106,7 +104,7 @@ export default function ProjectDP({
               วัน
             </span>
           </div>
-          <div className="project-plan-con">
+          <div className="project-plan-con hidden-mobile">
             <DateCtrl
               months={months}
               monthCount={monthCount}

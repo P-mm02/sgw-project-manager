@@ -2,6 +2,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import './LicenseCon.css'
+import './LicenseCon-mobile.css'
 import { formatDateToThai } from '@/lib/date/formatDateToThai'
 import DeleteLicenseButton from '../../delete/DeleteLicenseButton'
 import { LicenseType } from '@/types/LicenseType' // ✅ now safe in client

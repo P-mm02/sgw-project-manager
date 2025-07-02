@@ -66,7 +66,7 @@ export default function ProjectCon() {
           </Link>
         </div>
       </div>
-      <div className="date-ctrl-con">
+      <div className="date-ctrl-con hidden-mobile">
         <MonthSelectBtn
           monthSelect={monthSelect}
           setMonthSelect={setMonthSelect}
