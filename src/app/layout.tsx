@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import '@/styles/globals.css'
 import Nav from './components/Nav/Nav'
 import Footer from './components/Footer/Footer'
@@ -6,7 +5,11 @@ import Footer from './components/Footer/Footer'
 export const metadata = {
   title: 'SGW-Working',
   description: 'SGW ERP website build by Wee',
-  viewport: 'width=device-width, initial-scale=1', // ✅ Add this line
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
