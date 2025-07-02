@@ -6,10 +6,14 @@ import { sendLineMessage } from '@/lib/sendMessage/sendLineMessage'
 export async function handleLicenseNotifications(licenses: LicenseType[]) {
   const today = new Date()
   const userIds = [
+    'C0fc7a3d81a3b48dac518739672356f1d',  
+  ]
+/*   const userIds = [
+    'C0fc7a3d81a3b48dac518739672356f1d',
     'U7954973400f148caf34e524adc4db5ac',
     'U45649660c3ff9de01615478639509a76',
     'U8bb70a35218c0ac670343d5449a60ab6',
-  ]
+  ] */
 /*   const userIds = [
     'Ua053de08814ccd75375a472e6a404f3e',
     'U4a74a0e50ecbc9807f53b020a56a7951',
@@ -32,7 +36,8 @@ export async function handleLicenseNotifications(licenses: LicenseType[]) {
 
     if (!shouldNotify) continue
 
-    const message = `⚠️ ${license.clientName}\n
+    const message = `ทดสอบข้อความอัตโนมัติ แจ้งเตือนใบอนุญาติใกล้หมดอายุ
+    ⚠️ ${license.clientName}\n
     ใบอนุญาตเลขที่\n
     ${
       license.licenseNumber
