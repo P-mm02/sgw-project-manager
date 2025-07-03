@@ -6,7 +6,7 @@ import { sendLineMessage } from '@/lib/sendMessage/sendLineMessage'
 export async function handleLicenseNotifications(licenses: LicenseType[]) {
   const today = new Date()
 //SGW weeID
-  const userIds = ['C0fc7a3d81a3b48dac518739672356f1d']
+  const userIds = ['U7954973400f148caf34e524adc4db5ac']
   //SGW GroupID SG แจ้งเตือน
   /*   const userIds = [
     'C0fc7a3d81a3b48dac518739672356f1d',  
@@ -14,7 +14,6 @@ export async function handleLicenseNotifications(licenses: LicenseType[]) {
  */
   //SGW userIds
   /*   const userIds = [
-    'C0fc7a3d81a3b48dac518739672356f1d',
     'U7954973400f148caf34e524adc4db5ac',
     'U45649660c3ff9de01615478639509a76',
     'U8bb70a35218c0ac670343d5449a60ab6',
