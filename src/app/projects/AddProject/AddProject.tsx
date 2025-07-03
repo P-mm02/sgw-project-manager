@@ -90,10 +90,10 @@ export default function AddProject() {
           value={safe(formData.status)}
           onChange={handleChange}
         >
-          <option value="">Select Status</option>
-          <option value="planned">Planned</option>
-          <option value="in_progress">In Progress</option>
-          <option value="done">Done</option>
+          <option value="">---เลือก---</option>
+          <option value="planned">วางแผน</option>
+          <option value="in_progress">กำลังดำเนินการ</option>
+          <option value="done">เสร็จสิ้น</option>
         </select>
       </label>
 
