@@ -16,7 +16,10 @@ export async function GET(req: Request) {
   try {
     await connectToDB()
     const licenses = await License.find({})
-    await handleLicenseNotifications(licenses)
+    //await handleLicenseNotifications(licenses)
+    console.log('📥 API received request:', new Date())
+    console.log('licenses:' + licenses)
+
 
     return NextResponse.json({
       message: '✅ Notification job ran successfully',

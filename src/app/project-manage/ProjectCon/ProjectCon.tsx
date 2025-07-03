@@ -73,6 +73,7 @@ export default function ProjectCon() {
           yearSelect={yearSelect}
           setYearSelect={setYearSelect}
           monthCount={monthCount}
+          setMonthCount={setMonthCount}
         />
         <MonthBtnCtrl
           monthCount={monthCount}

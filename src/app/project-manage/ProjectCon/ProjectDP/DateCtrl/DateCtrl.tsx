@@ -44,13 +44,17 @@ export default function DateCtrl({ months, planRange, actualRange }: Props) {
     }
 
     const totalDays = differenceInCalendarDays(timelineEnd, timelineStart) + 1
-    const offsetDays = Math.max(
-      0,
-      differenceInCalendarDays(start, timelineStart)
-    )
-    const duration = Math.max(1, differenceInCalendarDays(end, start) + 1)
 
-    const visibleDuration = Math.min(duration, totalDays - offsetDays)
+    // Clamp range within timeline
+    const clampedStart = start < timelineStart ? timelineStart : start
+    const clampedEnd = end > timelineEnd ? timelineEnd : end
+
+    const offsetDays = differenceInCalendarDays(clampedStart, timelineStart)
+    const visibleDuration = Math.max(
+      1,
+      differenceInCalendarDays(clampedEnd, clampedStart) + 1
+    )
+
     const leftPercent = (offsetDays / totalDays) * 100
     const widthPercent = (visibleDuration / totalDays) * 100
 
@@ -59,7 +63,7 @@ export default function DateCtrl({ months, planRange, actualRange }: Props) {
       width: `${widthPercent}%`,
     }
   }
-  
+    
   return (
     <div className="date-timeline-wrapper">
       <div className="timeline-months" style={{ display: 'none' }}>
