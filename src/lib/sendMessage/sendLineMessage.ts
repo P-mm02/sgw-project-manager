@@ -22,9 +22,6 @@ export async function sendLineMessage(userId: string, message: string) {
 
   try {
     await axios.post(url, body, { headers })
-    console.log('url: '+url)
-    console.log('body: '+body)
-    console.log('headers: '+headers)
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       console.error(

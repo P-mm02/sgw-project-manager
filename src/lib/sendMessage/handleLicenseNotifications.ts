@@ -6,12 +6,13 @@ import { sendLineMessage } from '@/lib/sendMessage/sendLineMessage'
 export async function handleLicenseNotifications(licenses: LicenseType[]) {
   const today = new Date()
   const userIds = [
-    'Ua053de08814ccd75375a472e6a404f3e',
+    'C0fc7a3d81a3b48dac518739672356f1d',
   ]
 /*   const userIds = [
     'C0fc7a3d81a3b48dac518739672356f1d',  
   ]
- *//*   const userIds = [
+ */
+/*   const userIds = [
     'C0fc7a3d81a3b48dac518739672356f1d',
     'U7954973400f148caf34e524adc4db5ac',
     'U45649660c3ff9de01615478639509a76',
