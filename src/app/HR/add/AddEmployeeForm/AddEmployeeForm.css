@@ -1,0 +1,54 @@
+.add-employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.add-employee-form label {
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.add-employee-form input,
+.add-employee-form select,
+.add-employee-form textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.add-employee-form input:focus,
+.add-employee-form select:focus,
+.add-employee-form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+}
+
+.add-employee-form button {
+  align-self: flex-start;
+  padding: 0.6rem 1.2rem;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-employee-form button:hover {
+  background-color: #1d4ed8;
+}

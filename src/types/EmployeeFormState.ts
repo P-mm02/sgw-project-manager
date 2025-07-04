@@ -1,7 +1,10 @@
+// src/types/EmployeeFormState.ts
 import type { EmployeeType } from './EmployeeType'
-import type { FormFriendly } from './utils'
+import type { FormFriendly, DeepRequired } from './utils'
 
-export type EmployeeFormState = Omit<
-  FormFriendly<EmployeeType>,
-  '_id' | 'createdAt' | 'updatedAt' | '__v' | 'kpiScores' | 'kpiGiven' | 'kpiCommentCount' | 'isEmployed'
+export type EmployeeFormState = DeepRequired<
+  Omit<
+    FormFriendly<EmployeeType>,
+    '_id' | 'createdAt' | 'updatedAt' | '__v' | 'kpiScores' | 'kpiGiven' | 'kpiCommentCount' | 'isEmployed'
+  >
 >

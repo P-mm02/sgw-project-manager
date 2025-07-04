@@ -26,8 +26,6 @@ export default function EmployeeList() {
 
   return (
     <>
-      <h2>📋 รายชื่อพนักงาน</h2>
-
       {loading ? (
         <DotsLoader />
       ) : (

@@ -1,3 +1,7 @@
+.hr-card-list-head {
+  display: flex;
+  gap: 1rem;
+}
 .hr-card-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

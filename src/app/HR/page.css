@@ -48,3 +48,19 @@
 .hr-documents a:hover {
   color: #0f172a;
 }
+
+.add-employee-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+  margin-bottom: 1.5rem;
+}
+
+.add-employee-btn:hover {
+  background-color: #1d4ed8; /* blue-700 */
+}
