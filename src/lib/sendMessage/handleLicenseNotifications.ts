@@ -40,8 +40,7 @@ export async function handleLicenseNotifications(licenses: LicenseType[]) {
 
     if (!shouldNotify) continue
 
-    const message = `ทดสอบข้อความอัตโนมัติ แจ้งเตือนใบอนุญาติใกล้หมดอายุ
-    ⚠️ ${license.clientName}\n
+    const message = `⚠️ ${license.clientName}\n
     ใบอนุญาตเลขที่\n
     ${license.licenseNumber}\n
     จะหมดอายุ วันที่\n
