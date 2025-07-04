@@ -8,12 +8,14 @@ import { formatDateToThai } from '@/lib/date/formatDateToThai'
 import '@/app/license/add/page.css' // reuse same styles
 import type { LicenseType } from '@/types/LicenseType'
 import DotsLoader from '@/loading/DotsLoader/DotsLoader'
+import type { LicenseFormState } from '@/types/LicenseFormState'
+
 
 export default function EditLicensePage() {
   const { id } = useParams()
   const router = useRouter()
 
-  const [formData, setFormData] = useState<LicenseType | null>(null)
+  const [formData, setFormData] = useState<LicenseFormState | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -23,8 +25,24 @@ export default function EditLicensePage() {
         alert('❌ Failed to fetch license data')
         return
       }
-      const data = await res.json()
-      setFormData(data)
+
+      const data: LicenseType = await res.json()
+
+      const formSafe: LicenseFormState = {
+        clientName: data.clientName || '',
+        licenseNumber: data.licenseNumber || '',
+        licenseType: data.licenseType || '',
+        wellNumber: data.wellNumber || '',
+        clientAddress: data.clientAddress || '',
+        wellDescription: data.wellDescription || '',
+        depthStart: data.depthStart?.toString() || '',
+        depthEnd: data.depthEnd?.toString() || '',
+        wellWidth: data.wellWidth?.toString() || '',
+        licenseIssuedDate: data.licenseIssuedDate?.slice(0, 10) || '',
+        licenseExpireDate: data.licenseExpireDate?.slice(0, 10) || '',
+      }
+
+      setFormData(formSafe)
       setLoading(false)
     }
 
@@ -36,15 +54,24 @@ export default function EditLicensePage() {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
+    if (!formData) return
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!formData) return // safeguard
+    const payload = {
+      ...formData,
+      depthStart: Number(formData.depthStart),
+      depthEnd: Number(formData.depthEnd),
+      wellWidth: Number(formData.wellWidth),
+    }
+
     const res = await fetch(`/api/license/${id}/edit`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(payload),
     })
 
     if (res.ok) {
@@ -63,7 +90,11 @@ export default function EditLicensePage() {
       /^(\d{2})(\d{0,5})(\d{0,4}).*/,
       (_, p1, p2, p3) => [p1, p2, p3].filter(Boolean).join('-')
     )
-    setFormData((prev) => ({ ...(prev as LicenseType), licenseNumber: formatted }))
+    setFormData((prev) => {
+      if (!prev) return prev
+      return { ...prev, licenseNumber: formatted }
+    })
+
 
   }
 
@@ -72,7 +103,11 @@ export default function EditLicensePage() {
     const formatted = value.replace(/^(\d{0,6})(\d{0,4}).*/, (_, p1, p2) =>
       [p1, p2].filter(Boolean).join('-')
     )
-    setFormData((prev) => ({ ...prev as LicenseType, wellNumber: formatted }))
+    setFormData((prev) => {
+      if (!prev) return prev
+      return { ...prev, LicenseType: formatted }
+    })
+
   }
 
   const handleWellDescriptionChange = (
@@ -176,43 +211,12 @@ export default function EditLicensePage() {
           />
         </label>
 
-        <label className="well-description-label">
-          รายละเอียดบ่อ:
-          <div className="well-description-group">
-            <span>ความลึก</span>
-            <input
-              type="number"
-              name="depthStart"
-              value={formData.depthStart || ''}
-              onChange={handleWellDescriptionChange}
-              placeholder="ตื้นสุด"
-            />
-            <span>-</span>
-            <input
-              type="number"
-              name="depthEnd"
-              value={formData.depthEnd || ''}
-              onChange={handleWellDescriptionChange}
-              placeholder="ลึกสุด"
-            />
-            <span>เมตร | ความกว้างไม่เกิน</span>
-            <input
-              type="number"
-              name="wellWidth"
-              value={formData.wellWidth || ''}
-              onChange={handleWellDescriptionChange}
-              placeholder="กว้างสุด"
-            />
-            <span>มิลลิเมตร</span>
-          </div>
-        </label>
-
         <label>
           วันที่เริ่มใช้ใบอนุญาต:
           <input
             type="date"
             name="licenseIssuedDate"
-            value={formData.licenseIssuedDate?.slice(0, 10) || ''}
+            value={formData.licenseIssuedDate}
             onChange={handleChange}
             required
           />
@@ -226,7 +230,7 @@ export default function EditLicensePage() {
           <input
             type="date"
             name="licenseExpireDate"
-            value={formData.licenseExpireDate?.slice(0, 10) || ''}
+            value={formData.licenseExpireDate}
             onChange={handleChange}
             required
           />

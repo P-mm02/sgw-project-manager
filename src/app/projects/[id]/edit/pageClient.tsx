@@ -1,12 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import DotsLoader from '@/loading/DotsLoader/DotsLoader'
 
 const EditProjectForm = dynamic(
   () => import('./EditProjectForm/EditProjectForm'),
   {
     ssr: false,
-    loading: () => <p>Loading form...</p>,
+    loading: () => <DotsLoader/>,
   }
 )
 

@@ -1,5 +1,5 @@
 'use client'
-
+import './ProjectCon/ProjectCon.css'
 import dynamic from 'next/dynamic'
 import DotsLoader from '@/loading/DotsLoader/DotsLoader'
 

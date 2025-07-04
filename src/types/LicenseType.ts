@@ -2,13 +2,13 @@ export type LicenseType = {
   _id?: string
   clientName?: string
   licenseNumber?: string
-  licenseType?: 'drilling' | 'waterUse' | 'modify' | 'cancel'
+  licenseType?: string
   wellNumber?: string
   clientAddress?: string
   wellDescription?: string
-  depthStart?: number // ✅ depth: shallow
-  depthEnd?: number // ✅ depth: deep
-  wellWidth?: number // ✅ width in millimeters
+  depthStart?: string // ✅ depth: shallow
+  depthEnd?: string // ✅ depth: deep
+  wellWidth?: string // ✅ width in millimeters
   licenseIssuedDate?: string
   licenseExpireDate?: string
   notificationSent?: number

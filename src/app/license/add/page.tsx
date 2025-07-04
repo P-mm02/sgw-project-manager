@@ -4,23 +4,14 @@ import './page.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { formatDateToThai } from '@/lib/date/formatDateToThai'
+import { initialLicenseFormState } from '@/constants/license/initialLicenseFormState'
+import type { LicenseFormState } from '@/types/LicenseFormState'
+
 
 
 export default function AddLicensePage() {
   const router = useRouter()
-  const [formData, setFormData] = useState({
-    clientName: '',
-    licenseNumber: '',
-    licenseType: '',
-    wellNumber: '',
-    clientAddress: '',
-    depthStart: '',
-    depthEnd: '',
-    wellWidth: '',
-    wellDescription: '',
-    licenseIssuedDate: '',
-    licenseExpireDate: '',
-  })
+  const [formData, setFormData] = useState<LicenseFormState>(initialLicenseFormState)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
