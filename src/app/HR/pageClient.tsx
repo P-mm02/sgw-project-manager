@@ -3,8 +3,6 @@
 import dynamic from 'next/dynamic'
 import './EmployeeList/EmployeeList.css'
 import DotsLoader from '@/loading/DotsLoader/DotsLoader'
-import Link from 'next/link'
-
 
 const EmployeeList = dynamic(() => import('./EmployeeList/EmployeeList'), {
   ssr: false,
@@ -18,12 +16,6 @@ export default function HRPageClient() {
       <p className="hr-description">
         จัดการข้อมูลพนักงาน ลางาน เอกสารสำคัญ และตรวจสอบเวลาเข้า-ออกงาน
       </p>
-      <div className="hr-card-list-head">
-        <h2>📋 รายชื่อพนักงาน</h2>
-        <Link href="/HR/add" className="add-employee-btn">
-          ➕ เพิ่มพนักงาน
-        </Link>
-      </div>
       <section className="hr-section">
         <EmployeeList />
       </section>

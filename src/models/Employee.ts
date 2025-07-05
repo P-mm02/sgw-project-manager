@@ -9,8 +9,8 @@ const EmployeeSchema = new Schema(
     department: { type: String, default: '-' },
     email: { type: String, default: '-' },
     phoneNumber: { type: String, default: '-' },
-    birthDate: Date,
-    startDate: Date,
+    birthDate: { type: Date, default: null },
+    startDate: { type: Date, default: null },
 
     currentAddress: {
       houseNumber: { type: String, default: '-' },
@@ -40,25 +40,11 @@ const EmployeeSchema = new Schema(
       role: { type: String, default: '-' },
     },
 
-    kpiScores: [
-      {
-        score: Number,
-        comment: { type: String, default: '-' },
-        dateEvaluated: Date,
-      },
-    ],
-
-    kpiGiven: [
-      {
-        targetEmployeeId: { type: Schema.Types.ObjectId, ref: 'Employee' },
-        dateGiven: { type: Date, default: Date.now },
-      },
-    ],
-
     isEmployed: { type: Boolean, default: true },
   },
   { timestamps: true }
 )
 
-const Employee = models.Employee || model('Employee', EmployeeSchema, 'employees')
+const Employee =
+  models.Employee || model('Employee', EmployeeSchema, 'employees')
 export default Employee

@@ -1,7 +1,6 @@
 .hr-container {
   margin: 0 auto;
-  padding: 2rem;
-  font-family: 'Inter', sans-serif;
+  padding: 2rem 1rem;
 }
 
 .hr-title {
@@ -64,3 +63,4 @@
 .add-employee-btn:hover {
   background-color: #1d4ed8; /* blue-700 */
 }
+

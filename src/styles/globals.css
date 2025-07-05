@@ -3,55 +3,84 @@
 
 /* 📐 Root font-size for rem scaling */
 html {
-  font-size: 16px; /* 1rem = 16px on desktop */
+  font-size: 16px !important; /* 1rem = 16px on desktop */
+}
+
+@media (max-width: 1440px) {
+  .DW1440-display-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .DW1280-display-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .DW1024-display-none {
+    display: none !important;
+  }
 }
 
 @media (max-width: 768px) {
   html {
-    font-size: 14px; /* 1rem = 14px on tablets */
+    font-size: 14px !important; /* 1rem = 14px on tablets */
+  }
+  .DW760-display-none {
+    display: none !important;
   }
 }
 
 @media (max-width: 480px) {
   html {
-    font-size: 12px; /* 1rem = 12px on mobile phones */
+    font-size: 12px !important; /* 1rem = 12px on mobile phones */
   }
 }
-
 
 /* 🧰 Reset box sizing and spacing */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box ;
+  margin: 0 ;
+  padding: 0 ;
 }
 
 /* 🧾 Set font family globally */
 body {
-  font-family: 'Noto Sans', sans-serif;
-  -webkit-font-smoothing: antialiased; /* Smooth fonts on Safari */
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
-  background-color: #fff;
-  color: #000;
-  line-height: 1.5;
+  font-family: 'Noto Sans', sans-serif !important;
+  -webkit-font-smoothing: antialiased ;
+  -webkit-tap-highlight-color: transparent ;
+  background-color: #fff ;
+  color: #000 ;
+  line-height: 1.5 ;
 }
 
 /* ✋ Improve tap and touch interaction for mobile */
 a,
 button {
-  cursor: pointer;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  cursor: pointer ;
+  touch-action: manipulation ;
+  -webkit-tap-highlight-color: transparent ;
 }
-
 
 /* 🖼️ Make all images responsive by default */
 img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  max-width: 100% ;
+  height: auto ;
+  display: block ;
 }
 
+/* 🎯 Utility classes */
+.text-center {
+  text-align: center !important;
+}
 
+/* 📧 Wrap long text like email or address */
+.text-wrap {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}

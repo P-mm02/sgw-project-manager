@@ -37,20 +37,8 @@ export type EmployeeType = {
     team?: {
       name?: string
       role?: string
-    }
-  
-    kpiScores?: {
-      score: number
-      comment: string
-      dateEvaluated: string // ISO string format
-    }[]
-  
-    kpiGiven?: {
-      targetEmployeeId: string
-      dateGiven: string
-    }[]
-  
-    kpiCommentCount?: number
+    }  
+    
     isEmployed?: boolean
   
     createdAt?: string

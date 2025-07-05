@@ -5,6 +5,6 @@ import type { FormFriendly, DeepRequired } from './utils'
 export type EmployeeFormState = DeepRequired<
   Omit<
     FormFriendly<EmployeeType>,
-    '_id' | 'createdAt' | 'updatedAt' | '__v' | 'kpiScores' | 'kpiGiven' | 'kpiCommentCount' | 'isEmployed'
+    '_id' | 'createdAt' | 'updatedAt' | '__v' | 'kpiScores' | 'isEmployed'
   >
 >
