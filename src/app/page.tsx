@@ -1,4 +1,5 @@
 import './page.css'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'หน้าแรก | SG-WORKING',
@@ -17,11 +18,18 @@ export default function HomePage() {
         <section className="card highlight-card">
           <h2>📢 ประกาศด่วน</h2>
           <ul>
-            <li>⏰ ปรับปรุงระบบ: 20 มิ.ย. เวลา 22:00</li>
-            <li>📩 ส่งรายงานโครงการ: ภายใน 25 มิ.ย.</li>
+            <li>⏰ เรื่องที่ 1: 20 มิ.ย. เวลา 22:00</li>
+            <li>📩 เรื่องที่ 2: ภายใน 25 มิ.ย.</li>
           </ul>
         </section>
-
+        <Link
+          href="/ManageNotification"
+          className="card manageNotificationLink"
+        >
+          <h1 className="text-center">
+            ควบคุมการแจ้งเตือน<br />Manage Notification
+          </h1>
+        </Link>
         {/* Upcoming Holidays */}
         <section className="card">
           <h2>🗓️ วันหยุดราชการ</h2>
@@ -62,7 +70,7 @@ export default function HomePage() {
           <div className="timeline">
             <div className="log-item">
               <span className="log-time">09:14</span>
-              <p>คุณ Wee: บันทึกงานใน ‘ฟาร์มโคนมดารา’</p>
+              <p>คุณ Wee: บันทึกงานใน ‘ฟาร์มโคนม’</p>
             </div>
             <div className="log-item">
               <span className="log-time">16:45</span>

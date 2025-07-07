@@ -64,6 +64,7 @@ button {
   cursor: pointer ;
   touch-action: manipulation ;
   -webkit-tap-highlight-color: transparent ;
+  text-decoration: none;
 }
 
 /* 🖼️ Make all images responsive by default */

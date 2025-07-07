@@ -1,0 +1,99 @@
+/* === Page Layout === */
+.notification-page {
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+    max-width: 1280px;
+    margin: auto;
+  }
+  
+  .notification-page h1 {
+    font-size: 2rem;
+    color: #0c2a4e;
+    margin-bottom: 2rem;
+  }
+  
+  /* === 3-Column Grid === */
+  .notification-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  /* === Column Styling === */
+  .notification-column {
+    background: #ffffff;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .notification-column h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+  
+  /* === Notification Cards === */
+  .notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .notification-card {
+    padding: 1rem;
+    background-color: #ecfccb;
+    border-left: 4px solid #65a30d;
+    border-radius: 0.375rem;
+    color: #365314;
+    font-weight: 500;
+  }
+  
+  .notification-card.expired {
+    background-color: #fee2e2;
+    border-left-color: #dc2626;
+    color: #991b1b;
+  }
+  
+  /* === Notification Form === */
+  .notify-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .notify-form input,
+  .notify-form textarea,
+  .notify-form button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+  }
+  
+  .notify-form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .notify-form button {
+    background-color: #f97316;
+    color: white;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+  
+  .notify-form button:hover {
+    background-color: #ea580c;
+    cursor: pointer;
+  }
+  
+  /* === Responsive === */
+  @media (max-width: 1024px) {
+    .notification-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
