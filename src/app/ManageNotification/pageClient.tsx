@@ -19,23 +19,23 @@ export default function PageClient() {
   const [notifications, setNotifications] = useState([]) // Example state
 
   return (
-    <div className="notification-grid">
+    <div className="notification-grid display-grid-column">
       {/* Column 1 */}
       <section className="notification-column">
         <h2>🔔 การแจ้งเตือนที่กำลังจะมาถึง</h2>
-        <ComingNotify/>
+        <ComingNotify />
       </section>
 
       {/* Column 2 */}
       <section className="notification-column form-column">
         <h2>➕ สร้างแจ้งเตือนใหม่</h2>
-        <CreateNotify/>
+        <CreateNotify />
       </section>
 
       {/* Column 3 */}
       <section className="notification-column">
         <h2>⌛ การแจ้งเตือนที่หมดอายุ</h2>
-        <ExpireNotify/>
+        <ExpireNotify />
       </section>
     </div>
   )

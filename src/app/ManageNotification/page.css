@@ -90,10 +90,3 @@
     cursor: pointer;
   }
   
-  /* === Responsive === */
-  @media (max-width: 1024px) {
-    .notification-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
