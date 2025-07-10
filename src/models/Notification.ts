@@ -6,36 +6,42 @@ const NotificationSchema = new Schema(
       type: String,
       trim: true,
       default: 'ไม่มีหัวข้อ',
+      set: (v: string) => v.replace(/\s+/g, ' ').trim(),
     },
     detail: {
       type: String,
       trim: true,
       default: '',
+      set: (v: string) => v.replace(/\s+/g, ' ').trim(),
     },
     notifyBeforeDays: {
-      type: Number,
-      default: 0,
+      type: [Number], // e.g., [90, 60, 30]
+      default: [],
     },
-    notifyMethod: {
-      type: String,
-      default: '',
+    notifiedDays: {
+      type: [Number], // e.g., [90, 60]
+      default: [0,],
+    },
+    isNotified: {
+      type: Boolean,
+      default: false, // false = still waiting to notify all
     },
     notifyDate: {
       type: Date,
-      default: () => new Date(), // now
+      default: () => new Date(),
     },
     createdBy: {
       type: String,
-      default: 'system',
       trim: true,
+      default: 'system',
+      set: (v: string) => v.replace(/\s+/g, ' ').trim(),
     },
   },
   {
-    timestamps: true, // adds createdAt and updatedAt
+    timestamps: true,
   }
 )
 
 const Notification =
   models.Notification || model('Notification', NotificationSchema)
-
 export default Notification

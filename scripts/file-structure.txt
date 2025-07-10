@@ -53,19 +53,22 @@
       📄 page.tsx
     📁 api
       📁 add-project
+      📁 employees
       📁 license
       📁 line-webhook
+      📁 manage-notification
       📁 projects
       📁 scripts
-      📁 test-db
-      📁 test-line
     📁 components
       📁 Footer
       📁 Nav
     📄 favicon.ico
     📁 HR
+      📁 add
+      📁 EmployeeList
       📄 page.css
       📄 page.tsx
+      📄 pageClient.tsx
     📄 layout.tsx
     📁 license
       📁 add
@@ -74,6 +77,13 @@
       📁 LicenseClient
       📄 page.css
       📄 page.tsx
+    📁 ManageNotification
+      📁 ComingNotify
+      📁 CreateNotify
+      📁 ExpireNotify
+      📄 page.css
+      📄 page.tsx
+      📄 pageClient.tsx
     📁 Marketing
       📄 page.css
       📄 page.tsx
@@ -87,11 +97,16 @@
       📁 AddProject
       📁 [id]
   📁 constants
+    📁 employee
+      📄 initialEmployeeFormState.ts
+    📁 license
+      📄 initialLicenseFormState.ts
     📁 project
       📄 initialProjectForm.ts
     📄 thaiMonths.ts
     📄 thaiMonthShort.ts
   📁 data
+    📄 employee_seed_data.json
     📄 projectData.json
   📁 lib
     📁 date
@@ -101,10 +116,14 @@
       📄 formatDateInput.ts
       📄 formatDateToThai.ts
       📄 formatStartEndDate.ts
+    📁 employee
+      📄 employeeFormat.ts
+      📄 sortEmployees.ts
     📁 fetch
     📄 mongoose.ts
     📁 sendMessage
       📄 handleLicenseNotifications.ts
+      📄 handleNotifications.ts
       📄 sendLineMessage.ts
     📁 test
       📄 Cooldown.tsx
@@ -116,11 +135,16 @@
       📄 Skeleton.css
       📄 Skeleton.tsx
   📁 models
+    📄 Employee.ts
     📄 License.ts
+    📄 Notification.ts
     📄 Project.ts
   📁 styles
     📄 globals.css
   📁 types
+    📄 EmployeeFormState.ts
+    📄 EmployeeType.ts
+    📄 LicenseFormState.ts
     📄 LicenseType.ts
     📄 ProjectFormState.ts
     📄 ProjectType.ts
