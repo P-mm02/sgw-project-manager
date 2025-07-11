@@ -26,7 +26,7 @@ function buildNotificationMessage(
       : '') +
     `\nเรื่อง: ${notify.title || 'ไม่ระบุ'}` +
     `\n${notify.detail ? `รายละเอียด: ${notify.detail}\n` : 'ไม่ระบุ'}` +
-    `\nวันนัดหมาย: ${
+    `\nวันครบกำหนด: ${
       notify.notifyDate
         ? new Date(notify.notifyDate).toLocaleString('th-TH', {
             dateStyle: 'medium',

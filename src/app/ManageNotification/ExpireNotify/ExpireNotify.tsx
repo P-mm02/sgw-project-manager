@@ -21,6 +21,21 @@ export default function ExpireNotify({
     (item) => new Date(item.notifyDate) < now
   )
 
+  const handleDelete = async (id: string) => {
+    if (confirm('ต้องการลบการแจ้งเตือนนี้จริงหรือไม่?')) {
+      const res = await fetch('/api/manage-notification/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      })
+      if (res.ok) {
+        window.location.reload()
+      } else {
+        alert('ลบไม่สำเร็จ')
+      }
+    }
+  }
+
   return (
     <div className="notification-list">
       {expired.length > 0 ? (
@@ -31,26 +46,42 @@ export default function ExpireNotify({
               ? item.notifyBeforeDays.join(', ')
               : '-'
 
-          const notified =
-            Array.isArray(item.notifiedDays) && item.notifiedDays.length > 0
-              ? `แจ้งล่วงหน้าแล้ว: ${item.notifiedDays.join(', ')} วัน`
-              : 'ยังไม่มีการแจ้งล่วงหน้า'
-
           return (
             <div
               key={item._id || item.id}
               className="notification-card expired"
             >
+              {/* Absolute Delete Button */}
+              <button
+                className="delete-btn"
+                title="ลบการแจ้งเตือนนี้"
+                onClick={() => handleDelete(item._id || item.id)}
+                aria-label="ลบ"
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+
               <div>
                 ❌ <strong>{item.title}</strong>
               </div>
               <div>รายละเอียด: {item.detail || '-'}</div>
               <div>
-                วันที่แจ้งเตือน:{' '}
+                วันครบกำหนด:{' '}
                 {new Date(item.notifyDate).toLocaleDateString('th-TH')}
               </div>
-              <div>แจ้งเตือนล่วงหน้า: {notifyBefore} วัน</div>
-              <div>{notified}</div>
+              <div>
+                แจ้งเตือนล่วงหน้า:{' '}
+                {Array.isArray(item.notifyBeforeDays) &&
+                item.notifyBeforeDays.length > 0
+                  ? item.notifyBeforeDays.join(', ') + ' วัน'
+                  : 'ไม่ระบุ'}{' '}
+              </div>
+              <div>
+                {Array.isArray(item.notifiedDays) &&
+                item.notifiedDays.length > 0
+                  ? `แจ้งล่วงหน้าแล้ว: ${item.notifiedDays.join(', ')} วัน`
+                  : 'ยังไม่มีการแจ้งเตือนล่วงหน้า'}
+              </div>
               <div>
                 สถานะ: {item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
               </div>

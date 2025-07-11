@@ -154,7 +154,7 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
         required
       />
 
-      <label htmlFor="notifyDate">วันที่ต้องการแจ้งเตือน</label>
+      <label htmlFor="notifyDate">วันครบกำหนด</label>
       <div className="notify-date-input-container">
         {/* Hidden real input for form value */}
         <input

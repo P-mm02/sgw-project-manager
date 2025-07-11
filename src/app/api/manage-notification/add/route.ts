@@ -6,19 +6,15 @@ export async function POST(req: NextRequest) {
   await connectToDB()
   try {
     const data = await req.json()
-
-    // Add debug log here
-    console.log('Debug ทดสอบบรรทัด :', JSON.stringify(data.detail))
-
     // Only pass fields your model expects!
     const newNotification = await Notification.create({
       title: data.title,
       detail: data.detail,
       notifyBeforeDays: data.notifyBeforeDays ?? [],
-      notifiedDays: data.notifiedDays ?? [0],
+      notifiedDays: data.notifiedDays ?? [],
       isNotified: data.isNotified ?? false,
       notifyDate: data.notifyDate || new Date(),
-      createdBy: data.createdBy || 'system',
+      createdBy: data.createdBy || 'ไม่ระบุ',
     })
 
     return NextResponse.json({ success: true, notification: newNotification })

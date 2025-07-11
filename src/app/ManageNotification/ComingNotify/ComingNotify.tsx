@@ -21,12 +21,43 @@ export default function ComingNotify({
     (item) => new Date(item.notifyDate) >= now
   )
 
+  const handleDelete = async (id: string) => {
+    if (confirm('ต้องการลบการแจ้งเตือนนี้จริงหรือไม่?')) {
+      const res = await fetch('/api/manage-notification/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      })
+      if (res.ok) {
+        window.location.reload()
+      } else {
+        alert('ลบไม่สำเร็จ')
+      }
+    }
+  }
+
   return (
     <div className="notification-list">
       {upcoming.length > 0 ? (
         upcoming.map((item) => {
+          // === คำนวณจำนวนวันที่เหลือ ===
+          const notifyDate = new Date(item.notifyDate)
+          notifyDate.setHours(0, 0, 0, 0)
+          const daysLeft = Math.ceil(
+            (notifyDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+          )
+
           return (
             <div key={item._id || item.id} className="notification-card">
+              {/* Absolute Delete Button */}
+              <button
+                className="delete-btn"
+                title="ลบการแจ้งเตือนนี้"
+                onClick={() => handleDelete(item._id || item.id)}
+                aria-label="ลบ"
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
               <div>
                 📅 <strong>{item.title}</strong>
               </div>
@@ -34,9 +65,10 @@ export default function ComingNotify({
                 รายละเอียด: {item.detail || '-'}
               </div>
               <div>
-                วันที่แจ้งเตือน:{' '}
+                วันครบกำหนด:{' '}
                 {new Date(item.notifyDate).toLocaleDateString('th-TH')}
               </div>
+              <div>เหลือเวลาอีก: {daysLeft} วัน</div>
               <div>
                 แจ้งเตือนล่วงหน้า:{' '}
                 {Array.isArray(item.notifyBeforeDays) &&

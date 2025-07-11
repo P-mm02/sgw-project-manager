@@ -1,0 +1,41 @@
+/* src/app/ManageNotification/collapes.css */
+
+.collapse-panel {
+  border-bottom: 1px solid #f1f1f1;
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem 0;
+  overflow: hidden;
+  box-shadow: 0 6px 6px rgba(0,0,0,0.1);
+}
+
+.collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  width: 100%;
+  font-size: 1.75rem;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+}
+
+.collapse-header:hover {
+  background: #f9fafb;
+}
+
+.collapse-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.collapse-content {
+  transition: max-height 0.3s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+  padding: 0 1.5rem;
+  background: #fff;
+}

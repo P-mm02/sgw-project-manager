@@ -2,6 +2,8 @@
 
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
+import './collapes.css'
+import CollapsePanel from './CollapsePanel'
 
 const ComingNotify = dynamic(() => import('./ComingNotify/ComingNotify'), {
   ssr: false,
@@ -17,61 +19,73 @@ export default function PageClient() {
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Fetch notifications when component mounts
-useEffect(() => {
-  const fetchNotifications = async () => {
-    setLoading(true)
-    setError(null)
-    try {
-      const res = await fetch('/api/manage-notification')
-      if (!res.ok) throw new Error('Failed to fetch notifications')
-      const data = await res.json()
-      setNotifications(data.notifications)
-    } catch (err: any) {
-      setError(err.message || 'Unknown error')
-    } finally {
-      setLoading(false)
+  useEffect(() => {
+    // Detect mobile width (<= 768px)
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const res = await fetch('/api/manage-notification')
+        if (!res.ok) throw new Error('Failed to fetch notifications')
+        const data = await res.json()
+        setNotifications(data.notifications)
+      } catch (err: any) {
+        setError(err.message || 'Unknown error')
+      } finally {
+        setLoading(false)
+      }
     }
-  }
-  fetchNotifications()
-}, [])
+    fetchNotifications()
+  }, [])
 
-  // For real-world use: pass setNotifications to CreateNotify for auto-refresh after adding
+  // On mobile: start closed; On desktop: start open
+  const defaultOpen = !isMobile
 
   return (
     <div className="notification-grid display-grid-column">
-      {/* Column 1 */}
       <section className="notification-column">
-        <h2>🔔 การแจ้งเตือนที่กำลังจะมาถึง</h2>
-        <ComingNotify
-          notifications={notifications}
-          loading={loading}
-          error={error}
-        />
+        <CollapsePanel
+          title="🔔 คิวการแจ้งเตือน"
+          defaultOpen={defaultOpen}
+        >
+          <ComingNotify
+            notifications={notifications}
+            loading={loading}
+            error={error}
+          />
+        </CollapsePanel>
       </section>
-
-      {/* Column 2 */}
       <section className="notification-column form-column">
-        <h2>➕ สร้างแจ้งเตือนใหม่</h2>
-        <CreateNotify
-          onCreated={() => {
-            // re-fetch after create (optional, for instant update)
-            fetch('/api/manage-notification')
-              .then((res) => res.json())
-              .then((data) => setNotifications(data.notifications))
-          }}
-        />
+        <CollapsePanel title="➕ สร้างแจ้งเตือนใหม่" defaultOpen={defaultOpen}>
+          <CreateNotify
+            onCreated={() => {
+              fetch('/api/manage-notification')
+                .then((res) => res.json())
+                .then((data) => setNotifications(data.notifications))
+            }}
+          />
+        </CollapsePanel>
       </section>
-
-      {/* Column 3 */}
       <section className="notification-column">
-        <h2>⌛ การแจ้งเตือนที่หมดอายุ</h2>
-        <ExpireNotify
-          notifications={notifications}
-          loading={loading}
-          error={error}
-        />
+        <CollapsePanel
+          title="⌛ การแจ้งเตือนที่หมดอายุ"
+          defaultOpen={defaultOpen}
+        >
+          <ExpireNotify
+            notifications={notifications}
+            loading={loading}
+            error={error}
+          />
+        </CollapsePanel>
       </section>
     </div>
   )

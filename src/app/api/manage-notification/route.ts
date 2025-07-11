@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   await connectToDB()
   try {
     const notifications = await Notification.find()
-      .sort({ createdAt: -1 })
+      .sort({ notifyDate: 1 })
       .limit(200)
       .lean()
     return NextResponse.json({ notifications })
