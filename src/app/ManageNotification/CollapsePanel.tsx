@@ -33,8 +33,17 @@ export default function CollapsePanel({
           ▶
         </span>
       </button>
-      <div className="collapse-content" style={{ maxHeight: open ? 2000 : 0 }}>
-        {open && <div>{children}</div>}
+      <div
+        className="collapse-content"
+        style={{
+          maxHeight: open ? 2000 : 0,
+          overflow: 'hidden',
+          transition: 'max-height 0.3s ease',
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? 'auto' : 'none', // optional, for accessibility
+        }}
+      >
+        <div>{children}</div>
       </div>
     </div>
   )
