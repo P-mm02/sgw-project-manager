@@ -2,8 +2,13 @@ import type { NotificationType } from '@/types/NotificationType'
 import Notification from '@/models/Notification'
 import { sendLineMessage } from '@/lib/sendMessage/sendLineMessage'
 
-const userIds = ['U7954973400f148caf34e524adc4db5ac']
+const userIds = ['C0fc7a3d81a3b48dac518739672356f1d']
+  //SGW weeID
+  //const userIds = ['U7954973400f148caf34e524adc4db5ac']
 
+  //SGW GroupID SG แจ้งเตือน
+  //const userIds = ['C0fc7a3d81a3b48dac518739672356f1d']
+  
 function daysDiff(date1: Date, date2: Date): number {
   return Math.floor(
     (date1.setHours(0, 0, 0, 0) - date2.setHours(0, 0, 0, 0)) / 86400000
