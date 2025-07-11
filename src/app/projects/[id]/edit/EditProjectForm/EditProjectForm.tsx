@@ -150,18 +150,22 @@ export default function EditProjectForm() {
         <option value="done">เสร็จสิ้น</option>
       </select>
 
-      <label>ประเภทงาน</label>
-      <select
-        name="workType"
-        value={safe(formData.workType)}
-        onChange={handleChange}
-      >
-        <option value="drilling">เจาะบ่อ</option>
-        <option value="survey">สำรวจ</option>
-        <option value="dewatering">ดูดน้ำ</option>
-        <option value="maintenance">ซ่อมบำรุง</option>
-        <option value="others">อื่น ๆ</option>
-      </select>
+      <label>
+        ประเภทงาน{' '}
+        <select
+          name="workType"
+          value={safe(formData.workType)}
+          onChange={handleChange}
+        >
+          <option value="">--เลือกประเภท--</option>
+          <option value="drilling">เจาะ</option>
+          <option value="survey">สำรวจ</option>
+          <option value="dewatering">สูบลดระดับน้ำ</option>
+          <option value="maintenance">ซ่อมบำรุง</option>
+          <option value="fix">ซ่อมแก้ไข</option>
+          <option value="others">อื่นๆ</option>
+        </select>
+      </label>
 
       <label>แผนเริ่มงาน</label>
       <input
