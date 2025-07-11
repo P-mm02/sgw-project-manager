@@ -19,23 +19,23 @@ export default function PageClient() {
   const [error, setError] = useState<string | null>(null)
 
   // Fetch notifications when component mounts
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      setLoading(true)
-      setError(null)
-      try {
-        const res = await fetch('/api/manage-notification')
-        if (!res.ok) throw new Error('Failed to fetch notifications')
-        const data = await res.json()
-        setNotifications(data.notifications)
-      } catch (err: any) {
-        setError(err.message || 'Unknown error')
-      } finally {
-        setLoading(false)
-      }
+useEffect(() => {
+  const fetchNotifications = async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/manage-notification')
+      if (!res.ok) throw new Error('Failed to fetch notifications')
+      const data = await res.json()
+      setNotifications(data.notifications)
+    } catch (err: any) {
+      setError(err.message || 'Unknown error')
+    } finally {
+      setLoading(false)
     }
-    fetchNotifications()
-  }, [])
+  }
+  fetchNotifications()
+}, [])
 
   // For real-world use: pass setNotifications to CreateNotify for auto-refresh after adding
 

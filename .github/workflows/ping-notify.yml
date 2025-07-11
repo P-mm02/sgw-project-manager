@@ -1,0 +1,14 @@
+name: 🔁 Manage Notification Cron
+
+on:
+  schedule:
+    - cron: '0 0 * * *'      # 7:00 AM Thailand time (00:00 UTC)
+    - cron: '30 23 * * *'    # 6:30 AM Thailand time (23:30 UTC previous day)
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📡 Ping manage-notification/activate API
+        run: curl -s "https://sgw-project-manager.netlify.app/api/manage-notification/activate?secret=${{ secrets.CRON_SECRET }}"

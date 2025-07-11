@@ -7,6 +7,9 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json()
 
+    // Add debug log here
+    console.log('Debug ทดสอบบรรทัด :', JSON.stringify(data.detail))
+
     // Only pass fields your model expects!
     const newNotification = await Notification.create({
       title: data.title,
@@ -28,18 +31,3 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Optional for local dev
-export async function GET() {
-  await connectToDB()
-  try {
-    const notifications = await Notification.find()
-      .sort({ createdAt: -1 })
-      .limit(100)
-    return NextResponse.json({ notifications })
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 }
-    )
-  }
-}

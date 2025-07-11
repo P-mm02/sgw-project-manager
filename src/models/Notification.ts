@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from 'mongoose'
+import { Schema, model, models } from 'mongoose'
 
 const NotificationSchema = new Schema(
   {
@@ -6,13 +6,11 @@ const NotificationSchema = new Schema(
       type: String,
       trim: true,
       default: 'ไม่มีหัวข้อ',
-      set: (v: string) => v.replace(/\s+/g, ' ').trim(),
     },
     detail: {
       type: String,
       trim: true,
-      default: '',
-      set: (v: string) => v.replace(/\s+/g, ' ').trim(),
+      default: 'ไม่ระบุ',
     },
     notifyBeforeDays: {
       type: [Number], // e.g., [90, 60, 30]
@@ -33,8 +31,7 @@ const NotificationSchema = new Schema(
     createdBy: {
       type: String,
       trim: true,
-      default: 'system',
-      set: (v: string) => v.replace(/\s+/g, ' ').trim(),
+      default: '',
     },
   },
   {

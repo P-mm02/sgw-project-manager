@@ -16,6 +16,7 @@ export default function ExpireNotify({
 
   // Expired = notifyDate in the past (before today)
   const now = new Date()
+  now.setHours(0, 0, 0, 0)
   const expired = notifications.filter(
     (item) => new Date(item.notifyDate) < now
   )

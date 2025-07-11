@@ -213,7 +213,7 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
       <input
         id="notifyBeforeDays"
         type="text"
-        placeholder="90,60,30"
+        placeholder="ตัวอย่าง 1,3,7,30"
         value={form.notifyBeforeDays}
         onChange={handleChange}
       />
@@ -222,7 +222,7 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
       <input
         id="createdBy"
         type="text"
-        placeholder="system หรือชื่อผู้ใช้"
+        placeholder="ชื่อผู้ที่สร้างการแจ้งเตือนนี้"
         value={form.createdBy}
         onChange={handleChange}
       />

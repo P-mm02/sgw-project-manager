@@ -16,6 +16,7 @@ export default function ComingNotify({
 
   // Upcoming = notifyDate in the future (or today)
   const now = new Date()
+  now.setHours(0, 0, 0, 0)
   const upcoming = notifications.filter(
     (item) => new Date(item.notifyDate) >= now
   )
@@ -29,7 +30,9 @@ export default function ComingNotify({
               <div>
                 📅 <strong>{item.title}</strong>
               </div>
-              <div>รายละเอียด: {item.detail || '-'}</div>
+              <div style={{ whiteSpace: 'pre-line' }}>
+                รายละเอียด: {item.detail || '-'}
+              </div>
               <div>
                 วันที่แจ้งเตือน:{' '}
                 {new Date(item.notifyDate).toLocaleDateString('th-TH')}
@@ -38,15 +41,14 @@ export default function ComingNotify({
                 แจ้งเตือนล่วงหน้า:{' '}
                 {Array.isArray(item.notifyBeforeDays) &&
                 item.notifyBeforeDays.length > 0
-                  ? item.notifyBeforeDays.join(', ')
-                  : '-'}{' '}
-                วัน
+                  ? item.notifyBeforeDays.join(', ') + ' วัน'
+                  : 'ไม่ระบุ'}{' '}
               </div>
               <div>
                 {Array.isArray(item.notifiedDays) &&
                 item.notifiedDays.length > 0
                   ? `แจ้งล่วงหน้าแล้ว: ${item.notifiedDays.join(', ')} วัน`
-                  : 'ยังไม่มีการแจ้งล่วงหน้า'}
+                  : 'ยังไม่มีการแจ้งเตือนล่วงหน้า'}
               </div>
               <div>
                 สถานะ: {item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
