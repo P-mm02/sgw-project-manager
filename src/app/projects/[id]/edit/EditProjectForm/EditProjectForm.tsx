@@ -151,7 +151,7 @@ export default function EditProjectForm() {
       </select>
 
       <label>
-        ประเภทงาน{' '}
+        ประเภทงาน{' `'}
         <select
           name="workType"
           value={safe(formData.workType)}

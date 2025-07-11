@@ -1,13 +1,7 @@
 'use client'
 
-import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import './EmployeeList/EmployeeList.css'
-import DotsLoader from '@/loading/DotsLoader/DotsLoader'
-
-const EmployeeList = dynamic(() => import('./EmployeeList/EmployeeList'), {
-  ssr: false,
-  loading: () => <DotsLoader/>,
-})
 
 export default function HRPageClient() {
   return (
@@ -17,7 +11,9 @@ export default function HRPageClient() {
         จัดการข้อมูลพนักงาน ลางาน เอกสารสำคัญ และตรวจสอบเวลาเข้า-ออกงาน
       </p>
       <section className="hr-section">
-        <EmployeeList />
+        <Link href="/HR/EmployeeList" className="employee-list-link">
+          📋 ดูรายชื่อพนักงาน
+        </Link>
       </section>
       <section className="hr-section">
         <h2>🗓️ การลางาน</h2>
