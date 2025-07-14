@@ -2,8 +2,8 @@ name: 🔁 Manage Notification Cron
 
 on:
   schedule:
-    - cron: '0 0 * * *'      # 7:00 AM Thailand time (00:00 UTC)
-    - cron: '30 23 * * *'    # 6:30 AM Thailand time (23:30 UTC previous day)
+      - cron: '30 22 * * *'    # 5:30 AM Thailand time (22:30 UTC previous day)
+      - cron: '0 23 * * *'      # 6:00 AM Thailand time (23:00 UTC previous day)
   workflow_dispatch:
 
 jobs:
