@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import './collapes.css'
 import CollapsePanel from './CollapsePanel'
+import './ComingNotify/notifyEditModal.css'
 
 const ComingNotify = dynamic(() => import('./ComingNotify/ComingNotify'), {
   ssr: false,

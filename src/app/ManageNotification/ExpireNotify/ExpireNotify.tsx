@@ -61,31 +61,31 @@ export default function ExpireNotify({
                 <i className="fa-solid fa-xmark"></i>
               </button>
 
-              <div>
+              <div className='text-wrap'>
                 ❌ <strong>{item.title}</strong>
               </div>
-              <div>รายละเอียด: {item.detail || '-'}</div>
+              <div className='text-wrap'>รายละเอียด: {item.detail || '-'}</div>
               <div>
                 วันครบกำหนด:{' '}
                 {new Date(item.notifyDate).toLocaleDateString('th-TH')}
               </div>
-              <div>
+              <div className='text-wrap'>
                 แจ้งเตือนล่วงหน้า:{' '}
                 {Array.isArray(item.notifyBeforeDays) &&
                 item.notifyBeforeDays.length > 0
                   ? item.notifyBeforeDays.join(', ') + ' วัน'
                   : 'ไม่ระบุ'}{' '}
               </div>
-              <div>
+              <div className='text-wrap'>
                 {Array.isArray(item.notifiedDays) &&
                 item.notifiedDays.length > 0
                   ? `แจ้งล่วงหน้าแล้ว: ${item.notifiedDays.join(', ')} วัน`
                   : 'ยังไม่มีการแจ้งเตือนล่วงหน้า'}
               </div>
-              <div>
+              <div className='text-wrap'>
                 สถานะ: {item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
               </div>
-              <div>สร้างโดย: {item.createdBy || '-'}</div>
+              <div className='text-wrap'>สร้างโดย: {item.createdBy || '-'}</div>
               <div style={{ fontSize: '0.9em', color: '#888' }}>
                 สร้างเมื่อ:{' '}
                 {item.createdAt

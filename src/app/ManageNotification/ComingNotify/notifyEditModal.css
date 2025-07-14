@@ -1,0 +1,168 @@
+/* === Edit Button (แก้ไข) on notification-card === */
+.notify-edit {
+  align-self: flex-start;
+  padding: 0.5em 1.2em;
+  border-radius: 0.48em;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: #f9f3d1;
+  color: #b45309;
+  box-shadow: 0 1px 4px rgba(245, 158, 11, 0.08);
+  cursor: pointer;
+  transition: all 0.14s;
+}
+
+.notify-edit:hover,
+.notify-edit:focus-visible {
+  background: #fef08a;
+  color: #a16207;
+  box-shadow: 0 2px 10px #facc15a1;
+}
+
+@media (max-width: 600px) {
+  .notify-edit {
+    width: 100%;
+    padding: 0.38em 0;
+  }
+}
+
+
+/* === Modal Overlay === */
+.notify-edit-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44,62,80,0.15);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal card */
+.notify-edit-modal {    
+  font-size: 1.5rem;
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 32px rgba(44,62,80,0.19), 0 1.5px 8px rgba(101,163,13,0.14);
+  padding: 2rem 2.2rem 1.5rem 2.2rem;  
+  max-width: 98vw;
+  max-height: 80vh;
+  width: 40rem;
+  overflow-y: auto;
+  color: #1f2937;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  animation: notifyModalPopIn 0.22s cubic-bezier(.42,0,.58,1.2);
+
+  /* Hide scrollbar (all browsers) */
+  scrollbar-width: none;         /* Firefox */
+  -ms-overflow-style: none;      /* IE/Edge */
+}
+.notify-edit-modal::-webkit-scrollbar {
+  display: none;                 /* Chrome/Safari */
+}
+
+
+@media (max-width: 550px) {
+  .notify-edit-modal {
+    padding: 1.2rem 0.6rem;
+    width: 96vw;
+  }
+}
+
+/* === Modal Close Button (top-right X) === */
+.notify-edit-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #e3342f;
+  font-size: 4rem;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.3s;
+  width: 2.3rem; height: 2.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notify-edit-modal-close:hover {
+    transform: scale(1.2);
+}
+
+/* === Form Elements in Modal === */
+.notify-edit-modal-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 1rem;
+}
+.notify-edit-modal-form label {
+  width: 100%;
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  color: #0c2a4e;
+  display: flex;
+  flex-direction: column; /* stack text and input vertically */
+  gap: 0.4em;
+}
+
+.notify-edit-modal-form input,
+.notify-edit-modal-form textarea {
+  width: 100%;     /* <--- full width! */
+  font-size: 1.5rem;
+  padding: 0.5rem 0.7rem;
+  margin: 0;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  background: #fafaf9;
+  box-shadow: 0 1px 2px rgba(101,163,13,0.04);
+  transition: all 0.13s;
+  box-sizing: border-box; /* fix Safari bug */
+}
+
+.notify-edit-modal-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+
+/* === Modal Actions (buttons) === */
+.notify-edit-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 0.6rem;
+}
+
+.notify-edit-modal-actions button {
+  padding: 0.65em 1.5em;
+  border-radius: 0.5em;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 1px 5px rgba(249,115,22,0.08);
+  cursor: pointer;
+  transition: all 0.14s;
+}
+
+.notify-edit-modal-actions .save-btn {
+  background: #65a30d;
+  color: #fff;
+}
+.notify-edit-modal-actions .save-btn:hover{
+  background: #3f6212;
+}
+
+.notify-edit-modal-actions .cancel-btn {
+  background: #f1f5f9;
+  color: #1f2937;
+}
+.notify-edit-modal-actions .cancel-btn:hover{
+  background: #cbd5e1;
+}
