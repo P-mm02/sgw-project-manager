@@ -1,7 +1,7 @@
 'use client'
 
 import type { NotificationType } from '@/types/NotificationType'
-import '../EditNotify/NotifyEditModal2.css'
+import '../EditNotify/NotifyEditModal.css'
 import { useEditNotify } from '../EditNotify/editNotify'
 import NotificationEditModal from '../EditNotify/NotificationEditModal'
 
