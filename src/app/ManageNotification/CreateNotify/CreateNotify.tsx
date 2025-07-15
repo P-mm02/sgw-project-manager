@@ -119,12 +119,12 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
         body: JSON.stringify(body),
       })
       if (res.ok) {
-        setMessage('Notification created successfully!')
+        setMessage('สร้างการแจ้งเตือนสำเร็จ ✅')
         clearForm()
         if (onCreated) onCreated()
       } else {
         const data = await res.json()
-        setMessage(data.error || 'Failed to create notification')
+        setMessage(data.error || 'สร้างการแจ้งเตือนล้มเหลว ⚠️')
       }
     } catch {
       setMessage('Network error')
