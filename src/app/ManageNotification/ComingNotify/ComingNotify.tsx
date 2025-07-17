@@ -75,15 +75,15 @@ export default function ComingNotify({
                 📅 <strong>{item.title}</strong>
               </div>
               <div className="text-wrap" style={{ whiteSpace: 'pre-line' }}>
-                รายละเอียด: {item.detail || '-'}
+                <strong>รายละเอียด:</strong> {item.detail || '-'}
               </div>
               <div>
-                วันครบกำหนด:{' '}
+                <strong>วันครบกำหนด: </strong>
                 {new Date(item.notifyDate).toLocaleDateString('th-TH')}
               </div>
-              <div>เหลือเวลาอีก: {daysLeft} วัน</div>
+              <div><strong>เหลือเวลาอีก: </strong>{daysLeft} วัน</div>
               <div className="text-wrap">
-                แจ้งเตือนล่วงหน้า:{' '}
+                <strong>แจ้งเตือนล่วงหน้า: </strong>
                 {Array.isArray(item.notifyBeforeDays) &&
                 item.notifyBeforeDays.length > 0
                   ? item.notifyBeforeDays.join(', ') + ' วัน'
@@ -96,9 +96,9 @@ export default function ComingNotify({
                   : 'ยังไม่มีการแจ้งเตือนล่วงหน้า'}
               </div>
               <div className="text-wrap">
-                สถานะ: {item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
+                <strong>สถานะ: </strong>{item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
               </div>
-              <div>สร้างโดย: {item.createdBy || '-'}</div>
+              <div><strong>สร้างโดย: </strong>{item.createdBy || '-'}</div>
               <div style={{ fontSize: '0.9em', color: '#888' }}>
                 สร้างเมื่อ:{' '}
                 {item.createdAt

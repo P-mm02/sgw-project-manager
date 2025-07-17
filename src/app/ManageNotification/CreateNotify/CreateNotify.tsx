@@ -86,8 +86,8 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
     setLoading(true)
     setMessage(null)
 
-    if (!form.title.trim() || !form.detail.trim()) {
-      setMessage('กรุณากรอกหัวข้อและรายละเอียด')
+    if (!form.title.trim()) {
+      setMessage('กรุณากรอกหัวข้อ')
       setLoading(false)
       return
     }
@@ -142,7 +142,6 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
         placeholder="หัวข้อแจ้งเตือน"
         value={form.title}
         onChange={handleChange}
-        required
       />
 
       <label htmlFor="detail">รายละเอียด</label>
@@ -151,7 +150,6 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
         placeholder="รายละเอียด"
         value={form.detail}
         onChange={handleChange}
-        required
       />
 
       <label htmlFor="notifyDate">วันครบกำหนด</label>
@@ -163,7 +161,6 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
           type="date"
           value={form.notifyDate}
           onChange={handleChange}
-          required
         />
 
         <div>
@@ -231,7 +228,15 @@ export default function CreateNotify({ onCreated }: CreateNotifyProps) {
         {loading ? 'Saving...' : 'บันทึก'}
       </button>
       {message && (
-        <div style={{ color: message.includes('success') ? 'green' : 'red' }}>
+        <div
+          style={{
+            color:
+              message.includes('success') || message.includes('สำเร็จ')
+                ? 'green'
+                : 'red',
+            fontWeight: 'bold',
+          }}
+        >
           {message}
         </div>
       )}

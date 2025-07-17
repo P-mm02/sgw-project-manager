@@ -5,7 +5,7 @@ const NotificationSchema = new Schema(
     title: {
       type: String,
       trim: true,
-      default: 'ไม่มีหัวข้อ',
+      default: 'ไม่ระบุ',
     },
     detail: {
       type: String,
@@ -18,7 +18,7 @@ const NotificationSchema = new Schema(
     },
     notifiedDays: {
       type: [Number], // e.g., [90, 60]
-      default: [0,],
+      default: [],
     },
     isNotified: {
       type: Boolean,

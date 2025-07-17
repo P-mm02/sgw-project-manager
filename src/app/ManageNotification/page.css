@@ -34,20 +34,14 @@
 }
 
 /* === Column Styling === */
-.notification-column {
-  background: #fff;
-  padding: 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 1.2rem;
-  box-shadow: 0 2px 16px rgba(44, 62, 80, 0.07);
-  transition: box-shadow 0.15s;  
+.notification-column { 
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
 .notification-column h2 {
   font-size: 1.35rem;
-  margin-bottom: 1.2rem;
   color: #1f2937;
   font-weight: 600;
 }
@@ -61,12 +55,11 @@
 
 .notification-card {
   position: relative; /* Only declare this once! */
-  padding: 1.2rem 1.2rem 0.9rem 1.2rem;
   background-color: #f1fce8;
   border-left: 5px solid #65a30d;
   border-radius: 0.65rem;
   color: #365314;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 500;
   box-shadow: 0 1px 7px rgba(101,163,13,0.06);
   transition: box-shadow 0.13s, background 0.13s;
@@ -88,7 +81,9 @@
   background: #fecaca;
   box-shadow: 0 2px 12px rgba(220,38,38,0.12);
 }
-
+.notification-card div{
+  margin-left: 1rem;
+}
 /* === Delete Button === */
 .delete-btn {
   position: absolute;
@@ -129,6 +124,10 @@
   gap: 1rem;
   margin-top: 0.7rem;
   font-size: 1.5rem;
+}
+
+.notify-form label {
+ font-weight: 600;
 }
 
 .notify-form input,

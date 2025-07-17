@@ -2,28 +2,27 @@
 .notify-edit {
   align-self: flex-start;
   padding: 0.5em 1.2em;
+  margin: 0 1rem;
   border-radius: 0.48em;
   border: none;
   font-size: 1.5rem;
   font-weight: 600;
   background: #f9f3d1;
-  color: #b45309;
+  color: #813c07;
   box-shadow: 0 1px 4px rgba(245, 158, 11, 0.08);
-  cursor: pointer;
-  transition: all 0.14s;
+  transition: all 0.15s;
 }
 
 .notify-edit:hover,
 .notify-edit:focus-visible {
-  background: #fef08a;
-  color: #a16207;
-  box-shadow: 0 2px 10px #facc15a1;
+  background: #ebe08e;
+  color: #784805;
+  box-shadow: 0 2px 8px #facc15a1;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .notify-edit {
-    width: 100%;
-    padding: 0.38em 0;
+    width:calc(100% - 2rem);
   }
 }
 
@@ -44,18 +43,16 @@
   font-size: 1.5rem;
   background: #fff;
   border-radius: 1.2rem;
-  box-shadow: 0 4px 32px rgba(44,62,80,0.19), 0 1.5px 8px rgba(101,163,13,0.14);
+  box-shadow: 0 4px 32px rgba(44,62,80,0.19);
   padding: 2rem 2.2rem 1.5rem 2.2rem;  
   max-width: 98vw;
   max-height: 80vh;
   width: 40rem;
   overflow-y: auto;
-  color: #1f2937;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
-  animation: notifyModalPopIn 0.22s cubic-bezier(.42,0,.58,1.2);
 
   /* Hide scrollbar (all browsers) */
   scrollbar-width: none;         /* Firefox */
@@ -68,8 +65,7 @@
 
 @media (max-width: 550px) {
   .notify-edit-modal {
-    padding: 1.2rem 0.6rem;
-    width: 96vw;
+    padding: 1rem;
   }
 }
 
@@ -99,14 +95,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   gap: 1rem;
 }
 .notify-edit-modal-form label {
   width: 100%;
   font-weight: 600;
   margin-bottom: 0.2em;
-  color: #0c2a4e;
   display: flex;
   flex-direction: column; /* stack text and input vertically */
   gap: 0.4em;
@@ -116,8 +110,7 @@
 .notify-edit-modal-form textarea {
   width: 100%;     /* <--- full width! */
   font-size: 1.5rem;
-  padding: 0.5rem 0.7rem;
-  margin: 0;
+  padding: 0.8rem;
   border-radius: 0.5rem;
   border: 1px solid #d1d5db;
   background: #fafaf9;
@@ -135,9 +128,8 @@
 /* === Modal Actions (buttons) === */
 .notify-edit-modal-actions {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
   justify-content: flex-end;
-  margin-top: 0.6rem;
 }
 
 .notify-edit-modal-actions button {
