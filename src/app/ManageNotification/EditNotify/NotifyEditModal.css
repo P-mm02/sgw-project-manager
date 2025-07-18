@@ -43,8 +43,7 @@
   font-size: 1.5rem;
   background: #fff;
   border-radius: 1.2rem;
-  box-shadow: 0 4px 32px rgba(44,62,80,0.19);
-  padding: 2rem 2.2rem 1.5rem 2.2rem;  
+  box-shadow: 0 4px 32px rgba(44,62,80,0.19);    
   max-width: 98vw;
   max-height: 80vh;
   width: 40rem;
@@ -53,6 +52,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
+  padding: 2rem;
 
   /* Hide scrollbar (all browsers) */
   scrollbar-width: none;         /* Firefox */
@@ -60,13 +60,6 @@
 }
 .notify-edit-modal::-webkit-scrollbar {
   display: none;                 /* Chrome/Safari */
-}
-
-
-@media (max-width: 550px) {
-  .notify-edit-modal {
-    padding: 1rem;
-  }
 }
 
 /* === Modal Close Button (top-right X) === */
