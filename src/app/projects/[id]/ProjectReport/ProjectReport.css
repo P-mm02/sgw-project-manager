@@ -53,7 +53,7 @@
 .report-recordText {
   display: flex;
   flex-direction: column; /* <--- Allow vertical stacking */
-  align-items: start;      /* <--- Left-align items */
+  align-items: flex-start;      /* <--- Left-align items */
 }
 
 .input-field {
