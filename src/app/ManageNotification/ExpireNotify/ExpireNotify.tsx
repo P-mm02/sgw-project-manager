@@ -1,6 +1,7 @@
 'use client'
 
 import type { NotificationType } from '@/types/NotificationType'
+import CircleSpining from '@/loading/CircleSpining/CircleSpining'
 
 export default function ExpireNotify({
   notifications = [],
@@ -11,7 +12,7 @@ export default function ExpireNotify({
   loading?: boolean
   error?: string | null
 }) {
-  if (loading) return <div>Loading...</div>
+  if (loading) return <CircleSpining/>
   if (error) return <div>Error: {error}</div>
 
   // Expired = notifyDate in the past (before today)

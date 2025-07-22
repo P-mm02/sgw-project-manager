@@ -1,15 +1,9 @@
 // src/app/ManageNotification/NotificationEditModal/NotificationEditModal.tsx
+
 'use client'
 
-import React from 'react'
-
-export type EditFormType = {
-  title: string
-  detail: string
-  notifyDate: string
-  notifyBeforeDays: string
-  createdBy: string
-}
+import { useMemo } from 'react'
+import type { EditFormType } from './editNotify' // adjust import as needed
 
 type NotificationEditModalProps = {
   open: boolean
@@ -18,8 +12,35 @@ type NotificationEditModalProps = {
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void
+  onNotifyDateChange: (notifyDate: string) => void
   onSave: () => void
   onCancel: () => void
+}
+
+const thaiMonths = [
+  'มกราคม',
+  'กุมภาพันธ์',
+  'มีนาคม',
+  'เมษายน',
+  'พฤษภาคม',
+  'มิถุนายน',
+  'กรกฎาคม',
+  'สิงหาคม',
+  'กันยายน',
+  'ตุลาคม',
+  'พฤศจิกายน',
+  'ธันวาคม',
+]
+
+function daysInMonth(year: number, month: number) {
+  return new Date(year, month, 0).getDate()
+}
+
+function thaiDateString(ymd: string) {
+  const [y, m, d] = ymd.split('-')
+  return `${parseInt(d)} ${thaiMonths[parseInt(m) - 1]} พ.ศ. ${
+    parseInt(y) + 543
+  }`
 }
 
 export default function NotificationEditModal({
@@ -27,10 +48,61 @@ export default function NotificationEditModal({
   editForm,
   saving = false,
   onChange,
+  onNotifyDateChange,
   onSave,
   onCancel,
 }: NotificationEditModalProps) {
   if (!open) return null
+
+  const [year, month, day] = editForm.notifyDate
+    ? editForm.notifyDate.split('-').map(Number)
+    : (() => {
+        const now = new Date()
+        return [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+      })()
+
+  const thaiYears = useMemo(() => {
+    const now = new Date()
+    return Array.from({ length: 11 }, (_, i) => {
+      const yearAD = now.getFullYear() - 5 + i
+      return {
+        label: (yearAD + 543).toString(),
+        value: yearAD,
+      }
+    })
+  }, [])
+
+  const daysCount = daysInMonth(year, month)
+
+  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newYear = Number(e.target.value)
+    const d = Math.min(day, daysInMonth(newYear, month))
+    onNotifyDateChange(
+      `${newYear}-${String(month).padStart(2, '0')}-${String(d).padStart(
+        2,
+        '0'
+      )}`
+    )
+  }
+  const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newMonth = Number(e.target.value)
+    const d = Math.min(day, daysInMonth(year, newMonth))
+    onNotifyDateChange(
+      `${year}-${String(newMonth).padStart(2, '0')}-${String(d).padStart(
+        2,
+        '0'
+      )}`
+    )
+  }
+  const handleDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newDay = Number(e.target.value)
+    onNotifyDateChange(
+      `${year}-${String(month).padStart(2, '0')}-${String(newDay).padStart(
+        2,
+        '0'
+      )}`
+    )
+  }
 
   return (
     <div className="notify-edit-modal-overlay" onClick={onCancel}>
@@ -69,16 +141,44 @@ export default function NotificationEditModal({
               required
             />
           </label>
-          <label>
-            วันครบกำหนด:
-            <input
-              type="date"
-              name="notifyDate"
-              value={editForm.notifyDate}
-              onChange={onChange}
-              required
-            />
-          </label>
+          <label>วันครบกำหนด</label>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <span>วันที่</span>
+            <select value={day} onChange={handleDayChange}>
+              {Array.from({ length: daysCount }, (_, i) => i + 1).map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
+            </select>
+            <span>เดือน</span>
+            <select value={month} onChange={handleMonthChange}>
+              {thaiMonths.map((m, idx) => (
+                <option key={idx + 1} value={idx + 1}>
+                  {m}
+                </option>
+              ))}
+            </select>
+            <span>พ.ศ.</span>
+            <select value={year} onChange={handleYearChange}>
+              {thaiYears.map((yr) => (
+                <option key={yr.value} value={yr.value}>
+                  {yr.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          {editForm.notifyDate && (
+            <div
+              style={{
+                color: '#888',
+                fontSize: '0.9em',
+                marginBottom: '0.5rem',
+              }}
+            >
+              วันที่: {thaiDateString(editForm.notifyDate)}
+            </div>
+          )}
           <label>
             แจ้งเตือนล่วงหน้ากี่วัน (เช่น 30,14,7):
             <input

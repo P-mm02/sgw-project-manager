@@ -107,10 +107,12 @@ export default function LicenseCon() {
               <a href="#">📎 ดูเอกสารแนบ</a>
               <a href="#">📍 เปิดในแผนที่</a>
             </div>
+            <div>
             <Link href={`/license/edit/${item._id}`} className="edit-btn">
               ✏️ แก้ไข
             </Link>
             {item._id && <DeleteLicenseButton id={item._id.toString()} />}
+            </div>
           </div>
         )
       })}

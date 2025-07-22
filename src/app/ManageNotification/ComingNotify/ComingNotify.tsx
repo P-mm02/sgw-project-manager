@@ -4,6 +4,7 @@ import type { NotificationType } from '@/types/NotificationType'
 import '../EditNotify/NotifyEditModal.css'
 import { useEditNotify } from '../EditNotify/editNotify'
 import NotificationEditModal from '../EditNotify/NotificationEditModal'
+import CircleSpining from '@/loading/CircleSpining/CircleSpining'
 
 export default function ComingNotify({
   notifications = [],
@@ -15,17 +16,19 @@ export default function ComingNotify({
   error?: string | null
 }) {
   // ---- Use the hook here! ----
-  const {
-    editing,
-    editForm,
-    saving,
-    handleEditClick,
-    handleEditChange,
-    handleEditSave,
-    handleEditCancel,
-  } = useEditNotify()
+const {
+  editing,
+  editForm,
+  saving,
+  handleEditClick,
+  handleEditChange,
+  handleEditSave,
+  handleEditCancel,
+  handleNotifyDateChange, // <-- Add this
+} = useEditNotify()
 
-  if (loading) return <div>Loading...</div>
+
+  if (loading) return <CircleSpining />
   if (error) return <div>Error: {error}</div>
 
   // Upcoming = notifyDate in the future (or today)
@@ -71,7 +74,7 @@ export default function ComingNotify({
               >
                 <i className="fa-solid fa-xmark"></i>
               </button>
-              <div className="text-wrap">
+              <div className="text-wrap notify-title">
                 📅 <strong>{item.title}</strong>
               </div>
               <div className="text-wrap" style={{ whiteSpace: 'pre-line' }}>
@@ -81,7 +84,10 @@ export default function ComingNotify({
                 <strong>วันครบกำหนด: </strong>
                 {new Date(item.notifyDate).toLocaleDateString('th-TH')}
               </div>
-              <div><strong>เหลือเวลาอีก: </strong>{daysLeft} วัน</div>
+              <div>
+                <strong>เหลือเวลาอีก: </strong>
+                {daysLeft} วัน
+              </div>
               <div className="text-wrap">
                 <strong>แจ้งเตือนล่วงหน้า: </strong>
                 {Array.isArray(item.notifyBeforeDays) &&
@@ -96,9 +102,13 @@ export default function ComingNotify({
                   : 'ยังไม่มีการแจ้งเตือนล่วงหน้า'}
               </div>
               <div className="text-wrap">
-                <strong>สถานะ: </strong>{item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
+                <strong>สถานะ: </strong>
+                {item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
               </div>
-              <div><strong>สร้างโดย: </strong>{item.createdBy || '-'}</div>
+              <div>
+                <strong>สร้างโดย: </strong>
+                {item.createdBy || '-'}
+              </div>
               <div style={{ fontSize: '0.9em', color: '#888' }}>
                 สร้างเมื่อ:{' '}
                 {item.createdAt
@@ -117,13 +127,13 @@ export default function ComingNotify({
       ) : (
         <div style={{ color: '#aaa' }}>ไม่พบการแจ้งเตือนที่กำลังจะมาถึง</div>
       )}
-
       {/* --- Modal: Now using your new modal component! --- */}
       <NotificationEditModal
         open={!!editing}
         editForm={editForm}
         saving={saving}
         onChange={handleEditChange}
+        onNotifyDateChange={handleNotifyDateChange} // <-- Add this
         onSave={handleEditSave}
         onCancel={handleEditCancel}
       />

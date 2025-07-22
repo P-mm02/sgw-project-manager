@@ -1,8 +1,7 @@
 /* === Edit Button (แก้ไข) on notification-card === */
 .notify-edit {
   align-self: flex-start;
-  padding: 0.5em 1.2em;
-  margin: 0 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.48em;
   border: none;
   font-size: 1.5rem;
@@ -117,6 +116,16 @@
   resize: vertical;
 }
 
+.notify-edit-modal-form select {
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  border-radius: 0.48rem;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(80, 80, 80, 0.04);
+  transition: border 0.15s, box-shadow 0.14s;
+}
+
 
 /* === Modal Actions (buttons) === */
 .notify-edit-modal-actions {
@@ -151,3 +160,4 @@
 .notify-edit-modal-actions .cancel-btn:hover{
   background: #cbd5e1;
 }
+

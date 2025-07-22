@@ -36,7 +36,7 @@ export default function CollapsePanel({
       <div
         className="collapse-content"
         style={{
-          maxHeight: open ? 2000 : 0,
+          maxHeight: open ? 9999 : 0,
           overflow: 'hidden',
           transition: 'max-height 0.3s ease',
           opacity: open ? 1 : 0,

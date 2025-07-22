@@ -95,3 +95,7 @@ img {
   word-break: break-word !important;
   overflow-wrap: break-word !important;
 }
+
+.hidden{
+  display: none !important;
+}

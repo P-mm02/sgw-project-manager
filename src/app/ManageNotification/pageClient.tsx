@@ -54,10 +54,7 @@ export default function PageClient() {
   return (
     <div className="notification-grid display-grid-column">
       <section className="notification-column">
-        <CollapsePanel
-          title="🔔 คิวการแจ้งเตือน"
-          defaultOpen={defaultOpen}
-        >
+        <CollapsePanel title="🔔 คิวการแจ้งเตือน" defaultOpen={defaultOpen}>
           <ComingNotify
             notifications={notifications}
             loading={loading}

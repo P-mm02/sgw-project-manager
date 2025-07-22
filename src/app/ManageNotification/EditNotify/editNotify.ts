@@ -1,4 +1,5 @@
 // src/app/ManageNotification/EditNotify/editNotify.ts
+
 import { useState } from 'react'
 import type { NotificationType } from '@/types/NotificationType'
 
@@ -45,6 +46,13 @@ export function useEditNotify(onSaved?: () => void) {
     }))
   }
 
+  function handleNotifyDateChange(notifyDate: string) {
+    setEditForm((f) => ({
+      ...f,
+      notifyDate,
+    }))
+  }
+
   async function handleEditSave() {
     if (!editing) return
     setSaving(true)
@@ -83,6 +91,7 @@ export function useEditNotify(onSaved?: () => void) {
     handleEditChange,
     handleEditSave,
     handleEditCancel,
+    handleNotifyDateChange, // <-- NEW
     setEditing,
     setEditForm,
   }
