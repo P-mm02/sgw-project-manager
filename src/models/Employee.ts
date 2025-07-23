@@ -12,6 +12,10 @@ const EmployeeSchema = new Schema(
     birthDate: { type: Date, default: null },
     startDate: { type: Date, default: null },
 
+    // Added weight (kg) and height (cm) with default 0
+    weight: { type: Number, default: 0 }, // kg
+    height: { type: Number, default: 0 }, // cm
+
     currentAddress: {
       houseNumber: { type: String, default: '-' },
       street: { type: String, default: '-' },

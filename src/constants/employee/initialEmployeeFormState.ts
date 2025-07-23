@@ -12,6 +12,10 @@ export const initialEmployeeFormState: EmployeeFormState = {
   birthDate: '',
   startDate: '',
 
+  // 👇 Added fields
+  weight: 0,
+  height: 0,
+
   currentAddress: {
     houseNumber: '',
     street: '',

@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { initialEmployeeFormState } from '@/constants/employee/initialEmployeeFormState'
 import type { EmployeeFormState } from '@/types/EmployeeFormState'
 import './AddEmployeeForm.css'
+import { addressEngToThai } from '@/lib/employee/addressEngToThai'
 
 export default function AddEmployeeForm() {
   const [formData, setFormData] = useState<EmployeeFormState>(initialEmployeeFormState)
@@ -43,42 +44,89 @@ type NestedObjectKey = 'currentAddress' | 'idCardAddress' | 'bankInfo' | 'team'
   return (
     <form className="add-employee-form" onSubmit={handleSubmit}>
       <label>ชื่อจริง</label>
-      <input name="firstName" value={formData.firstName} onChange={handleChange} required />
+      <input
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+        required
+      />
 
       <label>นามสกุล</label>
-      <input name="lastName" value={formData.lastName} onChange={handleChange} required />
+      <input
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+        required
+      />
 
       <label>ชื่อเล่น</label>
-      <input name="nickName" value={formData.nickName} onChange={handleChange} />
+      <input
+        name="nickName"
+        value={formData.nickName}
+        onChange={handleChange}
+      />
 
       <label>ตำแหน่ง</label>
-      <input name="jobTitle" value={formData.jobTitle} onChange={handleChange} />
+      <input
+        name="jobTitle"
+        value={formData.jobTitle}
+        onChange={handleChange}
+      />
 
       <label>แผนก</label>
-      <input name="department" value={formData.department} onChange={handleChange} />
+      <input
+        name="department"
+        value={formData.department}
+        onChange={handleChange}
+      />
 
       <label>อีเมล</label>
-      <input type="email" name="email" value={formData.email} onChange={handleChange} />
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
 
       <label>เบอร์โทรศัพท์</label>
-      <input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+      <input
+        name="phoneNumber"
+        value={formData.phoneNumber}
+        onChange={handleChange}
+      />
 
       <label>วันเกิด</label>
-      <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} />
+      <input
+        type="date"
+        name="birthDate"
+        value={formData.birthDate}
+        onChange={handleChange}
+      />
 
       <label>วันเริ่มงาน</label>
-      <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
+      <input
+        type="date"
+        name="startDate"
+        value={formData.startDate}
+        onChange={handleChange}
+      />
 
       <hr />
 
       <h3>📍 ที่อยู่ปัจจุบัน</h3>
       {Object.keys(formData.currentAddress).map((key) => (
         <div key={key}>
-          <label>{key}</label>
+          <label>{addressEngToThai[key] || key}</label>
           <input
             name={key}
-            value={formData.currentAddress?.[key as keyof typeof formData.currentAddress] || ''}
-            onChange={(e) => handleNestedChange('currentAddress', key, e.target.value)}
+            value={
+              formData.currentAddress?.[
+                key as keyof typeof formData.currentAddress
+              ] || ''
+            }
+            onChange={(e) =>
+              handleNestedChange('currentAddress', key, e.target.value)
+            }
           />
         </div>
       ))}
@@ -86,11 +134,17 @@ type NestedObjectKey = 'currentAddress' | 'idCardAddress' | 'bankInfo' | 'team'
       <h3>🪪 ที่อยู่บัตรประชาชน</h3>
       {Object.keys(formData.idCardAddress).map((key) => (
         <div key={key}>
-          <label>{key}</label>
+          <label>{addressEngToThai[key] || key}</label>
           <input
             name={key}
-            value={formData.idCardAddress?.[key as keyof typeof formData.idCardAddress] || ''}
-            onChange={(e) => handleNestedChange('idCardAddress', key, e.target.value)}
+            value={
+              formData.idCardAddress?.[
+                key as keyof typeof formData.idCardAddress
+              ] || ''
+            }
+            onChange={(e) =>
+              handleNestedChange('idCardAddress', key, e.target.value)
+            }
           />
         </div>
       ))}
@@ -100,13 +154,17 @@ type NestedObjectKey = 'currentAddress' | 'idCardAddress' | 'bankInfo' | 'team'
       <input
         name="bankName"
         value={formData.bankInfo.bankName}
-        onChange={(e) => handleNestedChange('bankInfo', 'bankName', e.target.value)}
+        onChange={(e) =>
+          handleNestedChange('bankInfo', 'bankName', e.target.value)
+        }
       />
       <label>เลขบัญชี</label>
       <input
         name="accountNumber"
         value={formData.bankInfo.accountNumber}
-        onChange={(e) => handleNestedChange('bankInfo', 'accountNumber', e.target.value)}
+        onChange={(e) =>
+          handleNestedChange('bankInfo', 'accountNumber', e.target.value)
+        }
       />
 
       <h3>👥 ทีม</h3>
@@ -116,11 +174,40 @@ type NestedObjectKey = 'currentAddress' | 'idCardAddress' | 'bankInfo' | 'team'
         value={formData.team.name}
         onChange={(e) => handleNestedChange('team', 'name', e.target.value)}
       />
-      <label>บทบาท</label>
+      <label>หน้าที่</label>
       <input
         name="role"
         value={formData.team.role}
         onChange={(e) => handleNestedChange('team', 'role', e.target.value)}
+      />
+
+      <h3>ร่างกาย</h3>
+      <label>น้ำหนัก (kg)</label>
+      <input
+        type="number"
+        name="weight"
+        value={formData.weight}
+        min={0}
+        onChange={(e) =>
+          setFormData((prev) => ({
+            ...prev,
+            weight: Number(e.target.value),
+          }))
+        }
+      />
+
+      <label>ส่วนสูง (cm)</label>
+      <input
+        type="number"
+        name="height"
+        value={formData.height}
+        min={0}
+        onChange={(e) =>
+          setFormData((prev) => ({
+            ...prev,
+            height: Number(e.target.value),
+          }))
+        }
       />
 
       <button type="submit">บันทึกข้อมูลพนักงาน</button>
