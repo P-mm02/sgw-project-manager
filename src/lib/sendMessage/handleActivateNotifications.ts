@@ -8,7 +8,15 @@ const userIds = ['C0fc7a3d81a3b48dac518739672356f1d']
 
   //SGW GroupID SG แจ้งเตือน
   //const userIds = ['C0fc7a3d81a3b48dac518739672356f1d']
-  
+
+function getBangkokDate() {
+  // Get now in UTC, then convert to Asia/Bangkok timezone
+  // Note: toLocaleString returns a string in that time zone.
+  return new Date(
+    new Date().toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
+  );
+}
+
 function daysDiff(date1: Date, date2: Date): number {
   return Math.floor(
     (date1.setHours(0, 0, 0, 0) - date2.setHours(0, 0, 0, 0)) / 86400000
@@ -65,7 +73,9 @@ export async function handleActivateNotifications(
   notifications: NotificationType[]
 ) {
   console.log('handleActivateNotifications: START')
-  const today = new Date()
+  const todayTH = getBangkokDate()
+  console.log('todayTH: '+todayTH)
+  
 
   for (const notify of notifications) {
     if (!notify.notifyDate) continue
@@ -74,7 +84,7 @@ export async function handleActivateNotifications(
     const notifiedDays = notify.notifiedDays || []
     
 
-    if (daysDiff(notifyDate, today) === 0) {
+    if (daysDiff(notifyDate, todayTH) === 0) {
       await sendAndMarkNotification(notify, 0, userIds)
       await Notification.findByIdAndUpdate(notify._id, { isNotified: true })
       console.log(`Notification ${notify._id} marked as isNotified`)
@@ -87,7 +97,7 @@ export async function handleActivateNotifications(
       const targetDate = new Date(notifyDate)
       targetDate.setDate(targetDate.getDate() - notifyBeforeDay)
 
-      if (daysDiff(today, targetDate) === 0) {
+      if (daysDiff(todayTH, targetDate) === 0) {
         await sendAndMarkNotification(notify, notifyBeforeDay, userIds)
       }
     }
