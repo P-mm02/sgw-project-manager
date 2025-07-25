@@ -21,7 +21,6 @@ export default function Nav() {
           <button className="mobile-menu-button" onClick={toggleMobileMenu}>
             ☰
           </button>
-          
         </div>
         <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
           <Link
