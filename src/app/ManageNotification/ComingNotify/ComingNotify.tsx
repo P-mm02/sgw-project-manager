@@ -97,9 +97,14 @@ const {
               </div>
               <div className="text-wrap">
                 {Array.isArray(item.notifiedDays) &&
-                item.notifiedDays.length > 0
-                  ? `แจ้งล่วงหน้าแล้ว: ${item.notifiedDays.join(', ')} วัน`
-                  : 'ยังไม่มีการแจ้งเตือนล่วงหน้า'}
+                item.notifiedDays.length > 0 ? (
+                  <>
+                    <strong>แจ้งล่วงหน้าแล้ว:</strong>{' '}
+                    {item.notifiedDays.join(', ')} วัน
+                  </>
+                ) : (
+                  'ยังไม่มีการแจ้งเตือนล่วงหน้า'
+                )}
               </div>
               <div className="text-wrap">
                 <strong>สถานะ: </strong>
