@@ -37,8 +37,38 @@ export default function ExpireNotify({
     }
   }
 
+  const handleDeleteAllExpired = async () => {
+    if (expired.length === 0) return
+    if (
+      confirm(
+        `ต้องการลบการแจ้งเตือนหมดอายุทั้งหมด (${expired.length} รายการ) หรือไม่?`
+      )
+    ) {
+      const ids = expired.map((item) => item._id || item.id)
+
+      const res = await fetch('/api/manage-notification/delete/all-expired', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids }),
+      })
+
+      if (res.ok) {
+        window.location.reload()
+      } else {
+        alert('ลบไม่สำเร็จ')
+      }
+    }
+  }
+
   return (
     <div className="notification-list">
+      <button
+        className="remove-all-expire-notify-btn"
+        onClick={handleDeleteAllExpired}
+        disabled={expired.length === 0}
+      >
+        ลบทั้งหมด
+      </button>
       {expired.length > 0 ? (
         expired.map((item) => {
           const notifyBefore =
@@ -62,31 +92,31 @@ export default function ExpireNotify({
                 <i className="fa-solid fa-xmark"></i>
               </button>
 
-              <div className='text-wrap'>
+              <div className="text-wrap">
                 ❌ <strong>{item.title}</strong>
               </div>
-              <div className='text-wrap'>รายละเอียด: {item.detail || '-'}</div>
+              <div className="text-wrap">รายละเอียด: {item.detail || '-'}</div>
               <div>
                 วันครบกำหนด:{' '}
                 {new Date(item.notifyDate).toLocaleDateString('th-TH')}
               </div>
-              <div className='text-wrap'>
+              <div className="text-wrap">
                 แจ้งเตือนล่วงหน้า:{' '}
                 {Array.isArray(item.notifyBeforeDays) &&
                 item.notifyBeforeDays.length > 0
                   ? item.notifyBeforeDays.join(', ') + ' วัน'
                   : 'ไม่ระบุ'}{' '}
               </div>
-              <div className='text-wrap'>
+              <div className="text-wrap">
                 {Array.isArray(item.notifiedDays) &&
                 item.notifiedDays.length > 0
                   ? `แจ้งล่วงหน้าแล้ว: ${item.notifiedDays.join(', ')} วัน`
                   : 'ยังไม่มีการแจ้งเตือนล่วงหน้า'}
               </div>
-              <div className='text-wrap'>
+              <div className="text-wrap">
                 สถานะ: {item.isNotified ? 'แจ้งเตือนครบแล้ว' : 'รอแจ้งเตือน'}
               </div>
-              <div className='text-wrap'>สร้างโดย: {item.createdBy || '-'}</div>
+              <div className="text-wrap">สร้างโดย: {item.createdBy || '-'}</div>
               <div style={{ fontSize: '0.9em', color: '#888' }}>
                 สร้างเมื่อ:{' '}
                 {item.createdAt

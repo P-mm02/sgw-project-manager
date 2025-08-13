@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { connectToDB } from '@/lib/mongoose'
 import Notification from '@/models/Notification'
 
-export async function DELETE(req) {
+export async function DELETE(req: Request) {
   await connectToDB()
   try {
     const { id } = await req.json()
