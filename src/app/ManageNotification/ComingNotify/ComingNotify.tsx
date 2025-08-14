@@ -77,8 +77,11 @@ const {
               <div className="text-wrap notify-title">
                 📅 <strong>{item.title}</strong>
               </div>
-              <div className="text-wrap" style={{ whiteSpace: 'pre-line' }}>
-                <strong>รายละเอียด:</strong> {item.detail || '-'}
+              <div className="text-wrap">
+                <strong>รายละเอียด:</strong>{' '}
+                <span style={{ whiteSpace: 'pre-line' }}>
+                  {item.detail || '-'}
+                </span>
               </div>
               <div>
                 <strong>วันครบกำหนด: </strong>
