@@ -15,6 +15,14 @@ export default function HomePage() {
 
       <div className="dashboard-grid">
         {/* Urgent Announcements */}
+        <Link href="/OperationalPlan" className="card ">
+          <h1 className="text-center">
+            แผนการปฎิบัติงาน
+            <br />
+            Operational plan
+          </h1>
+        </Link>
+
         <section className="card highlight-card">
           <h2>📢 ประกาศด่วน</h2>
           <ul>
@@ -27,7 +35,9 @@ export default function HomePage() {
           className="card manageNotificationLink"
         >
           <h1 className="text-center">
-            ควบคุมการแจ้งเตือน<br />Manage Notification
+            ควบคุมการแจ้งเตือน
+            <br />
+            Manage Notification
           </h1>
         </Link>
         {/* Upcoming Holidays */}
