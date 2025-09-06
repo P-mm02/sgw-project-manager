@@ -136,13 +136,9 @@ h1 {
     font-weight: 700;
 }
 .header-date.today .day-number {
-    background-color: #3182ce;
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 10px;
-    line-height: 30px;
+    color: rgb(31, 31, 243);
     display: inline-block;
+    scale: 1.5;
 }
 
 
@@ -176,9 +172,11 @@ thead .sticky-col {
 
 /* Data Cells */
 .data-cell {
-    height: 60px;
-    vertical-align: middle;
+  min-height: 60px;   /* allow two rows */
+  height: auto;       /* grow if note exists */
+  vertical-align: middle;
 }
+
 .data-cell.has-data {
     padding: 4px;
 }
@@ -188,6 +186,7 @@ thead .sticky-col {
 
 /* Tags in cells */
 .member-tag, .project-tag {
+    width: 7rem;
     color: white;
     padding: 0.5rem;
     border-radius: 6px;
@@ -205,4 +204,36 @@ thead .sticky-col {
 
 .project-tag {
     background-color: #48bb78; /* Green */
+}
+
+/* Stack member names (first line) over note (second line) */
+.cell-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Keep your existing pill look for names; ensure it spans nicely */
+.member-tag {
+  display: block;           /* make the pill span the cell width nicely */
+}
+
+/* Note styling (soft, readable, consistent with your palette) */
+.note-text {
+  width: 7rem;
+  font-size: 0.7rem;
+  color: #4a5568;           /* gray-700 */
+  background-color: #edf2f7;/* gray-100 */
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Extra polish: today highlight + note contrast */
+.today-cell .note-text {
+  background-color: #e6f0fa; /* very light blue to read on today background */
 }
