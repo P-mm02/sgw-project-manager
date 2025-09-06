@@ -15,7 +15,7 @@ export default function HomePage() {
 
       <div className="dashboard-grid">
         {/* Urgent Announcements */}
-        <Link href="/OperationalPlan" className="card ">
+        <Link href="/OperationalPlan" className="card operationalPlanLink">
           <h1 className="text-center">
             แผนการปฎิบัติงาน
             <br />

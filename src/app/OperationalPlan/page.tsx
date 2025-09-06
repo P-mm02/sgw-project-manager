@@ -1,18 +1,22 @@
 'use client'
-import React, { useState, useMemo } from 'react'
+
+import React, { useMemo, useState } from 'react'
 import membersData from './member.json'
 import projectsData from './project.json'
 import './page.css'
 
-// Define types for our data
+/** =============================
+ *  Types
+ *  ============================= */
 type Member = {
-  id: string
+  _id: string
   name: string
 }
 
 type ScheduleEntry = {
-  date: string
-  memberId: string
+  date: string // YYYY-MM-DD (Bangkok local)
+  _id: string // member _id
+  memberName: string // denormalized name for fast rendering
 }
 
 type Project = {
@@ -21,38 +25,67 @@ type Project = {
   schedule: ScheduleEntry[]
 }
 
-// Main component
+/** =============================
+ *  Timezone helpers (Bangkok)
+ *  ============================= */
+const BKK_TZ = 'Asia/Bangkok'
+
+/** Return YYYY-MM-DD in Bangkok local time */
+const toLocalDateString = (date: Date) =>
+  date.toLocaleDateString('en-CA', { timeZone: BKK_TZ }) // en-CA => YYYY-MM-DD
+
+/** Build all Date objects for the visible month (using local month/year) */
+function buildDaysInMonth(anchor: Date) {
+  // Work with a copy set to local first-of-month
+  const year = anchor.getFullYear()
+  const month = anchor.getMonth()
+
+  const start = new Date(year, month, 1)
+  const days: Date[] = []
+  const d = new Date(start)
+
+  while (d.getMonth() === month) {
+    days.push(new Date(d))
+    d.setDate(d.getDate() + 1)
+  }
+  return days
+}
+
+/** =============================
+ *  Component
+ *  ============================= */
 const OperationalPlanPage = () => {
-  // Set current date to the specified date for consistency
-  const [currentDate, setCurrentDate] = useState(new Date('2025-09-05'))
-  const [view, setView] = useState<'project' | 'member'>('project') // 'project' or 'member'
+  // Use actual "now". If you want a fixed demo date, set new Date('2025-09-05T00:00:00+07:00')
+  const [currentDate, setCurrentDate] = useState(new Date())
+  const [view, setView] = useState<'project' | 'member'>('project')
 
   const members: Member[] = membersData
   const projects: Project[] = projectsData
 
-  const daysInMonth = useMemo(() => {
-    const year = currentDate.getFullYear()
-    const month = currentDate.getMonth()
-    const date = new Date(year, month, 1)
-    const days = []
-    while (date.getMonth() === month) {
-      days.push(new Date(date))
-      date.setDate(date.getDate() + 1)
-    }
-    return days
-  }, [currentDate])
+  /** Days in current visible month (local) */
+  const daysInMonth = useMemo(
+    () => buildDaysInMonth(currentDate),
+    [currentDate]
+  )
 
+  /** Member map for quick formatting/lookup
+      We map both (_id -> name) and (name -> name) so project view can call:
+      memberMap.get(scheduleEntry.memberName) without hitting member.json per cell. */
   const memberMap = useMemo(() => {
-    return new Map(members.map((m) => [m.id, m.name]))
+    const map = new Map<string, string>()
+    members.forEach((m) => {
+      map.set(m._id, m.name)
+      map.set(m.name, m.name)
+    })
+    return map
   }, [members])
 
   const handleMonthChange = (offset: number) => {
-    setCurrentDate((prevDate) => {
-      const newDate = new Date(prevDate)
-      // Set to the first of the month to avoid issues with different day counts
-      newDate.setDate(1)
-      newDate.setMonth(newDate.getMonth() + offset)
-      return newDate
+    setCurrentDate((prev) => {
+      const next = new Date(prev)
+      next.setDate(1) // avoid month-roll issues
+      next.setMonth(next.getMonth() + offset)
+      return next
     })
   }
 
@@ -61,32 +94,33 @@ const OperationalPlanPage = () => {
     return days[date.getDay()]
   }
 
+  /** Today check in Bangkok local */
   const isToday = (date: Date) => {
-    const today = new Date('2025-09-05T00:00:00') // Use a consistent "today" for demonstration
-    return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
-    )
+    const today = toLocalDateString(new Date())
+    return toLocalDateString(date) === today
   }
 
+  /** ------------ PROJECT VIEW ------------ */
   const renderProjectView = () => (
     <div className="table-container">
       <table className="operational-table">
         <thead>
           <tr>
             <th className="sticky-col header-project">Project</th>
-            {daysInMonth.map((day) => (
-              <th
-                key={day.toISOString()}
-                className={`header-date ${isToday(day) ? 'today' : ''}`}
-              >
-                <div className="date-cell-content">
-                  <span className="day-initial">{getDayInitial(day)}</span>
-                  <span className="day-number">{day.getDate()}</span>
-                </div>
-              </th>
-            ))}
+            {daysInMonth.map((day) => {
+              const key = day.getTime() // stable key without UTC shifts
+              return (
+                <th
+                  key={key}
+                  className={`header-date ${isToday(day) ? 'today' : ''}`}
+                >
+                  <div className="date-cell-content">
+                    <span className="day-initial">{getDayInitial(day)}</span>
+                    <span className="day-number">{day.getDate()}</span>
+                  </div>
+                </th>
+              )
+            })}
           </tr>
         </thead>
         <tbody>
@@ -94,16 +128,22 @@ const OperationalPlanPage = () => {
             <tr key={project.projectId}>
               <td className="sticky-col cell-project">{project.projectName}</td>
               {daysInMonth.map((day) => {
-                const yyyyMmDd = day.toISOString().split('T')[0]
+                const key = day.getTime()
+                const yyyyMmDd = toLocalDateString(day)
+
                 const scheduleEntry = project.schedule.find(
                   (s) => s.date === yyyyMmDd
                 )
+
+                // No per-cell member.json lookup; rely on denormalized memberName and optional formatting via map
                 const memberName = scheduleEntry
-                  ? memberMap.get(scheduleEntry.memberId)
+                  ? memberMap.get(scheduleEntry.memberName) ??
+                    scheduleEntry.memberName
                   : ''
+
                 return (
                   <td
-                    key={day.toISOString()}
+                    key={key}
                     className={`data-cell ${memberName ? 'has-data' : ''} ${
                       isToday(day) ? 'today-cell' : ''
                     }`}
@@ -121,11 +161,13 @@ const OperationalPlanPage = () => {
     </div>
   )
 
+  /** ------------ MEMBER VIEW ------------ */
   const renderMemberView = () => {
-    const projectScheduleMap = new Map<string, string>() // Key: 'YYYY-MM-DD-memberId', Value: projectName
+    // index by (YYYY-MM-DD-<member _id>) => projectName
+    const projectScheduleMap = new Map<string, string>()
     projects.forEach((p) => {
       p.schedule.forEach((s) => {
-        const key = `${s.date}-${s.memberId}`
+        const key = `${s.date}-${s._id}`
         projectScheduleMap.set(key, p.projectName)
       })
     })
@@ -136,36 +178,42 @@ const OperationalPlanPage = () => {
           <thead>
             <tr>
               <th className="sticky-col header-project">Member</th>
-              {daysInMonth.map((day) => (
-                <th
-                  key={day.toISOString()}
-                  className={`header-date ${isToday(day) ? 'today' : ''}`}
-                >
-                  <div className="date-cell-content">
-                    <span className="day-initial">{getDayInitial(day)}</span>
-                    <span className="day-number">{day.getDate()}</span>
-                  </div>
-                </th>
-              ))}
+              {daysInMonth.map((day) => {
+                const key = day.getTime()
+                return (
+                  <th
+                    key={key}
+                    className={`header-date ${isToday(day) ? 'today' : ''}`}
+                  >
+                    <div className="date-cell-content">
+                      <span className="day-initial">{getDayInitial(day)}</span>
+                      <span className="day-number">{day.getDate()}</span>
+                    </div>
+                  </th>
+                )
+              })}
             </tr>
           </thead>
           <tbody>
             {members.map((member) => (
-              <tr key={member.id}>
+              <tr key={member._id}>
                 <td className="sticky-col cell-project">{member.name}</td>
                 {daysInMonth.map((day) => {
-                  const yyyyMmDd = day.toISOString().split('T')[0]
-                  const key = `${yyyyMmDd}-${member.id}`
-                  const projectName = projectScheduleMap.get(key)
+                  const key = day.getTime()
+                  const yyyyMmDd = toLocalDateString(day)
+                  const matchProjectName = projectScheduleMap.get(
+                    `${yyyyMmDd}-${member._id}`
+                  )
+
                   return (
                     <td
-                      key={day.toISOString()}
-                      className={`data-cell ${projectName ? 'has-data' : ''} ${
-                        isToday(day) ? 'today-cell' : ''
-                      }`}
+                      key={key}
+                      className={`data-cell ${
+                        matchProjectName ? 'has-data' : ''
+                      } ${isToday(day) ? 'today-cell' : ''}`}
                     >
-                      {projectName && (
-                        <div className="project-tag">{projectName}</div>
+                      {matchProjectName && (
+                        <div className="project-tag">{matchProjectName}</div>
                       )}
                     </td>
                   )
@@ -189,6 +237,7 @@ const OperationalPlanPage = () => {
               {currentDate.toLocaleString('default', {
                 month: 'long',
                 year: 'numeric',
+                timeZone: BKK_TZ,
               })}
             </span>
             <button onClick={() => handleMonthChange(1)}>&gt;</button>
