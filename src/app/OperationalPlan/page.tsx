@@ -9,9 +9,8 @@ import './page.css'
  *  Types
  *  =============================
  *  Member: normalized directory of people.
- *  ScheduleEntry: per-day assignment. We keep BOTH:
+ *  ScheduleEntry: per-day assignment. We now keep ONLY:
  *    - memberIds[]  : authoritative references (DB integrity, joins)
- *    - memberNames[]: denormalized strings for fast rendering (no lookup)
  *  Project: a project with a calendar of schedule entries.
  */
 type Member = {
@@ -20,10 +19,9 @@ type Member = {
 }
 
 type ScheduleEntry = {
-  date: string // YYYY-MM-DD in local (Bangkok) time; must match toLocalDateString()
-  memberIds: string[] // list of member _id (primary/authoritative)
-  memberNames: string[] // list of display names (denormalized for quick render)
-  note?: string // optional note shown under names on a second line
+  date: string
+  memberIds: string[]
+  note?: string
 }
 
 type Project = {
@@ -52,9 +50,6 @@ const toLocalDateString = (date: Date) =>
 
 /**
  * Build all Date objects for the visible month using local month/year.
- * We iterate from the 1st to the last day of the current month.
- * Note: We keep Date objects for rendering (weekday initials, numbers),
- *       but all equality/joins use toLocalDateString() for safety.
  */
 function buildDaysInMonth(anchor: Date) {
   const year = anchor.getFullYear()
@@ -78,8 +73,6 @@ const OperationalPlanPage = () => {
   /**
    * currentDate:
    * - Drives which month is rendered.
-   * - If you want a reproducible demo, use:
-   *   new Date('2025-09-05T00:00:00+07:00')
    */
   const [currentDate, setCurrentDate] = useState(new Date())
 
@@ -94,38 +87,22 @@ const OperationalPlanPage = () => {
   const members = membersData as Member[]
   const projects = projectsData as Project[]
 
-  /**
-   * daysInMonth:
-   * - Recomputed only when currentDate changes (useMemo).
-   * - Array of Date objects for each visible day.
-   */
+  /** Days of current month (memoized) */
   const daysInMonth = useMemo(
     () => buildDaysInMonth(currentDate),
     [currentDate]
   )
 
   /**
-   * memberMap:
-   * - Convenience map to format names.
-   * - We map:
-   *     (_id -> name) for ID-based lookups
-   *     (name -> name) for denormalized-name passthrough (no extra hits)
-   * - The second mapping means scheduleEntry.memberNames can be plugged in directly,
-   *   but still formatted via the map if you later want per-member transforms (e.g. aliases).
+   * memberMap: (_id -> name) for fast lookups from memberIds
    */
   const memberMap = useMemo(() => {
     const map = new Map<string, string>()
-    members.forEach((m) => {
-      map.set(m._id, m.name) // canonical ID -> name
-      map.set(m.name, m.name) // name passthrough (keeps project-view fast)
-    })
+    members.forEach((m) => map.set(m._id, m.name))
     return map
   }, [members])
 
-  /**
-   * Month navigation:
-   * - Set date to day 1 first to avoid month-end rollover bugs.
-   */
+  /** Month navigation */
   const handleMonthChange = (offset: number) => {
     setCurrentDate((prev) => {
       const next = new Date(prev)
@@ -135,32 +112,19 @@ const OperationalPlanPage = () => {
     })
   }
 
-  /** Render "S,M,T,W,T,F,S" weekday initial for header. */
+  /** Weekday initial for header */
   const getDayInitial = (date: Date) => {
     const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
     return days[date.getDay()]
   }
 
-  /**
-   * isToday:
-   * - Compares local YYYY-MM-DD strings in Asia/Bangkok.
-   * - Avoids UTC drift that causes "today" highlight to shift a day.
-   */
+  /** Today check using local YYYY-MM-DD */
   const isToday = (date: Date) => {
     const today = toLocalDateString(new Date())
     return toLocalDateString(date) === today
   }
 
-  /** ------------ PROJECT VIEW ------------
-   *  Rows:    projects
-   *  Columns: days of the visible month
-   *  Cell:    member names (first line) + note (second line)
-   *
-   *  Performance note:
-   *  - We do a simple .find() per cell; fine for small/medium data.
-   *  - For very large months/projects, consider pre-indexing each project's
-   *    schedule to a Map<YYYY-MM-DD, ScheduleEntry> to achieve O(1) cell lookup.
-   */
+  /** ------------ PROJECT VIEW ------------ */
   const renderProjectView = () => (
     <div className="table-container">
       <table className="operational-table">
@@ -168,7 +132,6 @@ const OperationalPlanPage = () => {
           <tr>
             <th className="sticky-col header-project">Project</th>
             {daysInMonth.map((day) => {
-              // Use getTime() as a stable key; avoids timezone/ISO surprises.
               const key = day.getTime()
               return (
                 <th
@@ -200,16 +163,13 @@ const OperationalPlanPage = () => {
                   (s) => s.date === yyyyMmDd
                 )
 
-                // Render line 1: names, mapped/passthrough via memberMap
+                // Convert IDs -> names for display
                 const memberNames =
-                  scheduleEntry?.memberNames.map(
-                    (n) => memberMap.get(n) ?? n
+                  scheduleEntry?.memberIds.map(
+                    (id) => memberMap.get(id) ?? id
                   ) ?? []
 
-                // Render line 2: optional note
                 const note = (scheduleEntry?.note || '').trim()
-
-                // If we have either names or a note, mark cell as "has-data"
                 const hasAny = memberNames.length > 0 || note.length > 0
 
                 return (
@@ -218,18 +178,15 @@ const OperationalPlanPage = () => {
                     className={`data-cell ${hasAny ? 'has-data' : ''} ${
                       isToday(day) ? 'today-cell' : ''
                     }`}
-                    // Title as a quick hover tooltip for longer notes
                     title={note ? note : undefined}
                   >
                     {hasAny && (
                       <div className="cell-lines">
-                        {/* Line 1: comma-joined names (swap to individual pills if desired) */}
                         {memberNames.length > 0 && (
                           <div className="member-tag text-wrap">
                             {memberNames.join(', ')}
                           </div>
                         )}
-                        {/* Line 2: note, styled subtly under names */}
                         {note && (
                           <div className="note-text text-wrap">{note}</div>
                         )}
@@ -245,13 +202,7 @@ const OperationalPlanPage = () => {
     </div>
   )
 
-  /** ------------ MEMBER VIEW ------------
-   *  Rows:    members
-   *  Columns: days of the visible month
-   *  Cell:    project name if the member is assigned that day
-   *
-   *  We precompute a Map<YYYY-MM-DD-<memberId>, projectName> for O(1) lookups.
-   */
+  /** ------------ MEMBER VIEW ------------ */
   const renderMemberView = () => {
     // Pre-index all assignments for quick per-cell checks
     const projectScheduleMap = new Map<string, string>()
@@ -328,18 +279,16 @@ const OperationalPlanPage = () => {
   return (
     <div className="plan-container">
       <header className="plan-header">
-        <h1>Operational Plan</h1>
-
-        {/* Controls: month navigation + view switcher */}
+        <h1>แผนปฏิบัติงาน</h1>
         <div className="controls">
-          {/* Month selector: previous / current month label / next */}
           <div className="month-selector">
             <button onClick={() => handleMonthChange(-1)}>&lt;</button>
             <span>
-              {currentDate.toLocaleString('default', {
+              {currentDate.toLocaleString('th-TH', {
                 month: 'long',
                 year: 'numeric',
-                timeZone: BKK_TZ, // Render label in Bangkok time
+                calendar: 'buddhist',
+                timeZone: BKK_TZ,
               })}
             </span>
             <button onClick={() => handleMonthChange(1)}>&gt;</button>

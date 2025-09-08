@@ -59,6 +59,7 @@
       📁 license
       📁 line-webhook
       📁 manage-notification
+      📁 OperationalPlan
       📁 projects
       📁 scripts
     📁 components
@@ -97,6 +98,7 @@
       📄 page.css
       📄 page.tsx
     📁 OperationalPlan
+      📁 addMember
       📄 member.json
       📄 page.css
       📄 page.tsx
@@ -161,6 +163,8 @@
     📄 Employee.ts
     📄 License.ts
     📄 Notification.ts
+    📁 OperationalPlan
+      📄 Member.ts
     📄 Project.ts
   📁 styles
     📄 globals.css

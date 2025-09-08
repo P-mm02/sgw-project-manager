@@ -6,37 +6,31 @@
       {
         "date": "2025-09-01",
         "memberIds": ["m1", "m2"],
-        "memberNames": ["Aliceeeeeeeeeeeeeeeeeeeee", "Bob"],
         "note": "Design kickoff & sitemap review"
       },
       {
         "date": "2025-09-02",
         "memberIds": ["m3"],
-        "memberNames": ["Charlie"],
         "note": "Wireframes V1"
       },
       {
         "date": "2025-09-05",
         "memberIds": ["m4", "m5"],
-        "memberNames": ["Diana", "Ethan"],
         "note": "Component library setup"
       },
       {
         "date": "2025-09-09",
         "memberIds": ["m6", "m7"],
-        "memberNames": ["Fiona", "George"],
         "note": "Hero section & CTA test"
       },
       {
         "date": "2025-09-15",
         "memberIds": ["m1", "m8"],
-        "memberNames": ["Alice", "Hannah"],
         "note": "Client review round 1"
       },
       {
         "date": "2025-09-29",
         "memberIds": ["m2", "m3"],
-        "memberNames": ["Bob", "Charlie"],
         "note": "Accessibility pass (WCAG)"
       }
     ]
@@ -48,37 +42,31 @@
       {
         "date": "2025-09-03",
         "memberIds": ["m5"],
-        "memberNames": ["Ethan"],
         "note": "CI/CD pipeline"
       },
       {
         "date": "2025-09-05",
         "memberIds": ["m6"],
-        "memberNames": ["Fiona"],
         "note": "Push notification test"
       },
       {
         "date": "2025-09-06",
         "memberIds": ["m7", "m8"],
-        "memberNames": ["George", "Hannah"],
         "note": "Beta build QA"
       },
       {
         "date": "2025-09-12",
         "memberIds": ["m1", "m4"],
-        "memberNames": ["Alice", "Diana"],
         "note": "Store listing assets"
       },
       {
         "date": "2025-09-18",
         "memberIds": ["m2", "m3"],
-        "memberNames": ["Bob", "Charlie"],
         "note": "Crash reporting setup"
       },
       {
         "date": "2025-09-25",
         "memberIds": ["m5", "m6", "m7"],
-        "memberNames": ["Ethan", "Fiona", "George"],
         "note": "Launch rehearsal"
       }
     ]
@@ -90,31 +78,26 @@
       {
         "date": "2025-09-01",
         "memberIds": ["m2", "m8"],
-        "memberNames": ["Bob", "Hannah"],
         "note": "Campaign brief & KPIs"
       },
       {
         "date": "2025-09-08",
         "memberIds": ["m1", "m3"],
-        "memberNames": ["Alice", "Charlie"],
         "note": "Creative concepts A/B"
       },
       {
         "date": "2025-09-15",
         "memberIds": ["m4", "m5"],
-        "memberNames": ["Diana", "Ethan"],
         "note": "Landing page copy"
       },
       {
         "date": "2025-09-23",
         "memberIds": ["m6", "m7"],
-        "memberNames": ["Fiona", "George"],
         "note": "Ad set launch"
       },
       {
         "date": "2025-09-30",
         "memberIds": ["m1", "m2", "m3"],
-        "memberNames": ["Alice", "Bob", "Charlie"],
         "note": "Performance review & next sprint"
       }
     ]
@@ -126,25 +109,21 @@
       {
         "date": "2025-09-22",
         "memberIds": ["m4", "m5", "m6"],
-        "memberNames": ["Diana", "Ethan", "Fiona"],
         "note": "Infra provisioning"
       },
       {
         "date": "2025-09-29",
         "memberIds": ["m7"],
-        "memberNames": ["George"],
         "note": "Blue/green strategy"
       },
       {
         "date": "2025-09-30",
         "memberIds": ["m8"],
-        "memberNames": ["Hannah"],
         "note": "Data migration rehearsal"
       },
       {
         "date": "2025-10-01",
         "memberIds": ["m1", "m2"],
-        "memberNames": ["Alice", "Bob"],
         "note": "Cutover & monitoring"
       }
     ]
@@ -156,37 +135,31 @@
       {
         "date": "2025-09-04",
         "memberIds": ["m2", "m5"],
-        "memberNames": ["Bob", "Ethan"],
         "note": "Star schema design"
       },
       {
         "date": "2025-09-07",
         "memberIds": ["m1"],
-        "memberNames": ["Alice"],
         "note": "ETL pipeline setup"
       },
       {
         "date": "2025-09-13",
         "memberIds": ["m3", "m6"],
-        "memberNames": ["Charlie", "Fiona"],
         "note": "Connector integrations"
       },
       {
         "date": "2025-09-19",
         "memberIds": ["m4"],
-        "memberNames": ["Diana"],
         "note": "Stakeholder demo"
       },
       {
         "date": "2025-09-26",
         "memberIds": ["m7", "m8"],
-        "memberNames": ["George", "Hannah"],
         "note": "Load/performance test"
       },
       {
         "date": "2025-10-02",
         "memberIds": ["m1", "m2"],
-        "memberNames": ["Alice", "Bob"],
         "note": "Production handoff"
       }
     ]
@@ -198,37 +171,31 @@
       {
         "date": "2025-09-02",
         "memberIds": ["m1", "m8"],
-        "memberNames": ["Alice", "Hannah"],
         "note": "Landing & hero sections"
       },
       {
         "date": "2025-09-11",
         "memberIds": ["m2"],
-        "memberNames": ["Bob"],
         "note": "Booking flow (Next.js)"
       },
       {
         "date": "2025-09-14",
         "memberIds": ["m4", "m5"],
-        "memberNames": ["Diana", "Ethan"],
         "note": "CMS content & images"
       },
       {
         "date": "2025-09-20",
         "memberIds": ["m6"],
-        "memberNames": ["Fiona"],
         "note": "SEO & analytics"
       },
       {
         "date": "2025-09-27",
         "memberIds": ["m3", "m7"],
-        "memberNames": ["Charlie", "George"],
         "note": "UAT & bug bash"
       },
       {
         "date": "2025-10-04",
         "memberIds": ["m1"],
-        "memberNames": ["Alice"],
         "note": "Launch window"
       }
     ]
@@ -240,37 +207,31 @@
       {
         "date": "2025-09-05",
         "memberIds": ["m1", "m2"],
-        "memberNames": ["Alice", "Bob"],
         "note": "Notification module revamp"
       },
       {
         "date": "2025-09-10",
         "memberIds": ["m3"],
-        "memberNames": ["Charlie"],
         "note": "License CRUD & validation"
       },
       {
         "date": "2025-09-17",
         "memberIds": ["m4", "m6"],
-        "memberNames": ["Diana", "Fiona"],
         "note": "LINE webhook integration"
       },
       {
         "date": "2025-09-21",
         "memberIds": ["m5"],
-        "memberNames": ["Ethan"],
         "note": "Analytics dashboard"
       },
       {
         "date": "2025-09-28",
         "memberIds": ["m7", "m8"],
-        "memberNames": ["George", "Hannah"],
         "note": "Edge functions & caching"
       },
       {
         "date": "2025-10-03",
         "memberIds": ["m2", "m3"],
-        "memberNames": ["Bob", "Charlie"],
         "note": "Release candidate build"
       }
     ]
@@ -282,37 +243,31 @@
       {
         "date": "2025-09-06",
         "memberIds": ["m6"],
-        "memberNames": ["Fiona"],
         "note": "Dependency scan & SBOM"
       },
       {
         "date": "2025-09-09",
         "memberIds": ["m2", "m5"],
-        "memberNames": ["Bob", "Ethan"],
         "note": "Threat modeling workshop"
       },
       {
         "date": "2025-09-16",
         "memberIds": ["m4"],
-        "memberNames": ["Diana"],
         "note": "WAF rules & rate limits"
       },
       {
         "date": "2025-09-24",
         "memberIds": ["m1", "m3"],
-        "memberNames": ["Alice", "Charlie"],
         "note": "Pentest remediation"
       },
       {
         "date": "2025-09-30",
         "memberIds": ["m7"],
-        "memberNames": ["George"],
         "note": "Final audit report"
       },
       {
         "date": "2025-10-01",
         "memberIds": ["m8"],
-        "memberNames": ["Hannah"],
         "note": "Policy rollout & training"
       }
     ]
