@@ -1,64 +1,43 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
-import membersData from './member.json'
-import projectsData from './project.json'
+import React, { useEffect, useMemo, useState } from 'react'
 import './page.css'
+import Link from 'next/link'
 
 /** =============================
  *  Types
- *  =============================
- *  Member: normalized directory of people.
- *  ScheduleEntry: per-day assignment. We now keep ONLY:
- *    - memberIds[]  : authoritative references (DB integrity, joins)
- *  Project: a project with a calendar of schedule entries.
- */
-type Member = {
-  _id: string
-  name: string
-}
+ *  ============================= */
+type Member = { _id: string; name: string }
 
 type ScheduleEntry = {
-  date: string
+  startDate: string // YYYY-MM-DD (local BKK)
+  endDate: string // YYYY-MM-DD (local BKK)
   memberIds: string[]
   note?: string
 }
 
 type Project = {
-  projectId: string
+  _id: string
   projectName: string
   schedule: ScheduleEntry[]
 }
 
 /** =============================
- *  Timezone helpers (Bangkok)
- *  =============================
- *  IMPORTANT:
- *  - Never use toISOString().split('T')[0] for day keys in Thailand;
- *    ISO uses UTC and will shift your date by -7 hours, causing a 1-day drift.
- *  - We always derive keys as local YYYY-MM-DD in Asia/Bangkok.
- */
+ *  Timezone / date helpers (Bangkok)
+ *  ============================= */
 const BKK_TZ = 'Asia/Bangkok'
 
-/**
- * Return YYYY-MM-DD in Bangkok local time.
- * We use 'en-CA' locale because it formats as ISO-like "YYYY-MM-DD".
- * This string is our canonical day key across the app.
- */
+/** Return YYYY-MM-DD in Bangkok local time. */
 const toLocalDateString = (date: Date) =>
-  date.toLocaleDateString('en-CA', { timeZone: BKK_TZ }) // en-CA => YYYY-MM-DD
+  date.toLocaleDateString('en-CA', { timeZone: BKK_TZ })
 
-/**
- * Build all Date objects for the visible month using local month/year.
- */
+/** Build all Date objects for the visible month using local month/year. */
 function buildDaysInMonth(anchor: Date) {
   const year = anchor.getFullYear()
   const month = anchor.getMonth()
   const start = new Date(year, month, 1)
-
   const days: Date[] = []
   const d = new Date(start)
-
   while (d.getMonth() === month) {
     days.push(new Date(d))
     d.setDate(d.getDate() + 1)
@@ -66,36 +45,90 @@ function buildDaysInMonth(anchor: Date) {
   return days
 }
 
+/** Local date math (no UTC drift) */
+function parseYMD(str: string): { y: number; m: number; d: number } {
+  const [y, m, d] = str.split('-').map(Number)
+  return { y, m, d }
+}
+function makeLocalDate(ymd: string): Date {
+  const { y, m, d } = parseYMD(ymd)
+  return new Date(y, m - 1, d)
+}
+function cmpYMD(a: string, b: string) {
+  return a < b ? -1 : a > b ? 1 : 0
+}
+function clampDateStr(dateStr: string, minStr: string, maxStr: string) {
+  if (cmpYMD(dateStr, minStr) < 0) return minStr
+  if (cmpYMD(dateStr, maxStr) > 0) return maxStr
+  return dateStr
+}
+function addDaysYMD(ymd: string, days: number): string {
+  const d = makeLocalDate(ymd)
+  d.setDate(d.getDate() + days)
+  return toLocalDateString(d)
+}
+/** Inclusive #days from a->b (YYYY-MM-DD, a<=b). */
+function inclusiveSpanDays(a: string, b: string): number {
+  const da = makeLocalDate(a)
+  const db = makeLocalDate(b)
+  const ms = db.getTime() - da.getTime()
+  return Math.floor(ms / 86400000) + 1
+}
+/** 0-based index of a date inside the current month window */
+function dayIndexFromMonthStart(dayStr: string, monthStartStr: string) {
+  return inclusiveSpanDays(monthStartStr, dayStr) - 1
+}
+
 /** =============================
- *  Component
+ *  Page Component
  *  ============================= */
 const OperationalPlanPage = () => {
-  /**
-   * currentDate:
-   * - Drives which month is rendered.
-   */
   const [currentDate, setCurrentDate] = useState(new Date())
-
-  /**
-   * view:
-   * - 'project'  = rows are projects, columns are days
-   * - 'member'   = rows are members, columns are days
-   */
   const [view, setView] = useState<'project' | 'member'>('project')
 
-  // Source data (JSON). Cast for strong typing.
-  const members = membersData as Member[]
-  const projects = projectsData as Project[]
+  const [members, setMembers] = useState<Member[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  /** Days of current month (memoized) */
+  // Fetch members + projects from API routes
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        setLoading(true)
+        const [mRes, pRes] = await Promise.all([
+          fetch('/api/OperationalPlan/member/get', { cache: 'no-store' }),
+          fetch('/api/OperationalPlan/project/get', { cache: 'no-store' }),
+        ])
+        if (!mRes.ok) throw new Error(`Member HTTP ${mRes.status}`)
+        if (!pRes.ok) throw new Error(`Project HTTP ${pRes.status}`)
+        const [{ members }, { projects }] = await Promise.all([
+          mRes.json(),
+          pRes.json(),
+        ])
+        if (cancelled) return
+        setMembers(members as Member[])
+        setProjects(projects as Project[])
+      } catch (e: any) {
+        if (!cancelled) setError(e?.message || 'Load failed')
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const daysInMonth = useMemo(
     () => buildDaysInMonth(currentDate),
     [currentDate]
   )
 
-  /**
-   * memberMap: (_id -> name) for fast lookups from memberIds
-   */
+  const monthStartStr = toLocalDateString(daysInMonth[0])
+  const monthEndStr = toLocalDateString(daysInMonth[daysInMonth.length - 1])
+
   const memberMap = useMemo(() => {
     const map = new Map<string, string>()
     members.forEach((m) => map.set(m._id, m.name))
@@ -124,100 +157,152 @@ const OperationalPlanPage = () => {
     return toLocalDateString(date) === today
   }
 
-  /** ------------ PROJECT VIEW ------------ */
-  const renderProjectView = () => (
-    <div className="table-container">
-      <table className="operational-table">
-        <thead>
-          <tr>
-            <th className="sticky-col header-project">Project</th>
-            {daysInMonth.map((day) => {
-              const key = day.getTime()
-              return (
-                <th
-                  key={key}
-                  className={`header-date ${isToday(day) ? 'today' : ''}`}
-                >
-                  <div className="date-cell-content">
-                    <span className="day-initial">{getDayInitial(day)}</span>
-                    <span className="day-number">{day.getDate()}</span>
-                  </div>
-                </th>
-              )
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((project) => (
-            <tr key={project.projectId}>
-              {/* Sticky left column with project name */}
-              <td className="sticky-col cell-project">{project.projectName}</td>
-
-              {/* One cell per day */}
-              {daysInMonth.map((day) => {
-                const key = day.getTime()
-                const yyyyMmDd = toLocalDateString(day)
-
-                // Find schedule (if any) for this exact local day
-                const scheduleEntry = project.schedule.find(
-                  (s) => s.date === yyyyMmDd
-                )
-
-                // Convert IDs -> names for display
-                const memberNames =
-                  scheduleEntry?.memberIds.map(
-                    (id) => memberMap.get(id) ?? id
-                  ) ?? []
-
-                const note = (scheduleEntry?.note || '').trim()
-                const hasAny = memberNames.length > 0 || note.length > 0
-
-                return (
-                  <td
-                    key={key}
-                    className={`data-cell ${hasAny ? 'has-data' : ''} ${
-                      isToday(day) ? 'today-cell' : ''
-                    }`}
-                    title={note ? note : undefined}
-                  >
-                    {hasAny && (
-                      <div className="cell-lines">
-                        {memberNames.length > 0 && (
-                          <div className="member-tag text-wrap">
-                            {memberNames.join(', ')}
-                          </div>
-                        )}
-                        {note && (
-                          <div className="note-text text-wrap">{note}</div>
-                        )}
-                      </div>
-                    )}
-                  </td>
-                )
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-
-  /** ------------ MEMBER VIEW ------------ */
-  const renderMemberView = () => {
-    // Pre-index all assignments for quick per-cell checks
-    const projectScheduleMap = new Map<string, string>()
-    projects.forEach((p) => {
-      p.schedule.forEach((s) => {
-        s.memberIds.forEach((id) => {
-          const key = `${s.date}-${id}`
-          projectScheduleMap.set(key, p.projectName)
-        })
-      })
-    })
+  /** ------------ PROJECT VIEW (CSS Grid lanes) ------------ */
+  const renderProjectView = () => {
+    const todayIdx = daysInMonth.findIndex((d) => isToday(d))
 
     return (
       <div className="table-container">
         <table className="operational-table">
+          <colgroup>
+            <col className="col-sticky" />
+            {daysInMonth.map((_, i) => (
+              <col key={`proj-col-${i}`} className="col-day" />
+            ))}
+          </colgroup>
+
+          <thead>
+            <tr>
+              <th className="sticky-col header-project">Project</th>
+              {daysInMonth.map((day) => {
+                const key = day.getTime()
+                return (
+                  <th
+                    key={key}
+                    className={`header-date ${isToday(day) ? 'today' : ''}`}
+                  >
+                    <div className="date-cell-content">
+                      <span className="day-initial">{getDayInitial(day)}</span>
+                      <span className="day-number">{day.getDate()}</span>
+                    </div>
+                  </th>
+                )
+              })}
+            </tr>
+          </thead>
+
+          <tbody>
+            {projects.map((project) => {
+              return (
+                <tr key={project._id}>
+                  <td className="sticky-col cell-project">
+                    {project.projectName}
+                  </td>
+
+                  {/* ONE grid cell spans all days; CSS Grid will auto-stack overlaps */}
+                  <td className="grid-cell" colSpan={daysInMonth.length}>
+                    {/* today marker column inside the grid */}
+                    {todayIdx >= 0 && (
+                      <div
+                        className="today-marker-abs"
+                        style={
+                          {
+                            // 0-based column index -> used in CSS calc()
+                            ['--col' as any]: todayIdx,
+                          } as React.CSSProperties
+                        }
+                      />
+                    )}
+
+                    <div
+                      className="row-grid"
+                      style={
+                        {
+                          ['--days' as any]: daysInMonth.length, // expose day count to CSS
+                        } as React.CSSProperties
+                      }
+                    >
+                      {/* bars */}
+                      {project.schedule.map((s, idx) => {
+                        // clamp to visible month
+                        const start = clampDateStr(
+                          s.startDate,
+                          monthStartStr,
+                          monthEndStr
+                        )
+                        const end = clampDateStr(
+                          s.endDate,
+                          monthStartStr,
+                          monthEndStr
+                        )
+                        if (cmpYMD(start, end) > 0) return null // out of view
+
+                        const startIdx = dayIndexFromMonthStart(
+                          start,
+                          monthStartStr
+                        )
+                        const endIdx = dayIndexFromMonthStart(
+                          end,
+                          monthStartStr
+                        )
+
+                        const memberNames = s.memberIds.map(
+                          (id) => memberMap.get(id) ?? id
+                        )
+                        const note = (s.note || '').trim()
+                        const hasAny = memberNames.length > 0 || note.length > 0
+
+                        return (
+                          <div
+                            key={`${project._id}-bar-${idx}`}
+                            className="grid-bar"
+                            style={{
+                              gridColumn: `${startIdx + 1} / ${endIdx + 2}`,
+                            }}
+                            title={note || undefined}
+                          >
+                            {hasAny && (
+                              <>
+                                {memberNames.length > 0 && (
+                                  <div className="member-tag text-wrap">
+                                    {memberNames.join(', ')}
+                                  </div>
+                                )}
+                                {note && (
+                                  <div className="note-text text-wrap">
+                                    {note}
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  /** ------------ MEMBER VIEW (CSS Grid lanes, like Project View) ------------ */
+  const renderMemberView = () => {
+    const todayIdx = daysInMonth.findIndex((d) => isToday(d))
+
+    return (
+      <div className="table-container">
+        <table className="operational-table">
+          <colgroup>
+            <col className="col-sticky" />
+            {daysInMonth.map((_, i) => (
+              <col key={`m-col-${i}`} className="col-day" />
+            ))}
+          </colgroup>
+
           <thead>
             <tr>
               <th className="sticky-col header-project">Member</th>
@@ -237,41 +322,126 @@ const OperationalPlanPage = () => {
               })}
             </tr>
           </thead>
+
           <tbody>
-            {members.map((member) => (
-              <tr key={member._id}>
-                {/* Sticky left column with member name */}
-                <td className="sticky-col cell-project">{member.name}</td>
+            {members.map((member) => {
+              // Build this member's bars from all projects' schedules
+              const bars: Array<{
+                start: string
+                end: string
+                projectName: string
+                note?: string
+              }> = []
 
-                {/* One cell per day */}
-                {daysInMonth.map((day) => {
-                  const key = day.getTime()
-                  const yyyyMmDd = toLocalDateString(day)
-
-                  // O(1) lookup using pre-indexed map
-                  const matchProjectName = projectScheduleMap.get(
-                    `${yyyyMmDd}-${member._id}`
+              projects.forEach((p) => {
+                p.schedule.forEach((s) => {
+                  if (!s.memberIds.includes(member._id)) return
+                  // clamp to visible month window
+                  const start = clampDateStr(
+                    s.startDate,
+                    monthStartStr,
+                    monthEndStr
                   )
+                  const end = clampDateStr(
+                    s.endDate,
+                    monthStartStr,
+                    monthEndStr
+                  )
+                  if (cmpYMD(start, end) > 0) return
+                  bars.push({
+                    start,
+                    end,
+                    projectName: p.projectName,
+                    note: s.note?.trim(),
+                  })
+                })
+              })
 
-                  return (
-                    <td
-                      key={key}
-                      className={`data-cell ${
-                        matchProjectName ? 'has-data' : ''
-                      } ${isToday(day) ? 'today-cell' : ''}`}
+              return (
+                <tr key={member._id}>
+                  <td className="sticky-col cell-project">{member.name}</td>
+
+                  {/* ONE grid cell spans all days; bars auto-stack when overlapping */}
+                  <td className="grid-cell" colSpan={daysInMonth.length}>
+                    {/* full-height today overlay aligned to the day column */}
+                    {todayIdx >= 0 && (
+                      <div
+                        className="today-marker-abs"
+                        style={
+                          { ['--col' as any]: todayIdx } as React.CSSProperties
+                        }
+                      />
+                    )}
+
+                    <div
+                      className="row-grid"
+                      style={
+                        {
+                          ['--days' as any]: daysInMonth.length,
+                        } as React.CSSProperties
+                      }
                     >
-                      {matchProjectName && (
-                        <div className="project-tag text-wrap">
-                          {matchProjectName}
-                        </div>
-                      )}
-                    </td>
-                  )
-                })}
-              </tr>
-            ))}
+                      {bars.map((b, i) => {
+                        const startIdx = dayIndexFromMonthStart(
+                          b.start,
+                          monthStartStr
+                        )
+                        const endIdx = dayIndexFromMonthStart(
+                          b.end,
+                          monthStartStr
+                        )
+                        return (
+                          <div
+                            key={`${member._id}-bar-${i}`}
+                            className="grid-bar"
+                            style={{
+                              gridColumn: `${startIdx + 1} / ${endIdx + 2}`,
+                            }}
+                            title={b.note || undefined}
+                          >
+                            <div className="project-tag text-wrap">
+                              {b.projectName}
+                            </div>
+                            {b.note && (
+                              <div className="note-text text-wrap">
+                                {b.note}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
+      </div>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div className="plan-container">
+        <header className="plan-header">
+          <h1>แผนปฏิบัติงาน</h1>
+        </header>
+        <main>
+          <p>Loading…</p>
+        </main>
+      </div>
+    )
+  }
+  if (error) {
+    return (
+      <div className="plan-container">
+        <header className="plan-header">
+          <h1>แผนปฏิบัติงาน</h1>
+        </header>
+        <main>
+          <p className="error">Error: {error}</p>
+        </main>
       </div>
     )
   }
@@ -280,6 +450,15 @@ const OperationalPlanPage = () => {
     <div className="plan-container">
       <header className="plan-header">
         <h1>แผนปฏิบัติงาน</h1>
+        <div className="data-management">
+          <Link href="/OperationalPlan/addMember" className="dm-link">
+            บุคลากร
+          </Link>
+          <Link href="/OperationalPlan/addProject" className="dm-link">
+            โครงการ
+          </Link>
+        </div>
+
         <div className="controls">
           <div className="month-selector">
             <button onClick={() => handleMonthChange(-1)}>&lt;</button>
@@ -294,7 +473,6 @@ const OperationalPlanPage = () => {
             <button onClick={() => handleMonthChange(1)}>&gt;</button>
           </div>
 
-          {/* Toggle between Project and Member views */}
           <div className="view-switcher">
             <button
               className={view === 'project' ? 'active' : ''}
@@ -312,7 +490,6 @@ const OperationalPlanPage = () => {
         </div>
       </header>
 
-      {/* Main table content based on current view */}
       <main>
         {view === 'project' ? renderProjectView() : renderMemberView()}
       </main>

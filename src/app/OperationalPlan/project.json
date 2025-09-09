@@ -1,273 +1,437 @@
 [
   {
-    "projectId": "p1",
+    "_id": "p1",
     "projectName": "Website Redesign",
     "schedule": [
       {
-        "date": "2025-09-01",
-        "memberIds": ["m1", "m2"],
+        "startDate": "2025-09-01",
+        "endDate": "2025-09-06",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4907a15967abd76dd0",
+          "68be9f4d07a15967abd76de5"
+        ],
         "note": "Design kickoff & sitemap review"
       },
       {
-        "date": "2025-09-02",
-        "memberIds": ["m3"],
+        "startDate": "2025-09-02",
+        "endDate": "2025-09-04",
+        "memberIds": ["68be9f4a07a15967abd76dd3", "68be9f4e07a15967abd76de8"],
         "note": "Wireframes V1"
       },
       {
-        "date": "2025-09-05",
-        "memberIds": ["m4", "m5"],
+        "startDate": "2025-09-05",
+        "endDate": "2025-09-11",
+        "memberIds": [
+          "68be9f4a07a15967abd76dd6",
+          "68be9f4b07a15967abd76dd9",
+          "68be9f4e07a15967abd76deb"
+        ],
         "note": "Component library setup"
       },
       {
-        "date": "2025-09-09",
-        "memberIds": ["m6", "m7"],
+        "startDate": "2025-09-09",
+        "endDate": "2025-09-14",
+        "memberIds": [
+          "68be9f4b07a15967abd76ddc",
+          "68be9f4c07a15967abd76ddf",
+          "68be9f4f07a15967abd76dee"
+        ],
         "note": "Hero section & CTA test"
       },
       {
-        "date": "2025-09-15",
-        "memberIds": ["m1", "m8"],
+        "startDate": "2025-09-15",
+        "endDate": "2025-09-21",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4c07a15967abd76de2",
+          "68be9f4f07a15967abd76df1"
+        ],
         "note": "Client review round 1"
       },
       {
-        "date": "2025-09-29",
-        "memberIds": ["m2", "m3"],
+        "startDate": "2025-09-29",
+        "endDate": "2025-10-03",
+        "memberIds": [
+          "68be9f4907a15967abd76dd0",
+          "68be9f4a07a15967abd76dd3",
+          "68be9f5007a15967abd76df4"
+        ],
         "note": "Accessibility pass (WCAG)"
       }
     ]
   },
   {
-    "projectId": "p2",
+    "_id": "p2",
     "projectName": "Mobile App Launch",
     "schedule": [
       {
-        "date": "2025-09-03",
-        "memberIds": ["m5"],
+        "startDate": "2025-09-03",
+        "endDate": "2025-09-09",
+        "memberIds": ["68be9f4b07a15967abd76dd9", "68be9f5007a15967abd76df7"],
         "note": "CI/CD pipeline"
       },
       {
-        "date": "2025-09-05",
-        "memberIds": ["m6"],
+        "startDate": "2025-09-05",
+        "endDate": "2025-09-06",
+        "memberIds": ["68be9f4b07a15967abd76ddc", "68be9f5107a15967abd76dfa"],
         "note": "Push notification test"
       },
       {
-        "date": "2025-09-06",
-        "memberIds": ["m7", "m8"],
+        "startDate": "2025-09-06",
+        "endDate": "2025-09-11",
+        "memberIds": [
+          "68be9f4c07a15967abd76ddf",
+          "68be9f4c07a15967abd76de2",
+          "68be9f4d07a15967abd76de5"
+        ],
         "note": "Beta build QA"
       },
       {
-        "date": "2025-09-12",
-        "memberIds": ["m1", "m4"],
+        "startDate": "2025-09-12",
+        "endDate": "2025-09-15",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4a07a15967abd76dd6",
+          "68be9f4e07a15967abd76de8"
+        ],
         "note": "Store listing assets"
       },
       {
-        "date": "2025-09-18",
-        "memberIds": ["m2", "m3"],
+        "startDate": "2025-09-18",
+        "endDate": "2025-09-23",
+        "memberIds": [
+          "68be9f4907a15967abd76dd0",
+          "68be9f4a07a15967abd76dd3",
+          "68be9f4e07a15967abd76deb"
+        ],
         "note": "Crash reporting setup"
       },
       {
-        "date": "2025-09-25",
-        "memberIds": ["m5", "m6", "m7"],
+        "startDate": "2025-09-25",
+        "endDate": "2025-09-28",
+        "memberIds": [
+          "68be9f4b07a15967abd76dd9",
+          "68be9f4b07a15967abd76ddc",
+          "68be9f4c07a15967abd76ddf",
+          "68be9f4f07a15967abd76dee"
+        ],
         "note": "Launch rehearsal"
       }
     ]
   },
   {
-    "projectId": "p3",
+    "_id": "p3",
     "projectName": "Marketing Campaign",
     "schedule": [
       {
-        "date": "2025-09-01",
-        "memberIds": ["m2", "m8"],
+        "startDate": "2025-09-01",
+        "endDate": "2025-09-05",
+        "memberIds": [
+          "68be9f4907a15967abd76dd0",
+          "68be9f4c07a15967abd76de2",
+          "68be9f4f07a15967abd76df1"
+        ],
         "note": "Campaign brief & KPIs"
       },
       {
-        "date": "2025-09-08",
-        "memberIds": ["m1", "m3"],
+        "startDate": "2025-09-08",
+        "endDate": "2025-09-13",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4a07a15967abd76dd3",
+          "68be9f5007a15967abd76df4"
+        ],
         "note": "Creative concepts A/B"
       },
       {
-        "date": "2025-09-15",
-        "memberIds": ["m4", "m5"],
+        "startDate": "2025-09-15",
+        "endDate": "2025-09-16",
+        "memberIds": [
+          "68be9f4a07a15967abd76dd6",
+          "68be9f4b07a15967abd76dd9",
+          "68be9f5007a15967abd76df7"
+        ],
         "note": "Landing page copy"
       },
       {
-        "date": "2025-09-23",
-        "memberIds": ["m6", "m7"],
+        "startDate": "2025-09-23",
+        "endDate": "2025-09-29",
+        "memberIds": [
+          "68be9f4b07a15967abd76ddc",
+          "68be9f4c07a15967abd76ddf",
+          "68be9f5107a15967abd76dfa"
+        ],
         "note": "Ad set launch"
       },
       {
-        "date": "2025-09-30",
-        "memberIds": ["m1", "m2", "m3"],
+        "startDate": "2025-09-30",
+        "endDate": "2025-10-02",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4907a15967abd76dd0",
+          "68be9f4a07a15967abd76dd3",
+          "68be9f4d07a15967abd76de5"
+        ],
         "note": "Performance review & next sprint"
       }
     ]
   },
   {
-    "projectId": "p4",
+    "_id": "p4",
     "projectName": "Server Migration",
     "schedule": [
       {
-        "date": "2025-09-22",
-        "memberIds": ["m4", "m5", "m6"],
+        "startDate": "2025-09-22",
+        "endDate": "2025-09-28",
+        "memberIds": [
+          "68be9f4a07a15967abd76dd6",
+          "68be9f4b07a15967abd76dd9",
+          "68be9f4b07a15967abd76ddc",
+          "68be9f4e07a15967abd76de8"
+        ],
         "note": "Infra provisioning"
       },
       {
-        "date": "2025-09-29",
-        "memberIds": ["m7"],
+        "startDate": "2025-09-29",
+        "endDate": "2025-10-01",
+        "memberIds": ["68be9f4c07a15967abd76ddf", "68be9f4e07a15967abd76deb"],
         "note": "Blue/green strategy"
       },
       {
-        "date": "2025-09-30",
-        "memberIds": ["m8"],
+        "startDate": "2025-09-30",
+        "endDate": "2025-10-04",
+        "memberIds": ["68be9f4c07a15967abd76de2", "68be9f4f07a15967abd76dee"],
         "note": "Data migration rehearsal"
       },
       {
-        "date": "2025-10-01",
-        "memberIds": ["m1", "m2"],
+        "startDate": "2025-10-01",
+        "endDate": "2025-10-05",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4907a15967abd76dd0",
+          "68be9f4f07a15967abd76df1"
+        ],
         "note": "Cutover & monitoring"
       }
     ]
   },
   {
-    "projectId": "p5",
+    "_id": "p5",
     "projectName": "Data Warehouse Rollout",
     "schedule": [
       {
-        "date": "2025-09-04",
-        "memberIds": ["m2", "m5"],
+        "startDate": "2025-09-04",
+        "endDate": "2025-09-08",
+        "memberIds": [
+          "68be9f4907a15967abd76dd0",
+          "68be9f4b07a15967abd76dd9",
+          "68be9f5007a15967abd76df4"
+        ],
         "note": "Star schema design"
       },
       {
-        "date": "2025-09-07",
-        "memberIds": ["m1"],
+        "startDate": "2025-09-07",
+        "endDate": "2025-09-09",
+        "memberIds": ["68be9f4907a15967abd76dcd", "68be9f5007a15967abd76df7"],
         "note": "ETL pipeline setup"
       },
       {
-        "date": "2025-09-13",
-        "memberIds": ["m3", "m6"],
+        "startDate": "2025-09-13",
+        "endDate": "2025-09-17",
+        "memberIds": [
+          "68be9f4a07a15967abd76dd3",
+          "68be9f4b07a15967abd76ddc",
+          "68be9f5107a15967abd76dfa"
+        ],
         "note": "Connector integrations"
       },
       {
-        "date": "2025-09-19",
-        "memberIds": ["m4"],
+        "startDate": "2025-09-19",
+        "endDate": "2025-09-20",
+        "memberIds": ["68be9f4a07a15967abd76dd6", "68be9f4c07a15967abd76ddf"],
         "note": "Stakeholder demo"
       },
       {
-        "date": "2025-09-26",
-        "memberIds": ["m7", "m8"],
+        "startDate": "2025-09-26",
+        "endDate": "2025-10-01",
+        "memberIds": [
+          "68be9f4c07a15967abd76ddf",
+          "68be9f4c07a15967abd76de2",
+          "68be9f4d07a15967abd76de5"
+        ],
         "note": "Load/performance test"
       },
       {
-        "date": "2025-10-02",
-        "memberIds": ["m1", "m2"],
+        "startDate": "2025-10-02",
+        "endDate": "2025-10-06",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4907a15967abd76dd0",
+          "68be9f4e07a15967abd76de8"
+        ],
         "note": "Production handoff"
       }
     ]
   },
   {
-    "projectId": "p6",
+    "_id": "p6",
     "projectName": "Caroline Clinic Website",
     "schedule": [
       {
-        "date": "2025-09-02",
-        "memberIds": ["m1", "m8"],
+        "startDate": "2025-09-02",
+        "endDate": "2025-09-05",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4c07a15967abd76de2",
+          "68be9f4e07a15967abd76deb"
+        ],
         "note": "Landing & hero sections"
       },
       {
-        "date": "2025-09-11",
-        "memberIds": ["m2"],
+        "startDate": "2025-09-11",
+        "endDate": "2025-09-14",
+        "memberIds": ["68be9f4907a15967abd76dd0", "68be9f4f07a15967abd76dee"],
         "note": "Booking flow (Next.js)"
       },
       {
-        "date": "2025-09-14",
-        "memberIds": ["m4", "m5"],
+        "startDate": "2025-09-14",
+        "endDate": "2025-09-18",
+        "memberIds": [
+          "68be9f4a07a15967abd76dd6",
+          "68be9f4b07a15967abd76dd9",
+          "68be9f4f07a15967abd76df1"
+        ],
         "note": "CMS content & images"
       },
       {
-        "date": "2025-09-20",
-        "memberIds": ["m6"],
+        "startDate": "2025-09-20",
+        "endDate": "2025-09-24",
+        "memberIds": ["68be9f4b07a15967abd76ddc", "68be9f5007a15967abd76df4"],
         "note": "SEO & analytics"
       },
       {
-        "date": "2025-09-27",
-        "memberIds": ["m3", "m7"],
+        "startDate": "2025-09-27",
+        "endDate": "2025-09-30",
+        "memberIds": [
+          "68be9f4a07a15967abd76dd3",
+          "68be9f4c07a15967abd76ddf",
+          "68be9f5007a15967abd76df7"
+        ],
         "note": "UAT & bug bash"
       },
       {
-        "date": "2025-10-04",
-        "memberIds": ["m1"],
+        "startDate": "2025-10-04",
+        "endDate": "2025-10-07",
+        "memberIds": ["68be9f4907a15967abd76dcd", "68be9f5107a15967abd76dfa"],
         "note": "Launch window"
       }
     ]
   },
   {
-    "projectId": "p7",
+    "_id": "p7",
     "projectName": "SGW Project Manager v2",
     "schedule": [
       {
-        "date": "2025-09-05",
-        "memberIds": ["m1", "m2"],
+        "startDate": "2025-09-05",
+        "endDate": "2025-09-09",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4907a15967abd76dd0",
+          "68be9f4d07a15967abd76de5"
+        ],
         "note": "Notification module revamp"
       },
       {
-        "date": "2025-09-10",
-        "memberIds": ["m3"],
+        "startDate": "2025-09-10",
+        "endDate": "2025-09-15",
+        "memberIds": ["68be9f4a07a15967abd76dd3", "68be9f4e07a15967abd76de8"],
         "note": "License CRUD & validation"
       },
       {
-        "date": "2025-09-17",
-        "memberIds": ["m4", "m6"],
+        "startDate": "2025-09-17",
+        "endDate": "2025-09-20",
+        "memberIds": [
+          "68be9f4a07a15967abd76dd6",
+          "68be9f4b07a15967abd76ddc",
+          "68be9f4e07a15967abd76deb"
+        ],
         "note": "LINE webhook integration"
       },
       {
-        "date": "2025-09-21",
-        "memberIds": ["m5"],
+        "startDate": "2025-09-21",
+        "endDate": "2025-09-26",
+        "memberIds": ["68be9f4b07a15967abd76dd9", "68be9f4f07a15967abd76dee"],
         "note": "Analytics dashboard"
       },
       {
-        "date": "2025-09-28",
-        "memberIds": ["m7", "m8"],
+        "startDate": "2025-09-28",
+        "endDate": "2025-10-02",
+        "memberIds": [
+          "68be9f4c07a15967abd76ddf",
+          "68be9f4c07a15967abd76de2",
+          "68be9f4f07a15967abd76df1"
+        ],
         "note": "Edge functions & caching"
       },
       {
-        "date": "2025-10-03",
-        "memberIds": ["m2", "m3"],
+        "startDate": "2025-10-03",
+        "endDate": "2025-10-06",
+        "memberIds": [
+          "68be9f4907a15967abd76dd0",
+          "68be9f4a07a15967abd76dd3",
+          "68be9f5007a15967abd76df4"
+        ],
         "note": "Release candidate build"
       }
     ]
   },
   {
-    "projectId": "p8",
+    "_id": "p8",
     "projectName": "Security Audit & Hardening",
     "schedule": [
       {
-        "date": "2025-09-06",
-        "memberIds": ["m6"],
+        "startDate": "2025-09-06",
+        "endDate": "2025-09-08",
+        "memberIds": ["68be9f4b07a15967abd76ddc", "68be9f5007a15967abd76df7"],
         "note": "Dependency scan & SBOM"
       },
       {
-        "date": "2025-09-09",
-        "memberIds": ["m2", "m5"],
+        "startDate": "2025-09-09",
+        "endDate": "2025-09-13",
+        "memberIds": [
+          "68be9f4907a15967abd76dd0",
+          "68be9f4b07a15967abd76dd9",
+          "68be9f5107a15967abd76dfa"
+        ],
         "note": "Threat modeling workshop"
       },
       {
-        "date": "2025-09-16",
-        "memberIds": ["m4"],
+        "startDate": "2025-09-16",
+        "endDate": "2025-09-18",
+        "memberIds": ["68be9f4a07a15967abd76dd6", "68be9f4d07a15967abd76de5"],
         "note": "WAF rules & rate limits"
       },
       {
-        "date": "2025-09-24",
-        "memberIds": ["m1", "m3"],
+        "startDate": "2025-09-24",
+        "endDate": "2025-09-27",
+        "memberIds": [
+          "68be9f4907a15967abd76dcd",
+          "68be9f4a07a15967abd76dd3",
+          "68be9f4e07a15967abd76de8"
+        ],
         "note": "Pentest remediation"
       },
       {
-        "date": "2025-09-30",
-        "memberIds": ["m7"],
+        "startDate": "2025-09-30",
+        "endDate": "2025-10-05",
+        "memberIds": ["68be9f4c07a15967abd76ddf", "68be9f4e07a15967abd76deb"],
         "note": "Final audit report"
       },
       {
-        "date": "2025-10-01",
-        "memberIds": ["m8"],
+        "startDate": "2025-10-01",
+        "endDate": "2025-10-04",
+        "memberIds": ["68be9f4c07a15967abd76de2", "68be9f4f07a15967abd76dee"],
         "note": "Policy rollout & training"
       }
     ]

@@ -1,241 +1,191 @@
-/* General Layout */
-.plan-container {
-  padding: 1rem;
-  background-color: #f4f7fa;
-  min-height: 100vh;
+/* ================= Base & Tokens ================= */
+:root{
+  --day-col: 7rem;           /* width of each day column */
+  --sticky-col: 7rem;        /* width of left sticky column */
+  --radius: 8px;
+
+  --c-app-bg: #f4f7fa;
+  --c-panel: #fff;
+  --c-border: #aab3c1;
+  --c-border-strong: #cbd5e0;
+  --c-text: #2d3748;
+  --c-text-muted: #4a5568;
+  --c-text-subtle: #a0aec0;
+
+  --c-green: #48bb78;
+  --c-blue: #4299e1;
+  --c-range: #2b6cb0;
+
+  --c-note-bg: #edf2f7;
+  --c-today-bg: #ebf8ff;
+  --c-grid-today-fill: rgba(66,153,225,.12);
+  --c-grid-today-border: rgba(66,153,225,.35);
 }
 
-.plan-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
+* { box-sizing: border-box; }
 
-h1 {
-  font-size: 2rem;
-  color: #1a202c;
-  font-weight: 700;
-}
+/* ================= Layout ================= */
+.plan-container{ padding:1rem; background:var(--c-app-bg); min-height:100vh; }
+.plan-header{ display:flex; flex-direction:column; align-items:center; gap:1.25rem; margin-bottom:2rem; }
+h1{ font-size:2rem; color:#1a202c; font-weight:700; }
+.controls{ display:flex; flex-direction:column; gap:1.5rem; }
 
-.controls {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+/* ================= Month Selector ================= */
+.month-selector{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--c-panel); border-radius:var(--radius);
+  box-shadow:0 1px 3px rgba(0,0,0,.1); padding:.25rem;
 }
+.month-selector button{
+  background:none; border:none; cursor:pointer; font-size:1.5rem; font-weight:900; color:#4a5568;
+  padding:.5rem 1rem; border-radius:6px; transition:background-color .2s;
+}
+.month-selector button:hover{ background:#edf2f7; }
+.month-selector span{ font-size:1.4rem; font-weight:600; color:var(--c-text); padding:0 1rem; min-width:150px; text-align:center; }
 
-/* Month Selector */
-.month-selector {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 0.25rem;
+/* ================= View Switcher ================= */
+.view-switcher{ display:flex; background:#e2e8f0; border-radius:var(--radius); padding:.25rem; }
+.view-switcher button{
+  background:none; border:none; padding:.75rem 1.5rem; cursor:pointer;
+  font-size:1.2rem; font-weight:600; color:#4a5568; border-radius:6px; transition:all .3s ease;
 }
+.view-switcher button.active{ background:var(--c-panel); color:var(--c-text); box-shadow:0 1px 3px rgba(0,0,0,.1); }
 
-.month-selector button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #4a5568;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: background-color 0.2s;
+/* ================= Table Shell ================= */
+.table-container{
+  overflow-x:auto; border:1px solid var(--c-border); border-radius:12px; background:var(--c-panel);
+  box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+  -webkit-overflow-scrolling:touch;
 }
-
-.month-selector button:hover {
-  background-color: #edf2f7;
+.operational-table{
+  table-layout:fixed; border-collapse:separate; border-spacing:0; width:auto; /* sticky + (days * 7rem) */
 }
-
-.month-selector span {
-  font-weight: 600;
-  color: #2d3748;
-  padding: 0 1rem;
-  min-width: 150px;
-  text-align: center;
-}
-
-/* View Switcher */
-.view-switcher {
-  display: flex;
-  background-color: #e2e8f0;
-  border-radius: 8px;
-  padding: 0.25rem;
-}
-
-.view-switcher button {
-  background: none;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #4a5568;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.view-switcher button.active {
-  background-color: #ffffff;
-  color: #2d3748;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Table Styles */
-.table-container {
-  overflow-x: auto;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-}
-
-.operational-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+.col-sticky{ width:var(--sticky-col); min-width:var(--sticky-col); }
+.col-day   { width:var(--day-col);    min-width:var(--day-col); }
 
 .operational-table th,
-.operational-table td {
-  padding: 0.75rem;
-  text-align: center;
-  border-right: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
-  min-width: 20px;
+.operational-table td{
+  text-align:center; border-right:1px solid var(--c-border); border-bottom:1px solid var(--c-border);
+  min-width:0; /* let colgroup control column width */
 }
 .operational-table th:last-child,
-.operational-table td:last-child {
-  border-right: none;
+.operational-table td:last-child{ border-right:none; }
+.operational-table tr:last-child td{ border-bottom:none; }
+
+/* ================= Table Header ================= */
+.header-date{ font-weight:600; color:#4a5568; background:#f7fafc; }
+.date-cell-content{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.day-initial{ font-size:.75rem; color:var(--c-text-subtle); }
+.day-number{ font-size:.75rem; font-weight:700; }
+.header-date.today .day-number{ color:rgb(31,31,243); display:inline-block; scale:1.5; }
+
+/* ================= Sticky Column ================= */
+.sticky-col{
+  position:sticky; left:0; z-index:10; background:var(--c-panel);
+  border-right:2px solid var(--c-border-strong);
+  box-shadow:2px 0 0 var(--c-border-strong), 4px 0 12px rgba(0,0,0,.04);
 }
-.operational-table tr:last-child td {
-    border-bottom: none;
+thead .sticky-col{ z-index:20; background:#f7fafc; }
+.header-project{ text-align:left; font-size:1rem; }
+.cell-project{ padding-inline: 0.5rem; text-align:left; font-weight:600; color:var(--c-text); font-size:1rem; vertical-align:middle; }
+
+/* ================= Generic Data Cells (member view, etc.) ================= */
+.data-cell{ min-height:60px; height:auto; vertical-align:middle; }
+.data-cell.has-data{ padding:4px; }
+.data-cell.today-cell{ background:var(--c-today-bg); }
+
+/* In member view bars, make the project label fill the whole span */
+.grid-bar .project-tag { width: 100%; max-width: 100%; }
+
+/* ================= Pills / Notes ================= */
+.member-tag, .project-tag{
+  display:block; color:#fff; padding:.25rem; border-radius:6px; font-size:.75rem; font-weight:500; text-align:center;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.member-tag{ background:var(--c-blue); }
+.project-tag{ background:var(--c-green); }
+
+.note-text{
+  width:var(--day-col); font-size:.7rem; color:var(--c-text-muted);
+  background:var(--c-note-bg); border-radius:6px; padding:.35rem .5rem; line-height:1.2;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.today-cell .note-text{ background:#e6f0fa; }
+.text-wrap{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* ================= Data Management Links ================= */
+.data-management{ display:flex; gap:.5rem; margin:.75rem 0 1rem; flex-wrap:wrap; justify-content:center; }
+.dm-link{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.5rem .9rem; border-radius:var(--radius); background:#fff; color:var(--c-text);
+  font-weight:600; font-size:1.4rem; border:1px solid var(--c-border); box-shadow:0 1px 2px rgba(0,0,0,.04);
+  text-decoration:none; transition:background-color .15s, border-color .15s, box-shadow .15s, transform .06s;
+}
+.dm-link:hover{ background:#f7fafc; border-color:var(--c-border-strong); box-shadow:0 2px 6px rgba(0,0,0,.06); transform:translateY(-1px); }
+.dm-link:focus{ outline:none; box-shadow:0 0 0 3px rgba(49,130,206,.2); border-color:#3182ce; }
+.dm-link:active{ transform:translateY(0); }
+
+/* ================= Project View (Grid bars that auto-wrap on overlap) ================= */
+.grid-cell{ position: relative; padding:1rem  0; }
+.row-grid{
+  position: relative;
+  display:grid;
+  grid-template-columns:repeat(var(--days), var(--day-col));
+  grid-auto-rows:minmax(40px,auto);
+  row-gap:6px; column-gap:0; position:relative;
+}
+/* vertical day dividers under bars */
+.row-grid::after{
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(var(--day-col) - 1px),
+    var(--c-border) calc(var(--day-col) - 1px),
+    var(--c-border) var(--day-col)
+  );
 }
 
-
-/* Table Header */
-.header-date {
-  font-weight: 600;
-  color: #4a5568;
-  background-color: #f7fafc;
+/* range bar */
+.grid-bar{
+  display:flex; flex-direction:column; gap:4px; padding:4px; z-index:2;
 }
-.date-cell-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.grid-bar .member-tag, .grid-bar .note-text{ width:100%; max-width:100%; }
+.grid-bar .member-tag{
+  background:var(--c-range); color:#fff; border:none; padding:.35rem .5rem; border-radius:8px; line-height:1.15;
 }
-.day-initial {
-    font-size: 0.75rem;
-    color: #a0aec0;
-}
-.day-number {
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-.header-date.today .day-number {
-    color: rgb(31, 31, 243);
-    display: inline-block;
-    scale: 1.5;
+.grid-bar .note-text{ background:rgb(192, 220, 255); color:var(--c-text); border:1px dashed var(--c-border); }
+.grid-bar:hover .member-tag{
+  box-shadow:0 0 0 2px rgba(43,108,176,.2), 0 4px 10px rgba(0,0,0,.06);
+  transform:translateY(-1px); transition:box-shadow .15s, transform .1s;
 }
 
+/* ================= Legacy colSpan range (kept if needed elsewhere) ================= */
+.range-cell{ padding:4px; background:transparent; border:none; }
+.range-cell .cell-lines{ align-items:stretch; }
+.range-cell .member-tag, .range-cell .note-text{ width:100%; max-width:100%; white-space:nowrap; }
+.range-cell .member-tag{ background:var(--c-range); color:#fff; border:none; padding:.35rem .5rem; border-radius:8px; line-height:1.15; }
+.range-cell .note-text{ background:rgba(43,108,176,.10); color:var(--c-text); border:1px dashed var(--c-border); }
 
-/* Sticky Column */
-.sticky-col {
-  position: sticky;
-  left: 0;
-  z-index: 10;
-  background-color: #ffffff;
-  border-right: 2px solid #cbd5e0;
-}
-thead .sticky-col {
-  z-index: 20;
-  background-color: #f7fafc;
-}
-.header-project {
-  text-align: left;
-  min-width: 200px;
-  padding-left: 1.5rem;
-  font-size: 0.75rem;
-}
-.cell-project {
-  text-align: left;
-  font-weight: 600;
-  color: #2d3748;
-  padding-left: 1.5rem;
-  min-width: 200px;
-  font-size: 0.75rem;
-
+/* ================= Responsive ================= */
+@media (max-width:900px){
+  .day-initial{ display:none; }
+  .day-number{ font-size:.8rem; }
+  .header-project, .cell-project{ min-width:160px; }
 }
 
-/* Data Cells */
-.data-cell {
-  min-height: 60px;   /* allow two rows */
-  height: auto;       /* grow if note exists */
-  vertical-align: middle;
-}
+/* Full-height “today” overlay aligned to the correct day column */
+.today-marker-abs {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--col) * var(--day-col));
+  width: var(--day-col);
 
-.data-cell.has-data {
-    padding: 4px;
-}
-.data-cell.today-cell {
-    background-color: #ebf8ff;
-}
+  background: var(--c-grid-today-fill);
+  border-left: 1px solid var(--c-grid-today-border);
+  border-right: 1px solid var(--c-grid-today-border);
 
-/* Tags in cells */
-.member-tag, .project-tag {
-    width: 7rem;
-    color: white;
-    padding: 0.25rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.member-tag {
-  background-color: #4299e1; /* Blue */
-}
-
-.project-tag {
-    background-color: #48bb78; /* Green */
-}
-
-/* Stack member names (first line) over note (second line) */
-.cell-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* Keep your existing pill look for names; ensure it spans nicely */
-.member-tag {
-  display: block;           /* make the pill span the cell width nicely */
-}
-
-/* Note styling (soft, readable, consistent with your palette) */
-.note-text {
-  width: 7rem;
-  font-size: 0.7rem;
-  color: #4a5568;           /* gray-700 */
-  background-color: #edf2f7;/* gray-100 */
-  border-radius: 6px;
-  padding: 0.35rem 0.5rem;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Extra polish: today highlight + note contrast */
-.today-cell .note-text {
-  background-color: #e6f0fa; /* very light blue to read on today background */
+  pointer-events: none;   /* don’t block hover on bars */
+  z-index: 1;             /* above dividers (::after), below bars */
 }

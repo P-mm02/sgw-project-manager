@@ -3,6 +3,16 @@ import { NextResponse } from 'next/server'
 import { connectToDB } from '@/lib/mongoose'
 import Member from '@/models/OperationalPlan/Member'
 
+type MemberDTO = {
+  id: string
+  _id: string
+  name: string
+  positions: string[]
+  active: boolean
+  createdAt: string
+  updatedAt: string
+}
+
 export async function GET(req: Request) {
   try {
     await connectToDB()
@@ -16,14 +26,23 @@ export async function GET(req: Request) {
     if (activeParam === 'false') query.active = false
     if (search) query.$text = { $search: search }
 
-    // IMPORTANT: don't use lean() so toJSON transform runs
-    const docs = await Member.find(query).sort({ createdAt: 1 })
-    const members = docs.map((d) => d.toJSON())
+    // Use lean + map to a DTO; do NOT use Mongoose doc types here.
+    const raw = await Member.find(query).sort({ createdAt: 1 }).lean()
+
+    const members: MemberDTO[] = raw.map((m: any) => ({
+      id: m._id.toString(),
+      _id: m._id.toString(),
+      name: m.name,
+      positions: Array.isArray(m.positions) ? m.positions : [],
+      active: !!m.active,
+      createdAt: new Date(m.createdAt).toISOString(),
+      updatedAt: new Date(m.updatedAt).toISOString(),
+    }))
 
     return NextResponse.json({ success: true, members }, { status: 200 })
   } catch (err: any) {
     return NextResponse.json(
-      { error: err?.message || 'Failed to fetch members' },
+      { success: false, error: err?.message || 'Failed to fetch members' },
       { status: 500 }
     )
   }

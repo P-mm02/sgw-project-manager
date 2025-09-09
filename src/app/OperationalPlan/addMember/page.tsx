@@ -181,7 +181,7 @@ export default function AddMemberPage() {
 
   return (
     <div className="op-container">
-      <h1 className="op-title">Operational Plan • Members</h1>
+      <h1 className="op-title">บุคลากร</h1>
 
       {(error || success) && (
         <div className="op-alerts">
