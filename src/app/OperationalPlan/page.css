@@ -148,7 +148,7 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
 
 /* range bar */
 .grid-bar{
-  display:flex; flex-direction:column; gap:4px; padding:4px; z-index:2;
+  display:flex; flex-direction:column; gap:4px; padding:4px; z-index:2; /* bars above hit layer */
 }
 .grid-bar .member-tag, .grid-bar .note-text{ width:100%; max-width:100%; }
 .grid-bar .member-tag{
@@ -158,6 +158,22 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
 .grid-bar:hover .member-tag{
   box-shadow:0 0 0 2px rgba(43,108,176,.2), 0 4px 10px rgba(0,0,0,.06);
   transform:translateY(-1px); transition:box-shadow .15s, transform .1s;
+}
+
+/* ================= Clickable day cells (under bars) ================= */
+.hit-cell{
+  z-index:1;                    /* below bars (z=2), above grid lines (z=0) */
+  width:100%; height:100%;
+  background:transparent; border:none; padding:0; margin:0;
+  cursor:cell; border-radius:4px;
+  touch-action:manipulation;
+  font-size: 2rem;
+}
+.hit-cell:hover{ background:rgba(2,132,199,.08); }
+.hit-cell:focus-visible{
+  outline:2px solid rgba(49,130,206,.6);
+  outline-offset:1px;
+  background:rgba(2,132,199,.08);
 }
 
 /* ================= Legacy colSpan range (kept if needed elsewhere) ================= */
@@ -186,6 +202,61 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
   border-left: 1px solid var(--c-grid-today-border);
   border-right: 1px solid var(--c-grid-today-border);
 
-  pointer-events: none;   /* don’t block hover on bars */
+  pointer-events: none;   /* don’t block hover/clicks */
   z-index: 1;             /* above dividers (::after), below bars */
 }
+
+/* ================= Quick Add Modal ================= */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.35);
+  display:flex; align-items:center; justify-content:center; z-index:1000;
+}
+.modal-card{
+  width:min(560px, 92vw);
+  background:#fff; border-radius:12px; padding:16px 18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+.modal-card h3{ margin:0 0 10px; }
+.form-row{ display:grid; gap:6px; margin:8px 0; }
+.modal-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:12px; }
+
+/* Inputs inside modal — match AddProject look */
+.modal-card input,
+.modal-card select,
+.modal-card textarea{
+  background:#fff;
+  border:1px solid #cbd5e0;
+  border-radius:8px;
+  padding:10px 12px;
+  color:#1a202c;
+  outline:none;
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.modal-card input::placeholder,
+.modal-card textarea::placeholder{ color:#a0aec0; }
+.modal-card input:focus,
+.modal-card select:focus,
+.modal-card textarea:focus{
+  border-color:#3182ce;
+  box-shadow:0 0 0 3px rgba(49,130,206,0.15);
+}
+
+/* ================= Buttons (shared with AddProject look) ================= */
+.btn{
+  background-color:#edf2f7;
+  color:#2d3748;
+  border:1px solid #cbd5e0;
+  border-radius:8px;
+  padding:8px 12px;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:background-color .15s ease, border-color .15s ease;
+}
+.btn:hover{ background-color:#e2e8f0; }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+.btn.primary{ background-color:#3182ce; border-color:#2b6cb0; color:#fff; }
+.btn.primary:hover{ background-color:#2b6cb0; }
+.btn.danger{ background-color:#e53e3e; border-color:#c53030; color:#fff; }
+.btn.danger:hover{ background-color:#c53030; }
+.btn.ghost{ background-color:transparent; border-color:#cbd5e0; color:#2d3748; }
