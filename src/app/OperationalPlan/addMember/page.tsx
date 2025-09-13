@@ -2,6 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import './page.css'
+import BackButton from '@/components/BackButton'
+
 
 type Member = {
   id: string
@@ -181,6 +183,7 @@ export default function AddMemberPage() {
 
   return (
     <div className="op-container">
+      <BackButton />      
       <h1 className="op-title">บุคลากร</h1>
 
       {(error || success) && (

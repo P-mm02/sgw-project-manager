@@ -1,0 +1,216 @@
+/* =========
+   Layout
+   ========= */
+.op-container {
+  padding: 1rem;
+  background-color: #f4f7fa;
+  min-height: 100vh;
+}
+
+.op-title {
+  font-size: 1.75rem;
+  color: #1a202c;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* =========
+   Cards & Form
+   ========= */
+.op-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.op-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.op-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+/* Inputs */
+.op-input {
+  background-color: #fff;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #1a202c;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.op-input::placeholder {
+  color: #a0aec0;
+}
+
+.op-input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49,130,206,0.15);
+}
+
+.small-label {
+  display: block;
+  font-size: 12px;
+  color: #718096;
+  margin-bottom: 4px;
+}
+
+/* =========
+   Schedule Rows
+   ========= */
+.schedule-row {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: #fff;
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Responsive stack */
+@media (max-width: 640px) {
+  .schedule-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========
+   Chip Multi-select
+   ========= */
+.chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-select {
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #cbd5e0;
+  background: #f7fafc;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  transition: background-color .12s ease, border-color .12s ease, color .12s ease;
+}
+
+.chip-select.selected {
+  background: #ebf8ff;
+  border-color: #3182ce;
+  color: #2b6cb0;
+}
+
+.chip-select.inactive {
+  opacity: 0.6;
+}
+
+/* =========
+   Actions
+   ========= */
+.op-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.project-row-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.schedule-row-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+/* =========
+   Buttons
+   ========= */
+.btn {
+  background-color: #edf2f7;
+  color: #2d3748;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+
+.btn:hover {
+  background-color: #e2e8f0;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn.primary {
+  background-color: #3182ce;
+  border-color: #2b6cb0;
+  color: #fff;
+}
+.btn.primary:hover {
+  background-color: #2b6cb0;
+}
+
+.btn.danger {
+  background-color: #e53e3e;
+  border-color: #c53030;
+  color: #fff;
+}
+.btn.danger:hover {
+  background-color: #c53030;
+}
+
+.btn.ghost {
+  background-color: transparent;
+  border-color: #cbd5e0;
+  color: #2d3748;
+}
+
+/* =========
+   Helpers
+   ========= */
+.center {
+  text-align: center;
+}
+.muted {
+  color: #718096;
+}
+
+.project-badges{
+  position: relative;
+}
+.project-badges .project-badge {  
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 10px;
+  background-color: #f0ffda;
+  border: 1px solid #cbd5e0;
+}

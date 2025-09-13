@@ -99,14 +99,14 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
 
 /* ================= Pills / Notes ================= */
 .member-tag, .project-tag{
-  display:block; color:#fff; padding:.25rem; border-radius:6px; font-size:.75rem; font-weight:500; text-align:center;
+  display:block; color:#fff; padding:.25rem; border-radius:6px; font-size:1rem; font-weight:500; text-align:center;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .member-tag{ background:var(--c-blue); }
 .project-tag{ background:var(--c-green); }
 
 .note-text{
-  width:var(--day-col); font-size:.7rem; color:var(--c-text-muted);
+  width:var(--day-col); font-size:1rem; color:var(--c-text-muted);
   background:var(--c-note-bg); border-radius:6px; padding:.35rem .5rem; line-height:1.2;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }

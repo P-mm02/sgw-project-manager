@@ -13,6 +13,7 @@
 
 /* Project cards use the same base as member cards */
 .project-card {
+  min-height: 15rem;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
@@ -37,7 +38,8 @@
 /* Schedule blocks */
 .schedule-list {
   margin-top: 0.5rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -72,7 +74,7 @@
   border-radius: 999px;
 }
 
-.schedule-line .chips {
+.schedule-line .chips ,.project-card .chips {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -85,13 +87,11 @@
 
 /* Grid for schedule forms */
 .schedule-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(160px, 1fr)) minmax(200px, 1fr);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: start;
-}
-.schedule-grid .schedule-note {
-  grid-column: 1 / -1;
 }
 
 .small-label {
@@ -106,4 +106,34 @@
   .schedule-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Container for chips so they wrap nicely */
+.chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Make chips clickable like buttons */
+.chip-select {
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #cbd5e0; /* base when unselected */
+  background: #f7fafc;
+  color: #2d3748;
+  transition: background-color .12s ease, border-color .12s ease, color .12s ease;
+}
+
+/* Selected state */
+.chip-select.selected {
+  background: #ebf8ff;
+  border-color: #3182ce;
+  color: #2b6cb0;
+  box-shadow: 0 0 0 2px rgba(49,130,206,0.15);
+}
+
+/* Inactive members (still selectable, just dimmed) */
+.chip-select.inactive {
+  opacity: 0.7;
 }

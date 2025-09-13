@@ -141,5 +141,12 @@ const Project =
     'plan-projects'
   )
 
+  export interface ProjectDoc extends Document {
+    _id: Types.ObjectId // <-- add this line
+    projectName: string
+    schedule: Types.DocumentArray<ScheduleEntry & Types.Subdocument>
+    getScheduleEntry(id: string): (ScheduleEntry & Types.Subdocument) | null
+  }
+
 
 export default Project
