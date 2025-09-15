@@ -14,7 +14,7 @@ export default function HomePage() {
       </header>
 
       <div className="dashboard-grid">
-        {/* Urgent Announcements */}
+
         <Link href="/OperationalPlan" className="card operationalPlanLink">
           <h1 className="text-center">
             แผนการปฎิบัติงาน
@@ -23,13 +23,6 @@ export default function HomePage() {
           </h1>
         </Link>
 
-        <section className="card highlight-card">
-          <h2>📢 ประกาศด่วน</h2>
-          <ul>
-            <li>⏰ เรื่องที่ 1: 20 มิ.ย. เวลา 22:00</li>
-            <li>📩 เรื่องที่ 2: ภายใน 25 มิ.ย.</li>
-          </ul>
-        </section>
         <Link
           href="/ManageNotification"
           className="card manageNotificationLink"
@@ -40,8 +33,20 @@ export default function HomePage() {
             Manage Notification
           </h1>
         </Link>
+
+        {/* Urgent Announcements */}
+        <section className="card highlight-card">
+          <h2>ตัวอย่างฟังก์ชัน</h2>
+          <h2>📢 ประกาศด่วน</h2>
+          <ul>
+            <li>⏰ เรื่องที่ 1: 20 มิ.ย. เวลา 22:00</li>
+            <li>📩 เรื่องที่ 2: ภายใน 25 มิ.ย.</li>
+          </ul>
+        </section>
+
         {/* Upcoming Holidays */}
         <section className="card">
+          <h2>ตัวอย่างฟังก์ชัน</h2>
           <h2>🗓️ วันหยุดราชการ</h2>
           <ul>
             <li>20 ก.ค. 2025 - วันอาสาฬหบูชา</li>
@@ -51,6 +56,7 @@ export default function HomePage() {
 
         {/* Project Status */}
         <section className="card">
+          <h2>ตัวอย่างฟังก์ชัน</h2>
           <h2>📊 โครงการล่าสุด</h2>
           <ul className="status-list">
             <li>
@@ -67,6 +73,7 @@ export default function HomePage() {
 
         {/* Tasks */}
         <section className="card">
+          <h2>ตัวอย่างฟังก์ชัน</h2>
           <h2>✅ งานที่ต้องทำวันนี้</h2>
           <ol>
             <li>ส่งแบบแปลนให้หัวหน้าโครงการ</li>
@@ -76,6 +83,7 @@ export default function HomePage() {
 
         {/* Latest Logs */}
         <section className="card">
+          <h2>ตัวอย่างฟังก์ชัน</h2>
           <h2>🕒 บันทึกงานล่าสุด</h2>
           <div className="timeline">
             <div className="log-item">
@@ -91,6 +99,7 @@ export default function HomePage() {
 
         {/* Latest Documents */}
         <section className="card">
+          <h2>ตัวอย่างฟังก์ชัน</h2>
           <h2>📁 เอกสารล่าสุด</h2>
           <ul>
             <li>
@@ -104,6 +113,7 @@ export default function HomePage() {
 
         {/* Project Map */}
         <section className="card map-card">
+          <h2>ตัวอย่างฟังก์ชัน</h2>
           <h2>📍 แผนที่โครงการ</h2>
           <div className="map-placeholder">[🗺️ กำลังโหลดแผนที่...]</div>
         </section>
