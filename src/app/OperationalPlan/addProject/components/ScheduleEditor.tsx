@@ -83,7 +83,6 @@ export default function ScheduleEditor({
         </div>
 
         <div>
-          <span className="small-label">บุคลากร</span>
           <MemberMultiSelect
             members={members}
             value={form.memberIds}
