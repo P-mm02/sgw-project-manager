@@ -10,7 +10,7 @@
   --c-border-strong: #cbd5e0;
   --c-text: #2d3748;
   --c-text-muted: #4a5568;
-  --c-text-subtle: #a0aec0;
+  --c-text-subtle: #5f6875;
 
   --c-green: #48bb78;
   --c-blue: #4299e1;
@@ -53,15 +53,30 @@ h1{ font-size:2rem; color:#1a202c; font-weight:700; }
 
 /* ================= Table Shell ================= */
 .table-container{
-  overflow-x:auto; border:1px solid var(--c-border); border-radius:12px; background:var(--c-panel);
+  max-height: 100vh;
+  overflow:auto; border:1px solid var(--c-border); border-radius:12px; background:var(--c-panel);
   box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
   -webkit-overflow-scrolling:touch;
+  cursor: grab;
 }
+.table-container.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+.table-container.dragging .hit-cell,
+.table-container.dragging .schedule-bar {
+  pointer-events: none;
+}
+
 .operational-table{
   table-layout:fixed; border-collapse:separate; border-spacing:0; width:auto; /* sticky + (days * 7rem) */
 }
 .col-sticky{ width:var(--sticky-col); min-width:var(--sticky-col); }
 .col-day   { width:var(--day-col);    min-width:var(--day-col); }
+
+.header-date, .header-project{
+  position:sticky; top:0; z-index:10;
+} 
 
 .operational-table th,
 .operational-table td{
@@ -75,8 +90,8 @@ h1{ font-size:2rem; color:#1a202c; font-weight:700; }
 /* ================= Table Header ================= */
 .header-date{ font-weight:600; color:#4a5568; background:#f7fafc; }
 .date-cell-content{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
-.day-initial{ font-size:.75rem; color:var(--c-text-subtle); }
-.day-number{ font-size:.75rem; font-weight:700; }
+.day-initial{ font-size:1rem; color:var(--c-text-subtle); }
+.day-number{ font-size:1rem; font-weight:700; }
 .header-date.today .day-number{ color:rgb(31,31,243); display:inline-block; scale:1.5; }
 
 /* ================= Sticky Column ================= */
@@ -162,14 +177,24 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
 
 /* ================= Clickable day cells (under bars) ================= */
 .hit-cell{
-  z-index:1;                    /* below bars (z=2), above grid lines (z=0) */
-  width:100%; height:100%;
-  background:transparent; border:none; padding:0; margin:0;
-  cursor:cell; border-radius:4px;
+  z-index:1;
+  justify-self: center;
+  width: fit-content;
+  height: fit-content;
+  background:transparent;
+  padding: 0.2rem 0.7rem;
+  border: none;
+  border-radius: 9999px;
+  cursor:cell;
   touch-action:manipulation;
   font-size: 2rem;
+  color: rgb(205, 205, 205);
 }
-.hit-cell:hover{ background:rgba(2,132,199,.08); }
+.hit-cell:hover{
+  transform:translateY(-2px);
+  scale: 1.2;
+  transition:all .2s;
+}
 .hit-cell:focus-visible{
   outline:2px solid rgba(49,130,206,.6);
   outline-offset:1px;
@@ -183,12 +208,6 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
 .range-cell .member-tag{ background:var(--c-range); color:#fff; border:none; padding:.35rem .5rem; border-radius:8px; line-height:1.15; }
 .range-cell .note-text{ background:rgba(43,108,176,.10); color:var(--c-text); border:1px dashed var(--c-border); }
 
-/* ================= Responsive ================= */
-@media (max-width:900px){
-  .day-initial{ display:none; }
-  .day-number{ font-size:.8rem; }
-  .header-project, .cell-project{ min-width:160px; }
-}
 
 /* Full-height “today” overlay aligned to the correct day column */
 .today-marker-abs {
@@ -213,8 +232,10 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
 }
 .modal-card{
   width:min(560px, 92vw);
+  max-height: 96vh;
   background:#fff; border-radius:12px; padding:16px 18px;
   box-shadow:0 10px 30px rgba(0,0,0,.2);
+  overflow-y: auto;
 }
 .modal-card h3{ margin:0 0 10px; }
 .form-row{ display:grid; gap:6px; margin:8px 0; }
@@ -260,3 +281,70 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
 .btn.danger{ background-color:#e53e3e; border-color:#c53030; color:#fff; }
 .btn.danger:hover{ background-color:#c53030; }
 .btn.ghost{ background-color:transparent; border-color:#cbd5e0; color:#2d3748; }
+
+.schedule-bar{
+  cursor: pointer;
+}
+.schedule-bar:hover{
+  scale: 1.02;
+}
+
+/* --- Fullscreen layout --- */
+.main-view.fullscreen {
+  position: fixed;
+  inset: 0;                  /* top:0; right:0; bottom:0; left:0 */
+  width: 100vw;
+  height: 100vh;
+  z-index: 998;               /* below the button */
+  background: #fff;          /* ensure a clean canvas; adjust if you use dark */
+  overflow: auto;            /* allow scroll within fullscreen content */
+}
+
+/* Optional: slightly dim the rest of the page when fullscreen */
+.plan-container[data-fullscreen="1"] .plan-header {
+  /* header stays in DOM; you can hide or fade if desired */
+  opacity: 0.0;              /* or 0.5 for dim; or display:none if you prefer */
+  pointer-events: none;
+}
+
+/* --- Fullscreen toggle button --- */
+.full-screen-plan-btn {
+  width: fit-content;
+  align-self: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid #cbd5e0;
+  background: #f7fafc;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background .15s ease, transform .05s ease;
+}
+
+.full-screen-btn-inner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.full-screen-icon {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.full-screen-plan-btn:hover {
+  background: #edf2f7;
+}
+
+.full-screen-plan-btn:active {
+  transform: translateY(1px);
+}
+
+/* When fullscreen: pin button to top-right, above the main-view */
+.full-screen-plan-btn.fixed {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 999; /* above .main-view.fullscreen */
+}
+

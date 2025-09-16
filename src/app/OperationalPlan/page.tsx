@@ -4,18 +4,21 @@ import React, { useEffect, useMemo, useState } from 'react'
 import './page.css'
 import Link from 'next/link'
 
-import type { Member, Project } from './types'
+import type { Member, Project, ScheduleEntry } from './types'
 import { BKK_TZ, buildDaysInMonth, toLocalDateString } from './utils/date'
 
 import ProjectView from './components/ProjectView'
 import MemberView from './components/MemberView'
 import ScheduleQuickAddModal from './components/ScheduleQuickAddModal'
+import ScheduleEditModal from './components/ScheduleEditModal'
 
 type QuickAddState = { projectId: string; date: string } | null
+type EditState = { projectId: string; schedule: ScheduleEntry } | null
 
 export default function OperationalPlanPage() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [view, setView] = useState<'project' | 'member'>('project')
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   const [members, setMembers] = useState<Member[]>([])
   const [projects, setProjects] = useState<Project[]>([])
@@ -27,6 +30,12 @@ export default function OperationalPlanPage() {
   const openQuickAdd = (projectId: string, dateStr: string) =>
     setQuickAdd({ projectId, date: dateStr })
   const closeQuickAdd = () => setQuickAdd(null)
+
+  // Edit modal state
+  const [editModal, setEditModal] = useState<EditState>(null)
+  const openEdit = (projectId: string, entry: ScheduleEntry) =>
+    setEditModal({ projectId, schedule: entry })
+  const closeEdit = () => setEditModal(null)
 
   // Fetch members + projects
   useEffect(() => {
@@ -81,6 +90,18 @@ export default function OperationalPlanPage() {
     })
   }
 
+  // lock body scroll while fullscreen
+  useEffect(() => {
+    if (isFullscreen) {
+      const prev = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = prev
+      }
+    }
+  }, [isFullscreen])
+  const toggleFullscreen = () => setIsFullscreen((v) => !v)
+
   if (loading) {
     return (
       <div className="plan-container">
@@ -105,7 +126,6 @@ export default function OperationalPlanPage() {
       </div>
     )
   }
-
   return (
     <div className="plan-container">
       <header className="plan-header">
@@ -148,10 +168,26 @@ export default function OperationalPlanPage() {
               Member View
             </button>
           </div>
+          <button
+            className={`full-screen-plan-btn ${isFullscreen ? 'fixed' : ''}`}
+            onClick={toggleFullscreen}
+            aria-pressed={isFullscreen}
+            title={isFullscreen ? 'ออกจากโหมดเต็มจอ' : 'ดูเต็มจอ'}
+          >
+            {isFullscreen ? (
+              <div className="full-screen-btn-inner">
+                <strong className="full-screen-icon">⛶</strong> ออก
+              </div>
+            ) : (
+              <div className="full-screen-btn-inner">
+                <strong className="full-screen-icon">⛶</strong> ดูเต็มหน้าจอ
+              </div>
+            )}
+          </button>
         </div>
       </header>
 
-      <main>
+      <main className={`main-view ${isFullscreen ? 'fullscreen' : ''}`}>
         {view === 'project' ? (
           <ProjectView
             projects={projects}
@@ -160,6 +196,7 @@ export default function OperationalPlanPage() {
             monthEndStr={monthEndStr}
             memberMap={memberMap}
             onDayClick={openQuickAdd}
+            onBarClick={openEdit}
           />
         ) : (
           <MemberView
@@ -181,11 +218,29 @@ export default function OperationalPlanPage() {
           onClose={closeQuickAdd}
           onSaved={(updatedProject) => {
             setProjects((prev) =>
-              prev.map((p) =>
-                p._id === updatedProject._id ? updatedProject : p
-              )
+              prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
             )
             closeQuickAdd()
+          }}
+        />
+      )}
+
+      {/* Edit modal (only for Project View schedule bar clicks) */}
+      {editModal && ( // ✅
+        <ScheduleEditModal
+          projectId={editModal.projectId}
+          schedule={editModal.schedule}
+          members={members}
+          onClose={closeEdit}
+          onSaved={(updatedProject) => {
+            setProjects((prev) =>
+              prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
+            )
+            closeEdit()
+          }}
+          onDeleted={() => {
+            // you can also just rely on onSaved(updatedProject) from backend response
+            closeEdit()
           }}
         />
       )}

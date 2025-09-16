@@ -24,7 +24,7 @@ export async function GET(req: Request) {
 
     // Build filter
     let filter: any = {}
-    let sort: any = { createdAt: -1 }
+    let sort: any = { createdAt: 1 }
 
     if (search) {
       // Prefer text search (ProjectSchema has ProjectSchema.index({ projectName: 'text' }))

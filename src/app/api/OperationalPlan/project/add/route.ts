@@ -1,3 +1,4 @@
+// src/app/api/OperationalPlan/project/add/route.ts
 import { NextResponse } from 'next/server'
 import { connectToDB } from '@/lib/mongoose'
 import Project, { type ProjectAttrs } from '@/models/OperationalPlan/Project'
@@ -16,13 +17,28 @@ const isYMD = (s: string) => /^\d{4}-\d{2}-\d{2}$/.test(s)
 const isDateOrderOK = (start: string, end: string) =>
   new Date(start) <= new Date(end)
 
+// Blank only if BOTH memberIds and note are empty (dates ignored)
+const isBlankScheduleEntry = (e: any) => {
+  const ids = Array.isArray(e?.memberIds) ? e.memberIds : []
+  const note = (e?.note ?? '').toString().trim()
+  return ids.length === 0 && note === '' // <- change to `||` if you want “either empty”
+}
+
 export async function POST(req: Request) {
   try {
     await connectToDB()
 
     const body = (await req.json()) as Body
     const projectName = (body.projectName || '').trim()
-    const scheduleInput = Array.isArray(body.schedule) ? body.schedule : []
+
+    // Original array (or empty)
+    const rawSchedule = Array.isArray(body.schedule) ? body.schedule : []
+
+    // If only one entry and it's "blank" by memberIds/note rule, treat as empty list
+    const scheduleInput =
+      rawSchedule.length <= 1 && isBlankScheduleEntry(rawSchedule[0])
+        ? []
+        : rawSchedule
 
     // --- Validate projectName ---
     if (!projectName) {
@@ -78,7 +94,7 @@ export async function POST(req: Request) {
       }
     }
 
-    // --- Normalize to ProjectAttrs (let Mongoose auto-generate subdoc _id) ---
+    // --- Normalize to ProjectAttrs ---
     const attrs: ProjectAttrs = {
       projectName,
       schedule: scheduleInput.map((s) => ({
@@ -95,8 +111,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      project: project.toJSON(), // maps _id -> id (and schedule subdoc ids) per your schema
-      projectId: project._id.toString(), // strongly typed if _id is Types.ObjectId
+      project: project.toJSON(),
+      projectId: project._id.toString(),
     })
   } catch (err: any) {
     console.error('❌ Error creating project:', err)

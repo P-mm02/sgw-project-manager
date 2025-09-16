@@ -46,8 +46,10 @@ export function dayIndexFromMonthStart(dayStr: string, monthStartStr: string) {
 }
 
 /** Helpers for headers & today checks */
+/* export const getDayInitial = (date: Date) =>
+  ['S', 'M', 'T', 'W', 'T', 'F', 'S'][date.getDay()] */
 export const getDayInitial = (date: Date) =>
-  ['S', 'M', 'T', 'W', 'T', 'F', 'S'][date.getDay()]
+  ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'][date.getDay()]
 
 export const isToday = (date: Date) => {
   const today = toLocalDateString(new Date())
