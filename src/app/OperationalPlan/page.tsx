@@ -164,13 +164,13 @@ export default function OperationalPlanPage() {
               className={view === 'project' ? 'active' : ''}
               onClick={() => setView('project')}
             >
-              Project View
+              มุมมองโครงการ
             </button>
             <button
               className={view === 'member' ? 'active' : ''}
               onClick={() => setView('member')}
             >
-              Member View
+              มุมมองบุคลากร
             </button>
           </div>
           <button
