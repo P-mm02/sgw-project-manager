@@ -280,3 +280,9 @@ label {
 .muted {
   color: #718096;
 }
+
+.fetching-CircleSpining{
+  width: 100%;
+  max-width: 600px;
+  justify-self: center;
+}

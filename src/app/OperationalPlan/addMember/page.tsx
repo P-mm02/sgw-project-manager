@@ -3,6 +3,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import './page.css'
 import BackButton from '@/components/BackButton'
+import CircleSpining from '@/loading/CircleSpining/CircleSpining'
+
 
 
 type Member = {
@@ -183,7 +185,7 @@ export default function AddMemberPage() {
 
   return (
     <div className="op-container">
-      <BackButton />      
+      <BackButton />
       <h1 className="op-title">บุคลากร</h1>
 
       {(error || success) && (
@@ -271,9 +273,16 @@ export default function AddMemberPage() {
           <option value="false">Inactive เท่านั้น</option>
         </select>
         <button className="btn" onClick={fetchMembers} disabled={fetching}>
-          {fetching ? 'กำลังโหลด…' : 'รีเฟรช'}
+          {fetching ? <></> : 'รีเฟรช'}
         </button>
       </div>
+      {fetching ? (
+        <div className="fetching-CircleSpining">
+          <CircleSpining />
+        </div>
+      ) : (
+        ''
+      )}
 
       {/* Members cards */}
       <div className="op-card-grid">

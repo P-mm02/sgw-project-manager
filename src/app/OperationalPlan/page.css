@@ -188,11 +188,12 @@ thead .sticky-col{ z-index:20; background:#f7fafc; }
   cursor:cell;
   touch-action:manipulation;
   font-size: 2rem;
-  color: rgb(205, 205, 205);
+  color: rgb(240, 240, 240);
 }
 .hit-cell:hover{
   transform:translateY(-2px);
   scale: 1.2;
+  color: rgb(0, 0, 0);
   transition:all .2s;
 }
 .hit-cell:focus-visible{

@@ -26,6 +26,8 @@ import type {
   ScheduleEntryInput,
 } from './types'
 
+import CircleSpining from '@/loading/CircleSpining/CircleSpining'
+
 /** =============================
  *  Page Component
  *  ============================= */
@@ -331,34 +333,40 @@ export default function AddProjectPage() {
       />
 
       {/* Projects list */}
-      <ProjectsList
-        projects={projects}
-        members={members}
-        memberName={memberName}
-        expanded={expanded}
-        toggleExpand={toggleExpand}
-        // project name edit
-        editingProjectId={editingProjectId}
-        editProjectName={editProjectName}
-        startEditProject={startEditProject}
-        cancelEditProject={cancelEditProject}
-        setEditProjectName={setEditProjectName}
-        saveEditProject={saveEditProject}
-        deleteProject={deleteProject}
-        // schedule edit
-        editingSchedule={editingSchedule}
-        startEditSchedule={startEditSchedule}
-        cancelEditSchedule={cancelEditSchedule}
-        setEditingSchedule={setEditingSchedule}
-        saveEditSchedule={saveEditSchedule}
-        deleteSchedule={deleteSchedule}
-        // add schedule
-        addingScheduleFor={addingScheduleFor}
-        startAddScheduleFor={startAddScheduleFor}
-        cancelAddScheduleFor={cancelAddScheduleFor}
-        setAddingScheduleFor={setAddingScheduleFor}
-        saveAddScheduleFor={saveAddScheduleFor}
-      />
+      {fetching ? (
+        <div className="fetching-CircleSpining">
+          <CircleSpining />
+        </div>
+      ) : (
+        <ProjectsList
+          projects={projects}
+          members={members}
+          memberName={memberName}
+          expanded={expanded}
+          toggleExpand={toggleExpand}
+          // project name edit
+          editingProjectId={editingProjectId}
+          editProjectName={editProjectName}
+          startEditProject={startEditProject}
+          cancelEditProject={cancelEditProject}
+          setEditProjectName={setEditProjectName}
+          saveEditProject={saveEditProject}
+          deleteProject={deleteProject}
+          // schedule edit
+          editingSchedule={editingSchedule}
+          startEditSchedule={startEditSchedule}
+          cancelEditSchedule={cancelEditSchedule}
+          setEditingSchedule={setEditingSchedule}
+          saveEditSchedule={saveEditSchedule}
+          deleteSchedule={deleteSchedule}
+          // add schedule
+          addingScheduleFor={addingScheduleFor}
+          startAddScheduleFor={startAddScheduleFor}
+          cancelAddScheduleFor={cancelAddScheduleFor}
+          setAddingScheduleFor={setAddingScheduleFor}
+          saveAddScheduleFor={saveAddScheduleFor}
+        />
+      )}
     </div>
   )
 }

@@ -72,6 +72,9 @@
   cursor: pointer;
 }
 
+.card h1{
+  color: white;
+}
 
 .manageNotificationLink {
   display: inline-flex;

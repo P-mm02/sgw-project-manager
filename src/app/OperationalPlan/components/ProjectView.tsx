@@ -224,6 +224,14 @@ useEffect(() => {
                   })}
 
                   {project.schedule.map((s, idx) => {
+                    // 1) Fast reject: no overlap with [monthStartStr, monthEndStr]
+                    if (
+                      cmpYMD(s.endDate, monthStartStr) < 0 || // ends before month starts
+                      cmpYMD(s.startDate, monthEndStr) > 0 // starts after month ends
+                    ) {
+                      return null
+                    }
+                    
                     const start = clampDateStr(
                       s.startDate,
                       monthStartStr,

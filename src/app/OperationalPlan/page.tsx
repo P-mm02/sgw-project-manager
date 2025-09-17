@@ -11,6 +11,8 @@ import ProjectView from './components/ProjectView'
 import MemberView from './components/MemberView'
 import ScheduleQuickAddModal from './components/ScheduleQuickAddModal'
 import ScheduleEditModal from './components/ScheduleEditModal'
+import CircleSpining from '@/loading/CircleSpining/CircleSpining'
+import BackButton from '@/components/BackButton'
 
 type QuickAddState = { projectId: string; date: string } | null
 type EditState = { projectId: string; schedule: ScheduleEntry } | null
@@ -106,10 +108,11 @@ export default function OperationalPlanPage() {
     return (
       <div className="plan-container">
         <header className="plan-header">
+          <BackButton />
           <h1>แผนปฏิบัติงาน</h1>
         </header>
-        <main>
-          <p>Loading…</p>
+        <main style={{ maxWidth: 600, margin: '2rem auto' }}>
+          <CircleSpining />
         </main>
       </div>
     )
@@ -118,6 +121,7 @@ export default function OperationalPlanPage() {
     return (
       <div className="plan-container">
         <header className="plan-header">
+          <BackButton />
           <h1>แผนปฏิบัติงาน</h1>
         </header>
         <main>
@@ -129,6 +133,7 @@ export default function OperationalPlanPage() {
   return (
     <div className="plan-container">
       <header className="plan-header">
+        <BackButton />
         <h1>แผนปฏิบัติงาน</h1>
 
         <div className="data-management">
