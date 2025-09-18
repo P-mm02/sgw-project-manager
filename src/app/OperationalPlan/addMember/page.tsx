@@ -4,29 +4,23 @@ import React, { useEffect, useMemo, useState } from 'react'
 import './page.css'
 import BackButton from '@/components/BackButton'
 import CircleSpining from '@/loading/CircleSpining/CircleSpining'
+import { MemberAttrs } from '@/models/OperationalPlan/Member'
+import { normalizeHexColor, toInt } from './lib/memberUtils'
+import MemberForm, { type FormState } from './components/MemberForm'
+import MemberList from './components/MemberList'
+import Toolbar from './components/Toolbar'
 
-
-
-type Member = {
-  id: string
-  name: string
-  positions: string[]
-  active: boolean
-  createdAt: string
-  updatedAt: string
+const initialForm: FormState = {
+  name: '',
+  positions: '',
+  active: true,
+  indexNumber: 0,
+  backgroundColor: '#e2e8f0',
 }
-
-type FormState = {
-  name: string
-  positions: string // comma-separated; backend normalizes
-  active: boolean
-}
-
-const initialForm: FormState = { name: '', positions: '', active: true }
 
 export default function AddMemberPage() {
   const [form, setForm] = useState<FormState>(initialForm)
-  const [members, setMembers] = useState<Member[]>([])
+  const [members, setMembers] = useState<MemberAttrs[]>([])
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -38,7 +32,7 @@ export default function AddMemberPage() {
   const [savingEdit, setSavingEdit] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
 
-  // simple search & filter
+  // search & filter
   const [query, setQuery] = useState('')
   const [showActiveOnly, setShowActiveOnly] = useState<
     'all' | 'true' | 'false'
@@ -74,7 +68,6 @@ export default function AddMemberPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // refetch when searching / filter changes (debounced)
   useEffect(() => {
     const t = setTimeout(fetchMembers, 300)
     return () => clearTimeout(t)
@@ -96,8 +89,10 @@ export default function AddMemberPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: form.name.trim(),
-          positions: form.positions, // backend normalizes to string[]
+          positions: form.positions,
           active: form.active,
+          'index-number': form.indexNumber,
+          'background-color': normalizeHexColor(form.backgroundColor),
         }),
       })
       const data = await res.json()
@@ -113,12 +108,19 @@ export default function AddMemberPage() {
   }
 
   // EDIT
-  const startEdit = (m: Member) => {
-    setEditingId(m.id)
+  const startEdit = (m: MemberAttrs) => {
+    setEditingId(m.id as string)
     setEditForm({
       name: m.name,
-      positions: m.positions.join(', '),
-      active: m.active,
+      positions: Array.isArray(m.positions)
+        ? m.positions.join(', ')
+        : (m.positions as any) || '',
+      active: m.active ?? true,
+      indexNumber: (m as any).indexNumber ?? (m as any)['index-number'] ?? 0,
+      backgroundColor:
+        (m as any).backgroundColor ??
+        (m as any)['background-color'] ??
+        '#e2e8f0',
     })
     resetAlerts()
   }
@@ -143,8 +145,10 @@ export default function AddMemberPage() {
         body: JSON.stringify({
           id: editingId,
           name: editForm.name.trim(),
-          positions: editForm.positions, // backend normalizes
+          positions: editForm.positions,
           active: editForm.active,
+          'index-number': editForm.indexNumber,
+          'background-color': normalizeHexColor(editForm.backgroundColor),
         }),
       })
       const data = await res.json()
@@ -181,7 +185,16 @@ export default function AddMemberPage() {
     }
   }
 
-  const visibleMembers = useMemo(() => members, [members])
+  // sort by index-number
+  const visibleMembers = useMemo(() => {
+    const list = members.slice()
+    list.sort((a: any, b: any) => {
+      const ai = a.indexNumber ?? a['index-number'] ?? 0
+      const bi = b.indexNumber ?? b['index-number'] ?? 0
+      return ai - bi
+    })
+    return list
+  }, [members])
 
   return (
     <div className="op-container">
@@ -195,203 +208,39 @@ export default function AddMemberPage() {
         </div>
       )}
 
-      {/* Add form */}
-      <form className="op-card op-form" onSubmit={handleAdd}>
-        <div className="op-form-row">
-          <label htmlFor="name">ชื่อ</label>
-          <input
-            id="name"
-            className="op-input"
-            value={form.name}
-            onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
-            placeholder="เช่น เติ้ง"
-            maxLength={50}
-            required
-          />
-        </div>
+      <MemberForm
+        form={form}
+        setForm={setForm}
+        loading={loading}
+        onSubmit={handleAdd}
+      />
 
-        <div className="op-form-row">
-          <label htmlFor="positions">ตำแหน่ง</label>
-          <input
-            id="positions"
-            className="op-input"
-            value={form.positions}
-            onChange={(e) =>
-              setForm((s) => ({ ...s, positions: e.target.value }))
-            }
-            placeholder="คั่นด้วยคอมมา เช่น หน.หน่วยเจาะ, ช่างสำรวจ"
-          />
-        </div>
+      <Toolbar
+        query={query}
+        setQuery={setQuery}
+        showActiveOnly={showActiveOnly}
+        setShowActiveOnly={setShowActiveOnly}
+        fetching={fetching}
+        onRefresh={fetchMembers}
+      />
 
-        <div className="op-form-row inline">
-          <label className="op-checkbox">
-            <input
-              type="checkbox"
-              checked={form.active}
-              onChange={(e) =>
-                setForm((s) => ({ ...s, active: e.target.checked }))
-              }
-            />
-            <span>Active</span>
-          </label>
-        </div>
-
-        <div className="op-actions">
-          <button className="btn primary" type="submit" disabled={loading}>
-            {loading ? 'กำลังบันทึก…' : 'เพิ่มสมาชิก'}
-          </button>
-          <button
-            className="btn ghost"
-            type="button"
-            onClick={() => {
-              setForm(initialForm)
-              resetAlerts()
-            }}
-            disabled={loading}
-          >
-            ล้างฟอร์ม
-          </button>
-        </div>
-      </form>
-
-      {/* Search & filter */}
-      <div className="op-toolbar">
-        <input
-          className="op-input"
-          placeholder="ค้นหาชื่อ…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <select
-          className="op-input"
-          value={showActiveOnly}
-          onChange={(e) => setShowActiveOnly(e.target.value as any)}
-          title="Filter Active"
-        >
-          <option value="all">ทั้งหมด</option>
-          <option value="true">Active เท่านั้น</option>
-          <option value="false">Inactive เท่านั้น</option>
-        </select>
-        <button className="btn" onClick={fetchMembers} disabled={fetching}>
-          {fetching ? <></> : 'รีเฟรช'}
-        </button>
-      </div>
       {fetching ? (
         <div className="fetching-CircleSpining">
           <CircleSpining />
         </div>
-      ) : (
-        ''
-      )}
+      ) : null}
 
-      {/* Members cards */}
-      <div className="op-card-grid">
-        {visibleMembers.length === 0 && (
-          <div className="muted center">
-            {' '}
-            {fetching ? 'กำลังโหลด…' : 'ไม่มีข้อมูล'}{' '}
-          </div>
-        )}
-
-        {visibleMembers.map((m) => {
-          const isEditing = editingId === m.id
-          return (
-            <div key={m.id} className="member-card">
-              {!isEditing ? (
-                <>
-                  <div className="member-header">
-                    <h3 className="member-name">{m.name}</h3>
-                    <span className={`badge ${m.active ? 'green' : 'gray'}`}>
-                      {m.active ? 'Active' : 'Inactive'}
-                    </span>
-                  </div>
-
-                  <div className="member-positions">
-                    {m.positions && m.positions.length > 0 ? (
-                      m.positions.map((p, idx) => (
-                        <span key={idx} className="chip">
-                          {p}
-                        </span>
-                      ))
-                    ) : (
-                      <span className="muted">ไม่ระบุ</span>
-                    )}
-                  </div>
-
-                  <div className="row-actions">
-                    <button className="btn" onClick={() => startEdit(m)}>
-                      แก้ไข
-                    </button>
-                    <button
-                      className="btn danger"
-                      onClick={() => handleDelete(m.id, m.name)}
-                      disabled={deletingId === m.id}
-                    >
-                      {deletingId === m.id ? 'กำลังลบ…' : 'ลบ'}
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="member-header">
-                    <input
-                      className="op-input"
-                      value={editForm.name}
-                      onChange={(e) =>
-                        setEditForm((s) => ({ ...s, name: e.target.value }))
-                      }
-                    />
-                    <label className="op-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={editForm.active}
-                        onChange={(e) =>
-                          setEditForm((s) => ({
-                            ...s,
-                            active: e.target.checked,
-                          }))
-                        }
-                      />
-                      Active
-                    </label>
-                  </div>
-
-                  <div className="member-positions">
-                    <input
-                      className="op-input"
-                      value={editForm.positions}
-                      onChange={(e) =>
-                        setEditForm((s) => ({
-                          ...s,
-                          positions: e.target.value,
-                        }))
-                      }
-                      placeholder="คั่นด้วยคอมมา"
-                    />
-                  </div>
-
-                  <div className="row-actions">
-                    <button
-                      className="btn primary"
-                      onClick={saveEdit}
-                      disabled={savingEdit}
-                    >
-                      {savingEdit ? 'กำลังบันทึก…' : 'บันทึก'}
-                    </button>
-                    <button
-                      className="btn ghost"
-                      onClick={cancelEdit}
-                      disabled={savingEdit}
-                    >
-                      ยกเลิก
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
-          )
-        })}
-      </div>
+      <MemberList
+        members={visibleMembers}
+        editingId={editingId}
+        editForm={editForm}
+        setEditForm={setEditForm}
+        startEdit={startEdit}
+        cancelEdit={cancelEdit}
+        saveEdit={saveEdit}
+        deletingId={deletingId}
+        handleDelete={handleDelete}
+      />
     </div>
   )
 }

@@ -1,10 +1,10 @@
 // src/app/api/OperationalPlan/member/add/route.ts
 import { NextResponse } from 'next/server'
 import { connectToDB } from '@/lib/mongoose'
-import Member, { type MemberAttrs } from '@/models/OperationalPlan/Member'
+import Member from '@/models/OperationalPlan/Member'
 
-/** Basic inline validation (kept lightweight; Zod overkill here) */
-function validatePayload(input: any): MemberAttrs {
+/** Minimal shape validation; let the schema handle casting/normalization */
+function validateBasic(input: any) {
   const errors: string[] = []
 
   const name = typeof input?.name === 'string' ? input.name.trim() : ''
@@ -23,17 +23,19 @@ function validatePayload(input: any): MemberAttrs {
   const activeOk = active === undefined || typeof active === 'boolean'
   if (!activeOk) errors.push('Field "active" must be a boolean.')
 
-  if (errors.length) {
-    const message = errors.join(' ')
-    throw new Error(message)
-  }
+  if (errors.length) throw new Error(errors.join(' '))
 
-  return { name, positions, active }
+  // Keep everything else as-is; schema will cast/normalize:
+  // - indexNumber: Number & min:0 (Mongoose will cast "3" -> 3)
+  // - backgroundColor: normalized by schema setter + validated
+  return {
+    ...input,
+    name, // trimmed
+  }
 }
 
 export async function POST(req: Request) {
   try {
-    // Reject wrong content-type early (helps client debugging)
     const contentType = req.headers.get('content-type') || ''
     if (!contentType.includes('application/json')) {
       return NextResponse.json(
@@ -43,30 +45,31 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json()
-    const payload = validatePayload(body)
+    const cleaned = validateBasic(body)
 
     await connectToDB()
 
-    // Optional: avoid accidental duplicates by name (not a unique index)
-    const existing = await Member.findOne({ name: payload.name })
+    // prevent duplicates by name (case-insensitive)
+    const existing = await Member.findOne({
+      name: { $regex: new RegExp(`^${cleaned.name}$`, 'i') },
+    })
     if (existing) {
       return NextResponse.json(
-        { error: `Member "${payload.name}" already exists.` },
+        { error: `Member "${cleaned.name}" already exists.` },
         { status: 409 }
       )
     }
 
-    // Build via schema static so your setter/normalizer runs
-    const doc = Member.fromPlain(payload)
+    // Use schema static so setters/validators run:
+    // NOTE: your Member.fromPlain already accepts both kebab and camel case.
+    const doc = Member.fromPlain(cleaned)
     await doc.save()
 
-    // toJSON transform will add `id` and remove `_id`
     return NextResponse.json(
       { success: true, member: doc.toJSON() },
       { status: 201 }
     )
   } catch (err: any) {
-    // Mongoose validation or custom validation errors land here
     const message =
       typeof err?.message === 'string' ? err.message : 'Unknown error'
     return NextResponse.json({ error: message }, { status: 400 })
