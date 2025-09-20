@@ -213,6 +213,7 @@ export default function AddMemberPage() {
         setForm={setForm}
         loading={loading}
         onSubmit={handleAdd}
+        membersLength={members.length}
       />
 
       <Toolbar

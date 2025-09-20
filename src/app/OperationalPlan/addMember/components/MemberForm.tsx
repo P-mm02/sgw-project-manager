@@ -16,6 +16,7 @@ type Props = {
   setForm: React.Dispatch<React.SetStateAction<FormState>>
   loading: boolean
   onSubmit: (e: React.FormEvent) => void
+  membersLength: number
 }
 
 export default function MemberForm({
@@ -23,6 +24,7 @@ export default function MemberForm({
   setForm,
   loading,
   onSubmit,
+  membersLength,
 }: Props) {
   return (
     <form className="op-card op-form" onSubmit={onSubmit}>
@@ -54,12 +56,12 @@ export default function MemberForm({
 
       <div className="op-form-row grid-2">
         <div>
-          <label htmlFor="indexNumber">ลำดับ (index-number)</label>
+          <label htmlFor="indexNumber">ลำดับ </label>
           <input
             id="indexNumber"
             type="number"
             className="op-input"
-            value={form.indexNumber}
+            value={form.indexNumber || membersLength+1}
             onChange={(e) =>
               setForm((s) => ({ ...s, indexNumber: toInt(e.target.value, 0) }))
             }
@@ -67,7 +69,7 @@ export default function MemberForm({
           />
         </div>
         <div>
-          <label htmlFor="bgColor">สีพื้นหลัง (background-color)</label>
+          <label htmlFor="bgColor">สีพื้นหลัง </label>
           <input
             id="bgColor"
             className="op-input"

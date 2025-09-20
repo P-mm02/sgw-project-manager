@@ -3,46 +3,53 @@ import { NextResponse } from 'next/server'
 import { connectToDB } from '@/lib/mongoose'
 import Member from '@/models/OperationalPlan/Member'
 
-type MemberDTO = {
-  id: string
-  _id: string
-  name: string
-  positions: string[]
-  active: boolean
-  createdAt: string
-  updatedAt: string
-}
-
 export async function GET(req: Request) {
   try {
     await connectToDB()
-
     const url = new URL(req.url)
-    const activeParam = url.searchParams.get('active')
+
+    const q: any = {}
+    const active = url.searchParams.get('active')
     const search = url.searchParams.get('search')?.trim()
+    if (active === 'true') q.active = true
+    if (active === 'false') q.active = false
+    if (search) q.$text = { $search: search }
 
-    const query: any = {}
-    if (activeParam === 'true') query.active = true
-    if (activeParam === 'false') query.active = false
-    if (search) query.$text = { $search: search }
+    const members = await Member.aggregate([
+      { $match: q },
+      { $sort: { indexNumber: 1, createdAt: 1 } },
+      {
+        $project: {
+          id: { $toString: '$_id' },
+          _id: { $toString: '$_id' }, // keep if your UI expects _id
+          name: 1,
+          positions: 1,
+          active: 1,
+          indexNumber: 1,
+          backgroundColor: 1,
+          createdAt: {
+            $dateToString: {
+              date: '$createdAt',
+              format: '%Y-%m-%dT%H:%M:%S.%LZ',
+              timezone: 'UTC',
+            },
+          },
+          updatedAt: {
+            $dateToString: {
+              date: { $ifNull: ['$updatedAt', '$createdAt'] },
+              format: '%Y-%m-%dT%H:%M:%S.%LZ',
+              timezone: 'UTC',
+            },
+          },
+        },
+      },
+    ])
 
-    // Use lean + map to a DTO; do NOT use Mongoose doc types here.
-    const raw = await Member.find(query).sort({ createdAt: 1 }).lean()
-
-    const members: MemberDTO[] = raw.map((m: any) => ({
-      id: m._id.toString(),
-      _id: m._id.toString(),
-      name: m.name,
-      positions: Array.isArray(m.positions) ? m.positions : [],
-      active: !!m.active,
-      createdAt: new Date(m.createdAt).toISOString(),
-      updatedAt: new Date(m.updatedAt).toISOString(),
-    }))
 
     return NextResponse.json({ success: true, members }, { status: 200 })
-  } catch (err: any) {
+  } catch (e: any) {
     return NextResponse.json(
-      { success: false, error: err?.message || 'Failed to fetch members' },
+      { success: false, error: e?.message || 'Failed to fetch members' },
       { status: 500 }
     )
   }

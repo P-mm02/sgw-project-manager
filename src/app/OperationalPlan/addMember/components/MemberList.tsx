@@ -95,13 +95,7 @@ export default function MemberList({
             ) : (
               <>
                 <div className="member-header">
-                  <input
-                    className="op-input"
-                    value={editForm.name}
-                    onChange={(e) =>
-                      setEditForm((s) => ({ ...s, name: e.target.value }))
-                    }
-                  />
+                  <h4>ชื่อ</h4>
                   <label className="op-checkbox">
                     <input
                       type="checkbox"
@@ -116,8 +110,18 @@ export default function MemberList({
                     Active
                   </label>
                 </div>
+                <div className="member-header">
+                  <input
+                    className="op-input"
+                    value={editForm.name}
+                    onChange={(e) =>
+                      setEditForm((s) => ({ ...s, name: e.target.value }))
+                    }
+                  />
+                </div>
 
                 <div className="member-positions grid-2">
+                  <h4>ตำแหน่ง หน้าที่</h4>
                   <input
                     className="op-input"
                     value={editForm.positions}
@@ -129,33 +133,33 @@ export default function MemberList({
                     }
                     placeholder="คั่นด้วยคอมมา"
                   />
-                  <div className="grid-2">
-                    <input
-                      className="op-input"
-                      type="number"
-                      value={editForm.indexNumber}
-                      onChange={(e) =>
-                        setEditForm((s) => ({
-                          ...s,
-                          indexNumber: toInt(e.target.value, 0),
-                        }))
-                      }
-                      placeholder="index-number"
-                      min={0}
-                    />
-                    <input
-                      className="op-input"
-                      value={editForm.backgroundColor}
-                      onChange={(e) =>
-                        setEditForm((s) => ({
-                          ...s,
-                          backgroundColor: e.target.value,
-                        }))
-                      }
-                      placeholder="#e2e8f0"
-                      title="background-color"
-                    />
-                  </div>
+                  <h4>ลำดับที่</h4>
+                  <input
+                    className="op-input"
+                    type="number"
+                    value={editForm.indexNumber}
+                    onChange={(e) =>
+                      setEditForm((s) => ({
+                        ...s,
+                        indexNumber: toInt(e.target.value, 0),
+                      }))
+                    }
+                    placeholder="index-number"
+                    min={0}
+                  />
+                  <h4>สีพื้นหลัง</h4>
+                  <input
+                    className="op-input"
+                    value={editForm.backgroundColor}
+                    onChange={(e) =>
+                      setEditForm((s) => ({
+                        ...s,
+                        backgroundColor: e.target.value,
+                      }))
+                    }
+                    placeholder="#e2e8f0"
+                    title="background-color"
+                  />
                 </div>
 
                 <div className="row-actions">
