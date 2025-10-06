@@ -4,6 +4,8 @@ export type Member = {
   name: string
   positions: string[]
   active: boolean
+  indexNumber: number
+  backgroundColor?: string
 }
 
 export type ScheduleEntryInput = {

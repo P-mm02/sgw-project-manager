@@ -1,3 +1,4 @@
+// src/app/OperationalPlan/addMember/components/MemberList.tsx
 'use client'
 
 import React from 'react'
@@ -24,6 +25,22 @@ type Props = {
   handleDelete: (id: string, name: string) => void
 }
 
+// 12 preset colors (no pink; includes white)
+const BG_COLORS = [
+  '#e2e8f0', // slate-200 (default)
+  '#ffffff', // white
+  '#fde68a', // amber-200
+  '#fed7aa', // orange-200
+  '#fecaca', // red-200
+  '#fecdd3', // rose-200
+  '#f5d0fe', // fuchsia-200
+  '#e9d5ff', // purple-200
+  '#c7d2fe', // indigo-200
+  '#bae6fd', // sky-200
+  '#a7f3d0', // emerald-200
+  '#99f6e4', // teal-200
+]
+
 export default function MemberList({
   members,
   editingId,
@@ -39,25 +56,41 @@ export default function MemberList({
     return <div className="muted center">ไม่มีข้อมูล</div>
   }
 
+  const setBg = (hex: string) =>
+    setEditForm((s) => ({ ...s, backgroundColor: hex }))
+
   return (
     <div className="op-card-grid">
       {members.map((m: any) => {
         const isEditing = editingId === m.id
-        const bg = m.backgroundColor ?? m['background-color'] ?? '#e2e8f0'
+        const rawBg = m.backgroundColor ?? m['background-color'] ?? '#e2e8f0'
+        const bg = normalizeHexColor(rawBg)
         const idx = m.indexNumber ?? m['index-number'] ?? 0
 
         return (
           <div
             key={m.id}
             className="member-card"
-            style={{ background: normalizeHexColor(bg) }}
+            style={{ background: bg }}
             title={`index-number: ${idx}`}
           >
             {!isEditing ? (
               <>
                 <div className="member-header">
                   <h3 className="member-name">
-                    <span className="idx-pill" style={{ backgroundColor: bg }}>
+                    <span
+                      className="idx-pill"
+                      style={{
+                        backgroundColor: 'white',
+                        border: '1px solid #cbd5e1',
+                        borderRadius: '50%',
+                        boxShadow:
+                          // inner bevels
+                          'inset 0 2px 6px rgba(0,0,0,0.08), inset 0 -2px 4px rgba(0,0,0,0.06),' +
+                          // soft outer lift
+                          '0 2px 3px rgba(0,0,0,0.06), 0 6px 12px rgba(0,0,0,0.12)',
+                      }}
+                    >
                       {idx}
                     </span>
                     {m.name}
@@ -110,6 +143,7 @@ export default function MemberList({
                     Active
                   </label>
                 </div>
+
                 <div className="member-header">
                   <input
                     className="op-input"
@@ -133,6 +167,7 @@ export default function MemberList({
                     }
                     placeholder="คั่นด้วยคอมมา"
                   />
+
                   <h4>ลำดับที่</h4>
                   <input
                     className="op-input"
@@ -147,19 +182,77 @@ export default function MemberList({
                     placeholder="index-number"
                     min={0}
                   />
+
                   <h4>สีพื้นหลัง</h4>
-                  <input
-                    className="op-input"
-                    value={editForm.backgroundColor}
-                    onChange={(e) =>
-                      setEditForm((s) => ({
-                        ...s,
-                        backgroundColor: e.target.value,
-                      }))
-                    }
-                    placeholder="#e2e8f0"
-                    title="background-color"
-                  />
+                  <div>
+                    {/* Dropdown for accessibility */}
+                    <select
+                      className="op-input"
+                      value={editForm.backgroundColor}
+                      onChange={(e) => setBg(e.target.value)}
+                      title="background-color"
+                    >
+                      {BG_COLORS.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+
+                    {/* Swatches */}
+                    <div
+                      role="radiogroup"
+                      aria-label="เลือกสีพื้นหลัง"
+                      className="op-color-swatches"
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(6, 28px)',
+                        gap: '8px',
+                        marginTop: '8px',
+                      }}
+                    >
+                      {BG_COLORS.map((c) => {
+                        const selected =
+                          (editForm.backgroundColor || '').toLowerCase() ===
+                          c.toLowerCase()
+                        return (
+                          <button
+                            key={c}
+                            type="button"
+                            role="radio"
+                            aria-checked={selected}
+                            title={c}
+                            onClick={() => setBg(c)}
+                            style={{
+                              width: 28,
+                              height: 28,
+                              borderRadius: 6,
+                              background: c,
+                              border: selected
+                                ? '2px solid #111827'
+                                : '1px solid #cbd5e1',
+                              boxShadow: selected
+                                ? '0 0 0 2px #93c5fd inset'
+                                : 'none',
+                              cursor: 'pointer',
+                            }}
+                          />
+                        )
+                      })}
+                    </div>
+
+                    {/* Live preview */}
+                    <div
+                      aria-hidden="true"
+                      style={{
+                        marginTop: 10,
+                        height: 8,
+                        borderRadius: 4,
+                        background: editForm.backgroundColor || BG_COLORS[0],
+                        border: '1px solid #cbd5e1',
+                      }}
+                    />
+                  </div>
                 </div>
 
                 <div className="row-actions">
@@ -175,7 +268,6 @@ export default function MemberList({
           </div>
         )
       })}
-
     </div>
   )
 }

@@ -1,0 +1,44 @@
+/* =========
+   Chip Multi-select (scoped for MemberMultiSelect)
+   ========= */
+.chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-select {
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #cbd5e0;
+  background: #f7fafc;           /* inline style from TS can override for member color */
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  transition:
+    background-color .12s ease,
+    border-color .12s ease,
+    color .12s ease,
+    box-shadow .12s ease,
+    transform .05s ease;
+}
+
+.chip-select:hover {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.chip-select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(49,130,206,0.25);
+}
+
+.chip-select.selected {
+  background: #ebf8ff;           /* if inline bg is set, inline wins */
+  border-color: #3182ce;
+  color: #2b6cb0;
+  transform: translateY(1px);    /* subtle pressed feel */
+}
+
+.chip-select.inactive {
+  opacity: 0.6;
+}

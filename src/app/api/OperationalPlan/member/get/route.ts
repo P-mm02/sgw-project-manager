@@ -21,12 +21,20 @@ export async function GET(req: Request) {
       {
         $project: {
           id: { $toString: '$_id' },
-          _id: { $toString: '$_id' }, // keep if your UI expects _id
+          _id: { $toString: '$_id' }, // keep if UI needs _id
           name: 1,
           positions: 1,
           active: 1,
           indexNumber: 1,
-          backgroundColor: 1,
+
+          // <-- unify camelCase + kebab-case + fallback
+          backgroundColor: {
+            $ifNull: [
+              '$backgroundColor',
+              { $ifNull: ['$background-color', '#e2e8f0'] },
+            ],
+          },
+
           createdAt: {
             $dateToString: {
               date: '$createdAt',
@@ -44,7 +52,6 @@ export async function GET(req: Request) {
         },
       },
     ])
-
 
     return NextResponse.json({ success: true, members }, { status: 200 })
   } catch (e: any) {
