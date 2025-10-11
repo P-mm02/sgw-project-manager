@@ -20,14 +20,11 @@ export async function GET(req: Request) {
       { $sort: { indexNumber: 1, createdAt: 1 } },
       {
         $project: {
-          id: { $toString: '$_id' },
-          _id: { $toString: '$_id' }, // keep if UI needs _id
+          _id: { $toString: '$_id' },
           name: 1,
           positions: 1,
           active: 1,
           indexNumber: 1,
-
-          // <-- unify camelCase + kebab-case + fallback
           backgroundColor: {
             $ifNull: [
               '$backgroundColor',
@@ -52,7 +49,7 @@ export async function GET(req: Request) {
         },
       },
     ])
-
+    //console.log('Backend side members:', members)
     return NextResponse.json({ success: true, members }, { status: 200 })
   } catch (e: any) {
     return NextResponse.json(

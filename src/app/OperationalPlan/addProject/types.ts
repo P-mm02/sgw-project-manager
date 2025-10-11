@@ -1,6 +1,6 @@
 // src/app/OperationalPlan/addProject/types.ts
 export type Member = {
-  id: string
+  _id: string
   name: string
   positions: string[]
   active: boolean

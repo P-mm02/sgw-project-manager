@@ -1,20 +1,19 @@
 // src/app/OperationalPlan/components/ScheduleQuickAddModal.tsx
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
-import type { Member as OPMember, Project } from '../types'
+import React, { useEffect, useState } from 'react'
+import type { Member , Project } from '../addProject/types'
 import { cmpYMD } from '../utils/date'
 import DateInputTH from '@/components/DateInputTH'
 import '../addProject/page.css' // for .modal-backdrop, .modal-card, .btn, .op-input, etc.
 
 // ✅ keep using the shared multi-select from addProject
 import MemberMultiSelect from '../addProject/components/MemberMultiSelect'
-import type { Member as APMember } from '../addProject/types'
 
 type Props = {
   projectId: string
   initialDate: string
-  members: OPMember[] // expects {_id: string; name: string; active?: boolean}
+  members: Member[]
   onClose: () => void
   onSaved: (p: Project) => void
 }
@@ -48,18 +47,6 @@ export default function ScheduleQuickAddModal({
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
-
-  // Adapt OP members -> AddProject members (id vs _id; minimal required fields)
-  const membersForSelect = useMemo<APMember[]>(
-    () =>
-      members.map((m) => ({
-        id: (m as any)._id ?? (m as any).id,
-        name: m.name,
-        positions: [],
-        active: (m as any).active ?? true,
-      })),
-    [members]
-  )
 
   // === Date auto-fill (same rules as ScheduleAdder) ===
   const onChangeStart = (v: string) => {
@@ -101,7 +88,6 @@ export default function ScheduleQuickAddModal({
       setSaving(false)
     }
   }
-
   return (
     <div
       className="modal-backdrop"
@@ -145,7 +131,7 @@ export default function ScheduleQuickAddModal({
           {/* ✅ MemberMultiSelect from addProject */}
           <div className="modal-schedule-member">
             <MemberMultiSelect
-              members={membersForSelect}
+              members={members}
               value={memberIds}
               onChange={setMemberIds}
             />

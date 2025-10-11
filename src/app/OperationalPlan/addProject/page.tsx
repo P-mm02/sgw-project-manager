@@ -89,7 +89,7 @@ export default function AddProjectPage() {
   /** --- Member map for O(1) lookup --- */
   const memberMap = useMemo(() => {
     const m = new Map<string, string>()
-    members.forEach((x) => m.set(x.id, x.name))
+    members.forEach((x) => m.set(x._id, x.name))
     return m
   }, [members])
   const memberName = (id: string) => memberMap.get(id) ?? '—'

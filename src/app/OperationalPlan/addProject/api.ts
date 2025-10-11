@@ -1,20 +1,41 @@
 // src/app/OperationalPlan/addProject/api.ts
 import type { Member, Project, ScheduleEntryInput } from './types'
 
+const normalizeHexColor = (v: unknown, fallback = '#e2e8f0'): string => {
+  if (typeof v !== 'string') return fallback
+  let s = v.trim().toLowerCase()
+  if (s.startsWith('0x')) s = s.slice(2)
+  if (s.startsWith('#')) s = s.slice(1)
+  if (/^[0-9a-f]{3}$/.test(s))
+    s = s
+      .split('')
+      .map((ch) => ch + ch)
+      .join('')
+  if (!/^[0-9a-f]{6}$/.test(s)) return fallback
+  return `#${s}`
+}
+
 export async function getMembers(): Promise<Member[]> {
   const res = await fetch('/api/OperationalPlan/member/get', {
     cache: 'no-store',
   })
   const data = await res.json()
   if (!res.ok) throw new Error(data?.error || 'โหลดรายชื่อไม่สำเร็จ')
+
   const list: Member[] = (data.members || [])
     .map((m: any) => ({
-      id: m.id ?? m._id ?? '',
+      _id: m._id ?? m.id ?? '', // <-- populate _id here
       name: m.name ?? '',
-      positions: m.positions ?? [],
+      positions: Array.isArray(m.positions) ? m.positions : [],
       active: Boolean(m.active),
+      indexNumber: m.indexNumber ?? 0,
+      backgroundColor: normalizeHexColor(
+        m.backgroundColor ?? m['background-color'] ?? '#e2e8f0'
+      ),
     }))
-    .filter((m: Member) => m.id && m.name)
+    .filter((m: Member) => m._id && m.name) // <-- filter by _id
+
+  //console.log('Fetched members:', list)
   return list
 }
 

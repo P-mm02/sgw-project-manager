@@ -124,16 +124,16 @@ export default function ScheduleAdder({
 
           <div className="chips-wrap">
             {activeMembersFirst.map((m) => {
-              const isSelected = selected.includes(m.id)
+              const isSelected = selected.includes(m._id)
               return (
                 <button
-                  key={m.id}
+                  key={m._id}
                   type="button"
                   className={`chip chip-select${isSelected ? ' selected' : ''}${
                     m.active ? '' : ' inactive'
                   }`}
                   aria-pressed={isSelected}
-                  onClick={() => toggleMember(m.id)}
+                  onClick={() => toggleMember(m._id)}
                   title={m.active ? m.name : `${m.name} (Inactive)`}
                 >
                   {m.name}

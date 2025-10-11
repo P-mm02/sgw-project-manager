@@ -29,7 +29,7 @@ function normalizeHexColor(v: unknown): string {
 
 /* ---------- Types ---------- */
 export interface MemberAttrs {
-  id?: string
+  _id?: string
   name: string
   positions?: string[] | string
   active?: boolean
@@ -81,7 +81,7 @@ const MemberSchema = new Schema<MemberDoc, MemberModel>(
       virtuals: false,
       transform: (doc, ret) => {
         // add id manually
-        ret.id = doc._id?.toString()
+        ret._id = doc._id?.toString()
         // DO NOT add kebab-case:
         // delete ret._id for cleanliness
         delete ret._id

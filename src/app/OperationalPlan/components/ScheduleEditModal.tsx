@@ -1,16 +1,16 @@
 // src/app/OperationalPlan/components/ScheduleEditModal.tsx
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
-import type { Member as OPMember, Project, ScheduleEntry } from '../types'
+import React, { useEffect, useState } from 'react'
+import type { Member, Project } from '../addProject/types'
+import type { ScheduleEntry } from '../types'
 import DateInputTH from '@/components/DateInputTH'
 import MemberMultiSelect from '../addProject/components/MemberMultiSelect'
-import type { Member as APMember } from '../addProject/types'
 
 type Props = {
   projectId: string
   schedule: ScheduleEntry
-  members: OPMember[]
+  members: Member[]
   onClose: () => void
   onSaved: (p: Project) => void
   onDeleted: (projectId: string, scheduleId: string) => void
@@ -39,19 +39,7 @@ export default function ScheduleEditModal({
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
-
-  // adapt members for the shared selector
-  const membersForSelect = useMemo<APMember[]>(
-    () =>
-      members.map((m) => ({
-        id: (m as any)._id ?? (m as any).id,
-        name: m.name,
-        positions: [],
-        active: true,
-      })),
-    [members]
-  )
-
+ 
   // date auto-fix rules (same as ScheduleAdder)
   const onStartChange = (v: string) => {
     setStartDate(v)
@@ -167,7 +155,7 @@ export default function ScheduleEditModal({
 
           <div>
             <MemberMultiSelect
-              members={membersForSelect}
+              members={members}
               value={memberIds}
               onChange={setMemberIds}
             />

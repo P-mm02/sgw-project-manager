@@ -4,8 +4,14 @@ import React, { useEffect, useMemo, useState } from 'react'
 import './page.css'
 import Link from 'next/link'
 
-import type { Member, Project, ScheduleEntry } from './types'
+import type { Member, Project } from './addProject/types'
+import type {  ScheduleEntry } from './types'
 import { BKK_TZ, buildDaysInMonth, toLocalDateString } from './utils/date'
+
+import {
+  getMembers,
+  getProjects
+} from './addProject/api'
 
 import ProjectView from './components/ProjectView'
 import MemberView from './components/MemberView'
@@ -24,8 +30,37 @@ export default function OperationalPlanPage() {
 
   const [members, setMembers] = useState<Member[]>([])
   const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  /** --- Fetch members --- */
+  const fetchMembers = async () => {
+    try {
+      const list = await getMembers()
+      setMembers(list)
+      //console.log('Members loaded:', list)
+    } catch (e: any) {
+      setError(e.message || 'โหลดรายชื่อไม่สำเร็จ')
+    }
+  }
+
+  /** --- Fetch projects --- */
+  const fetchProjects = async (search = '') => {
+    try {
+      const list = await getProjects(search)
+      setProjects(list)
+    } catch (e: any) {
+      setError(e.message || 'โหลดโปรเจ็กต์ไม่สำเร็จ')
+    }
+  }
+
+  /** --- Boot --- */
+  useEffect(() => {
+    setLoading(true)
+    fetchMembers()
+    fetchProjects()
+    setLoading(false)
+  }, [])
 
   // Quick-add modal state
   const [quickAdd, setQuickAdd] = useState<QuickAddState>(null)
@@ -38,36 +73,6 @@ export default function OperationalPlanPage() {
   const openEdit = (projectId: string, entry: ScheduleEntry) =>
     setEditModal({ projectId, schedule: entry })
   const closeEdit = () => setEditModal(null)
-
-  // Fetch members + projects
-  useEffect(() => {
-    let cancelled = false
-    ;(async () => {
-      try {
-        setLoading(true)
-        const [mRes, pRes] = await Promise.all([
-          fetch('/api/OperationalPlan/member/get', { cache: 'no-store' }),
-          fetch('/api/OperationalPlan/project/get', { cache: 'no-store' }),
-        ])
-        if (!mRes.ok) throw new Error(`Member HTTP ${mRes.status}`)
-        if (!pRes.ok) throw new Error(`Project HTTP ${pRes.status}`)
-        const [{ members }, { projects }] = await Promise.all([
-          mRes.json(),
-          pRes.json(),
-        ])
-        if (cancelled) return
-        setMembers(members as Member[])
-        setProjects(projects as Project[])
-      } catch (e: any) {
-        if (!cancelled) setError(e?.message || 'Load failed')
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    })()
-    return () => {
-      cancelled = true
-    }
-  }, [])
 
   const daysInMonth = useMemo(
     () => buildDaysInMonth(currentDate),
